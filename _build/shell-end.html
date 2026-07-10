@@ -1,0 +1,341 @@
+<footer>
+  <div class="wrap">
+    <p>Kubu pamācības vienā lapā: 2×2 (iesācēju + Ortega/CLL), 3×3 (slānis pa slānim + CFOP), Pyraminx (slānis pa slānim + L4E/Oka).
+    Trīs līmeņi: bērniem, iesācējiem un pro. Lapa strādā pilnībā bez interneta — vienkārši atver failu pārlūkā. Veiksmi salikšanā!</p>
+    <p style="margin-top:10px;font-size:13px">Algoritmu avoti (pārbaudīti):
+    <a href="https://cubingcheatsheet.com/algs2x.html">cubingcheatsheet.com (2×2)</a>,
+    <a href="https://www.jperm.net/algs/2x2/cll">jperm.net (CLL)</a>,
+    <a href="https://www.speedsolving.com/wiki/index.php/OLL">speedsolving.com (OLL)</a>,
+    <a href="https://speedcubedb.com/a/3x3/PLL">speedcubedb.com (PLL)</a>,
+    <a href="https://www.cubeskills.com/uploads/pdf/tutorials/f2l.pdf">cubeskills.com (F2L)</a>,
+    <a href="https://www.speedsolving.com/wiki/index.php/Pyraminx_algorithms">speedsolving.com (Pyraminx)</a>,
+    <a href="https://cubingapp.com/algorithms/Pyraminx-L4E">cubingapp.com (L4E)</a>,
+    <a href="https://ruwix.com/">ruwix.com</a>.</p>
+  </div>
+</footer>
+<script>
+(function () {
+  'use strict';
+  var NS = 'http://www.w3.org/2000/svg';
+  var INK = '#211E19';
+  var COL = {
+    y: '#FFD500', w: '#FFFFFF', r: '#D6382E', o: '#FF7A00', g: '#0AA24C',
+    b: '#1558C9', x: '#E6E1D2', e: '#F0EBDC', c: '#D9D2BD', m: '#FFE9A0'
+  };
+
+  function el(name, attrs, parent) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function mkSvg(w, h, dispW) {
+    var s = el('svg', { viewBox: '0 0 ' + w + ' ' + h, width: dispW, role: 'img' });
+    s.style.height = 'auto';
+    return s;
+  }
+  function cell(svg, x, y, cs, colorCode) {
+    el('rect', {
+      x: x, y: y, width: cs, height: cs, rx: 4,
+      fill: COL[colorCode] || COL.x, stroke: INK, 'stroke-width': 2
+    }, svg);
+  }
+  function gridN(svg, ox, oy, cs, colors, n) {
+    colors = colors || '';
+    for (var i = 0; i < n * n; i++) {
+      cell(svg, ox + (i % n) * cs, oy + Math.floor(i / n) * cs, cs, colors[i]);
+    }
+  }
+  function ringsN(svg, ox, oy, cs, marks, n) {
+    marks.forEach(function (i) {
+      el('rect', {
+        x: ox + (i % n) * cs - 2.5, y: oy + Math.floor(i / n) * cs - 2.5,
+        width: cs + 5, height: cs + 5, rx: 7, fill: 'none',
+        stroke: INK, 'stroke-width': 3.4
+      }, svg);
+    });
+  }
+  function head(svg, tipX, tipY, dirX, dirY) {
+    var len = Math.sqrt(dirX * dirX + dirY * dirY) || 1;
+    var ux = dirX / len, uy = dirY / len;
+    var px = -uy, py = ux, s = 9;
+    el('polygon', {
+      points: tipX + ',' + tipY + ' ' +
+        (tipX - ux * s + px * s * 0.55) + ',' + (tipY - uy * s + py * s * 0.55) + ' ' +
+        (tipX - ux * s - px * s * 0.55) + ',' + (tipY - uy * s - py * s * 0.55),
+      fill: INK
+    }, svg);
+  }
+  function arrow(svg, x1, y1, x2, y2, curve, dbl) {
+    curve = curve || 0;
+    var dx = x2 - x1, dy = y2 - y1;
+    var len = Math.sqrt(dx * dx + dy * dy) || 1;
+    var cx = (x1 + x2) / 2 - (dy / len) * curve;
+    var cy = (y1 + y2) / 2 + (dx / len) * curve;
+    var d = 'M ' + x1 + ' ' + y1 + ' Q ' + cx + ' ' + cy + ' ' + x2 + ' ' + y2;
+    el('path', { d: d, fill: 'none', stroke: '#FFFDF6', 'stroke-width': 7, 'stroke-linecap': 'round' }, svg);
+    el('path', { d: d, fill: 'none', stroke: INK, 'stroke-width': 3.2, 'stroke-linecap': 'round' }, svg);
+    head(svg, x2, y2, x2 - cx, y2 - cy);
+    if (dbl) head(svg, x1, y1, x1 - cx, y1 - cy);
+  }
+  function circleArrow(svg, cx, cy, r, ccw, dashed) {
+    var a0 = ccw ? 200 : -50, a1 = ccw ? -50 : 200;
+    var p0 = [cx + r * Math.cos(a0 * Math.PI / 180), cy + r * Math.sin(a0 * Math.PI / 180)];
+    var p1 = [cx + r * Math.cos(a1 * Math.PI / 180), cy + r * Math.sin(a1 * Math.PI / 180)];
+    var sweep = ccw ? 0 : 1;
+    var d = 'M ' + p0[0] + ' ' + p0[1] + ' A ' + r + ' ' + r + ' 0 1 ' + sweep + ' ' + p1[0] + ' ' + p1[1];
+    var attrs = { d: d, fill: 'none', stroke: INK, 'stroke-width': 3.4, 'stroke-linecap': 'round' };
+    if (dashed) attrs['stroke-dasharray'] = '7 5';
+    el('path', { d: d, fill: 'none', stroke: '#FFFDF6', 'stroke-width': 7, 'stroke-linecap': 'round' }, svg);
+    el('path', attrs, svg);
+    var rad = a1 * Math.PI / 180;
+    var t = ccw ? -1 : 1;
+    head(svg, p1[0], p1[1], -Math.sin(rad) * t, Math.cos(rad) * t);
+  }
+  function parseMarks(host) {
+    var m = host.getAttribute('data-mark');
+    return m ? m.split(',').map(Number) : [];
+  }
+  function panelN(host) {
+    var p = host.closest('.cubepanel');
+    return p && p.getAttribute('data-n') === '2' ? 2 : 3;
+  }
+
+  /* ---- kind: face (single NxN, notation & piece types) ---- */
+  function renderFace(host) {
+    var n = panelN(host);
+    var cs = n === 2 ? 34 : 30, off = 4, size = cs * n + off * 2;
+    var disp = n === 2 ? (host.getAttribute('data-small') ? 62 : 74) : 92;
+    var svg = mkSvg(size, size, disp);
+    gridN(svg, off, off, cs, host.getAttribute('data-c'), n);
+    ringsN(svg, off, off, cs, parseMarks(host), n);
+    var ar = host.getAttribute('data-arrow');
+    if (ar) {
+      var parts = ar.split(':'), idx = Number(parts[1] || 0);
+      var mid = off + idx * cs + cs / 2, c = size / 2;
+      var m = n === 2 ? 6 : 8, r = n === 2 ? 23 : 27;
+      if (parts[0] === 'colup') arrow(svg, mid, size - m, mid, m, 0);
+      else if (parts[0] === 'coldown') arrow(svg, mid, m, mid, size - m, 0);
+      else if (parts[0] === 'rowleft') arrow(svg, size - m, mid, m, mid, 0);
+      else if (parts[0] === 'rowright') arrow(svg, m, mid, size - m, mid, 0);
+      else if (parts[0] === 'cw') circleArrow(svg, c, c, r, false, false);
+      else if (parts[0] === 'ccw') circleArrow(svg, c, c, r, true, true);
+    }
+    host.insertBefore(svg, host.firstChild);
+  }
+
+  /* ---- kind: top (U face from above + 4 side strips) ---- */
+  function renderTop(host) {
+    var n = panelN(host);
+    var cs = n === 2 ? 34 : 30, off = 18, T = n === 2 ? 12 : 11, size = off * 2 + cs * n;
+    var disp = host.getAttribute('data-small') ? (n === 2 ? 92 : 102) : (n === 2 ? 116 : 138);
+    var svg = mkSvg(size, size, disp);
+    gridN(svg, off, off, cs, host.getAttribute('data-c'), n);
+    function strip(str, horiz, fixed) {
+      if (!str) return;
+      for (var i = 0; i < n; i++) {
+        var x = horiz ? off + i * cs : fixed;
+        var y = horiz ? fixed : off + i * cs;
+        el('rect', {
+          x: x, y: y, width: horiz ? cs : T, height: horiz ? T : cs, rx: 3,
+          fill: COL[str[i]] || COL.x, stroke: INK, 'stroke-width': 2
+        }, svg);
+      }
+    }
+    strip(host.getAttribute('data-b'), true, off - T - 3);
+    strip(host.getAttribute('data-f'), true, off + cs * n + 3);
+    strip(host.getAttribute('data-l'), false, off - T - 3);
+    strip(host.getAttribute('data-r'), false, off + cs * n + 3);
+    ringsN(svg, off, off, cs, parseMarks(host), n);
+    drawArrows(svg, host, { u: [off, off] }, cs);
+    host.insertBefore(svg, host.firstChild);
+  }
+
+  /* ---- kind: uf (U face above F face — for insertions) ---- */
+  function renderUF(host) {
+    var n = panelN(host);
+    var cs = n === 2 ? 34 : 30, ox = 18, uy = 4;
+    var fy = 4 + cs * n + (n === 2 ? 16 : 14);
+    var w = ox + cs * n + 4, h = fy + cs * n + 4;
+    var svg = mkSvg(w, h, n === 2 ? 104 : 116);
+    gridN(svg, ox, uy, cs, host.getAttribute('data-u'), n);
+    gridN(svg, ox, fy, cs, host.getAttribute('data-f'), n);
+    function label(txt, y) {
+      var t = el('text', {
+        x: 8, y: y, 'text-anchor': 'middle', fill: '#57503F',
+        'font-family': 'Bahnschrift, Arial Narrow, sans-serif', 'font-size': 13, 'font-weight': 700
+      }, svg);
+      t.textContent = txt;
+    }
+    label('U', uy + cs * n / 2 + 5);
+    label('F', fy + cs * n / 2 + 5);
+    ringsN(svg, ox, uy, cs, parseMarks(host), n);
+    drawArrows(svg, host, { u: [ox, uy], f: [ox, fy] }, cs);
+    host.insertBefore(svg, host.firstChild);
+  }
+
+  function drawArrows(svg, host, grids, cs) {
+    var spec = host.getAttribute('data-arrows');
+    if (!spec) return;
+    JSON.parse(spec).forEach(function (a) {
+      var g1 = grids[a.f[0]], g2 = grids[a.t[0]];
+      arrow(svg,
+        g1[0] + a.f[1] * cs + cs / 2, g1[1] + a.f[2] * cs + cs / 2,
+        g2[0] + a.t[1] * cs + cs / 2, g2[1] + a.t[2] * cs + cs / 2,
+        a.curve || 0, a.dbl);
+    });
+  }
+
+  /* ---- kind: net (unfolded cube, 6 faces U L F R B D) ---- */
+  function renderNet(host) {
+    var n = panelN(host);
+    var FS = 27, unit = FS + 3;
+    var pos = { U: [1, 0], L: [0, 1], F: [1, 1], R: [2, 1], B: [3, 1], D: [1, 2] };
+    var order = 'ULFRBD';
+    var c = host.getAttribute('data-c');
+    var svg = mkSvg(unit * 4 + 3, unit * 3 + 3, 196);
+    for (var i = 0; i < 6; i++) {
+      var name = order[i], code = c[i];
+      var x = 3 + pos[name][0] * unit, y = 3 + pos[name][1] * unit;
+      el('rect', { x: x, y: y, width: FS, height: FS, rx: 4, fill: COL[code], stroke: INK, 'stroke-width': 2 }, svg);
+      for (var j = 1; j < n; j++) {
+        el('line', { x1: x + FS * j / n, y1: y, x2: x + FS * j / n, y2: y + FS, stroke: INK, 'stroke-width': .8, opacity: .3 }, svg);
+        el('line', { x1: x, y1: y + FS * j / n, x2: x + FS, y2: y + FS * j / n, stroke: INK, 'stroke-width': .8, opacity: .3 }, svg);
+      }
+      var dark = 'rgb'.indexOf(code) >= 0;
+      var t = el('text', {
+        x: x + FS / 2, y: y + FS / 2 + 4, 'text-anchor': 'middle',
+        fill: dark ? '#FFFFFF' : INK, opacity: dark ? .9 : .6,
+        'font-family': 'Bahnschrift, Arial Narrow, sans-serif', 'font-size': 11, 'font-weight': 700
+      }, svg);
+      t.textContent = name;
+    }
+    host.insertBefore(svg, host.firstChild);
+  }
+
+  /* ---- kind: pyra (one triangular face, 9 small triangles) ---- */
+  var TRI = [
+    [[0,0],[1,0],[1,1]], [[1,0],[2,0],[2,1]], [[1,0],[1,1],[2,1]],
+    [[1,1],[2,1],[2,2]], [[2,0],[3,0],[3,1]], [[2,0],[2,1],[3,1]],
+    [[2,1],[3,1],[3,2]], [[2,1],[2,2],[3,2]], [[2,2],[3,2],[3,3]]
+  ];
+  function renderPyra(host) {
+    var small = host.getAttribute('data-small');
+    var cs = small ? 34 : 44, h = cs * 0.8660254, ox = 8, oy = 8;
+    var W = ox * 2 + 3 * cs, H = oy * 2 + 3 * h;
+    var svg = mkSvg(W, H, small ? 104 : 130);
+    var cx = ox + 1.5 * cs;
+    var P = [];
+    for (var i = 0; i <= 3; i++) { P[i] = []; for (var j = 0; j <= i; j++) { P[i][j] = [cx + (j - i / 2) * cs, oy + i * h]; } }
+    var c = host.getAttribute('data-c') || 'xxxxxxxxx';
+    var polys = [];
+    TRI.forEach(function (t, idx) {
+      var pts = t.map(function (pt) { return P[pt[0]][pt[1]]; });
+      polys.push(pts);
+      el('polygon', {
+        points: pts.map(function (p) { return p[0] + ',' + p[1]; }).join(' '),
+        fill: COL[c[idx]] || COL.x, stroke: INK, 'stroke-width': 1.8, 'stroke-linejoin': 'round'
+      }, svg);
+    });
+    parseMarks(host).forEach(function (idx) {
+      var pts = polys[idx];
+      el('polygon', {
+        points: pts.map(function (p) { return p[0] + ',' + p[1]; }).join(' '),
+        fill: 'none', stroke: INK, 'stroke-width': 3.8, 'stroke-linejoin': 'round'
+      }, svg);
+    });
+    function cent(idx) { var p = polys[idx]; return [(p[0][0] + p[1][0] + p[2][0]) / 3, (p[0][1] + p[1][1] + p[2][1]) / 3]; }
+    var pa = host.getAttribute('data-parrows');
+    if (pa) { JSON.parse(pa).forEach(function (a) { var f = cent(a.f), t = cent(a.t); arrow(svg, f[0], f[1], t[0], t[1], a.curve || 0, a.dbl); }); }
+    var rot = host.getAttribute('data-rot');
+    if (rot) {
+      var parts = rot.split(':'), ccw = parts[1] === 'ccw', pos;
+      if (parts[0] === 'top') pos = [cx, oy + cs * 0.62];
+      else if (parts[0] === 'left') pos = [P[3][0][0] + cs * 0.55, P[3][0][1] - cs * 0.4];
+      else if (parts[0] === 'right') pos = [P[3][3][0] - cs * 0.55, P[3][3][1] - cs * 0.4];
+      else pos = [cx, oy + 1.9 * h];
+      circleArrow(svg, pos[0], pos[1], cs * 0.4, ccw);
+    }
+    host.insertBefore(svg, host.firstChild);
+  }
+
+  document.querySelectorAll('.dg').forEach(function (host) {
+    var kind = host.getAttribute('data-kind');
+    try {
+      if (kind === 'face') renderFace(host);
+      else if (kind === 'top') renderTop(host);
+      else if (kind === 'uf') renderUF(host);
+      else if (kind === 'net') renderNet(host);
+      else if (kind === 'pyra') renderPyra(host);
+    } catch (e) { /* diagram is decorative — never break the page */ }
+  });
+
+  /* ---- Algorithm chips ---- */
+  document.querySelectorAll('[data-alg]').forEach(function (elx) {
+    var moves = elx.getAttribute('data-alg').trim().split(/\s+/);
+    var isPyra = !!elx.closest('#panel-py');
+    elx.textContent = '';
+    moves.forEach(function (mv) {
+      var s = document.createElement('span');
+      var cls = 'mv';
+      if (mv.indexOf("'") >= 0) cls += ' prime';
+      else if (!isPyra && mv.indexOf('2') >= 0) cls += ' dbl';
+      if (isPyra && /^[ulrb]/.test(mv)) cls += ' tip';
+      s.className = cls;
+      s.textContent = mv;
+      elx.appendChild(s);
+    });
+  });
+
+  /* ---- Progress checkboxes (saved in the browser) ---- */
+  var KEY = 'cubes-progress-v1';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
+  document.querySelectorAll('.done-row input[data-step]').forEach(function (box) {
+    var id = box.getAttribute('data-step');
+    box.checked = !!saved[id];
+    var card = box.closest('.card');
+    if (card) card.classList.toggle('is-done', box.checked);
+    box.addEventListener('change', function () {
+      saved[id] = box.checked;
+      if (card) card.classList.toggle('is-done', box.checked);
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    });
+  });
+
+  /* ---- Cube + level switching ---- */
+  var SKEY = 'cubes-state-v1';
+  var state = { cube: 'a3', level: 'beginner' };
+  try {
+    var s = JSON.parse(localStorage.getItem(SKEY));
+    if (s && s.cube && s.level) state = s;
+  } catch (e) {}
+  var cubeBtns = document.querySelectorAll('.cubebtn');
+  var lvlBtns = document.querySelectorAll('.lvlbtn');
+  function apply(scroll) {
+    document.body.setAttribute('data-cube', state.cube);
+    document.body.setAttribute('data-level', state.level);
+    cubeBtns.forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-cube') === state.cube); });
+    lvlBtns.forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-level') === state.level); });
+    try { localStorage.setItem(SKEY, JSON.stringify(state)); } catch (e) {}
+    if (scroll) window.scrollTo(0, 0);
+  }
+  cubeBtns.forEach(function (b) {
+    b.addEventListener('click', function () { state.cube = b.getAttribute('data-cube'); apply(true); });
+  });
+  lvlBtns.forEach(function (b) {
+    b.addEventListener('click', function () { state.level = b.getAttribute('data-level'); apply(true); });
+  });
+  apply(false);
+
+  /* ---- Sticky offsets: measure topbar height ---- */
+  var topbar = document.getElementById('topbar');
+  function setTbh() {
+    if (topbar) document.documentElement.style.setProperty('--tbh', topbar.offsetHeight + 'px');
+  }
+  setTbh();
+  window.addEventListener('resize', setTbh);
+})();
+</script>
+</body>
+</html>

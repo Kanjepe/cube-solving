@@ -1,0 +1,142 @@
+<div class="mode mode-beginner">
+
+<div class="part-head">
+  <div class="kick">1. metode</div>
+  <h2>Iesācēju metode — slānis pa slānim <span class="rule" style="background:var(--paper)"></span></h2>
+  <p>Vienkāršākā pieeja: 2 soļi bez formulām (tikai ar aci) + 3 algoritmi pašās beigās. Katrs solis sīki izskaidrots.</p>
+</div>
+
+<section>
+  <!-- 1. solis -->
+  <div class="card step s1" id="py-s1">
+    <div class="stepnum">1</div>
+    <h3>1. solis — Stūri un gali</h3>
+    <p class="goal">Mērķis: visi 4 lielie stūri pagriezti pareizi (katrai sejai vidū izveidojas viena krāsa) + mazie gali sakrīt.</p>
+
+    <h3 class="sub">Kas vispār ir «pagriezt stūri pareizi»?</h3>
+    <p>Katrs <strong>lielais stūris</strong> (gabals zem smailītes) rāda 3 krāsas — pa vienai uz katru no trim sejām.
+    Stūris ir «pareizi», kad <strong>katra tā krāsa skatās uz to seju, kur šī krāsa ir vairākumā</strong>.
+    Konkrēts piemērs: ja stūra krāsas ir zaļš–sarkans–zils un tu redzi, ka zaļā uzlīme skatās uz seju, kur pārsvarā sarkans — pagriez stūri, līdz zaļš iet pie zaļā.</p>
+
+    <ol>
+      <li>Paņem piramīdu jebkurā stāvoklī. Apskati <strong>vienu</strong> lielo virsotni (U, L, R vai B) un tās 3 krāsas.</li>
+      <li>Pagriez šo virsotni (lielais grieziens — griežas stūris + smailīte) par vienu vai diviem klikšķiem un salīdzini:
+        vai tagad stūra krāsas <strong>sader ar apkārtējām sejām</strong>? Katrai virsotnei ir tikai 3 iespējamie stāvokļi — vienkārši izmēģini.</li>
+      <li>Atkārto ar visiem 4 stūriem. Kad tie visi pareizi, katras sejas <strong>vidū redzēsi vienas krāsas rombu</strong> —
+        tā tagad ir šīs sejas «oficiālā» krāsa.</li>
+      <li>Beigās pagriez katru <strong>mazo galu</strong> (mazais grieziens — kustas tikai smailīte), lai tā krāsa sakrīt ar stūri zem tā.</li>
+    </ol>
+    <div class="dgrow">
+      <figure class="dg" data-kind="pyra" data-c="gggggggggg" data-mark="1,3,6"
+        ><figcaption>Stūri veido sejas «rombu» — pēc šī soļa tas ir vienā krāsā</figcaption></figure>
+      <figure class="dg" data-kind="pyra" data-c="gggggggggg" data-mark="0,4,8"
+        ><figcaption>Gali (smailītes) — pagriez pēdējos, lai sakrīt ar stūri</figcaption></figure>
+    </div>
+    <div class="tip"><b>Bez algoritma!</b> Šis solis ir tīri intuitīvs — te nav ko iegaumēt. Stūri <strong>nekad nemaina vietu</strong>,
+    tie tikai griežas uz vietas, tāpēc neko nevar «sabojāt». Gali ir tīra kosmētika — tos vari pagriezt jebkurā brīdī, arī pašās beigās.</div>
+    <div class="warn"><b>Ja nesaproti, kura krāsa kurai sejai:</b> saskaiti — uz katras sejas jau tagad kāda krāsa ir redzama visvairāk.
+    Tā arī ir šīs sejas krāsa. Standarta Pyraminx krāsas: zaļš, dzeltens, zils, sarkans — katra sava seja.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="py-s1"> Solis apgūts</label></div>
+  </div>
+
+  <!-- 2. solis -->
+  <div class="card step s2" id="py-s2">
+    <div class="stepnum">2</div>
+    <h3>2. solis — Pirmais slānis (apakšējā seja)</h3>
+    <p class="goal">Mērķis: viena vesela seja gatava apakšā — tās 3 malas ieliktas savās vietās ar pareizo krāsu uz leju.</p>
+
+    <p>Izvēlies vienu krāsu, ar ko strādāsi (ērtākais ir <strong>zaļais</strong> — turpmāk piemēros to arī lietosim), un turi piramīdu ar
+    <strong>zaļo seju uz leju</strong>. Tev jāatrod 3 malas, kurām viena krāsa ir zaļa, un jāieliek katra savā vietā.</p>
+
+    <h3 class="sub">Kā zināt, kura ir malas «sava vieta»?</h3>
+    <p>Malai ir 2 krāsas — piemēram, <strong>zaļš + sarkans</strong>. Tās vieta ir apakšā tieši tur, kur <strong>zaļā seja saskaras ar sarkano seju</strong>.
+    Turklāt malai jāsēž ar <strong>zaļo pusi uz leju</strong> un sarkano pret sarkano seju — citādi tā ir «apgriezta» un skaitās nepareizi.</p>
+
+    <ol>
+      <li>Atrodi malu ar zaļu krāsu. Ja tā ir <strong>augšējā daļā</strong> — lieliski, ej uz 2. punktu.
+        Ja tā jau ir apakšā, bet <strong>apgriezta vai nepareizā vietā</strong> — pagriez attiecīgo sānu virsotni (R vai L), lai mala uzbrauc augšā, un tad turpini kā parasti.</li>
+      <li>Griez augšējo virsotni (U), līdz mala atrodas <strong>tieši virs tās spraugas</strong>, kur tai jāiekrīt
+        (skaties pēc malas otrās krāsas: zaļi-sarkanajai malai jābūt virs vietas pie sarkanās sejas).</li>
+      <li>Tagad paskaties, <strong>uz kuru pusi skatās malas zaļā uzlīme</strong>:
+        <ul>
+          <li>Zaļais skatās <strong>pa kreisi</strong> → pagriez <strong>labo</strong> virsotni (R vai R', kā sanāk īsāk) — mala ieripo apakšā ar zaļo uz leju.</li>
+          <li>Zaļais skatās <strong>pa labi</strong> → pagriez <strong>kreiso</strong> virsotni (L vai L').</li>
+        </ul>
+      </li>
+      <li>Pārbaudi: vai mala tiešām sēž ar zaļo uz leju un otrā krāsa sakrīt ar savu seju? Ja iebrauca «otrādi» — izcel augšā un mēģini no otras puses.</li>
+      <li>Atkārto ar visām 3 zaļajām malām. Apakšējā seja gatava!</li>
+    </ol>
+    <div class="dgrow">
+      <figure class="dg" data-kind="pyra" data-c="ggggggggg"
+        ><figcaption>Apakšējā seja gatava — visas 3 apakšas malas savās vietās</figcaption></figure>
+    </div>
+    <div class="tip"><b>Kāpēc tas strādā:</b> griežot U, tu «piegādā» malu pareizajā pozīcijā; griežot sānu virsotni, tu to «ievieto».
+    Šie divi gājieni ir visa šī soļa būtība — pamēģini pāris reizes, un roka pati sapratīs.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="py-s2"> Solis apgūts</label></div>
+  </div>
+
+  <!-- 3. solis -->
+  <div class="card step s3" id="py-s3">
+    <div class="stepnum">3</div>
+    <h3>3. solis — Pēdējās 3 malas</h3>
+    <p class="goal">Mērķis: sakārtot 3 atlikušās augšējās malas — Pyraminx salikts.</p>
+
+    <p>Turi piramīdu ar gatavo (zaļo) seju <strong>apakšā</strong>. Palikušas tieši 3 malas ap augšējo virsotni.
+    Vispirms <strong>diagnosticē</strong>, kurš gadījums tev ir — tad izpildi atbilstošo algoritmu.</p>
+
+    <h3 class="sub">Kā atpazīt savu gadījumu</h3>
+    <ul>
+      <li>Apskati katru no 3 malām: vai tās abas krāsas <strong>sakrīt ar sejām</strong>, starp kurām tā sēž?</li>
+      <li><strong>Neviena mala nav savā vietā</strong> → gadījums <strong>A</strong>: visas 3 jāpārbīda pa apli (3-cikls).</li>
+      <li><strong>Malas ir savās vietās, bet 2 no tām «apgrieztas»</strong> (krāsas samainījušās vietām) → gadījums <strong>B</strong>.</li>
+      <li><strong>Viss sakrīt</strong> → piramīda jau salikta! 🎉</li>
+    </ul>
+
+    <h3 class="sub">A) Trīs malas jāmaina pa apli (3-cikls)</h3>
+    <p>Vēro vienu konkrētu malu: uz kuru vietu tai «jāaizbrauc»? Ja malām jāgriežas <strong>pretēji pulksteņrādītājam</strong> (skatoties no augšas):</p>
+    <p class="alg" data-alg="R U R' U R U R'"></p>
+    <p class="alg-label">3-cikls pretēji pulksteņrādītājam (CCW)</p>
+    <p>Ja malām jāgriežas <strong>pulksteņrādītāja virzienā</strong>:</p>
+    <p class="alg" data-alg="R U' R' U' R U' R'"></p>
+    <p class="alg-label">3-cikls pulksteņrādītāja virzienā (CW)</p>
+    <div class="tip"><b>Ja sajauci virzienu</b> — nekas slikts nenotiek! Vienkārši izpildi to pašu algoritmu vēlreiz,
+    vai izpildi otru. 3-cikls nekad neko nesabojā apakšā.</div>
+
+    <h3 class="sub">B) Divas malas jāapgriež uz vietas</h3>
+    <p>Malas sēž savās vietās, bet divām krāsas ir «uz nepareizo pusi». Turi piramīdu tā, lai <strong>abas apgrieztās malas ir priekšā</strong>
+    (viena priekšā-kreisajā, otra priekšā-labajā pusē), un izpildi:</p>
+    <p class="alg" data-alg="L R' L' R U' R U R'"></p>
+    <p class="alg-label">Divu malu apgriešana</p>
+
+    <div class="dgrow">
+      <figure class="dg" data-kind="pyra" data-c="ggggggggg"
+        data-parrows='[{"f":2,"t":5,"curve":10},{"f":5,"t":7,"curve":10},{"f":7,"t":2,"curve":10}]'
+        ><figcaption>A) 3 malas griežas pa apli</figcaption></figure>
+      <figure class="dg" data-kind="pyra" data-c="ggggggggg" data-mark="2,7"
+        data-parrows='[{"f":2,"t":7,"curve":0,"dbl":1}]'
+        ><figcaption>B) 2 malas apgriežas uz vietas</figcaption></figure>
+    </div>
+    <div class="tip"><b>Pazīstams?</b> <strong>R U R' U R U R'</strong> ir tā pati «Sune» ģimene, ko lieto 2×2 un 3×3 —
+    šeit tā cikliski maina 3 malas.</div>
+    <div class="warn"><b>Ja algoritms «neiet»:</b> visbiežāk vainīgs sajaukts grieziena virziens (R vietā R') vai
+    pa vidu nejauši pagriezta visa piramīda. Turi to stingri ar gatavo seju uz leju un izpildi lēni, burtu pa burtam.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="py-s3"> Solis apgūts</label></div>
+  </div>
+</section>
+
+<!-- iesācēju kopsavilkums -->
+<section id="py-cheat">
+  <h2>Kopsavilkums — iesācēju metode <span class="rule"></span></h2>
+  <div class="cheat-wrap">
+    <table class="cheat">
+      <tr><th>Solis</th><th>Kad lietot</th><th>Algoritms</th></tr>
+      <tr><td>1. Stūri + gali</td><td>Pagriez 4 stūrus pareizi, tad galus</td><td><em>ar aci, bez algoritma</em></td></tr>
+      <tr><td>2. Pirmais slānis</td><td>Apakšējās sejas 3 malas</td><td><em>intuitīvi: U piegādā, R/L ievieto</em></td></tr>
+      <tr><td>3A. 3-cikls (CCW)</td><td>3 malas jāgriež pretēji pulkstenim</td><td><span class="alg small" data-alg="R U R' U R U R'"></span></td></tr>
+      <tr><td>3A. 3-cikls (CW)</td><td>3 malas pulksteņa virzienā</td><td><span class="alg small" data-alg="R U' R' U' R U' R'"></span></td></tr>
+      <tr><td>3B. 2 malu apgriešana</td><td>2 malas vietās, bet apgrieztas</td><td><span class="alg small" data-alg="L R' L' R U' R U R'"></span></td></tr>
+    </table>
+  </div>
+</section>
+
+</div><!-- /mode-beginner -->

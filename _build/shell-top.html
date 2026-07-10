@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kubu salikšana — 2×2 · 3×3 · Pyraminx (Bērniem / Iesācējs / Pro)</title>
+<style>
+  :root {
+    --paper: #F4EFE3;
+    --card: #FFFDF6;
+    --ink: #211E19;
+    --ink-soft: #57503F;
+    --line: #C9C2AE;
+    --cy: #FFD500;
+    --cw: #FFFFFF;
+    --cr: #D6382E;
+    --co: #FF7A00;
+    --cg: #0AA24C;
+    --cb: #1558C9;
+    --cpro: #7A3FB5;
+    --gray: #E6E1D2;
+    --shadow: 6px 6px 0 rgba(33,30,25,.9);
+    --tbh: 52px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background-color: var(--paper);
+    background-image: radial-gradient(#D9D2BE 1px, transparent 1.5px);
+    background-size: 24px 24px;
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  h1, h2, h3, .display {
+    font-family: Bahnschrift, 'Arial Narrow', 'Segoe UI', sans-serif;
+    font-stretch: condensed;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    line-height: 1.1;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---------- Top bar: cube + level switcher ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 60;
+    background: var(--card); border-bottom: 2.5px solid var(--ink);
+  }
+  .topbar .tb-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; padding: 8px 0; }
+  .tb-brand {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; font-weight: 800;
+    font-size: 16px; letter-spacing: .08em; text-transform: uppercase; margin-right: 2px;
+  }
+  .tb-group { display: flex; gap: 6px; }
+  .tb-sep { width: 2px; height: 22px; background: var(--line); }
+  .tabbtn {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    letter-spacing: .04em; font-size: 14px; cursor: pointer;
+    border: 2px solid var(--ink); background: var(--card); color: var(--ink);
+    padding: 5px 12px; border-radius: 9px; box-shadow: 3px 3px 0 rgba(33,30,25,.85);
+    transition: transform .1s ease;
+  }
+  .tabbtn:hover { transform: translate(-1px,-1px); }
+  .tabbtn.active { background: var(--ink); color: var(--paper); }
+  .tabbtn.lvl-kids.active { background: var(--cg); border-color: var(--cg); }
+  .tabbtn.lvl-pro.active { background: var(--cpro); border-color: var(--cpro); }
+  .tabbtn .short { display: none; }
+
+  /* ---------- Panel heroes (compact) ---------- */
+  .panel-hero { padding: 26px 0 4px; }
+  .panel-hero h1 { font-size: clamp(28px, 5vw, 46px); font-weight: 800; }
+  .panel-hero p { margin-top: 6px; font-size: 16px; color: var(--ink-soft); font-style: italic; max-width: 660px; }
+  .panel-hero .hero-flag { display: flex; height: 8px; max-width: 260px; margin-bottom: 14px; border: 2px solid var(--ink); }
+  .panel-hero .hero-flag span { flex: 1; }
+
+  /* ---------- Cube panel + level visibility ---------- */
+  .cubepanel { display: none; }
+  body[data-cube="a2"] #panel-a2 { display: block; }
+  body[data-cube="a3"] #panel-a3 { display: block; }
+  body[data-cube="py"] #panel-py { display: block; }
+  .mode { display: none; }
+  body[data-level="kids"] .mode-kids { display: block; }
+  body[data-level="beginner"] .mode-beginner { display: block; }
+  body[data-level="pro"] .mode-pro { display: block; }
+  body[data-level="kids"] .hide-kids { display: none; }
+
+  /* ---------- Sticky step nav ---------- */
+  nav.steps {
+    position: sticky; top: var(--tbh); z-index: 50;
+    background: rgba(244,239,227,.94); backdrop-filter: blur(3px);
+    border-bottom: 2px solid var(--ink);
+    padding: 8px 0; margin-bottom: 30px;
+    display: none;
+  }
+  body[data-cube="a2"][data-level="kids"] nav[data-for="a2:kids"],
+  body[data-cube="a2"][data-level="beginner"] nav[data-for="a2:beginner"],
+  body[data-cube="a2"][data-level="pro"] nav[data-for="a2:pro"],
+  body[data-cube="a3"][data-level="kids"] nav[data-for="a3:kids"],
+  body[data-cube="a3"][data-level="beginner"] nav[data-for="a3:beginner"],
+  body[data-cube="a3"][data-level="pro"] nav[data-for="a3:pro"],
+  body[data-cube="py"][data-level="kids"] nav[data-for="py:kids"],
+  body[data-cube="py"][data-level="beginner"] nav[data-for="py:beginner"],
+  body[data-cube="py"][data-level="pro"] nav[data-for="py:pro"] { display: block; }
+  nav.steps .wrap { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  nav.steps a {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; font-size: 14px;
+    text-transform: uppercase; letter-spacing: .04em;
+    text-decoration: none; color: var(--ink);
+    border: 2px solid var(--ink); background: var(--card);
+    padding: 4px 10px; border-radius: 8px;
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  nav.steps a:hover { transform: translate(-2px,-2px); box-shadow: 3px 3px 0 var(--ink); }
+  nav.steps a b { font-size: 15px; }
+  nav.steps a.n1 b { color: var(--cb); }  nav.steps a.n2 b { color: var(--cr); }
+  nav.steps a.n3 b { color: var(--co); }  nav.steps a.n4 b { color: #B99A00; }
+  nav.steps a.n5 b { color: var(--cg); }  nav.steps a.n6 b { color: var(--cb); }
+  nav.steps a.n7 b { color: var(--cr); }
+  nav.steps a.pro { border-color: var(--cpro); }
+  nav.steps a.pro b { color: var(--cpro); }
+  nav.steps .sep { font-family: Bahnschrift, 'Arial Narrow', sans-serif; font-size: 12px;
+    color: var(--ink-soft); letter-spacing: .1em; padding: 0 2px; }
+
+  /* ---------- Sections & cards ---------- */
+  section { margin-bottom: 46px; }
+  h2 {
+    font-size: clamp(24px, 4vw, 34px); margin-bottom: 16px;
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  h2 .rule { flex: 1; height: 4px; background: var(--ink); min-width: 40px; }
+  .part-head { background: var(--ink); color: var(--paper); border-radius: 16px; padding: 20px 26px; margin: 12px 0 22px; box-shadow: var(--shadow); }
+  .part-head.pro { background: var(--cpro); }
+  .part-head.kids { background: var(--cg); }
+  .part-head .kick { font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase; letter-spacing: .12em; font-size: 13px; opacity: .85; }
+  .part-head h2 { color: var(--paper); margin: 4px 0 6px; }
+  .part-head p { margin: 0; font-style: italic; opacity: .92; }
+  .card {
+    background: var(--card); border: 2.5px solid var(--ink); border-radius: 16px;
+    box-shadow: var(--shadow); padding: 26px 28px; margin-bottom: 26px;
+    position: relative; overflow: hidden;
+  }
+  .card.step { border-left-width: 14px; scroll-margin-top: calc(var(--tbh) + 58px); }
+  .card.step.s1 { border-left-color: var(--cb); }
+  .card.step.s2 { border-left-color: var(--cr); }
+  .card.step.s3 { border-left-color: var(--co); }
+  .card.step.s4 { border-left-color: var(--cy); }
+  .card.step.s5 { border-left-color: var(--cg); }
+  .card.step.s6 { border-left-color: var(--cb); }
+  .card.step.s7 { border-left-color: var(--cr); }
+  .card.pro, .card.step.pro { border-left: 14px solid var(--cpro); scroll-margin-top: calc(var(--tbh) + 58px); }
+  .stepnum {
+    position: absolute; top: -18px; right: 6px;
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; font-weight: 800;
+    font-size: 110px; line-height: 1; color: transparent;
+    -webkit-text-stroke: 2px rgba(33,30,25,.16); pointer-events: none; user-select: none;
+  }
+  h3 { font-size: 21px; margin: 20px 0 8px; }
+  h3:first-child { margin-top: 0; }
+  h3.sub { font-size: 18px; margin-top: 22px; }
+  .goal {
+    font-style: italic; color: var(--ink-soft); margin-bottom: 14px;
+    padding-left: 12px; border-left: 4px solid var(--line);
+  }
+  p { margin-bottom: 12px; }
+  ul, ol { margin: 0 0 14px 24px; }
+  li { margin-bottom: 7px; }
+  strong { font-weight: 700; }
+
+  /* ---------- Algorithm chips ---------- */
+  .alg {
+    display: flex; flex-wrap: wrap; gap: 7px; align-items: center;
+    margin: 14px 0 16px;
+    font-family: Consolas, 'Courier New', monospace; font-weight: 700; font-size: 20px;
+  }
+  .alg .mv {
+    background: var(--ink); color: var(--cy);
+    padding: 6px 12px; border-radius: 9px;
+    box-shadow: 0 3px 0 rgba(0,0,0,.55);
+    min-width: 44px; text-align: center;
+  }
+  .alg .mv.prime { color: #7ED0FF; }
+  .alg .mv.dbl { color: #FF9E6B; }
+  .alg .mv.tip { color: #B9F6CA; }
+  .alg.small { font-size: 16px; }
+  .alg.small .mv { padding: 3px 8px; min-width: 30px; }
+  .alg.tiny { font-size: 13.5px; }
+  .alg.tiny .mv { padding: 2px 6px; min-width: 24px; border-radius: 6px; }
+  .alg-label {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    font-size: 14px; letter-spacing: .06em; color: var(--ink-soft); margin-top: 10px;
+  }
+
+  /* ---------- Callouts ---------- */
+  .tip, .warn {
+    border: 2px solid var(--ink); border-radius: 12px;
+    padding: 12px 16px; margin: 14px 0; font-size: 16px;
+  }
+  .tip { background: #E9F5EA; border-left: 8px solid var(--cg); }
+  .warn { background: #FBEAE3; border-left: 8px solid var(--cr); }
+  .tip b:first-child, .warn b:first-child {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    letter-spacing: .04em; font-size: 14px;
+  }
+
+  /* ---------- Kids boxes ---------- */
+  .kbox { border: 2.5px solid var(--ink); border-radius: 14px; padding: 14px 16px; margin: 12px 0; font-size: 16.5px; }
+  .kbox .kt {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    font-size: 13px; letter-spacing: .06em; display: block; margin-bottom: 6px;
+  }
+  .kbox.see { background: #E3F2FD; border-left: 10px solid var(--cb); }
+  .kbox.do { background: #E9F5EA; border-left: 10px solid var(--cg); }
+  .kbox.help { background: #FFF3E0; border-left: 10px solid var(--co); }
+  .mode-kids .card.step { scroll-margin-top: calc(var(--tbh) + 58px); }
+  .mode-kids ol li, .mode-kids ul li { margin-bottom: 10px; }
+
+  /* ---------- Diagrams ---------- */
+  .dgrow { display: flex; gap: 22px; flex-wrap: wrap; margin: 18px 0; align-items: flex-start; }
+  figure.dg { text-align: center; margin: 0; }
+  figure.dg svg { display: block; margin: 0 auto; }
+  figure.dg figcaption {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; font-size: 13.5px;
+    text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft);
+    margin-top: 8px; max-width: 200px;
+  }
+  .dgbox {
+    background: #FAF7EC; border: 2px dashed var(--line); border-radius: 12px;
+    padding: 16px 18px 12px;
+  }
+
+  /* ---------- Notation grid ---------- */
+  .notgrid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    gap: 16px; margin-top: 6px;
+  }
+  .notcell {
+    background: var(--card); border: 2px solid var(--ink); border-radius: 12px;
+    padding: 12px 10px 10px; text-align: center; box-shadow: 4px 4px 0 rgba(33,30,25,.85);
+  }
+  .notcell .nname {
+    font-family: Consolas, monospace; font-weight: 700; font-size: 24px;
+    display: block; margin-bottom: 6px;
+  }
+  .notcell .ndesc { font-size: 14px; color: var(--ink-soft); line-height: 1.35; display: block; margin-top: 6px; }
+  .notcell svg { margin: 0 auto; display: block; }
+
+  /* ---------- Cheat sheet ---------- */
+  .cheat { border-collapse: collapse; width: 100%; background: var(--card); }
+  .cheat th, .cheat td { border: 2px solid var(--ink); padding: 10px 14px; text-align: left; vertical-align: top; }
+  .cheat th {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    letter-spacing: .05em; font-size: 14.5px; background: var(--ink); color: var(--paper);
+  }
+  .cheat.pro th { background: var(--cpro); }
+  .cheat td:first-child { font-weight: 700; white-space: nowrap; }
+  .cheat .alg { margin: 0; }
+  .cheat-wrap { overflow-x: auto; border-radius: 12px; box-shadow: var(--shadow); border: 2.5px solid var(--ink); margin-bottom: 22px; }
+  .cheat-wrap .cheat th:first-child { border-top-left-radius: 9px; }
+
+  /* ---------- Progress checkbox ---------- */
+  .done-row { margin-top: 18px; padding-top: 14px; border-top: 2px dashed var(--line); }
+  .done-row label {
+    display: inline-flex; align-items: center; gap: 10px; cursor: pointer;
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    font-size: 14.5px; letter-spacing: .05em;
+  }
+  .done-row input { width: 20px; height: 20px; accent-color: var(--cg); cursor: pointer; }
+  .card.step.is-done { opacity: .82; }
+  .card.step.is-done .stepnum { -webkit-text-stroke-color: rgba(10,162,76,.35); }
+
+  footer {
+    border-top: 2px solid var(--ink); margin-top: 60px; padding: 26px 0 46px;
+    font-size: 15px; color: var(--ink-soft); font-style: italic;
+  }
+  footer a { color: var(--ink-soft); }
+
+  /* ---------- Mobile: compact header + nav ---------- */
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    .wrap { padding: 0 14px; }
+    .card { padding: 18px 14px; }
+    .stepnum { font-size: 64px; top: -8px; }
+    .topbar .tb-row { gap: 5px; padding: 6px 0; }
+    .tb-brand { display: none; }
+    .tb-sep { height: 18px; }
+    .tabbtn { font-size: 12.5px; padding: 4px 9px; box-shadow: 2px 2px 0 rgba(33,30,25,.85); border-radius: 8px; }
+    .tabbtn .long { display: none; }
+    .tabbtn .short { display: inline; }
+    .panel-hero { padding: 14px 0 2px; }
+    .panel-hero h1 { font-size: 26px; }
+    .panel-hero p { font-size: 14px; }
+    .panel-hero .hero-flag { height: 6px; max-width: 180px; margin-bottom: 10px; }
+    nav.steps { position: static; padding: 6px 0; margin-bottom: 20px; border-top: none; }
+    nav.steps .wrap { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+    nav.steps a { font-size: 12px; padding: 3px 8px; white-space: nowrap; }
+    .card.step, .card.pro, .mode-kids .card.step { scroll-margin-top: calc(var(--tbh) + 8px); }
+    .part-head { padding: 14px 16px; }
+    h2 { font-size: 22px; }
+  }
+  @media print {
+    body { background: #fff; }
+    .card, .notcell, .part-head { box-shadow: none; }
+    .topbar, nav.steps { position: static; }
+    .done-row { display: none; }
+  }
+</style>
+</head>
+<body data-cube="a3" data-level="beginner">
+
+<div class="topbar" id="topbar">
+  <div class="wrap">
+    <div class="tb-row">
+      <span class="tb-brand">Kubi</span>
+      <div class="tb-group" role="tablist" aria-label="Kuba izvēle">
+        <button class="tabbtn cubebtn" data-cube="a2" type="button">2×2</button>
+        <button class="tabbtn cubebtn" data-cube="a3" type="button">3×3</button>
+        <button class="tabbtn cubebtn" data-cube="py" type="button">Pyraminx</button>
+      </div>
+      <span class="tb-sep" aria-hidden="true"></span>
+      <div class="tb-group" role="tablist" aria-label="Līmeņa izvēle">
+        <button class="tabbtn lvlbtn lvl-kids" data-level="kids" type="button"><span class="long">Bērniem</span><span class="short">Bērni</span></button>
+        <button class="tabbtn lvlbtn" data-level="beginner" type="button"><span class="long">Iesācējs</span><span class="short">Iesāc.</span></button>
+        <button class="tabbtn lvlbtn lvl-pro" data-level="pro" type="button"><span class="long">Pro</span><span class="short">Pro</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="steps" data-for="a3:kids" aria-label="Soļi — 3×3 bērniem">
+  <div class="wrap">
+    <a href="#a3-k0"><b>★</b> Sāc šeit</a>
+    <a class="n1" href="#a3-k1"><b>1</b> Puķīte</a>
+    <a class="n2" href="#a3-k2"><b>2</b> Stūri</a>
+    <a class="n3" href="#a3-k3"><b>3</b> Vidus</a>
+    <a class="n4" href="#a3-k4"><b>4</b> Krusts</a>
+    <a class="n5" href="#a3-k5"><b>5</b> Malas</a>
+    <a class="n6" href="#a3-k6"><b>6</b> Vietas</a>
+    <a class="n7" href="#a3-k7"><b>7</b> Fināls</a>
+  </div>
+</nav>
+
+<nav class="steps" data-for="a2:kids" aria-label="Soļi — 2×2 bērniem">
+  <div class="wrap">
+    <a href="#a2-k0"><b>★</b> Sāc šeit</a>
+    <a class="n1" href="#a2-k1"><b>1</b> Baltā puse</a>
+    <a class="n2" href="#a2-k2"><b>2</b> Dzeltenā puse</a>
+    <a class="n3" href="#a2-k3"><b>3</b> Sāni</a>
+  </div>
+</nav>
+
+<nav class="steps" data-for="py:kids" aria-label="Soļi — Pyraminx bērniem">
+  <div class="wrap">
+    <a href="#py-k0"><b>★</b> Sāc šeit</a>
+    <a class="n1" href="#py-k1"><b>1</b> Smailītes</a>
+    <a class="n2" href="#py-k2"><b>2</b> Apakša</a>
+    <a class="n3" href="#py-k3"><b>3</b> Pēdējās malas</a>
+  </div>
+</nav>

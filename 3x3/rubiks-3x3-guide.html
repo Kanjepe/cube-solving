@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3×3 Rubika kuba salikšana — Iesācēju metode</title>
+<style>
+  :root {
+    --paper: #F4EFE3;
+    --card: #FFFDF6;
+    --ink: #211E19;
+    --ink-soft: #57503F;
+    --line: #C9C2AE;
+    --cy: #FFD500;
+    --cw: #FFFFFF;
+    --cr: #D6382E;
+    --co: #FF7A00;
+    --cg: #0AA24C;
+    --cb: #1558C9;
+    --gray: #E6E1D2;
+    --cpro: #7A3FB5;
+    --shadow: 6px 6px 0 rgba(33,30,25,.9);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background-color: var(--paper);
+    background-image: radial-gradient(#D9D2BE 1px, transparent 1.5px);
+    background-size: 24px 24px;
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  h1, h2, h3, .display {
+    font-family: Bahnschrift, 'Arial Narrow', 'Segoe UI', sans-serif;
+    font-stretch: condensed;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    line-height: 1.1;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---------- Hero ---------- */
+  header.hero { padding: 56px 0 30px; }
+  .hero-flag { display: flex; height: 10px; max-width: 340px; margin-bottom: 26px; border: 2px solid var(--ink); }
+  .hero-flag span { flex: 1; }
+  h1 { font-size: clamp(40px, 7vw, 72px); font-weight: 800; }
+  h1 .thin { font-weight: 300; }
+  .hero-sub {
+    margin-top: 14px; max-width: 640px; font-size: 19px; color: var(--ink-soft);
+    font-style: italic;
+  }
+  .hero-badges { margin-top: 22px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .badge {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; font-size: 14px;
+    text-transform: uppercase; letter-spacing: .05em;
+    border: 2px solid var(--ink); background: var(--card);
+    padding: 5px 12px; border-radius: 999px; box-shadow: 3px 3px 0 rgba(33,30,25,.85);
+  }
+
+  /* ---------- Sticky step nav ---------- */
+  nav.steps {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(244,239,227,.94); backdrop-filter: blur(3px);
+    border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
+    padding: 10px 0; margin-bottom: 34px;
+  }
+  nav.steps .wrap { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  nav.steps a {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; font-size: 14px;
+    text-transform: uppercase; letter-spacing: .04em;
+    text-decoration: none; color: var(--ink);
+    border: 2px solid var(--ink); background: var(--card);
+    padding: 4px 10px; border-radius: 8px;
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  nav.steps a:hover { transform: translate(-2px,-2px); box-shadow: 3px 3px 0 var(--ink); }
+  nav.steps a b { font-size: 15px; }
+  nav.steps a.n1 b { color: var(--cb); }  nav.steps a.n2 b { color: var(--cr); }
+  nav.steps a.n3 b { color: var(--co); }  nav.steps a.n4 b { color: #B99A00; }
+  nav.steps a.n5 b { color: var(--cg); }  nav.steps a.n6 b { color: var(--cb); }
+  nav.steps a.n7 b { color: var(--cr); }
+
+  /* ---------- Sections & cards ---------- */
+  section { margin-bottom: 46px; }
+  h2 {
+    font-size: clamp(24px, 4vw, 34px); margin-bottom: 16px;
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  h2 .rule { flex: 1; height: 4px; background: var(--ink); min-width: 40px; }
+  .card {
+    background: var(--card); border: 2.5px solid var(--ink); border-radius: 16px;
+    box-shadow: var(--shadow); padding: 26px 28px; margin-bottom: 26px;
+    position: relative; overflow: hidden;
+  }
+  .card.step { border-left-width: 14px; scroll-margin-top: 70px; }
+  .card.step.s1 { border-left-color: var(--cb); }
+  .card.step.s2 { border-left-color: var(--cr); }
+  .card.step.s3 { border-left-color: var(--co); }
+  .card.step.s4 { border-left-color: var(--cy); }
+  .card.step.s5 { border-left-color: var(--cg); }
+  .card.step.s6 { border-left-color: var(--cb); }
+  .card.step.s7 { border-left-color: var(--cr); }
+  .stepnum {
+    position: absolute; top: -18px; right: 6px;
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; font-weight: 800;
+    font-size: 110px; line-height: 1; color: transparent;
+    -webkit-text-stroke: 2px rgba(33,30,25,.16); pointer-events: none; user-select: none;
+  }
+  h3 { font-size: 21px; margin: 20px 0 8px; }
+  .goal {
+    font-style: italic; color: var(--ink-soft); margin-bottom: 14px;
+    padding-left: 12px; border-left: 4px solid var(--line);
+  }
+  p { margin-bottom: 12px; }
+  ul, ol { margin: 0 0 14px 24px; }
+  li { margin-bottom: 7px; }
+  strong { font-weight: 700; }
+
+  /* ---------- Algorithm chips ---------- */
+  .alg {
+    display: flex; flex-wrap: wrap; gap: 7px; align-items: center;
+    margin: 14px 0 16px;
+    font-family: Consolas, 'Courier New', monospace; font-weight: 700; font-size: 20px;
+  }
+  .alg .mv {
+    background: var(--ink); color: var(--cy);
+    padding: 6px 12px; border-radius: 9px;
+    box-shadow: 0 3px 0 rgba(0,0,0,.55);
+    min-width: 44px; text-align: center;
+  }
+  .alg .mv.prime { color: #7ED0FF; }
+  .alg .mv.dbl { color: #FF9E6B; }
+  .alg.small { font-size: 16px; }
+  .alg.small .mv { padding: 3px 8px; min-width: 34px; }
+  .alg-label {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    font-size: 14px; letter-spacing: .06em; color: var(--ink-soft); margin-top: 10px;
+  }
+
+  /* ---------- Callouts ---------- */
+  .tip, .warn {
+    border: 2px solid var(--ink); border-radius: 12px;
+    padding: 12px 16px; margin: 14px 0; font-size: 16px;
+  }
+  .tip { background: #E9F5EA; border-left: 8px solid var(--cg); }
+  .warn { background: #FBEAE3; border-left: 8px solid var(--cr); }
+  .tip b:first-child, .warn b:first-child {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    letter-spacing: .04em; font-size: 14px;
+  }
+
+  /* ---------- Diagrams ---------- */
+  .dgrow { display: flex; gap: 22px; flex-wrap: wrap; margin: 18px 0; align-items: flex-start; }
+  figure.dg { text-align: center; margin: 0; }
+  figure.dg svg { display: block; margin: 0 auto; }
+  figure.dg figcaption {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; font-size: 13.5px;
+    text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft);
+    margin-top: 8px; max-width: 190px;
+  }
+  .dgbox {
+    background: #FAF7EC; border: 2px dashed var(--line); border-radius: 12px;
+    padding: 16px 18px 12px;
+  }
+  .arrowline { stroke: var(--ink); stroke-width: 3.4; fill: none; }
+  .arrowhead { fill: var(--ink); }
+
+  /* ---------- Notation grid ---------- */
+  .notgrid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px; margin-top: 6px;
+  }
+  .notcell {
+    background: var(--card); border: 2px solid var(--ink); border-radius: 12px;
+    padding: 12px 10px 10px; text-align: center; box-shadow: 4px 4px 0 rgba(33,30,25,.85);
+  }
+  .notcell .nname {
+    font-family: Consolas, monospace; font-weight: 700; font-size: 24px;
+    display: block; margin-bottom: 6px;
+  }
+  .notcell .ndesc { font-size: 14px; color: var(--ink-soft); line-height: 1.35; display: block; margin-top: 6px; }
+  .notcell svg { margin: 0 auto; display: block; }
+
+  /* ---------- Cheat sheet ---------- */
+  .cheat { border-collapse: collapse; width: 100%; background: var(--card); }
+  .cheat th, .cheat td { border: 2px solid var(--ink); padding: 10px 14px; text-align: left; }
+  .cheat th {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    letter-spacing: .05em; font-size: 14.5px; background: var(--ink); color: var(--paper);
+  }
+  .cheat td:first-child { font-weight: 700; white-space: nowrap; }
+  .cheat .alg { margin: 0; }
+  .cheat-wrap { overflow-x: auto; border-radius: 12px; box-shadow: var(--shadow); border: 2.5px solid var(--ink); }
+  .cheat-wrap .cheat th:first-child { border-top-left-radius: 9px; }
+
+  /* ---------- Progress checkbox ---------- */
+  .done-row { margin-top: 18px; padding-top: 14px; border-top: 2px dashed var(--line); }
+  .done-row label {
+    display: inline-flex; align-items: center; gap: 10px; cursor: pointer;
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    font-size: 14.5px; letter-spacing: .05em;
+  }
+  .done-row input { width: 20px; height: 20px; accent-color: var(--cg); cursor: pointer; }
+  .card.step.is-done { opacity: .82; }
+  .card.step.is-done .stepnum { -webkit-text-stroke-color: rgba(10,162,76,.35); }
+
+  footer {
+    border-top: 2px solid var(--ink); margin-top: 60px; padding: 26px 0 46px;
+    font-size: 15px; color: var(--ink-soft); font-style: italic;
+  }
+
+  @media (max-width: 560px) {
+    .card { padding: 20px 16px; }
+    .stepnum { font-size: 74px; top: -10px; }
+    body { font-size: 16px; }
+  }
+  @media print {
+    body { background: #fff; }
+    .card, .notcell { box-shadow: none; }
+    nav.steps { position: static; }
+    .done-row { display: none; }
+  }
+
+  /* ---------- Mode switch (Beginner / Pro) ---------- */
+  .modebar { border-bottom: 2px solid var(--ink); background: var(--card); }
+  .modebar .wrap { display: flex; gap: 10px; align-items: center; padding: 14px 20px; flex-wrap: wrap; }
+  .modebar .mb-label {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    font-size: 13px; letter-spacing: .1em; color: var(--ink-soft);
+  }
+  .modebar button {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    letter-spacing: .04em; font-size: 15px; cursor: pointer;
+    border: 2.5px solid var(--ink); background: var(--card); color: var(--ink);
+    padding: 8px 18px; border-radius: 10px; box-shadow: 3px 3px 0 rgba(33,30,25,.85);
+    transition: transform .1s ease, box-shadow .1s ease;
+  }
+  .modebar button:hover { transform: translate(-1px,-1px); }
+  .modebar button.active { background: var(--ink); color: var(--paper); }
+  .modebar button.mb-pro.active { background: var(--cpro); border-color: var(--cpro); }
+  .modebar .mb-hint { font-size: 13.5px; color: var(--ink-soft); font-style: italic; flex-basis: 100%; }
+
+  /* content mode wrappers */
+  main > .mode { display: none; }
+  body:not(.pro) main > .mode.mode-beginner { display: block; }
+  body.pro main > .mode.mode-pro { display: block; }
+  /* nav swap */
+  nav.steps.pro-nav { display: none; }
+  body.pro nav.steps.beg-nav { display: none; }
+  body.pro nav.steps.pro-nav { display: block; }
+  nav.steps.pro-nav a.pro b { color: var(--cpro); }
+  nav.steps.pro-nav a.pro { border-color: var(--cpro); }
+
+  /* pro accents */
+  .part-head { background: var(--ink); color: var(--paper); border-radius: 16px; padding: 20px 26px; margin: 12px 0 22px; box-shadow: var(--shadow); }
+  .part-head.pro { background: var(--cpro); }
+  .part-head .kick { font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase; letter-spacing: .12em; font-size: 13px; opacity: .85; }
+  .part-head h2 { color: var(--paper); margin: 4px 0 6px; }
+  .part-head p { margin: 0; font-style: italic; opacity: .92; }
+  .card.pro { border-left: 14px solid var(--cpro); scroll-margin-top: 70px; }
+  .cheat.pro th { background: var(--cpro); }
+  .alg.tiny { font-size: 13.5px; }
+  .alg.tiny .mv { padding: 2px 6px; min-width: 24px; border-radius: 6px; }
+  h3.sub { font-size: 18px; margin-top: 22px; }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-flag" aria-hidden="true">
+      <span style="background:var(--cw)"></span><span style="background:var(--cy)"></span>
+      <span style="background:var(--cr)"></span><span style="background:var(--co)"></span>
+      <span style="background:var(--cg)"></span><span style="background:var(--cb)"></span>
+    </div>
+    <h1>3×3 Rubika kubs<br><span class="thin">Iesācēju metode</span></h1>
+    <p class="hero-sub">Pilna pamācība, kā salikt kubu slāni pa slānim — 7 soļi, 7 algoritmi.
+    Ja izpildīsi soļus secīgi, kubs sanāks <em>vienmēr</em>.</p>
+    <div class="hero-badges">
+      <span class="badge">7 soļi</span>
+      <span class="badge">7 algoritmi</span>
+      <span class="badge">Darbojas bez interneta</span>
+    </div>
+  </div>
+</header>
+
+<div class="modebar">
+  <div class="wrap">
+    <span class="mb-label">Režīms:</span>
+    <button id="mb-beg" class="mb-beg" type="button">Iesācējs</button>
+    <button id="mb-pro" class="mb-pro" type="button">Pro — CFOP</button>
+    <span class="mb-hint">Pārslēdzies starp vienkāršo slānis-pa-slānim metodi un profesionāļu CFOP (F2L · OLL 57 · PLL 21). Izvēle tiek saglabāta.</span>
+  </div>
+</div>
+
+<nav class="steps beg-nav" aria-label="Soļi — iesācējs">
+  <div class="wrap">
+    <a href="#nota" title="Notācija"><b>ABC</b> Notācija</a>
+    <a class="n1" href="#s1"><b>1</b> Krusts</a>
+    <a class="n2" href="#s2"><b>2</b> Stūri</a>
+    <a class="n3" href="#s3"><b>3</b> Vidus</a>
+    <a class="n4" href="#s4"><b>4</b> Dzelt. krusts</a>
+    <a class="n5" href="#s5"><b>5</b> Malas</a>
+    <a class="n6" href="#s6"><b>6</b> Stūru vietas</a>
+    <a class="n7" href="#s7"><b>7</b> Stūru pagrieziens</a>
+    <a href="#cheat" title="Kopsavilkums"><b>★</b> Kopsavilkums</a>
+  </div>
+</nav>
+
+<nav class="steps pro-nav" aria-label="Soļi — pro">
+  <div class="wrap">
+    <a href="#cfop" title="Par CFOP"><b>i</b> CFOP</a>
+    <a class="pro" href="#cross"><b>1</b> Krusts</a>
+    <a class="pro" href="#f2l"><b>2</b> F2L</a>
+    <a class="pro" href="#oll"><b>3</b> OLL</a>
+    <a class="pro" href="#pll"><b>4</b> PLL</a>
+    <a href="#cheat-pro" title="Kopsavilkums"><b>★</b> Kopsavilkums</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<div class="mode mode-beginner">
+
+<!-- ============ KUBA UZBŪVE ============ -->
+<section id="uzbuve">
+  <h2>Pirms sāc: kuba uzbūve <span class="rule"></span></h2>
+  <div class="card">
+    <p>Kubam ir <strong>trīs veidu gabaliņi</strong>, un tos nedrīkst jaukt:</p>
+    <ul>
+      <li><strong>Centri</strong> (6 gab., pa vienai krāsai) — tie <strong>nekad nekustas</strong> cits pret citu.
+        Centrs nosaka, kādā krāsā būs visa attiecīgā puse. Ja centrs ir zils — visa puse beigās būs zila.</li>
+      <li><strong>Malas</strong> (12 gab.) — gabaliņi ar <strong>2 krāsām</strong>.</li>
+      <li><strong>Stūri</strong> (8 gab.) — gabaliņi ar <strong>3 krāsām</strong>.</li>
+    </ul>
+    <p>Standarta krāsu izkārtojums: <strong>balts pretī dzeltenam</strong>, <strong>sarkans pretī oranžam</strong>,
+    <strong>zils pretī zaļam</strong>. Šajā pamācībā sākam ar <strong>balto pusi</strong> un beidzam ar <strong>dzelteno</strong>.</p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="face" data-c="xexecexex" data-mark="4"
+        ><figcaption>Centrs — 1 krāsa, nekustas</figcaption></figure>
+      <figure class="dg" data-kind="face" data-c="xexecexex" data-mark="1,3,5,7"
+        ><figcaption>Malas — 2 krāsas (4 augšējā slānī)</figcaption></figure>
+      <figure class="dg" data-kind="face" data-c="xexecexex" data-mark="0,2,6,8"
+        ><figcaption>Stūri — 3 krāsas (4 augšējā slānī)</figcaption></figure>
+      <figure class="dg" data-kind="net" data-c="yrgobw"
+        ><figcaption>Krāsu shēma (izklājums): balts↔dzeltens, sarkans↔oranžs, zils↔zaļš</figcaption></figure>
+    </div>
+    <div class="tip"><b>Galvenā doma:</b> tu nekārto uzlīmes — tu liec <strong>gabaliņus</strong> pareizajās vietās.
+    Mala «balts-sarkans» der tikai vienā vietā: starp balto un sarkano centru.</div>
+  </div>
+</section>
+
+<!-- ============ NOTĀCIJA ============ -->
+<section id="nota">
+  <h2>Notācija — kā lasīt algoritmus <span class="rule"></span></h2>
+  <div class="card">
+    <p>Katrs burts apzīmē <strong>vienu kuba pusi</strong>, un burts viens pats nozīmē: pagriez šo pusi
+    par 90° <strong>pulksteņrādītāja virzienā</strong> — tā, it kā tu skatītos tieši uz šo pusi.</p>
+    <div class="notgrid">
+      <div class="notcell"><span class="nname">R</span>
+        <div class="dg" data-kind="face" data-c="xxmxxmxxm" data-arrow="colup:2"></div>
+        <span class="ndesc"><b>Right</b> — labā puse uz augšu (uz sevis skatoties)</span></div>
+      <div class="notcell"><span class="nname">L</span>
+        <div class="dg" data-kind="face" data-c="mxxmxxmxx" data-arrow="coldown:0"></div>
+        <span class="ndesc"><b>Left</b> — kreisā puse uz leju</span></div>
+      <div class="notcell"><span class="nname">U</span>
+        <div class="dg" data-kind="face" data-c="mmmxxxxxx" data-arrow="rowleft:0"></div>
+        <span class="ndesc"><b>Up</b> — augšējā kārta pa kreisi</span></div>
+      <div class="notcell"><span class="nname">D</span>
+        <div class="dg" data-kind="face" data-c="xxxxxxmmm" data-arrow="rowright:2"></div>
+        <span class="ndesc"><b>Down</b> — apakšējā kārta pa labi</span></div>
+      <div class="notcell"><span class="nname">F</span>
+        <div class="dg" data-kind="face" data-c="mmmmmmmmm" data-arrow="cw"></div>
+        <span class="ndesc"><b>Front</b> — priekšpuse pulksteņrādītāja virzienā</span></div>
+      <div class="notcell"><span class="nname">B</span>
+        <div class="dg" data-kind="face" data-c="xxxxxxxxx" data-arrow="ccw"></div>
+        <span class="ndesc"><b>Back</b> — aizmugure (no priekšas izskatās pretēji)</span></div>
+    </div>
+    <h3>Papildu apzīmējumi</h3>
+    <ul>
+      <li><strong>' (apostrofs)</strong> — pagriez <strong>pretēji</strong> pulksteņrādītājam.
+        Piemēram, <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="R'"></span> = labā puse uz leju.</li>
+      <li><strong>2</strong> — pagriez par <strong>180°</strong> (divi griezieni; virziens nav svarīgs).
+        Piemēram, <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="U2"></span> = augšējā kārta divreiz.</li>
+    </ul>
+    <div class="warn"><b>Svarīgi!</b> Kamēr izpildi algoritmu, <strong>priekšpuse nemainās</strong> —
+    visu laiku turi kubu ar to pašu pusi pret sevi. Ja apgriezīsi kubu pa vidu, algoritms nestrādās.</div>
+    <div class="tip"><b>Krāsas čipos:</b> dzeltens burts = parasts grieziens,
+    <span style="color:#1558C9;font-weight:700">zils ar '</span> = pretējais virziens,
+    <span style="color:#C25400;font-weight:700">oranžs ar 2</span> = 180°.</div>
+  </div>
+</section>
+<!-- ============ 1. SOLIS ============ -->
+<section>
+  <h2>Salikšana soli pa solim <span class="rule"></span></h2>
+
+  <div class="card step s1" id="s1">
+    <div class="stepnum">1</div>
+    <h3>1. solis — Baltais krusts (caur «puķīti»)</h3>
+    <p class="goal">Mērķis: balts krusts baltajā pusē, un katras krusta malas sānu krāsa sakrīt ar sava sāna centru.</p>
+    <p>Šis solis ir <strong>bez algoritma</strong> — to dara ar aci. Vieglākais ceļš ir caur «puķīti»:</p>
+    <ol>
+      <li>Turi kubu ar <strong>dzelteno centru uz augšu</strong>.</li>
+      <li>Atrodi 4 malas ar baltu uzlīmi un savāc tās augšpusē ap dzelteno centru tā, lai
+        <strong>baltās uzlīmes skatās uz augšu</strong> — sanāk «puķīte».</li>
+      <li>Tagad pa vienai «ziedlapai»: pagriez augšējo kārtu (U), līdz ziedlapas <strong>sānu krāsa</strong>
+        sakrīt ar tās pašas puses <strong>centru</strong> (piem., balti-sarkanā mala virs sarkanā centra).</li>
+      <li>Pagriez to pusi par <strong>180°</strong> (divus griezienus) — baltā mala nonāk lejā, savā vietā.</li>
+      <li>Atkārto ar visām 4 ziedlapām. Krusts izveidojas <strong>apakšā</strong>, baltajā pusē.</li>
+    </ol>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="xwxwywxwx"
+        ><figcaption>«Puķīte» — 4 baltas malas ap dzelteno centru (skats no augšas)</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="xwxwwwxwx" data-b="xbx" data-r="xrx" data-f="xgx" data-l="xox"
+        ><figcaption>Gatavs krusts (skatoties tieši uz balto pusi) — malu sānu krāsas sakrīt ar centriem</figcaption></figure>
+    </div>
+    <div class="warn"><b>Pārbaudi!</b> Krusts ir pareizs tikai tad, ja <strong>visas 4 sānu krāsas sakrīt ar centriem</strong>.
+    Balts krusts ar nesakritīgiem sāniem ir jāpārtaisa — citādi tālākie soļi nestrādās.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="s1"> Solis apgūts</label></div>
+  </div>
+
+  <!-- ============ 2. SOLIS ============ -->
+  <div class="card step s2" id="s2">
+    <div class="stepnum">2</div>
+    <h3>2. solis — Baltie stūri (pirmā kārta gatava)</h3>
+    <p class="goal">Mērķis: visa baltā puse gatava apakšā, un katra sāna apakšējā rinda vienā krāsā.</p>
+    <p>No šī brīža līdz pat beigām turi kubu <strong>ar balto uz leju, dzelteno uz augšu</strong> — vairs nekad to neapgriez!</p>
+    <ol>
+      <li>Atrodi augšējā kārtā stūri ar <strong>baltu uzlīmi</strong>.</li>
+      <li>Apskati tā pārējās divas krāsas un pagriez augšējo kārtu (U) tā, lai stūris atrastos
+        <strong>tieši virs savas vietas</strong> (starp tiem pašiem diviem centriem, piem., balts-sarkans-zils
+        starp sarkano un zilo pusi).</li>
+      <li>Turi kubu tā, lai šis stūris būtu <strong>priekšā pa labi augšā</strong>, un atkārto:</li>
+    </ol>
+    <p class="alg" data-alg="R U R' U'"></p>
+    <p class="alg-label">Atkārto 1–6 reizes, līdz stūris «iekrīt» savā vietā ar balto uz leju</p>
+    <ul>
+      <li>Algoritms stūri katru reizi izceļ un ieliek citādi — <strong>skaiti nevajag</strong>, vienkārši atkārto, līdz stūris ir pareizi.</li>
+      <li>Ja balts stūris jau sēž apakšā, bet <strong>nepareizi</strong> — turi to priekšā pa labi, izpildi
+        algoritmu vienreiz (stūris izlec augšā), tad ievieto pareizi kā parasti.</li>
+    </ul>
+    <div class="dgrow">
+      <figure class="dg" data-kind="uf" data-u="xxxxxxxxm" data-f="xxxxxxxxm"
+        data-arrows='[{"f":["u",2,2],"t":["f",2,2],"curve":26}]'
+        ><figcaption>Stūris virs savas vietas → algoritms to nogādā lejā</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="wwwwwwwww" data-b="bbb" data-r="rrr" data-f="ggg" data-l="ooo"
+        ><figcaption>Rezultāts (skatoties uz balto pusi): balts + visu sānu pirmās rindas</figcaption></figure>
+    </div>
+    <div class="tip"><b>Pazīstams?</b> Šo pašu <strong>R U R' U'</strong> tu jau lieto 2×2 kubā stūru ievietošanai — šeit tas strādā tieši tāpat.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="s2"> Solis apgūts</label></div>
+  </div>
+
+  <!-- ============ 3. SOLIS ============ -->
+  <div class="card step s3" id="s3">
+    <div class="stepnum">3</div>
+    <h3>3. solis — Vidējā kārta</h3>
+    <p class="goal">Mērķis: visas 4 vidējās kārtas malas savās vietās — divas kārtas gatavas.</p>
+    <ol>
+      <li>Atrodi augšējā kārtā malu <strong>bez dzeltenās krāsas</strong> (tā pieder vidējai kārtai).</li>
+      <li>Pagriez augšējo kārtu (U), līdz malas <strong>priekšējā krāsa sakrīt ar priekšas centru</strong> —
+        izveidojas apgriezts «T» burts.</li>
+      <li>Paskaties uz malas <strong>augšējo krāsu</strong>:</li>
+    </ol>
+    <p><strong>Ja augšējā krāsa sakrīt ar LABO centru</strong> → mala jāieliek pa labi:</p>
+    <p class="alg" data-alg="U R U' R' U' F' U F"></p>
+    <p><strong>Ja augšējā krāsa sakrīt ar KREISO centru</strong> → mala jāieliek pa kreisi:</p>
+    <p class="alg" data-alg="U' L' U L U F U' F'"></p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="uf" data-u="xxxxxxxox" data-f="xgxxgxxxx"
+        data-arrows='[{"f":["f",1,0],"t":["f",2,1],"curve":-18}]'
+        ><figcaption>Augšā oranžs (= labais centrs) → mala iet pa labi</figcaption></figure>
+      <figure class="dg" data-kind="uf" data-u="xxxxxxxrx" data-f="xgxxgxxxx"
+        data-arrows='[{"f":["f",1,0],"t":["f",0,1],"curve":18}]'
+        ><figcaption>Augšā sarkans (= kreisais centrs) → mala iet pa kreisi</figcaption></figure>
+    </div>
+    <ul>
+      <li>Atkārto ar visām 4 malām.</li>
+      <li><strong>Ja mala jau sēž vidējā kārtā, bet nepareizi</strong> — ievieto tajā vietā jebkuru citu malu
+        no augšas (ar jebkuru no abiem algoritmiem); vecā mala izlec augšā, un tad to ievieto pareizi.</li>
+    </ul>
+    <div class="tip"><b>Padoms:</b> šī soļa algoritmi ir garākie visā metodē. Izpildi tos lēni un
+    ievēro: puse griezienu «paceļ» malu, otra puse «aizver» stūri atpakaļ.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="s3"> Solis apgūts</label></div>
+  </div>
+
+  <!-- ============ 4. SOLIS ============ -->
+  <div class="card step s4" id="s4">
+    <div class="stepnum">4</div>
+    <h3>4. solis — Dzeltenais krusts</h3>
+    <p class="goal">Mērķis: dzeltens krusts augšpusē (sānu krāsām pagaidām nav nozīmes).</p>
+    <p>Paskaties uz dzeltenajām malām augšpusē — redzēsi vienu no 4 attēliem. Viens un tas pats algoritms
+    ved tevi pa ķēdīti <strong>punkts → «L» → līnija → krusts</strong>:</p>
+    <p class="alg" data-alg="F R U R' U' F'"></p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="xxxxyxxxx" data-small="1"
+        ><figcaption>Punkts → algoritms (līdz 3 reizēm kopā)</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="xyxyyxxxx" data-small="1"
+        ><figcaption>«L» — turi rādām uz aizmuguri un pa kreisi → algoritms</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="xxxyyyxxx" data-small="1"
+        ><figcaption>Līnija — turi horizontāli → algoritms</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="xyxyyyxyx" data-small="1"
+        ><figcaption>Krusts — gatavs!</figcaption></figure>
+    </div>
+    <div class="warn"><b>Novietojums ir svarīgs!</b> Pirms algoritma pagriez <strong>visu kubu</strong> (vai U kārtu) tā,
+    lai «L» rādītos uz aizmuguri un pa kreisi, bet līnija ietu horizontāli — no kreisās uz labo pusi.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="s4"> Solis apgūts</label></div>
+  </div>
+<!-- ============ 5. SOLIS ============ -->
+  <div class="card step s5" id="s5">
+    <div class="stepnum">5</div>
+    <h3>5. solis — Dzelteno malu sakārtošana</h3>
+    <p class="goal">Mērķis: katras dzeltenā krusta malas sānu krāsa sakrīt ar sava sāna centru.</p>
+    <ol>
+      <li>Griez <strong>tikai augšējo kārtu (U)</strong> un atrodi pozīciju, kurā ar centriem sakrīt
+        <strong>pēc iespējas vairāk</strong> malu.</li>
+      <li><strong>Sakrīt visas 4</strong> → solis gatavs, ej tālāk.</li>
+      <li><strong>Sakrīt divas blakus esošas</strong> → turi kubu tā, lai pareizās malas būtu
+        <strong>aizmugurē un pa labi</strong>, izpildi algoritmu, tad pagriez U, lai viss sakristu.</li>
+      <li><strong>Sakrīt divas pretējās</strong> → izpildi algoritmu no jebkuras puses — sanāks
+        «divas blakus», tad rīkojies kā 3. punktā.</li>
+      <li><strong>Sakrīt tieši viena</strong> → turi to <strong>priekšā</strong> un izpildi algoritmu
+        (ja nepieciešams — vēlreiz tāpat).</li>
+    </ol>
+    <p class="alg" data-alg="R U R' U R U2 R'"></p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="xyxyyyxyx" data-b="xbx" data-r="xox" data-f="xrx" data-l="xgx"
+        data-arrows='[{"f":["u",1,2],"t":["u",0,1],"curve":-16,"dbl":1}]'
+        ><figcaption>Aizmugurē (zils) un pa labi (oranžs) — pareizi; priekšējā un kreisā mala mainās vietām</figcaption></figure>
+    </div>
+    <div class="tip"><b>Pazīstams?</b> Šis ir tas pats algoritms, ko 2×2 kubā lieto «pretējās puses taisīšanai» —
+    <strong>R U R' U R U2 R'</strong>.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="s5"> Solis apgūts</label></div>
+  </div>
+
+  <!-- ============ 6. SOLIS ============ -->
+  <div class="card step s6" id="s6">
+    <div class="stepnum">6</div>
+    <h3>6. solis — Dzelteno stūru novietošana</h3>
+    <p class="goal">Mērķis: visi 4 dzeltenie stūri savās vietās (pagriezti var būt nepareizi — tas nekas).</p>
+    <p>Stūris ir «savā vietā», ja tā <strong>trīs krāsas atbilst</strong> trim pusēm, starp kurām tas atrodas —
+    pat ja krāsas skatās nepareizos virzienos.</p>
+    <ol>
+      <li>Atrodi stūri, kas <strong>jau ir savā vietā</strong>.</li>
+      <li>Turi kubu tā, lai šis stūris būtu <strong>priekšā pa labi</strong>, un izpildi algoritmu —
+        pārējie trīs stūri mainās vietām pa apli.</li>
+      <li>Ja visi vēl nav vietās — <strong>atkārto tieši tāpat</strong> (to pašu stūri turi priekšā pa labi).</li>
+      <li>Ja savā vietā nav <strong>neviena</strong> stūra — izpildi algoritmu no jebkuras puses,
+        pēc tam viens noteikti būs vietā.</li>
+    </ol>
+    <p class="alg" data-alg="U R U' L' U R' U' L"></p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="xyxyyyxyx" data-mark="8"
+        data-arrows='[{"f":["u",0,2],"t":["u",2,0],"curve":-30},{"f":["u",2,0],"t":["u",0,0],"curve":-14},{"f":["u",0,0],"t":["u",0,2],"curve":-14}]'
+        ><figcaption>Atzīmētais stūris (priekšā pa labi) paliek uz vietas, pārējie trīs griežas pa apli</figcaption></figure>
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="s6"> Solis apgūts</label></div>
+  </div>
+
+  <!-- ============ 7. SOLIS ============ -->
+  <div class="card step s7" id="s7">
+    <div class="stepnum">7</div>
+    <h3>7. solis — Dzelteno stūru pagriešana (fināls!)</h3>
+    <p class="goal">Mērķis: visi stūri pagriezti ar dzelteno uz augšu — kubs salikts.</p>
+    <ol>
+      <li>Turi kubu ar dzelteno uz augšu un atrodi stūri, kam dzeltenā krāsa <strong>neskatās uz augšu</strong>.
+        Turi šo stūri <strong>priekšā pa labi</strong>.</li>
+      <li>Atkārto algoritmu, līdz <strong>tieši šis</strong> stūris ir ar dzelteno uz augšu
+        (būs vajadzīgas 2 vai 4 reizes):</li>
+    </ol>
+    <p class="alg" data-alg="R' D' R D"></p>
+    <ol start="3">
+      <li>Kad stūris gatavs, <strong>pagriez TIKAI augšējo kārtu (U)</strong>, lai nākamais nepagrieztais
+        stūris nonāktu priekšā pa labi, un atkārto algoritmu arī tam.</li>
+      <li>Kad visi stūri pagriezti, pagriez augšējo kārtu, lai krāsas saietu kopā — <strong>kubs salikts!</strong> 🎉</li>
+    </ol>
+    <div class="warn"><b>Nebaidies!</b> Šī soļa laikā pārējais kubs izskatīsies <strong>pilnīgi sajaukts</strong> —
+    tas tā ir paredzēts. Kad pēdējais stūris būs pagriezts, viss atkal saliksies. Galvenais:
+    <strong>starp stūriem griez tikai U kārtu</strong> un nekad negriez visu kubu.</div>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="xyyyyyyyx" data-mark="0,8" data-small="1"
+        ><figcaption>Pirms: diviem stūriem dzeltenais skatās sānis</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="yyyyyyyyy" data-small="1"
+        ><figcaption>Pēc: visa dzeltenā puse gatava</figcaption></figure>
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="s7"> Solis apgūts</label></div>
+  </div>
+</section>
+
+<!-- ============ KOPSAVILKUMS ============ -->
+<section id="cheat">
+  <h2>Kopsavilkums — visi algoritmi <span class="rule"></span></h2>
+  <div class="cheat-wrap">
+    <table class="cheat">
+      <tr><th>Solis</th><th>Kad lietot</th><th>Algoritms</th></tr>
+      <tr><td>1. Baltais krusts</td><td>«Puķīte» augšā → sānu krāsa pie centra → puse 180°</td>
+        <td><em>bez algoritma</em></td></tr>
+      <tr><td>2. Baltie stūri</td><td>Stūris virs savas vietas, priekšā pa labi</td>
+        <td><span class="alg small" data-alg="R U R' U'"></span></td></tr>
+      <tr><td>3. Vidus — pa labi</td><td>Malas augšējā krāsa = labais centrs</td>
+        <td><span class="alg small" data-alg="U R U' R' U' F' U F"></span></td></tr>
+      <tr><td>3. Vidus — pa kreisi</td><td>Malas augšējā krāsa = kreisais centrs</td>
+        <td><span class="alg small" data-alg="U' L' U L U F U' F'"></span></td></tr>
+      <tr><td>4. Dzeltenais krusts</td><td>Punkts → «L» (aizmugurē-pa kreisi) → līnija → krusts</td>
+        <td><span class="alg small" data-alg="F R U R' U' F'"></span></td></tr>
+      <tr><td>5. Dzeltenās malas</td><td>Pareizās malas aizmugurē + pa labi</td>
+        <td><span class="alg small" data-alg="R U R' U R U2 R'"></span></td></tr>
+      <tr><td>6. Stūru vietas</td><td>Pareizais stūris priekšā pa labi</td>
+        <td><span class="alg small" data-alg="U R U' L' U R' U' L"></span></td></tr>
+      <tr><td>7. Stūru pagriešana</td><td>Nepagrieztais stūris priekšā pa labi; starp stūriem tikai U</td>
+        <td><span class="alg small" data-alg="R' D' R D"></span></td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ PADOMI ============ -->
+<section id="padomi">
+  <h2>Padomi un biežākās kļūdas <span class="rule"></span></h2>
+  <div class="card">
+    <ul>
+      <li><strong>Negriez visu kubu algoritma laikā.</strong> Tā ir kļūda nr. 1 — priekšpusei jāpaliek
+        priekšā no algoritma sākuma līdz beigām.</li>
+      <li><strong>Nejauc R ar R'.</strong> Ja algoritms «neiet», visbiežāk vainīgs sajaukts virziens.
+        Atceries: burts bez apostrofa = pulksteņrādītāja virzienā, skatoties uz to pusi.</li>
+      <li><strong>7. solī neizbīsties</strong> — kubs pa vidu izskatās sajaukts, bet, ja starp stūriem
+        griezīsi tikai U kārtu, beigās viss saliksies.</li>
+      <li><strong>Ja apmaldies</strong> — labāk apzināti sajauc kubu un sāc no 1. soļa, nekā mēģini «glābt».
+        Ar praksi soļi 1–3 sanāks pilnībā automātiski.</li>
+      <li><strong>Trenē pa vienam solim.</strong> Vispirms iemācies stabili uztaisīt krustu, tad pievieno
+        stūrus utt. Pēc nedēļas prakses kubu saliksi bez šīs lapas.</li>
+      <li>No 2×2 kuba tu jau zini <strong>R U R' U'</strong> (2. solis) un <strong>R U R' U R U2 R'</strong>
+        (5. solis) — puse darba jau rokā!</li>
+    </ul>
+  </div>
+</section>
+
+</div><!-- /mode-beginner -->
+
+<div class="mode mode-pro">
+
+<!-- ==================== CFOP INTRO ==================== -->
+<div class="part-head pro" id="cfop">
+  <div class="kick">Profesionāļu metode</div>
+  <h2>CFOP (Fridrich) — 4 soļi <span class="rule" style="background:var(--paper)"></span></h2>
+  <p>Kā liek speedcuberi. Pilnā versijā ~119 kombinācijas, bet var sākt ar «2-look» un pakāpeniski papildināt.</p>
+</div>
+
+<section>
+  <div class="card">
+    <p><strong>CFOP</strong> = <strong>C</strong>ross · <strong>F</strong>2L · <strong>O</strong>LL · <strong>P</strong>LL. Atšķirībā no iesācēju metodes,
+    kur liek pa vienam gabaliņam, CFOP apvieno soļus, lai griezienu būtu daudz mazāk:</p>
+    <ol>
+      <li><strong>Cross</strong> — balts krusts apakšā (intuitīvi, bez algoritmiem).</li>
+      <li><strong>F2L</strong> — pirmie divi slāņi vienlaikus: stūris + mala pa pāriem (41 gadījums).</li>
+      <li><strong>OLL</strong> — visa augšējā puse vienā krāsā vienā piegājienā (57 gadījumi).</li>
+      <li><strong>PLL</strong> — pēdējā slāņa gabaliņu samainīšana vietām (21 gadījums).</li>
+    </ol>
+    <div class="tip"><b>Notācija</b> ir tā pati, kas Iesācēja režīmā (R, U, F, L, D, B, ', 2). Pro algoritmos parādās vēl:
+    <strong>plašie griezieni</strong> (mazie burti <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="r u f l"></span> — griež divus slāņus reizē),
+    <strong>vidus slānis</strong> <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="M"></span>, un
+    <strong>visa kuba pagriezieni</strong> <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="x y"></span>.</div>
+    <div class="warn"><b>Godīgi par apjomu:</b> visus 119 neviens neiemācās uzreiz. Ieteicamā secība:
+    <strong>F2L intuitīvi</strong> + <strong>2-look OLL</strong> (~10 alg.) + <strong>2-look PLL</strong> (~6 alg.), tad pakāpeniski pilnie OLL 57 un PLL 21.
+    Zemāk ir gan mācību ceļš, gan pilnās tabulas.</div>
+  </div>
+</section>
+
+<!-- ==================== CROSS ==================== -->
+<section id="cross">
+  <h2>1. Krusts (Cross) <span class="rule"></span></h2>
+  <div class="card pro">
+    <p class="goal">Mērķis: balts krusts APAKŠĀ, katras malas sānu krāsa sakrīt ar sāna centru. Bez algoritmiem — tikai ar aci.</p>
+    <ul>
+      <li>Krustu liek <strong>apakšā</strong> (nevis augšā kā iesācēju «puķītē») — tā uzreiz redzi F2L slotus un neapgriez kubu.</li>
+      <li>Mērķis: <strong>4 malas ≤ 8 griezienos</strong>. Treniņā centies to izplānot jau «inspekcijas» laikā, pirms sāc.</li>
+      <li>Sānu krāsām jāsakrīt ar centriem — pārbaudi, ka krusts nav «apgriezts».</li>
+    </ul>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="xwxwwwxwx" data-b="xbx" data-r="xrx" data-f="xgx" data-l="xox"
+        ><figcaption>Balts krusts apakšā (skats uz balto pusi) — malu sānu krāsas pie centriem</figcaption></figure>
+    </div>
+    <div class="tip"><b>Padoms:</b> pieredzējuši risinātāji krustu uztaisa «akli» — vispirms atrod 4 baltās malas, tad saliek bez apstāšanās.</div>
+  </div>
+</section>
+
+<!-- ==================== F2L ==================== -->
+<section id="f2l">
+  <h2>2. F2L — pirmie divi slāņi <span class="rule"></span></h2>
+  <div class="card pro">
+    <p class="goal">Mērķis: pabeigt pirmos divus slāņus, ievietojot stūri + tam piederošo malu pārī vienlaikus (4 sloti).</p>
+    <p><strong>Ideja:</strong> katram no 4 apakšējiem stūriem (ar baltu) ir sava mala. Atrodi tos augšējā slānī, «sapāro» un ievieto slotā.
+    Turi kubu ar <strong>krustu apakšā</strong>, slotu, kurā strādā — <strong>priekšā pa labi</strong>.</p>
+    <h3 class="sub">Pamata «trigger» kustības (no tām sastāv visi F2L gadījumi)</h3>
+    <ul>
+      <li>Pāris jau kopā, stūris rāda pa labi → <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="U R U' R'"></span></li>
+      <li>Pāris jau kopā, stūris rāda pa priekšu → <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="U' F' U F"></span></li>
+      <li>«Izcelt un ielikt» slotā pa labi → <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="R U' R'"></span> · pa kreisi → <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="F' U F"></span></li>
+    </ul>
+    <div class="tip"><b>F2L vislabāk mācīties INTUITĪVI</b> — saprast, kā pāris «savienojas» un «ieripo» slotā, nevis kalt 41 algoritmu.
+    Ja stūris vai mala jau sēž slotā nepareizi, vispirms to «izcel» ar to pašu trigeru, tad ievieto no jauna.</div>
+    <div class="warn"><b>Par pilno 41 gadījuma sarakstu:</b> katram gadījumam ir vairāki līdzvērtīgi publicēti algoritmi, un tos visērtāk apgūt no
+    <strong>diagrammām</strong>, nevis teksta. Pilns vizuāls saraksts ar attēliem: <strong>cubeskills.com</strong> (Feliks Zemdegs F2L PDF) un <strong>jperm.net/algs/f2l</strong>.
+    Šī lapa dod pamatus + trigerus; pilns per-gadījums saraksts ir minētajos avotos.</div>
+  </div>
+</section>
+
+<!-- ==================== OLL ==================== -->
+<section id="oll">
+  <h2>3. OLL — augšas orientācija (57) <span class="rule"></span></h2>
+  <div class="card pro">
+    <p class="goal">Mērķis: visa augšējā (dzeltenā) puse vienā krāsā vienā algoritmā. 57 gadījumi.</p>
+
+    <h3 class="sub">Mācību ceļš: 2-look OLL (vispirms iemācies šos ~10)</h3>
+    <p><strong>A) Vispirms orientē MALAS</strong> (izveido dzelteno krustu augšā). 3 gadījumi pēc dzelteno malu figūras:</p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="xxxxyxxxx" data-small="1"
+        ><figcaption>Punkts → <b>F R U R' U' F'</b>, tad atkārto</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="xyxyyxxxx" data-small="1"
+        ><figcaption>«L» (turi aizmugurē-pa kreisi) → <b>F U R U' R' F'</b></figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="xxxyyyxxx" data-small="1"
+        ><figcaption>Līnija (horizontāli) → <b>F R U R' U' F'</b></figcaption></figure>
+    </div>
+    <p><strong>B) Tad orientē STŪRUS</strong> (OCLL) — 7 gadījumi. Šeit dzeltenais krusts jau ir; skaties, kā stūri pagriezti:</p>
+    <div class="cheat-wrap">
+      <table class="cheat pro">
+        <tr><th>Nosaukums</th><th>Kad</th><th>Algoritms</th></tr>
+        <tr><td>Sune</td><td>1 stūris dzeltens augšā</td><td><span class="alg tiny" data-alg="R U R' U R U2 R'"></span></td></tr>
+        <tr><td>Antisune</td><td>1 stūris dzeltens (pretēji)</td><td><span class="alg tiny" data-alg="R U2 R' U' R U' R'"></span></td></tr>
+        <tr><td>H (Double Sune)</td><td>0 dzeltenu; 2 pretī 2</td><td><span class="alg tiny" data-alg="R U R' U R U' R' U R U2 R'"></span></td></tr>
+        <tr><td>Pi (Bruno)</td><td>0 dzeltenu augšā</td><td><span class="alg tiny" data-alg="R U2 R2 U' R2 U' R2 U2 R"></span></td></tr>
+        <tr><td>U (Headlights)</td><td>2 dzeltenu, «lukturi» priekšā</td><td><span class="alg tiny" data-alg="R2 D' R U2 R' D R U2 R"></span></td></tr>
+        <tr><td>T (Chameleon)</td><td>2 dzeltenu, «T» forma</td><td><span class="alg tiny" data-alg="r U R' U' r' F R F'"></span></td></tr>
+        <tr><td>L (Bowtie)</td><td>2 dzeltenu, diagonāle</td><td><span class="alg tiny" data-alg="F R' F' r U R U' r'"></span></td></tr>
+      </table>
+    </div>
+
+    <h3 class="sub">Pilnais OLL — visi 57 (viena algoritma «1-look»)</h3>
+    <p>Grupē pēc dzeltenās figūras uz augšas (Dot, Square, Lightning, Fish, Knight, OCLL, P, T, C, W, L, Line, Awkward). Skaitlis = standarta OLL numurs.</p>
+    <div class="cheat-wrap">
+      <table class="cheat pro">
+        <tr><th>#</th><th>Grupa</th><th>Algoritms</th></tr>
+        <tr><td>1</td><td>Dot</td><td><span class="alg tiny" data-alg="R U2 R2 F R F' U2 R' F R F'"></span></td></tr>
+        <tr><td>2</td><td>Dot</td><td><span class="alg tiny" data-alg="F R U R' U' F' f R U R' U' f'"></span></td></tr>
+        <tr><td>3</td><td>Dot</td><td><span class="alg tiny" data-alg="f R U R' U' f' U' F R U R' U' F'"></span></td></tr>
+        <tr><td>4</td><td>Dot</td><td><span class="alg tiny" data-alg="f R U R' U' f' U F R U R' U' F'"></span></td></tr>
+        <tr><td>17</td><td>Dot</td><td><span class="alg tiny" data-alg="R U R' U R' F R F' U2 R' F R F'"></span></td></tr>
+        <tr><td>18</td><td>Dot</td><td><span class="alg tiny" data-alg="R U2 R2 F R F' U2 M' U R U' r'"></span></td></tr>
+        <tr><td>19</td><td>Dot</td><td><span class="alg tiny" data-alg="S' R U R' S U' R' F R F'"></span></td></tr>
+        <tr><td>20</td><td>Dot</td><td><span class="alg tiny" data-alg="r U R' U' M2 U R U' R' U' M'"></span></td></tr>
+        <tr><td>5</td><td>Square</td><td><span class="alg tiny" data-alg="l' U2 L U L' U l"></span></td></tr>
+        <tr><td>6</td><td>Square</td><td><span class="alg tiny" data-alg="r U2 R' U' R U' r'"></span></td></tr>
+        <tr><td>7</td><td>Lightning</td><td><span class="alg tiny" data-alg="r U R' U R U2 r'"></span></td></tr>
+        <tr><td>8</td><td>Lightning</td><td><span class="alg tiny" data-alg="l' U' L U' L' U2 l"></span></td></tr>
+        <tr><td>11</td><td>Lightning</td><td><span class="alg tiny" data-alg="r' R2 U R' U R U2 R' U M'"></span></td></tr>
+        <tr><td>12</td><td>Lightning</td><td><span class="alg tiny" data-alg="M' R' U' R U' R' U2 R U' M"></span></td></tr>
+        <tr><td>39</td><td>Lightning</td><td><span class="alg tiny" data-alg="L F' L' U' L U F U' L'"></span></td></tr>
+        <tr><td>40</td><td>Lightning</td><td><span class="alg tiny" data-alg="R' F R U R' U' F' U R"></span></td></tr>
+        <tr><td>9</td><td>Fish</td><td><span class="alg tiny" data-alg="R U R' U' R' F R2 U R' U' F'"></span></td></tr>
+        <tr><td>10</td><td>Fish</td><td><span class="alg tiny" data-alg="R U R' U R' F R F' R U2 R'"></span></td></tr>
+        <tr><td>35</td><td>Fish</td><td><span class="alg tiny" data-alg="R U2 R2 F R F' R U2 R'"></span></td></tr>
+        <tr><td>37</td><td>Fish</td><td><span class="alg tiny" data-alg="F R' F' R U R U' R'"></span></td></tr>
+        <tr><td>13</td><td>Knight</td><td><span class="alg tiny" data-alg="F U R U2 R' U' R U R' F'"></span></td></tr>
+        <tr><td>14</td><td>Knight</td><td><span class="alg tiny" data-alg="R' F R U R' F' R F U' F'"></span></td></tr>
+        <tr><td>15</td><td>Knight</td><td><span class="alg tiny" data-alg="l' U' l L' U' L U l' U l"></span></td></tr>
+        <tr><td>16</td><td>Knight</td><td><span class="alg tiny" data-alg="r U r' R U R' U' r U' r'"></span></td></tr>
+        <tr><td>21</td><td>OCLL · H</td><td><span class="alg tiny" data-alg="R U R' U R U' R' U R U2 R'"></span></td></tr>
+        <tr><td>22</td><td>OCLL · Pi</td><td><span class="alg tiny" data-alg="R U2 R2 U' R2 U' R2 U2 R"></span></td></tr>
+        <tr><td>23</td><td>OCLL · U</td><td><span class="alg tiny" data-alg="R2 D' R U2 R' D R U2 R"></span></td></tr>
+        <tr><td>24</td><td>OCLL · T</td><td><span class="alg tiny" data-alg="r U R' U' r' F R F'"></span></td></tr>
+        <tr><td>25</td><td>OCLL · L</td><td><span class="alg tiny" data-alg="F R' F' r U R U' r'"></span></td></tr>
+        <tr><td>26</td><td>OCLL · Antisune</td><td><span class="alg tiny" data-alg="R U2 R' U' R U' R'"></span></td></tr>
+        <tr><td>27</td><td>OCLL · Sune</td><td><span class="alg tiny" data-alg="R U R' U R U2 R'"></span></td></tr>
+        <tr><td>28</td><td>Stūri gatavi</td><td><span class="alg tiny" data-alg="r U R' U' M U R U' R'"></span></td></tr>
+        <tr><td>57</td><td>Stūri gatavi</td><td><span class="alg tiny" data-alg="R U R' U' M' U R U' r'"></span></td></tr>
+        <tr><td>29</td><td>Awkward</td><td><span class="alg tiny" data-alg="R U R' U' R U' R' F' U' F R U R'"></span></td></tr>
+        <tr><td>30</td><td>Awkward</td><td><span class="alg tiny" data-alg="F U R U2 R' U' R U2 R' U' F'"></span></td></tr>
+        <tr><td>41</td><td>Awkward</td><td><span class="alg tiny" data-alg="R U R' U R U2 R' F R U R' U' F'"></span></td></tr>
+        <tr><td>42</td><td>Awkward</td><td><span class="alg tiny" data-alg="R' U' R U' R' U2 R F R U R' U' F'"></span></td></tr>
+        <tr><td>31</td><td>P</td><td><span class="alg tiny" data-alg="R' U' F U R U' R' F' R"></span></td></tr>
+        <tr><td>32</td><td>P</td><td><span class="alg tiny" data-alg="S R U R' U' R' F R f'"></span></td></tr>
+        <tr><td>43</td><td>P</td><td><span class="alg tiny" data-alg="R' U' F' U F R"></span></td></tr>
+        <tr><td>44</td><td>P</td><td><span class="alg tiny" data-alg="f R U R' U' f'"></span></td></tr>
+        <tr><td>33</td><td>T</td><td><span class="alg tiny" data-alg="R U R' U' R' F R F'"></span></td></tr>
+        <tr><td>45</td><td>T</td><td><span class="alg tiny" data-alg="F R U R' U' F'"></span></td></tr>
+        <tr><td>34</td><td>C</td><td><span class="alg tiny" data-alg="R U R2 U' R' F R U R U' F'"></span></td></tr>
+        <tr><td>46</td><td>C</td><td><span class="alg tiny" data-alg="R' U' R' F R F' U R"></span></td></tr>
+        <tr><td>36</td><td>W</td><td><span class="alg tiny" data-alg="L' U' L U' L' U L U L F' L' F"></span></td></tr>
+        <tr><td>38</td><td>W</td><td><span class="alg tiny" data-alg="R U R' U R U' R' U' R' F R F'"></span></td></tr>
+        <tr><td>47</td><td>L</td><td><span class="alg tiny" data-alg="F R' F' R U2 R U' R' U R U2 R'"></span></td></tr>
+        <tr><td>48</td><td>L</td><td><span class="alg tiny" data-alg="F R U R' U' R U R' U' F'"></span></td></tr>
+        <tr><td>49</td><td>L</td><td><span class="alg tiny" data-alg="r U' r2 U r2 U r2 U' r"></span></td></tr>
+        <tr><td>50</td><td>L</td><td><span class="alg tiny" data-alg="R' F R2 B' R2 F' R2 B R'"></span></td></tr>
+        <tr><td>53</td><td>L</td><td><span class="alg tiny" data-alg="l' U' L U' L' U L U' L' U2 l"></span></td></tr>
+        <tr><td>54</td><td>L</td><td><span class="alg tiny" data-alg="r U R' U R U' R' U R U2 r'"></span></td></tr>
+        <tr><td>51</td><td>Line</td><td><span class="alg tiny" data-alg="F U R U' R' U R U' R' F'"></span></td></tr>
+        <tr><td>52</td><td>Line</td><td><span class="alg tiny" data-alg="R U R' U R U' B U' B' R'"></span></td></tr>
+        <tr><td>55</td><td>Line</td><td><span class="alg tiny" data-alg="R' F R U R U' R2 F' R2 U' R' U R U R'"></span></td></tr>
+        <tr><td>56</td><td>Line</td><td><span class="alg tiny" data-alg="r U r' U R U' R' U R U' R' r U' r'"></span></td></tr>
+      </table>
+    </div>
+    <div class="warn"><b>Piezīme:</b> vairākiem OLL gadījumiem ir līdzvērtīgi algoritmu varianti; šeit doti standarta publicētie (speedsolving / speedcubedb / rubiksplace).
+    Vizuālas atpazīšanas diagrammas visiem 57: <strong>cubeskills.com</strong> un <strong>jperm.net/algs/oll</strong>.</div>
+  </div>
+</section>
+
+<!-- ==================== PLL ==================== -->
+<section id="pll">
+  <h2>4. PLL — pēdējā slāņa permutācija (21) <span class="rule"></span></h2>
+  <div class="card pro">
+    <p class="goal">Mērķis: samainīt pēdējā slāņa gabaliņus vietām — kubs salikts. 21 gadījums.</p>
+
+    <h3 class="sub">Mācību ceļš: 2-look PLL (vispirms šos ~6)</h3>
+    <p><strong>A) Vispirms STŪRI</strong> (atrodi 2 stūrus, kas jau pareizi — «lukturi» — un turi aizmugurē), <strong>tad MALAS.</strong></p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="yyyyyyyyy" data-b="ooo" data-r="bbb" data-f="rrr" data-l="ggg"
+        data-arrows='[{"f":["u",0,2],"t":["u",2,2],"curve":18,"dbl":1}]'
+        ><figcaption>Stūri — blakus maiņa: <b>R U R' U' R' F R2 U' R' U' R U R' F'</b></figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="yyyyyyyyy"
+        data-arrows='[{"f":["u",0,0],"t":["u",2,2],"curve":0,"dbl":1}]'
+        ><figcaption>Stūri — diagonāle: <b>F R U' R' U' R U R' F' R U R' U' R' F R F'</b></figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="yyyyyyyyy"
+        data-arrows='[{"f":["u",1,0],"t":["u",2,1],"curve":16},{"f":["u",2,1],"t":["u",1,2],"curve":16},{"f":["u",1,2],"t":["u",1,0],"curve":16}]'
+        ><figcaption>Malas — 3-cikls (Ua): <b>M2 U M U2 M' U M2</b></figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="yyyyyyyyy"
+        data-arrows='[{"f":["u",1,0],"t":["u",1,2],"curve":0,"dbl":1},{"f":["u",0,1],"t":["u",2,1],"curve":0,"dbl":1}]'
+        ><figcaption>Malas — «H» (pretējās): <b>M2 U' M2 U2 M2 U' M2</b></figcaption></figure>
+    </div>
+
+    <h3 class="sub">Pilnais PLL — visi 21</h3>
+    <div class="cheat-wrap">
+      <table class="cheat pro">
+        <tr><th>Nosaukums</th><th>Ko dara</th><th>Algoritms</th></tr>
+        <tr><td>Aa</td><td>Stūru 3-cikls</td><td><span class="alg tiny" data-alg="x R' U R' D2 R U' R' D2 R2 x'"></span></td></tr>
+        <tr><td>Ab</td><td>Stūru 3-cikls (pretēji)</td><td><span class="alg tiny" data-alg="x R2 D2 R U R' D2 R U' R x'"></span></td></tr>
+        <tr><td>E</td><td>Abas diagonāles</td><td><span class="alg tiny" data-alg="x' R U' R' D R U R' D' R U R' D R U' R' D' x"></span></td></tr>
+        <tr><td>Ua</td><td>Malu 3-cikls</td><td><span class="alg tiny" data-alg="M2 U M U2 M' U M2"></span></td></tr>
+        <tr><td>Ub</td><td>Malu 3-cikls (pretēji)</td><td><span class="alg tiny" data-alg="M2 U' M U2 M' U' M2"></span></td></tr>
+        <tr><td>H</td><td>Abas pretējās malas</td><td><span class="alg tiny" data-alg="M2 U' M2 U2 M2 U' M2"></span></td></tr>
+        <tr><td>Z</td><td>Divi blakus malu pāri</td><td><span class="alg tiny" data-alg="M' U' M2 U' M2 U' M' U2 M2"></span></td></tr>
+        <tr><td>T</td><td>Blakus stūri + malas</td><td><span class="alg tiny" data-alg="R U R' U' R' F R2 U' R' U' R U R' F'"></span></td></tr>
+        <tr><td>Ja</td><td>Blakus stūri + malas</td><td><span class="alg tiny" data-alg="x R2 F R F' R U2 r' U r U2 x'"></span></td></tr>
+        <tr><td>Jb</td><td>Blakus stūri + malas (spog.)</td><td><span class="alg tiny" data-alg="R U R' F' R U R' U' R' F R2 U' R'"></span></td></tr>
+        <tr><td>Ra</td><td>R-tips</td><td><span class="alg tiny" data-alg="R U' R' U' R U R D R' U' R D' R' U2 R'"></span></td></tr>
+        <tr><td>Rb</td><td>R-tips (spog.)</td><td><span class="alg tiny" data-alg="R' U2 R U2 R' F R U R' U' R' F' R2"></span></td></tr>
+        <tr><td>F</td><td>Blakus stūri + pretējās malas</td><td><span class="alg tiny" data-alg="R' U' F' R U R' U' R' F R2 U' R' U' R U R' U R"></span></td></tr>
+        <tr><td>V</td><td>Diagonāle + malas</td><td><span class="alg tiny" data-alg="R' U R' U' R D' R' D R' U D' R2 U' R2 D R2"></span></td></tr>
+        <tr><td>Y</td><td>Diagonāle + malas</td><td><span class="alg tiny" data-alg="F R U' R' U' R U R' F' R U R' U' R' F R F'"></span></td></tr>
+        <tr><td>Na</td><td>N-perm</td><td><span class="alg tiny" data-alg="R U R' U R U R' F' R U R' U' R' F R2 U' R' U2 R U' R'"></span></td></tr>
+        <tr><td>Nb</td><td>N-perm (spog.)</td><td><span class="alg tiny" data-alg="R' U R U' R' F' U' F R U R' F R' F' R U' R"></span></td></tr>
+        <tr><td>Ga</td><td>Stūru + malu 3-cikls</td><td><span class="alg tiny" data-alg="R2 U R' U R' U' R U' R2 D U' R' U R D'"></span></td></tr>
+        <tr><td>Gb</td><td>Stūru + malu 3-cikls</td><td><span class="alg tiny" data-alg="D R' U' R U D' R2 U R' U R U' R U' R2"></span></td></tr>
+        <tr><td>Gc</td><td>Stūru + malu 3-cikls</td><td><span class="alg tiny" data-alg="R2 U' R U' R U R' U R2 D' U R U' R' D"></span></td></tr>
+        <tr><td>Gd</td><td>Stūru + malu 3-cikls</td><td><span class="alg tiny" data-alg="R U R' U' D R2 U' R U' R' U R' U R2 D'"></span></td></tr>
+      </table>
+    </div>
+    <div class="tip"><b>Atpazīšana:</b> paskaties uz sānu «lukturiem» (2 vienādi stūri blakus) un bultiņām, kā gabaliņi jāpārvieto.
+    Vizuālas PLL diagrammas ar bultām: <strong>jperm.net/algs/pll</strong>.</div>
+  </div>
+</section>
+
+<!-- ==================== PRO SUMMARY ==================== -->
+<section id="cheat-pro">
+  <h2>Pro kopsavilkums un mācību secība <span class="rule"></span></h2>
+  <div class="card pro">
+    <ol>
+      <li><strong>Krusts apakšā</strong> — intuitīvi, ≤8 griezieni.</li>
+      <li><strong>F2L intuitīvi</strong> — 4 pāri; iemācies «savienot un ielikt», nevis kalt.</li>
+      <li><strong>2-look OLL</strong> (~10 alg.: krusts + 7 OCLL) → vēlāk <strong>pilns OLL 57</strong>.</li>
+      <li><strong>2-look PLL</strong> (~6 alg.: stūri + malas) → vēlāk <strong>pilns PLL 21</strong>.</li>
+    </ol>
+    <div class="tip"><b>Progresa mērķi:</b> iesācējs → CFOP 2-look ≈ sub-40s; pilns OLL+PLL ≈ sub-20s; ar praksi (labs F2L look-ahead) sub-15s un ātrāk.</div>
+    <div class="warn"><b>Algoritmu avoti (pārbaudīti):</b>
+    <a href="https://www.speedsolving.com/wiki/index.php/OLL">speedsolving.com (OLL)</a>,
+    <a href="https://speedcubedb.com/a/3x3/PLL">speedcubedb.com (PLL)</a>,
+    <a href="https://www.cubeskills.com/uploads/pdf/tutorials/f2l.pdf">cubeskills.com (F2L)</a>,
+    <a href="https://ruwix.com/the-rubiks-cube/advanced-cfop-fridrich/">ruwix.com (CFOP)</a>. Vizuālās diagrammas: <strong>jperm.net</strong>.</div>
+  </div>
+</section>
+
+</div><!-- /mode-pro -->
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>3×3 Rubika kuba iesācēju metode (slānis pa slānim) · Lapa strādā pilnībā bez interneta —
+    vienkārši atver failu pārlūkā. Veiksmi salikšanā!</p>
+  </div>
+</footer>
+<script>
+(function () {
+  'use strict';
+  var NS = 'http://www.w3.org/2000/svg';
+  var INK = '#211E19';
+  var COL = {
+    y: '#FFD500', w: '#FFFFFF', r: '#D6382E', o: '#FF7A00', g: '#0AA24C',
+    b: '#1558C9', x: '#E6E1D2', e: '#F0EBDC', c: '#D9D2BD', m: '#FFE9A0'
+  };
+
+  function el(name, attrs, parent) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+
+  function mkSvg(w, h, dispW) {
+    var s = el('svg', { viewBox: '0 0 ' + w + ' ' + h, width: dispW, role: 'img' });
+    s.style.height = 'auto';
+    return s;
+  }
+
+  function cell(svg, x, y, cs, colorCode) {
+    el('rect', {
+      x: x, y: y, width: cs, height: cs, rx: 4,
+      fill: COL[colorCode] || COL.x, stroke: INK, 'stroke-width': 2
+    }, svg);
+  }
+
+  function grid3(svg, ox, oy, cs, colors) {
+    for (var i = 0; i < 9; i++) {
+      cell(svg, ox + (i % 3) * cs, oy + Math.floor(i / 3) * cs, cs, colors[i]);
+    }
+  }
+
+  function rings(svg, ox, oy, cs, marks) {
+    marks.forEach(function (i) {
+      el('rect', {
+        x: ox + (i % 3) * cs - 2.5, y: oy + Math.floor(i / 3) * cs - 2.5,
+        width: cs + 5, height: cs + 5, rx: 7, fill: 'none',
+        stroke: INK, 'stroke-width': 3.4
+      }, svg);
+    });
+  }
+
+  function head(svg, tipX, tipY, dirX, dirY) {
+    var len = Math.sqrt(dirX * dirX + dirY * dirY) || 1;
+    var ux = dirX / len, uy = dirY / len;
+    var px = -uy, py = ux, s = 9;
+    el('polygon', {
+      points: tipX + ',' + tipY + ' ' +
+        (tipX - ux * s + px * s * 0.55) + ',' + (tipY - uy * s + py * s * 0.55) + ' ' +
+        (tipX - ux * s - px * s * 0.55) + ',' + (tipY - uy * s - py * s * 0.55),
+      fill: INK
+    }, svg);
+  }
+
+  function arrow(svg, x1, y1, x2, y2, curve, dbl) {
+    curve = curve || 0;
+    var dx = x2 - x1, dy = y2 - y1;
+    var len = Math.sqrt(dx * dx + dy * dy) || 1;
+    var cx = (x1 + x2) / 2 - (dy / len) * curve;
+    var cy = (y1 + y2) / 2 + (dx / len) * curve;
+    var d = 'M ' + x1 + ' ' + y1 + ' Q ' + cx + ' ' + cy + ' ' + x2 + ' ' + y2;
+    el('path', { d: d, fill: 'none', stroke: '#FFFDF6', 'stroke-width': 7, 'stroke-linecap': 'round' }, svg);
+    el('path', { d: d, fill: 'none', stroke: INK, 'stroke-width': 3.2, 'stroke-linecap': 'round' }, svg);
+    head(svg, x2, y2, x2 - cx, y2 - cy);
+    if (dbl) head(svg, x1, y1, x1 - cx, y1 - cy);
+  }
+
+  function circleArrow(svg, cx, cy, r, ccw, dashed) {
+    var a0 = ccw ? 200 : -50, a1 = ccw ? -50 : 200;
+    var p0 = [cx + r * Math.cos(a0 * Math.PI / 180), cy + r * Math.sin(a0 * Math.PI / 180)];
+    var p1 = [cx + r * Math.cos(a1 * Math.PI / 180), cy + r * Math.sin(a1 * Math.PI / 180)];
+    var sweep = ccw ? 0 : 1;
+    var d = 'M ' + p0[0] + ' ' + p0[1] + ' A ' + r + ' ' + r + ' 0 1 ' + sweep + ' ' + p1[0] + ' ' + p1[1];
+    var attrs = { d: d, fill: 'none', stroke: INK, 'stroke-width': 3.4, 'stroke-linecap': 'round' };
+    if (dashed) attrs['stroke-dasharray'] = '7 5';
+    el('path', { d: d, fill: 'none', stroke: '#FFFDF6', 'stroke-width': 7, 'stroke-linecap': 'round' }, svg);
+    el('path', attrs, svg);
+    var rad = a1 * Math.PI / 180;
+    var t = ccw ? -1 : 1;
+    head(svg, p1[0], p1[1], -Math.sin(rad) * t, Math.cos(rad) * t);
+  }
+
+  function parseMarks(host) {
+    var m = host.getAttribute('data-mark');
+    return m ? m.split(',').map(Number) : [];
+  }
+
+  /* ---- kind: face (single 3x3, used for notation & piece types) ---- */
+  function renderFace(host) {
+    var cs = 30, off = 4, size = cs * 3 + off * 2;
+    var svg = mkSvg(size, size, 92);
+    grid3(svg, off, off, cs, host.getAttribute('data-c'));
+    rings(svg, off, off, cs, parseMarks(host));
+    var ar = host.getAttribute('data-arrow');
+    if (ar) {
+      var parts = ar.split(':'), idx = Number(parts[1] || 0);
+      var mid = off + idx * cs + cs / 2, c = size / 2;
+      if (parts[0] === 'colup') arrow(svg, mid, size - 8, mid, 8, 0);
+      else if (parts[0] === 'coldown') arrow(svg, mid, 8, mid, size - 8, 0);
+      else if (parts[0] === 'rowleft') arrow(svg, size - 8, mid, 8, mid, 0);
+      else if (parts[0] === 'rowright') arrow(svg, 8, mid, size - 8, mid, 0);
+      else if (parts[0] === 'cw') circleArrow(svg, c, c, 27, false, false);
+      else if (parts[0] === 'ccw') circleArrow(svg, c, c, 27, true, true);
+    }
+    host.insertBefore(svg, host.firstChild);
+  }
+
+  /* ---- kind: top (U face seen from above + 4 side strips) ---- */
+  function renderTop(host) {
+    var cs = 30, off = 18, T = 11, size = off * 2 + cs * 3;
+    var svg = mkSvg(size, size, host.getAttribute('data-small') ? 102 : 138);
+    grid3(svg, off, off, cs, host.getAttribute('data-c'));
+    function strip(str, horiz, fixed) {
+      if (!str) return;
+      for (var i = 0; i < 3; i++) {
+        var x = horiz ? off + i * cs : fixed;
+        var y = horiz ? fixed : off + i * cs;
+        el('rect', {
+          x: x, y: y, width: horiz ? cs : T, height: horiz ? T : cs, rx: 3,
+          fill: COL[str[i]] || COL.x, stroke: INK, 'stroke-width': 2
+        }, svg);
+      }
+    }
+    strip(host.getAttribute('data-b'), true, off - T - 3);
+    strip(host.getAttribute('data-f'), true, off + cs * 3 + 3);
+    strip(host.getAttribute('data-l'), false, off - T - 3);
+    strip(host.getAttribute('data-r'), false, off + cs * 3 + 3);
+    rings(svg, off, off, cs, parseMarks(host));
+    drawArrows(svg, host, { u: [off, off] }, cs);
+    host.insertBefore(svg, host.firstChild);
+  }
+
+  /* ---- kind: uf (U face above F face — for insertions) ---- */
+  function renderUF(host) {
+    var cs = 30, ox = 18, uy = 4, fy = 4 + cs * 3 + 14;
+    var w = ox + cs * 3 + 4, h = fy + cs * 3 + 4;
+    var svg = mkSvg(w, h, 116);
+    grid3(svg, ox, uy, cs, host.getAttribute('data-u'));
+    grid3(svg, ox, fy, cs, host.getAttribute('data-f'));
+    function label(txt, y) {
+      var t = el('text', {
+        x: 8, y: y, 'text-anchor': 'middle', fill: '#57503F',
+        'font-family': 'Bahnschrift, Arial Narrow, sans-serif', 'font-size': 13, 'font-weight': 700
+      }, svg);
+      t.textContent = txt;
+    }
+    label('U', uy + cs * 1.5 + 5);
+    label('F', fy + cs * 1.5 + 5);
+    rings(svg, ox, uy, cs, parseMarks(host));
+    drawArrows(svg, host, { u: [ox, uy], f: [ox, fy] }, cs);
+    host.insertBefore(svg, host.firstChild);
+  }
+
+  function drawArrows(svg, host, grids, cs) {
+    var spec = host.getAttribute('data-arrows');
+    if (!spec) return;
+    JSON.parse(spec).forEach(function (a) {
+      var g1 = grids[a.f[0]], g2 = grids[a.t[0]];
+      arrow(svg,
+        g1[0] + a.f[1] * cs + cs / 2, g1[1] + a.f[2] * cs + cs / 2,
+        g2[0] + a.t[1] * cs + cs / 2, g2[1] + a.t[2] * cs + cs / 2,
+        a.curve || 0, a.dbl);
+    });
+  }
+
+  /* ---- kind: net (unfolded cube, 6 solid faces U L F R B D) ---- */
+  function renderNet(host) {
+    var FS = 27, unit = FS + 3;
+    var pos = { U: [1, 0], L: [0, 1], F: [1, 1], R: [2, 1], B: [3, 1], D: [1, 2] };
+    var order = 'ULFRBD';
+    var c = host.getAttribute('data-c');
+    var svg = mkSvg(unit * 4 + 3, unit * 3 + 3, 196);
+    for (var i = 0; i < 6; i++) {
+      var name = order[i], code = c[i];
+      var x = 3 + pos[name][0] * unit, y = 3 + pos[name][1] * unit;
+      el('rect', { x: x, y: y, width: FS, height: FS, rx: 4, fill: COL[code], stroke: INK, 'stroke-width': 2 }, svg);
+      for (var j = 1; j < 3; j++) {
+        el('line', { x1: x + FS * j / 3, y1: y, x2: x + FS * j / 3, y2: y + FS, stroke: INK, 'stroke-width': .8, opacity: .3 }, svg);
+        el('line', { x1: x, y1: y + FS * j / 3, x2: x + FS, y2: y + FS * j / 3, stroke: INK, 'stroke-width': .8, opacity: .3 }, svg);
+      }
+      var dark = 'rgb'.indexOf(code) >= 0;
+      var t = el('text', {
+        x: x + FS / 2, y: y + FS / 2 + 4, 'text-anchor': 'middle',
+        fill: dark ? '#FFFFFF' : INK, opacity: dark ? .9 : .6,
+        'font-family': 'Bahnschrift, Arial Narrow, sans-serif', 'font-size': 11, 'font-weight': 700
+      }, svg);
+      t.textContent = name;
+    }
+    host.insertBefore(svg, host.firstChild);
+  }
+
+  document.querySelectorAll('.dg').forEach(function (host) {
+    var kind = host.getAttribute('data-kind');
+    try {
+      if (kind === 'face') renderFace(host);
+      else if (kind === 'top') renderTop(host);
+      else if (kind === 'uf') renderUF(host);
+      else if (kind === 'net') renderNet(host);
+    } catch (e) { /* diagram is decorative — never break the page */ }
+  });
+
+  /* ---- Algorithm chips ---- */
+  document.querySelectorAll('[data-alg]').forEach(function (elx) {
+    var moves = elx.getAttribute('data-alg').trim().split(/\s+/);
+    elx.textContent = '';
+    moves.forEach(function (mv) {
+      var s = document.createElement('span');
+      s.className = 'mv' + (mv.indexOf("'") >= 0 ? ' prime' : (mv.indexOf('2') >= 0 ? ' dbl' : ''));
+      s.textContent = mv;
+      elx.appendChild(s);
+    });
+  });
+
+  /* ---- Progress checkboxes (saved in the browser) ---- */
+  var KEY = 'cube3x3-progress-v1';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
+  document.querySelectorAll('.done-row input[data-step]').forEach(function (box) {
+    var id = box.getAttribute('data-step');
+    box.checked = !!saved[id];
+    var card = box.closest('.card');
+    if (card) card.classList.toggle('is-done', box.checked);
+    box.addEventListener('change', function () {
+      saved[id] = box.checked;
+      if (card) card.classList.toggle('is-done', box.checked);
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    });
+  });
+
+  /* ---- Beginner / Pro mode switch ---- */
+  var MODEKEY = 'cube3x3-mode';
+  var begBtn = document.getElementById('mb-beg');
+  var proBtn = document.getElementById('mb-pro');
+  function setMode(m) {
+    var pro = (m === 'pro');
+    document.body.classList.toggle('pro', pro);
+    if (begBtn) begBtn.classList.toggle('active', !pro);
+    if (proBtn) proBtn.classList.toggle('active', pro);
+    try { localStorage.setItem(MODEKEY, m); } catch (e) {}
+  }
+  if (begBtn && proBtn) {
+    begBtn.addEventListener('click', function () { setMode('beginner'); window.scrollTo(0, 0); });
+    proBtn.addEventListener('click', function () { setMode('pro'); window.scrollTo(0, 0); });
+    var savedMode = 'beginner';
+    try { savedMode = localStorage.getItem(MODEKEY) || 'beginner'; } catch (e) {}
+    setMode(savedMode);
+  }
+})();
+</script>
+</body>
+</html>

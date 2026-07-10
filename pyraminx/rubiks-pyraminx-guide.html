@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pyraminx salikšana — Iesācēju + Profesionāļa metode</title>
+<style>
+  :root {
+    --paper: #F4EFE3;
+    --card: #FFFDF6;
+    --ink: #211E19;
+    --ink-soft: #57503F;
+    --line: #C9C2AE;
+    --cy: #FFD500;
+    --cw: #FFFFFF;
+    --cr: #D6382E;
+    --co: #FF7A00;
+    --cg: #0AA24C;
+    --cb: #1558C9;
+    --cpro: #7A3FB5;
+    --gray: #E6E1D2;
+    --shadow: 6px 6px 0 rgba(33,30,25,.9);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background-color: var(--paper);
+    background-image: radial-gradient(#D9D2BE 1px, transparent 1.5px);
+    background-size: 24px 24px;
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  h1, h2, h3, .display {
+    font-family: Bahnschrift, 'Arial Narrow', 'Segoe UI', sans-serif;
+    font-stretch: condensed;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    line-height: 1.1;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---------- Hero ---------- */
+  header.hero { padding: 56px 0 30px; }
+  .hero-flag { display: flex; height: 10px; max-width: 300px; margin-bottom: 26px; border: 2px solid var(--ink); }
+  .hero-flag span { flex: 1; }
+  h1 { font-size: clamp(38px, 7vw, 70px); font-weight: 800; }
+  h1 .thin { font-weight: 300; }
+  .hero-sub { margin-top: 14px; max-width: 660px; font-size: 19px; color: var(--ink-soft); font-style: italic; }
+  .hero-badges { margin-top: 22px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .badge {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; font-size: 14px;
+    text-transform: uppercase; letter-spacing: .05em;
+    border: 2px solid var(--ink); background: var(--card);
+    padding: 5px 12px; border-radius: 999px; box-shadow: 3px 3px 0 rgba(33,30,25,.85);
+  }
+
+  /* ---------- Mode switch ---------- */
+  .modebar { border-bottom: 2px solid var(--ink); background: var(--card); }
+  .modebar .wrap { display: flex; gap: 10px; align-items: center; padding: 14px 20px; flex-wrap: wrap; }
+  .modebar .mb-label {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    font-size: 13px; letter-spacing: .1em; color: var(--ink-soft);
+  }
+  .modebar button {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    letter-spacing: .04em; font-size: 15px; cursor: pointer;
+    border: 2.5px solid var(--ink); background: var(--card); color: var(--ink);
+    padding: 8px 18px; border-radius: 10px; box-shadow: 3px 3px 0 rgba(33,30,25,.85);
+    transition: transform .1s ease, box-shadow .1s ease;
+  }
+  .modebar button:hover { transform: translate(-1px,-1px); }
+  .modebar button.active { background: var(--ink); color: var(--paper); }
+  .modebar button.mb-pro.active { background: var(--cpro); border-color: var(--cpro); }
+  .modebar .mb-hint { font-size: 13.5px; color: var(--ink-soft); font-style: italic; flex-basis: 100%; }
+
+  /* ---------- Sticky nav ---------- */
+  nav.steps {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(244,239,227,.94); backdrop-filter: blur(3px);
+    border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
+    padding: 10px 0; margin-bottom: 34px;
+  }
+  nav.steps .wrap { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  nav.steps a {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; font-size: 14px;
+    text-transform: uppercase; letter-spacing: .04em;
+    text-decoration: none; color: var(--ink);
+    border: 2px solid var(--ink); background: var(--card);
+    padding: 4px 10px; border-radius: 8px;
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  nav.steps a:hover { transform: translate(-2px,-2px); box-shadow: 3px 3px 0 var(--ink); }
+  nav.steps a b { font-size: 15px; }
+  nav.steps a.n1 b { color: var(--cg); } nav.steps a.n2 b { color: var(--cb); } nav.steps a.n3 b { color: var(--cr); }
+  nav.steps a.pro { border-color: var(--cpro); }
+  nav.steps a.pro b { color: var(--cpro); }
+  nav.steps.pro-nav { display: none; }
+  body.pro nav.steps.beg-nav { display: none; }
+  body.pro nav.steps.pro-nav { display: block; }
+
+  /* ---------- Sections & cards ---------- */
+  main > .mode { display: none; }
+  body:not(.pro) main > .mode.mode-beginner { display: block; }
+  body.pro main > .mode.mode-pro { display: block; }
+
+  section { margin-bottom: 46px; }
+  h2 { font-size: clamp(24px, 4vw, 34px); margin-bottom: 16px; display: flex; align-items: baseline; gap: 12px; }
+  h2 .rule { flex: 1; height: 4px; background: var(--ink); min-width: 40px; }
+  .part-head { background: var(--ink); color: var(--paper); border-radius: 16px; padding: 20px 26px; margin: 12px 0 22px; box-shadow: var(--shadow); }
+  .part-head.pro { background: var(--cpro); }
+  .part-head .kick { font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase; letter-spacing: .12em; font-size: 13px; opacity: .85; }
+  .part-head h2 { color: var(--paper); margin: 4px 0 6px; }
+  .part-head p { margin: 0; font-style: italic; opacity: .92; }
+  .card {
+    background: var(--card); border: 2.5px solid var(--ink); border-radius: 16px;
+    box-shadow: var(--shadow); padding: 26px 28px; margin-bottom: 26px;
+    position: relative; overflow: hidden;
+  }
+  .card.step { border-left-width: 14px; scroll-margin-top: 70px; }
+  .card.step.s1 { border-left-color: var(--cg); }
+  .card.step.s2 { border-left-color: var(--cb); }
+  .card.step.s3 { border-left-color: var(--cr); }
+  .card.pro { border-left: 14px solid var(--cpro); scroll-margin-top: 70px; }
+  .stepnum {
+    position: absolute; top: -18px; right: 6px;
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; font-weight: 800;
+    font-size: 110px; line-height: 1; color: transparent;
+    -webkit-text-stroke: 2px rgba(33,30,25,.16); pointer-events: none; user-select: none;
+  }
+  h3 { font-size: 21px; margin: 20px 0 8px; }
+  h3:first-child { margin-top: 0; }
+  h3.sub { font-size: 18px; margin-top: 22px; }
+  .goal { font-style: italic; color: var(--ink-soft); margin-bottom: 14px; padding-left: 12px; border-left: 4px solid var(--line); }
+  p { margin-bottom: 12px; }
+  ul, ol { margin: 0 0 14px 24px; }
+  li { margin-bottom: 7px; }
+  strong { font-weight: 700; }
+
+  /* ---------- Algorithm chips ---------- */
+  .alg { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; margin: 14px 0 16px; font-family: Consolas, 'Courier New', monospace; font-weight: 700; font-size: 20px; }
+  .alg .mv { background: var(--ink); color: var(--cy); padding: 6px 12px; border-radius: 9px; box-shadow: 0 3px 0 rgba(0,0,0,.55); min-width: 40px; text-align: center; }
+  .alg .mv.prime { color: #7ED0FF; }
+  .alg .mv.tip { color: #B9F6CA; }
+  .alg.small { font-size: 16px; } .alg.small .mv { padding: 3px 8px; min-width: 30px; }
+  .alg.tiny { font-size: 13.5px; } .alg.tiny .mv { padding: 2px 6px; min-width: 24px; border-radius: 6px; }
+  .alg-label { font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase; font-size: 14px; letter-spacing: .06em; color: var(--ink-soft); margin-top: 10px; }
+
+  /* ---------- Callouts ---------- */
+  .tip, .warn { border: 2px solid var(--ink); border-radius: 12px; padding: 12px 16px; margin: 14px 0; font-size: 16px; }
+  .tip { background: #E9F5EA; border-left: 8px solid var(--cg); }
+  .warn { background: #FBEAE3; border-left: 8px solid var(--cr); }
+  .tip b:first-child, .warn b:first-child { font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase; letter-spacing: .04em; font-size: 14px; }
+
+  /* ---------- Diagrams ---------- */
+  .dgrow { display: flex; gap: 22px; flex-wrap: wrap; margin: 18px 0; align-items: flex-start; }
+  figure.dg { text-align: center; margin: 0; }
+  figure.dg svg { display: block; margin: 0 auto; }
+  figure.dg figcaption { font-family: Bahnschrift, 'Arial Narrow', sans-serif; font-size: 13.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); margin-top: 8px; max-width: 200px; }
+
+  /* ---------- Notation grid ---------- */
+  .notgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; margin-top: 6px; }
+  .notcell { background: var(--card); border: 2px solid var(--ink); border-radius: 12px; padding: 12px 10px 10px; text-align: center; box-shadow: 4px 4px 0 rgba(33,30,25,.85); }
+  .notcell .nname { font-family: Consolas, monospace; font-weight: 700; font-size: 24px; display: block; margin-bottom: 6px; }
+  .notcell .ndesc { font-size: 14px; color: var(--ink-soft); line-height: 1.35; display: block; margin-top: 6px; }
+  .notcell svg { margin: 0 auto; display: block; }
+
+  /* ---------- Cheat sheet ---------- */
+  .cheat { border-collapse: collapse; width: 100%; background: var(--card); }
+  .cheat th, .cheat td { border: 2px solid var(--ink); padding: 10px 14px; text-align: left; vertical-align: top; }
+  .cheat th { font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase; letter-spacing: .05em; font-size: 14.5px; background: var(--ink); color: var(--paper); }
+  .cheat.pro th { background: var(--cpro); }
+  .cheat td:first-child { font-weight: 700; white-space: nowrap; }
+  .cheat .alg { margin: 0; }
+  .cheat-wrap { overflow-x: auto; border-radius: 12px; box-shadow: var(--shadow); border: 2.5px solid var(--ink); margin-bottom: 22px; }
+  .cheat-wrap .cheat th:first-child { border-top-left-radius: 9px; }
+
+  /* ---------- Progress checkbox ---------- */
+  .done-row { margin-top: 18px; padding-top: 14px; border-top: 2px dashed var(--line); }
+  .done-row label { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase; font-size: 14.5px; letter-spacing: .05em; }
+  .done-row input { width: 20px; height: 20px; accent-color: var(--cg); cursor: pointer; }
+  .card.step.is-done { opacity: .82; }
+  .card.step.is-done .stepnum { -webkit-text-stroke-color: rgba(10,162,76,.35); }
+
+  footer { border-top: 2px solid var(--ink); margin-top: 60px; padding: 26px 0 46px; font-size: 15px; color: var(--ink-soft); font-style: italic; }
+  footer a { color: var(--ink-soft); }
+
+  @media (max-width: 560px) { .card { padding: 20px 16px; } .stepnum { font-size: 74px; top: -10px; } body { font-size: 16px; } }
+  @media print { body { background: #fff; } .card, .notcell, .part-head { box-shadow: none; } nav.steps { position: static; } .done-row { display: none; } }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-flag" aria-hidden="true">
+      <span style="background:var(--cg)"></span><span style="background:var(--cr)"></span>
+      <span style="background:var(--cb)"></span><span style="background:var(--cy)"></span>
+    </div>
+    <h1>Pyraminx<br><span class="thin">Divas metodes</span></h1>
+    <p class="hero-sub">Piramīdas puzle (tetraedrs). Divas metodes vienā lapā — <strong>pārslēdz augšā</strong>:
+    <strong>iesācēju</strong> (slānis pa slānim) vai <strong>profesionāļa</strong> (L4E + Oka) ātrai salikšanai.</p>
+    <div class="hero-badges">
+      <span class="badge">2 metodes</span>
+      <span class="badge">4 gali · 4 stūri · 6 malas</span>
+      <span class="badge">Darbojas bez interneta</span>
+    </div>
+  </div>
+</header>
+
+<div class="modebar">
+  <div class="wrap">
+    <span class="mb-label">Režīms:</span>
+    <button id="mb-beg" class="mb-beg" type="button">Iesācējs</button>
+    <button id="mb-pro" class="mb-pro" type="button">Pro</button>
+    <span class="mb-hint">Pārslēdzies starp vienkāršo slānis-pa-slānim metodi un profesionāļu metodēm (L4E + Oka). Izvēle tiek saglabāta.</span>
+  </div>
+</div>
+
+<nav class="steps beg-nav" aria-label="Soļi — iesācējs">
+  <div class="wrap">
+    <a href="#nota" title="Notācija"><b>ABC</b> Notācija</a>
+    <a class="n1" href="#s1"><b>1</b> Stūri + gali</a>
+    <a class="n2" href="#s2"><b>2</b> Pirmais slānis</a>
+    <a class="n3" href="#s3"><b>3</b> Pēdējās 3 malas</a>
+    <a href="#cheat" title="Kopsavilkums"><b>★</b> Kopsavilkums</a>
+  </div>
+</nav>
+
+<nav class="steps pro-nav" aria-label="Soļi — pro">
+  <div class="wrap">
+    <a href="#nota" title="Notācija"><b>ABC</b> Notācija</a>
+    <a href="#cfop" title="Par metodēm"><b>i</b> Metodes</a>
+    <a class="pro" href="#l4e"><b>1</b> L4E</a>
+    <a class="pro" href="#oka"><b>2</b> Oka</a>
+    <a href="#cheat-pro" title="Kopsavilkums"><b>★</b> Kopsavilkums</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ============ UZBŪVE (kopīga) ============ -->
+<section id="uzbuve">
+  <h2>Pirms sāc: Pyraminx uzbūve <span class="rule"></span></h2>
+  <div class="card">
+    <p>Pyraminx ir <strong>tetraedrs</strong> (4 trīsstūrveida sejas, 4 virsotnes). Tam ir trīs veidu gabaliņi:</p>
+    <ul>
+      <li><strong>Gali</strong> (4 gab.) — mazie smaili virsotnēs. Griežas <strong>paši par sevi</strong> un neietekmē neko citu. Salikt triviāli — vienkārši pagriez, lai krāsas sakrīt.</li>
+      <li><strong>Stūri / centri</strong> (4 gab.) — gabaliņi tieši zem galiem. Tie <strong>nekad nemaina vietu</strong> — tikai orientējas. Tie nosaka katras sejas krāsu.</li>
+      <li><strong>Malas</strong> (6 gab.) — gabaliņi ar 2 krāsām. <strong>Tikai tās</strong> jāpozicionē un jāorientē. Pyraminx atrisināšana būtībā ir 6 malu salikšana.</li>
+    </ul>
+    <div class="dgrow">
+      <figure class="dg" data-kind="pyra" data-c="gggggggggg" data-mark="0,4,8"
+        ><figcaption>Gali (4) — virsotnēs, griežas paši</figcaption></figure>
+      <figure class="dg" data-kind="pyra" data-c="gggggggggg" data-mark="1,3,6"
+        ><figcaption>Stūri/centri (4) — tikai orientējas</figcaption></figure>
+      <figure class="dg" data-kind="pyra" data-c="gggggggggg" data-mark="2,5,7"
+        ><figcaption>Malas (6) — tikai tās īsti jārisina</figcaption></figure>
+    </div>
+    <div class="tip"><b>Galvenā doma:</b> gali un stūri ir viegli (tikai jāorientē). Viss noslēpums ir <strong>6 malās</strong>.
+    Tāpēc Pyraminx ir daudz vienkāršāks par Rubika kubu.</div>
+  </div>
+</section>
+
+<!-- ============ NOTĀCIJA (kopīga) ============ -->
+<section id="nota">
+  <h2>Notācija — kā lasīt algoritmus <span class="rule"></span></h2>
+  <div class="card">
+    <p>Turi Pyraminx ar <strong>vienu virsotni uz augšu</strong> un vienu seju pret sevi. Tad trīs redzamās virsotnes ir
+    <strong>U</strong> (augšā), <strong>L</strong> (apakšā pa kreisi), <strong>R</strong> (apakšā pa labi); <strong>B</strong> ir aizmugurē (neredzamā).</p>
+    <div class="notgrid">
+      <div class="notcell"><span class="nname">U</span>
+        <div class="dg" data-kind="pyra" data-c="mgggggggg" data-small="1" data-rot="top:cw"></div>
+        <span class="ndesc"><b>Up</b> — augšējā virsotne (stūris + 3 malas) pulksteņa virzienā</span></div>
+      <div class="notcell"><span class="nname">L</span>
+        <div class="dg" data-kind="pyra" data-c="ggggmgggg" data-small="1" data-rot="left:cw"></div>
+        <span class="ndesc"><b>Left</b> — kreisā apakšas virsotne</span></div>
+      <div class="notcell"><span class="nname">R</span>
+        <div class="dg" data-kind="pyra" data-c="ggggggggm" data-small="1" data-rot="right:cw"></div>
+        <span class="ndesc"><b>Right</b> — labā apakšas virsotne</span></div>
+      <div class="notcell"><span class="nname">B</span>
+        <div class="dg" data-kind="pyra" data-c="ggggggggg" data-small="1" data-rot="center:cw"></div>
+        <span class="ndesc"><b>Back</b> — aizmugures virsotne (neredzama)</span></div>
+      <div class="notcell"><span class="nname">u l r b</span>
+        <div class="dg" data-kind="pyra" data-c="mgggggggg" data-small="1" data-mark="0"></div>
+        <span class="ndesc"><b>Mazie burti</b> = tikai <strong>gals</strong> (nekas cits nekustas)</span></div>
+    </div>
+    <h3>Papildu apzīmējumi</h3>
+    <ul>
+      <li><strong>' (apostrofs)</strong> — pagriez <strong>pretēji</strong> pulksteņrādītājam.
+        Piem., <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="R'"></span>.</li>
+      <li><strong>Nav «2»!</strong> Katrai virsotnei ir tikai 2 stāvokļi, tāpēc divi vienādi griezieni = pretējais:
+        <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="U U"></span> = <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="U'"></span>.</li>
+    </ul>
+    <div class="warn"><b>Uzmanību!</b> Lielie burti (U, L, R, B) griež <strong>visu virsotnes slāni</strong> (stūri + 3 malas).
+    Mazie burti (u, l, r, b) griež <strong>tikai galu</strong>. Tā ir galvenā atšķirība!</div>
+    <div class="tip"><b>Krāsas čipos:</b> dzeltens = parasts grieziens (lielais burts),
+    <span style="color:#1558C9;font-weight:700">zils ar '</span> = pretējais virziens,
+    <span style="color:#0AA24C;font-weight:700">zaļš mazais burts</span> = tikai gals.</div>
+  </div>
+</section>
+
+<!-- ==================== 1. METODE — IESĀCĒJU ==================== -->
+<div class="mode mode-beginner">
+
+<div class="part-head">
+  <div class="kick">1. metode</div>
+  <h2>Iesācēju metode — slānis pa slānim <span class="rule" style="background:var(--paper)"></span></h2>
+  <p>Vienkāršākā pieeja. 3 soļi, 3 algoritmi pēdējām malām. Pārējais — ar aci.</p>
+</div>
+
+<section>
+  <!-- 1. solis -->
+  <div class="card step s1" id="s1">
+    <div class="stepnum">1</div>
+    <h3>1. solis — Stūri un gali</h3>
+    <p class="goal">Mērķis: visi 4 lielie stūri orientēti pareizi (katras sejas krāsa noteikta) + gali sakrīt.</p>
+    <ol>
+      <li>Paņem kubu rokā un pagriez katru <strong>lielo virsotni</strong> (U, L, R, B) tā, lai tās <strong>3 sānu krāsas
+        sakristu ar blakus sejām</strong>. To dara <strong>ar aci</strong>, pa vienam stūrim.</li>
+      <li>Kad visi 4 stūri orientēti, katras sejas centra «rombs» ir vienā krāsā.</li>
+      <li>Beigās pagriez katru <strong>galu (mazais burts)</strong>, lai tā krāsa sakrīt ar stūri zem tā.</li>
+    </ol>
+    <div class="dgrow">
+      <figure class="dg" data-kind="pyra" data-c="ggggggggg"
+        ><figcaption>Stūri + gali sakārtoti — sejas «rombs» vienā krāsā, malas vēl jauktas</figcaption></figure>
+    </div>
+    <div class="tip"><b>Bez algoritma!</b> Šis solis ir tīri intuitīvs. Gali ir tikai kosmētika — tos var salikt jebkurā brīdī.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="s1"> Solis apgūts</label></div>
+  </div>
+
+  <!-- 2. solis -->
+  <div class="card step s2" id="s2">
+    <div class="stepnum">2</div>
+    <h3>2. solis — Pirmais slānis (apakšējā seja)</h3>
+    <p class="goal">Mērķis: viena vesela seja gatava (parasti apakšā) — tās 3 malas savās vietās.</p>
+    <p>Izvēlies apakšējo krāsu (piem., zaļo). Atrodi tās 3 malas un ieliec katru savā vietā ap apakšējo virsotni:</p>
+    <ol>
+      <li>Ja mala ir <strong>augšējā slānī</strong>, pagriez augšu (U), lai mala būtu <strong>tieši virs savas vietas</strong>.</li>
+      <li>Pagriez sānu virsotni (R vai L), lai mala «ieripo» apakšā pareizi.</li>
+      <li>Ja mala ir apakšā, bet <strong>apgriezta</strong>, vispirms izcel to augšā un ieliec no jauna.</li>
+    </ol>
+    <div class="dgrow">
+      <figure class="dg" data-kind="pyra" data-c="ggggggggg"
+        ><figcaption>Apakšējā seja gatava — visas 3 apakšas malas savās vietās</figcaption></figure>
+    </div>
+    <div class="tip"><b>Intuitīvi:</b> šis solis ir kā kuba «krusts» — dari to ar aci. Nav jākaļ algoritms;
+    galvenais — mala pareizajā vietā un ar pareizo pusi uz āru.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="s2"> Solis apgūts</label></div>
+  </div>
+
+  <!-- 3. solis -->
+  <div class="card step s3" id="s3">
+    <div class="stepnum">3</div>
+    <h3>3. solis — Pēdējās 3 malas</h3>
+    <p class="goal">Mērķis: sakārtot 3 atlikušās augšējās malas — Pyraminx salikts.</p>
+    <p>Turi kubu ar gatavo seju <strong>apakšā</strong>. Paliek 3 augšējās malas. Iespējami 3 gadījumi:</p>
+
+    <h3 class="sub">A) Trīs malas jācikliski jāsamaina</h3>
+    <p>Ja visas 3 malas vietās, bet jāpagriež pa apli. Skaties virzienu:</p>
+    <p class="alg" data-alg="R U R' U R U R'"></p>
+    <p class="alg-label">3-cikls pretēji pulksteņrādītājam (CCW)</p>
+    <p class="alg" data-alg="R U' R' U' R U' R'"></p>
+    <p class="alg-label">3-cikls pulksteņrādītāja virzienā (CW)</p>
+
+    <h3 class="sub">B) Divas malas jāapgriež (grūtākais gadījums)</h3>
+    <p>Ja divas malas ir vietās, bet «apgrieztas» (nepareizā pusē):</p>
+    <p class="alg" data-alg="L R' L' R U' R U R'"></p>
+    <p class="alg-label">Divu malu apgriešana</p>
+
+    <div class="dgrow">
+      <figure class="dg" data-kind="pyra" data-c="ggggggggg"
+        data-parrows='[{"f":2,"t":5,"curve":10},{"f":5,"t":7,"curve":10},{"f":7,"t":2,"curve":10}]'
+        ><figcaption>A) 3 malas griežas pa apli</figcaption></figure>
+      <figure class="dg" data-kind="pyra" data-c="ggggggggg" data-mark="2,7"
+        data-parrows='[{"f":2,"t":7,"curve":0,"dbl":1}]'
+        ><figcaption>B) 2 malas apgriežas vietā</figcaption></figure>
+    </div>
+    <div class="tip"><b>Pazīstams?</b> <strong>R U R' U R U R'</strong> ir tā pati «Sune» ģimene, ko lieto 2×2 un 3×3 —
+    šeit tā cikliski maina 3 malas.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="s3"> Solis apgūts</label></div>
+  </div>
+</section>
+
+<!-- iesācēju kopsavilkums -->
+<section id="cheat">
+  <h2>Kopsavilkums — iesācēju metode <span class="rule"></span></h2>
+  <div class="cheat-wrap">
+    <table class="cheat">
+      <tr><th>Solis</th><th>Kad lietot</th><th>Algoritms</th></tr>
+      <tr><td>1. Stūri + gali</td><td>Orientē 4 stūrus, tad gali</td><td><em>ar aci, bez algoritma</em></td></tr>
+      <tr><td>2. Pirmais slānis</td><td>Apakšējās sejas 3 malas</td><td><em>intuitīvi</em></td></tr>
+      <tr><td>3A. 3-cikls (CCW)</td><td>3 malas jāgriež pa apli</td><td><span class="alg small" data-alg="R U R' U R U R'"></span></td></tr>
+      <tr><td>3A. 3-cikls (CW)</td><td>3 malas otrā virzienā</td><td><span class="alg small" data-alg="R U' R' U' R U' R'"></span></td></tr>
+      <tr><td>3B. 2 malu apgriešana</td><td>2 malas vietās, bet apgrieztas</td><td><span class="alg small" data-alg="L R' L' R U' R U R'"></span></td></tr>
+    </table>
+  </div>
+</section>
+
+</div><!-- /mode-beginner -->
+
+<!-- ==================== 2. METODE — PROFESIONĀĻA ==================== -->
+<div class="mode mode-pro">
+
+<div class="part-head pro" id="cfop">
+  <div class="kick">2. metode</div>
+  <h2>Profesionāļa metodes <span class="rule" style="background:var(--paper)"></span></h2>
+  <p>Kā liek speedcuberi. Divas populārākās pieejas: <strong>L4E</strong> (slānis + pēdējās 4 malas) un <strong>Oka</strong> (top-first).</p>
+</div>
+
+<section>
+  <div class="card">
+    <p>Abas pro metodes sākas ar to pašu ideju: <strong>stūrus un galus salikt intuitīvi</strong> (kā iesācēju 1. solī),
+    un tad visu grūtību — <strong>malas</strong> — atrisināt gudrāk un ar mazāk griezieniem nekā slānis-pa-slānim.</p>
+    <ul>
+      <li><strong>L4E</strong> — atrisini visu, izņemot pēdējās 4 malas, tad tās vienā piegājienā.</li>
+      <li><strong>Oka</strong> — sāc no augšas (top-first): viena mala apzināti «nepareizā» vietā, izmanto to kā «atslēgas caurumu».</li>
+    </ul>
+    <div class="tip"><b>Ar ko sākt:</b> lielākā daļa sāk ar <strong>L4E intuitīvi</strong> (salikc 1 malu, tad pārējās 3 ar 3-ciklu),
+    jo tas prasa maz jaunu algoritmu virs iesācēju metodes.</div>
+    <div class="warn"><b>Godīgi par avotiem:</b> pilnais L4E ir ~35 algoritmu sistēma (šeit — verificētais kodols + intuitīvā pieeja;
+    pilns saraksts: cubingapp). <strong>Oka</strong> konkrētie algoritmi netiek publicēti kā notācija — tāpēc doti tās
+    <strong>koncepta soļi</strong> + pēdējā slāņa malu (ELL) algoritmi, ko Oka lieto nobeigumam.</div>
+  </div>
+</section>
+
+<!-- L4E -->
+<section id="l4e">
+  <h2>1. L4E — pēdējās 4 malas <span class="rule"></span></h2>
+  <div class="card pro">
+    <p class="goal">Mērķis: salikc visu, izņemot 4 malas, tad pēdējās 4 malas — vienā solī.</p>
+    <h3 class="sub">Solis 1 — «V» (stūri + 2 malas)</h3>
+    <p>Salikc visus 4 stūrus (intuitīvi) un <strong>2 blakus apakšējās malas</strong> — sanāk «V» forma. Ar treniņu to var
+    izplānot inspekcijas laikā un uztaisīt «akli».</p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="pyra" data-c="ggggggggg" data-mark="4,5,8"
+        ><figcaption>«V»: stūri + 2 apakšas malas gatavas</figcaption></figure>
+    </div>
+    <h3 class="sub">Solis 2 — pēdējās 4 malas</h3>
+    <p><strong>Intuitīvā L4E (ieteicams sākumā):</strong> salikc <strong>1 malu</strong> ar aci, tad atlikušās 3 ar 3-ciklu
+    (tie paši algoritmi, ko iesācēju 3. solī):</p>
+    <p class="alg small" data-alg="R U R' U R U R'"></p>
+    <p class="alg small" data-alg="R U' R' U' R U' R'"></p>
+    <p><strong>Algoritmiskā L4E — verificētais kodols</strong> (kad apakšas mala jau vietā):</p>
+    <div class="cheat-wrap">
+      <table class="cheat pro">
+        <tr><th>Gadījums</th><th>Algoritms</th></tr>
+        <tr><td>Sune (3-cikls)</td><td><span class="alg small" data-alg="R U R' U R U R'"></span></td></tr>
+        <tr><td>Antisune (3-cikls)</td><td><span class="alg small" data-alg="R U' R' U' R U' R'"></span></td></tr>
+        <tr><td>2 malu apgriešana</td><td><span class="alg small" data-alg="L R' L' R U' R U R'"></span></td></tr>
+        <tr><td>Sledgehammer</td><td><span class="alg small" data-alg="R' L R L'"></span></td></tr>
+        <tr><td>Hedgeslammer</td><td><span class="alg small" data-alg="L R' L' R"></span></td></tr>
+      </table>
+    </div>
+    <div class="warn"><b>Pilns L4E (visi ~35 gadījumi)</b> ar diagrammām: <strong>cubingapp.com/algorithms/Pyraminx-L4E</strong>.
+    Šeit dotais kodols + intuitīvā pieeja pietiek, lai risinātu jebkuru gadījumu.</div>
+  </div>
+</section>
+
+<!-- OKA -->
+<section id="oka">
+  <h2>2. Oka metode (top-first) <span class="rule"></span></h2>
+  <div class="card pro">
+    <p class="goal">Mērķis: sākt no augšas — viena mala apzināti «nepareizā» vietā (Oka mala), izmanto to kā atslēgas caurumu.</p>
+    <ol>
+      <li><strong>Salikc vienu malu ap centru</strong> un ieliec vēl vienu malu (<strong>«Oka mala»</strong>) —
+        pareizi orientētu, bet <strong>nepareizā vietā</strong>.</li>
+      <li><strong>Izmanto brīvo slotu (kā «keyhole»)</strong>, lai atrisinātu stūrus/centrus.</li>
+      <li><strong>Vienā solī</strong> ieliec apgriezto malu + aizver atslēgas caurumu.</li>
+      <li><strong>Pabeidz pēdējā slāņa malas (ELL)</strong> ar zemāk dotajiem algoritmiem.</li>
+    </ol>
+    <p>Oka nobeiguma malu (ELL) algoritmi:</p>
+    <div class="cheat-wrap">
+      <table class="cheat pro">
+        <tr><th>Gadījums</th><th>Algoritms</th></tr>
+        <tr><td>Sledgehammer</td><td><span class="alg small" data-alg="R' L R L'"></span></td></tr>
+        <tr><td>Hedgeslammer</td><td><span class="alg small" data-alg="L R' L' R"></span></td></tr>
+        <tr><td>U-perm</td><td><span class="alg small" data-alg="R' L R L2' U L U'"></span></td></tr>
+        <tr><td>Mirror U</td><td><span class="alg small" data-alg="L R' L' R' U' R' U"></span></td></tr>
+        <tr><td>2 malu apgriešana</td><td><span class="alg small" data-alg="L R' L' R U' R U R'"></span></td></tr>
+      </table>
+    </div>
+    <div class="tip"><b>Radniecīgās metodes:</b> <strong>WO</strong> (salikc visas 3 augšas malas, tad 1 algoritms centriem),
+    <strong>Nutella</strong> (2 malas pretējos stāvokļos). Oka atšķiras ar apzināti nepareizi novietoto «Oka malu».</div>
+    <div class="warn"><b>Piezīme:</b> Oka konkrētie soļu algoritmi publiski netiek doti kā notācija (tikai koncepts) —
+    tāpēc doti verificētie ELL nobeiguma algoritmi (Speedsolving). Detaļas ar video: speedsolving.com «Top First».</div>
+  </div>
+</section>
+
+<!-- pro kopsavilkums -->
+<section id="cheat-pro">
+  <h2>Pro kopsavilkums <span class="rule"></span></h2>
+  <div class="cheat-wrap">
+    <table class="cheat pro">
+      <tr><th>Solis</th><th>Kad</th><th>Algoritms</th></tr>
+      <tr><td>Stūri + gali</td><td>Vienmēr sākumā</td><td><em>intuitīvi</em></td></tr>
+      <tr><td>L4E — «V»</td><td>Stūri + 2 malas</td><td><em>intuitīvi</em></td></tr>
+      <tr><td>L4E — 3-cikls CCW</td><td>3 malas pa apli</td><td><span class="alg small" data-alg="R U R' U R U R'"></span></td></tr>
+      <tr><td>L4E — 3-cikls CW</td><td>3 malas otrādi</td><td><span class="alg small" data-alg="R U' R' U' R U' R'"></span></td></tr>
+      <tr><td>L4E / Oka — 2-flip</td><td>2 malas apgrieztas</td><td><span class="alg small" data-alg="L R' L' R U' R U R'"></span></td></tr>
+      <tr><td>Oka — Sledgehammer</td><td>ELL nobeigums</td><td><span class="alg small" data-alg="R' L R L'"></span></td></tr>
+      <tr><td>Oka — Hedgeslammer</td><td>ELL nobeigums</td><td><span class="alg small" data-alg="L R' L' R"></span></td></tr>
+      <tr><td>Oka — U-perm</td><td>ELL nobeigums</td><td><span class="alg small" data-alg="R' L R L2' U L U'"></span></td></tr>
+    </table>
+  </div>
+</section>
+
+</div><!-- /mode-pro -->
+
+<!-- ============ PADOMI (kopīgi) ============ -->
+<section id="padomi">
+  <h2>Padomi un biežākās kļūdas <span class="rule"></span></h2>
+  <div class="card">
+    <ul>
+      <li><strong>Nejauc lielos ar mazajiem burtiem.</strong> U (liels) griež visu slāni; u (mazs) — tikai galu. Tā ir kļūda nr. 1.</li>
+      <li><strong>Gali ir triviāli.</strong> Neuztraucies par tiem risināšanas laikā — salikc pašā beigās ar aci.</li>
+      <li><strong>Viss ir malās.</strong> Pyraminx = 6 malu puzle. Ja saproti malu pārvietošanu, tu proti visu.</li>
+      <li><strong>Nav «2» griezienu.</strong> Katrai virsotnei ir tikai 2 stāvokļi — <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="U U"></span> = <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="U'"></span>.</li>
+      <li><strong>Gribi ātrāk?</strong> No iesācēju metodes pāriej uz <strong>L4E intuitīvo</strong> — tie paši 3 algoritmi, bet mazāk griezienu.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Pyraminx pamācība — iesācēju (slānis pa slānim) + profesionāļa (L4E, Oka) metode.
+    Lapa strādā pilnībā bez interneta — vienkārši atver failu pārlūkā. Veiksmi salikšanā!</p>
+    <p style="margin-top:10px;font-size:13px">Algoritmu avoti (pārbaudīti):
+    <a href="https://www.speedsolving.com/wiki/index.php/Pyraminx_notation">speedsolving.com (notācija)</a>,
+    <a href="https://www.speedsolving.com/wiki/index.php/Pyraminx_algorithms">speedsolving.com (algoritmi)</a>,
+    <a href="https://www.kevingittemeier.com/solve-pyraminx/">kevingittemeier.com (iesācēju)</a>,
+    <a href="https://cubingapp.com/algorithms/Pyraminx-L4E">cubingapp.com (L4E)</a>,
+    <a href="https://ruwix.com/twisty-puzzles/pyraminx-triangle-rubiks-cube/">ruwix.com</a>.</p>
+  </div>
+</footer>
+<script>
+(function () {
+  'use strict';
+  var NS = 'http://www.w3.org/2000/svg';
+  var INK = '#211E19';
+  var COL = {
+    y: '#FFD500', w: '#FFFFFF', r: '#D6382E', o: '#FF7A00', g: '#0AA24C',
+    b: '#1558C9', x: '#E6E1D2', e: '#F0EBDC', c: '#D9D2BD', m: '#FFE9A0'
+  };
+
+  function el(name, attrs, parent) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function mkSvg(w, h, dispW) {
+    var s = el('svg', { viewBox: '0 0 ' + w + ' ' + h, width: dispW, role: 'img' });
+    s.style.height = 'auto';
+    return s;
+  }
+  function head(svg, tipX, tipY, dirX, dirY) {
+    var len = Math.sqrt(dirX * dirX + dirY * dirY) || 1;
+    var ux = dirX / len, uy = dirY / len, px = -uy, py = ux, s = 9;
+    el('polygon', {
+      points: tipX + ',' + tipY + ' ' +
+        (tipX - ux * s + px * s * 0.55) + ',' + (tipY - uy * s + py * s * 0.55) + ' ' +
+        (tipX - ux * s - px * s * 0.55) + ',' + (tipY - uy * s - py * s * 0.55),
+      fill: INK
+    }, svg);
+  }
+  function arrow(svg, x1, y1, x2, y2, curve, dbl) {
+    curve = curve || 0;
+    var dx = x2 - x1, dy = y2 - y1, len = Math.sqrt(dx * dx + dy * dy) || 1;
+    var cx = (x1 + x2) / 2 - (dy / len) * curve, cy = (y1 + y2) / 2 + (dx / len) * curve;
+    var d = 'M ' + x1 + ' ' + y1 + ' Q ' + cx + ' ' + cy + ' ' + x2 + ' ' + y2;
+    el('path', { d: d, fill: 'none', stroke: '#FFFDF6', 'stroke-width': 7, 'stroke-linecap': 'round' }, svg);
+    el('path', { d: d, fill: 'none', stroke: INK, 'stroke-width': 3.2, 'stroke-linecap': 'round' }, svg);
+    head(svg, x2, y2, x2 - cx, y2 - cy);
+    if (dbl) head(svg, x1, y1, x1 - cx, y1 - cy);
+  }
+  function circleArrow(svg, cx, cy, r, ccw) {
+    var a0 = ccw ? 200 : -50, a1 = ccw ? -50 : 200;
+    var p0 = [cx + r * Math.cos(a0 * Math.PI / 180), cy + r * Math.sin(a0 * Math.PI / 180)];
+    var p1 = [cx + r * Math.cos(a1 * Math.PI / 180), cy + r * Math.sin(a1 * Math.PI / 180)];
+    var sweep = ccw ? 0 : 1;
+    var d = 'M ' + p0[0] + ' ' + p0[1] + ' A ' + r + ' ' + r + ' 0 1 ' + sweep + ' ' + p1[0] + ' ' + p1[1];
+    el('path', { d: d, fill: 'none', stroke: '#FFFDF6', 'stroke-width': 7, 'stroke-linecap': 'round' }, svg);
+    el('path', { d: d, fill: 'none', stroke: INK, 'stroke-width': 3.4, 'stroke-linecap': 'round' }, svg);
+    var rad = a1 * Math.PI / 180, t = ccw ? -1 : 1;
+    head(svg, p1[0], p1[1], -Math.sin(rad) * t, Math.cos(rad) * t);
+  }
+  function parseMarks(host) {
+    var m = host.getAttribute('data-mark');
+    return m ? m.split(',').map(Number) : [];
+  }
+
+  /* ---- kind: pyra (one triangular face, 9 small triangles) ---- */
+  var TRI = [
+    [[0,0],[1,0],[1,1]], [[1,0],[2,0],[2,1]], [[1,0],[1,1],[2,1]],
+    [[1,1],[2,1],[2,2]], [[2,0],[3,0],[3,1]], [[2,0],[2,1],[3,1]],
+    [[2,1],[3,1],[3,2]], [[2,1],[2,2],[3,2]], [[2,2],[3,2],[3,3]]
+  ];
+  function renderPyra(host) {
+    var small = host.getAttribute('data-small');
+    var cs = small ? 34 : 44, h = cs * 0.8660254, ox = 8, oy = 8;
+    var W = ox * 2 + 3 * cs, H = oy * 2 + 3 * h;
+    var svg = mkSvg(W, H, small ? 104 : 130);
+    var cx = ox + 1.5 * cs;
+    var P = [];
+    for (var i = 0; i <= 3; i++) { P[i] = []; for (var j = 0; j <= i; j++) { P[i][j] = [cx + (j - i / 2) * cs, oy + i * h]; } }
+    var c = host.getAttribute('data-c') || 'xxxxxxxxx';
+    var polys = [];
+    TRI.forEach(function (t, idx) {
+      var pts = t.map(function (pt) { return P[pt[0]][pt[1]]; });
+      polys.push(pts);
+      el('polygon', {
+        points: pts.map(function (p) { return p[0] + ',' + p[1]; }).join(' '),
+        fill: COL[c[idx]] || COL.x, stroke: INK, 'stroke-width': 1.8, 'stroke-linejoin': 'round'
+      }, svg);
+    });
+    parseMarks(host).forEach(function (idx) {
+      var pts = polys[idx];
+      el('polygon', {
+        points: pts.map(function (p) { return p[0] + ',' + p[1]; }).join(' '),
+        fill: 'none', stroke: INK, 'stroke-width': 3.8, 'stroke-linejoin': 'round'
+      }, svg);
+    });
+    function cent(idx) { var p = polys[idx]; return [(p[0][0] + p[1][0] + p[2][0]) / 3, (p[0][1] + p[1][1] + p[2][1]) / 3]; }
+    var pa = host.getAttribute('data-parrows');
+    if (pa) { JSON.parse(pa).forEach(function (a) { var f = cent(a.f), t = cent(a.t); arrow(svg, f[0], f[1], t[0], t[1], a.curve || 0, a.dbl); }); }
+    var rot = host.getAttribute('data-rot');
+    if (rot) {
+      var parts = rot.split(':'), ccw = parts[1] === 'ccw', pos;
+      if (parts[0] === 'top') pos = [cx, oy + cs * 0.62];
+      else if (parts[0] === 'left') pos = [P[3][0][0] + cs * 0.55, P[3][0][1] - cs * 0.4];
+      else if (parts[0] === 'right') pos = [P[3][3][0] - cs * 0.55, P[3][3][1] - cs * 0.4];
+      else pos = [cx, oy + 1.9 * h];
+      circleArrow(svg, pos[0], pos[1], cs * 0.4, ccw);
+    }
+    host.insertBefore(svg, host.firstChild);
+  }
+
+  document.querySelectorAll('.dg').forEach(function (host) {
+    try { if (host.getAttribute('data-kind') === 'pyra') renderPyra(host); }
+    catch (e) { /* diagram is decorative — never break the page */ }
+  });
+
+  /* ---- Algorithm chips ---- */
+  document.querySelectorAll('[data-alg]').forEach(function (elx) {
+    var moves = elx.getAttribute('data-alg').trim().split(/\s+/);
+    elx.textContent = '';
+    moves.forEach(function (mv) {
+      var s = document.createElement('span');
+      var cls = 'mv';
+      if (mv.indexOf("'") >= 0) cls += ' prime';
+      if (/^[ulrb]/.test(mv)) cls += ' tip';
+      s.className = cls;
+      s.textContent = mv;
+      elx.appendChild(s);
+    });
+  });
+
+  /* ---- Progress checkboxes ---- */
+  var KEY = 'pyraminx-progress-v1', saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
+  document.querySelectorAll('.done-row input[data-step]').forEach(function (box) {
+    var id = box.getAttribute('data-step');
+    box.checked = !!saved[id];
+    var card = box.closest('.card');
+    if (card) card.classList.toggle('is-done', box.checked);
+    box.addEventListener('change', function () {
+      saved[id] = box.checked;
+      if (card) card.classList.toggle('is-done', box.checked);
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    });
+  });
+
+  /* ---- Beginner / Pro mode switch ---- */
+  var MODEKEY = 'pyraminx-mode';
+  var begBtn = document.getElementById('mb-beg');
+  var proBtn = document.getElementById('mb-pro');
+  function setMode(m) {
+    var pro = (m === 'pro');
+    document.body.classList.toggle('pro', pro);
+    if (begBtn) begBtn.classList.toggle('active', !pro);
+    if (proBtn) proBtn.classList.toggle('active', pro);
+    try { localStorage.setItem(MODEKEY, m); } catch (e) {}
+  }
+  if (begBtn && proBtn) {
+    begBtn.addEventListener('click', function () { setMode('beginner'); window.scrollTo(0, 0); });
+    proBtn.addEventListener('click', function () { setMode('pro'); window.scrollTo(0, 0); });
+    var savedMode = 'beginner';
+    try { savedMode = localStorage.getItem(MODEKEY) || 'beginner'; } catch (e) {}
+    setMode(savedMode);
+  }
+})();
+</script>
+</body>
+</html>

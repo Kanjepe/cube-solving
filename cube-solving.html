@@ -1,0 +1,2456 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kubu salikšana — 2×2 · 3×3 · Pyraminx (Bērniem / Iesācējs / Pro)</title>
+<style>
+  :root {
+    --paper: #F4EFE3;
+    --card: #FFFDF6;
+    --ink: #211E19;
+    --ink-soft: #57503F;
+    --line: #C9C2AE;
+    --cy: #FFD500;
+    --cw: #FFFFFF;
+    --cr: #D6382E;
+    --co: #FF7A00;
+    --cg: #0AA24C;
+    --cb: #1558C9;
+    --cpro: #7A3FB5;
+    --gray: #E6E1D2;
+    --shadow: 6px 6px 0 rgba(33,30,25,.9);
+    --tbh: 52px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background-color: var(--paper);
+    background-image: radial-gradient(#D9D2BE 1px, transparent 1.5px);
+    background-size: 24px 24px;
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  h1, h2, h3, .display {
+    font-family: Bahnschrift, 'Arial Narrow', 'Segoe UI', sans-serif;
+    font-stretch: condensed;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    line-height: 1.1;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---------- Top bar: cube + level switcher ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 60;
+    background: var(--card); border-bottom: 2.5px solid var(--ink);
+  }
+  .topbar .tb-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; padding: 8px 0; }
+  .tb-brand {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; font-weight: 800;
+    font-size: 16px; letter-spacing: .08em; text-transform: uppercase; margin-right: 2px;
+  }
+  .tb-group { display: flex; gap: 6px; }
+  .tb-sep { width: 2px; height: 22px; background: var(--line); }
+  .tabbtn {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    letter-spacing: .04em; font-size: 14px; cursor: pointer;
+    border: 2px solid var(--ink); background: var(--card); color: var(--ink);
+    padding: 5px 12px; border-radius: 9px; box-shadow: 3px 3px 0 rgba(33,30,25,.85);
+    transition: transform .1s ease;
+  }
+  .tabbtn:hover { transform: translate(-1px,-1px); }
+  .tabbtn.active { background: var(--ink); color: var(--paper); }
+  .tabbtn.lvl-kids.active { background: var(--cg); border-color: var(--cg); }
+  .tabbtn.lvl-pro.active { background: var(--cpro); border-color: var(--cpro); }
+  .tabbtn .short { display: none; }
+
+  /* ---------- Panel heroes (compact) ---------- */
+  .panel-hero { padding: 26px 0 4px; }
+  .panel-hero h1 { font-size: clamp(28px, 5vw, 46px); font-weight: 800; }
+  .panel-hero p { margin-top: 6px; font-size: 16px; color: var(--ink-soft); font-style: italic; max-width: 660px; }
+  .panel-hero .hero-flag { display: flex; height: 8px; max-width: 260px; margin-bottom: 14px; border: 2px solid var(--ink); }
+  .panel-hero .hero-flag span { flex: 1; }
+
+  /* ---------- Cube panel + level visibility ---------- */
+  .cubepanel { display: none; }
+  body[data-cube="a2"] #panel-a2 { display: block; }
+  body[data-cube="a3"] #panel-a3 { display: block; }
+  body[data-cube="py"] #panel-py { display: block; }
+  .mode { display: none; }
+  body[data-level="kids"] .mode-kids { display: block; }
+  body[data-level="beginner"] .mode-beginner { display: block; }
+  body[data-level="pro"] .mode-pro { display: block; }
+  body[data-level="kids"] .hide-kids { display: none; }
+
+  /* ---------- Sticky step nav ---------- */
+  nav.steps {
+    position: sticky; top: var(--tbh); z-index: 50;
+    background: rgba(244,239,227,.94); backdrop-filter: blur(3px);
+    border-bottom: 2px solid var(--ink);
+    padding: 8px 0; margin-bottom: 30px;
+    display: none;
+  }
+  body[data-cube="a2"][data-level="kids"] nav[data-for="a2:kids"],
+  body[data-cube="a2"][data-level="beginner"] nav[data-for="a2:beginner"],
+  body[data-cube="a2"][data-level="pro"] nav[data-for="a2:pro"],
+  body[data-cube="a3"][data-level="kids"] nav[data-for="a3:kids"],
+  body[data-cube="a3"][data-level="beginner"] nav[data-for="a3:beginner"],
+  body[data-cube="a3"][data-level="pro"] nav[data-for="a3:pro"],
+  body[data-cube="py"][data-level="kids"] nav[data-for="py:kids"],
+  body[data-cube="py"][data-level="beginner"] nav[data-for="py:beginner"],
+  body[data-cube="py"][data-level="pro"] nav[data-for="py:pro"] { display: block; }
+  nav.steps .wrap { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  nav.steps a {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; font-size: 14px;
+    text-transform: uppercase; letter-spacing: .04em;
+    text-decoration: none; color: var(--ink);
+    border: 2px solid var(--ink); background: var(--card);
+    padding: 4px 10px; border-radius: 8px;
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  nav.steps a:hover { transform: translate(-2px,-2px); box-shadow: 3px 3px 0 var(--ink); }
+  nav.steps a b { font-size: 15px; }
+  nav.steps a.n1 b { color: var(--cb); }  nav.steps a.n2 b { color: var(--cr); }
+  nav.steps a.n3 b { color: var(--co); }  nav.steps a.n4 b { color: #B99A00; }
+  nav.steps a.n5 b { color: var(--cg); }  nav.steps a.n6 b { color: var(--cb); }
+  nav.steps a.n7 b { color: var(--cr); }
+  nav.steps a.pro { border-color: var(--cpro); }
+  nav.steps a.pro b { color: var(--cpro); }
+  nav.steps .sep { font-family: Bahnschrift, 'Arial Narrow', sans-serif; font-size: 12px;
+    color: var(--ink-soft); letter-spacing: .1em; padding: 0 2px; }
+
+  /* ---------- Sections & cards ---------- */
+  section { margin-bottom: 46px; }
+  h2 {
+    font-size: clamp(24px, 4vw, 34px); margin-bottom: 16px;
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  h2 .rule { flex: 1; height: 4px; background: var(--ink); min-width: 40px; }
+  .part-head { background: var(--ink); color: var(--paper); border-radius: 16px; padding: 20px 26px; margin: 12px 0 22px; box-shadow: var(--shadow); }
+  .part-head.pro { background: var(--cpro); }
+  .part-head.kids { background: var(--cg); }
+  .part-head .kick { font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase; letter-spacing: .12em; font-size: 13px; opacity: .85; }
+  .part-head h2 { color: var(--paper); margin: 4px 0 6px; }
+  .part-head p { margin: 0; font-style: italic; opacity: .92; }
+  .card {
+    background: var(--card); border: 2.5px solid var(--ink); border-radius: 16px;
+    box-shadow: var(--shadow); padding: 26px 28px; margin-bottom: 26px;
+    position: relative; overflow: hidden;
+  }
+  .card.step { border-left-width: 14px; scroll-margin-top: calc(var(--tbh) + 58px); }
+  .card.step.s1 { border-left-color: var(--cb); }
+  .card.step.s2 { border-left-color: var(--cr); }
+  .card.step.s3 { border-left-color: var(--co); }
+  .card.step.s4 { border-left-color: var(--cy); }
+  .card.step.s5 { border-left-color: var(--cg); }
+  .card.step.s6 { border-left-color: var(--cb); }
+  .card.step.s7 { border-left-color: var(--cr); }
+  .card.pro, .card.step.pro { border-left: 14px solid var(--cpro); scroll-margin-top: calc(var(--tbh) + 58px); }
+  .stepnum {
+    position: absolute; top: -18px; right: 6px;
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; font-weight: 800;
+    font-size: 110px; line-height: 1; color: transparent;
+    -webkit-text-stroke: 2px rgba(33,30,25,.16); pointer-events: none; user-select: none;
+  }
+  h3 { font-size: 21px; margin: 20px 0 8px; }
+  h3:first-child { margin-top: 0; }
+  h3.sub { font-size: 18px; margin-top: 22px; }
+  .goal {
+    font-style: italic; color: var(--ink-soft); margin-bottom: 14px;
+    padding-left: 12px; border-left: 4px solid var(--line);
+  }
+  p { margin-bottom: 12px; }
+  ul, ol { margin: 0 0 14px 24px; }
+  li { margin-bottom: 7px; }
+  strong { font-weight: 700; }
+
+  /* ---------- Algorithm chips ---------- */
+  .alg {
+    display: flex; flex-wrap: wrap; gap: 7px; align-items: center;
+    margin: 14px 0 16px;
+    font-family: Consolas, 'Courier New', monospace; font-weight: 700; font-size: 20px;
+  }
+  .alg .mv {
+    background: var(--ink); color: var(--cy);
+    padding: 6px 12px; border-radius: 9px;
+    box-shadow: 0 3px 0 rgba(0,0,0,.55);
+    min-width: 44px; text-align: center;
+  }
+  .alg .mv.prime { color: #7ED0FF; }
+  .alg .mv.dbl { color: #FF9E6B; }
+  .alg .mv.tip { color: #B9F6CA; }
+  .alg.small { font-size: 16px; }
+  .alg.small .mv { padding: 3px 8px; min-width: 30px; }
+  .alg.tiny { font-size: 13.5px; }
+  .alg.tiny .mv { padding: 2px 6px; min-width: 24px; border-radius: 6px; }
+  .alg-label {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    font-size: 14px; letter-spacing: .06em; color: var(--ink-soft); margin-top: 10px;
+  }
+
+  /* ---------- Callouts ---------- */
+  .tip, .warn {
+    border: 2px solid var(--ink); border-radius: 12px;
+    padding: 12px 16px; margin: 14px 0; font-size: 16px;
+  }
+  .tip { background: #E9F5EA; border-left: 8px solid var(--cg); }
+  .warn { background: #FBEAE3; border-left: 8px solid var(--cr); }
+  .tip b:first-child, .warn b:first-child {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    letter-spacing: .04em; font-size: 14px;
+  }
+
+  /* ---------- Kids boxes ---------- */
+  .kbox { border: 2.5px solid var(--ink); border-radius: 14px; padding: 14px 16px; margin: 12px 0; font-size: 16.5px; }
+  .kbox .kt {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    font-size: 13px; letter-spacing: .06em; display: block; margin-bottom: 6px;
+  }
+  .kbox.see { background: #E3F2FD; border-left: 10px solid var(--cb); }
+  .kbox.do { background: #E9F5EA; border-left: 10px solid var(--cg); }
+  .kbox.help { background: #FFF3E0; border-left: 10px solid var(--co); }
+  .mode-kids .card.step { scroll-margin-top: calc(var(--tbh) + 58px); }
+  .mode-kids ol li, .mode-kids ul li { margin-bottom: 10px; }
+
+  /* ---------- Diagrams ---------- */
+  .dgrow { display: flex; gap: 22px; flex-wrap: wrap; margin: 18px 0; align-items: flex-start; }
+  figure.dg { text-align: center; margin: 0; }
+  figure.dg svg { display: block; margin: 0 auto; }
+  figure.dg figcaption {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; font-size: 13.5px;
+    text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft);
+    margin-top: 8px; max-width: 200px;
+  }
+  .dgbox {
+    background: #FAF7EC; border: 2px dashed var(--line); border-radius: 12px;
+    padding: 16px 18px 12px;
+  }
+
+  /* ---------- Notation grid ---------- */
+  .notgrid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    gap: 16px; margin-top: 6px;
+  }
+  .notcell {
+    background: var(--card); border: 2px solid var(--ink); border-radius: 12px;
+    padding: 12px 10px 10px; text-align: center; box-shadow: 4px 4px 0 rgba(33,30,25,.85);
+  }
+  .notcell .nname {
+    font-family: Consolas, monospace; font-weight: 700; font-size: 24px;
+    display: block; margin-bottom: 6px;
+  }
+  .notcell .ndesc { font-size: 14px; color: var(--ink-soft); line-height: 1.35; display: block; margin-top: 6px; }
+  .notcell svg { margin: 0 auto; display: block; }
+
+  /* ---------- Cheat sheet ---------- */
+  .cheat { border-collapse: collapse; width: 100%; background: var(--card); }
+  .cheat th, .cheat td { border: 2px solid var(--ink); padding: 10px 14px; text-align: left; vertical-align: top; }
+  .cheat th {
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    letter-spacing: .05em; font-size: 14.5px; background: var(--ink); color: var(--paper);
+  }
+  .cheat.pro th { background: var(--cpro); }
+  .cheat td:first-child { font-weight: 700; white-space: nowrap; }
+  .cheat .alg { margin: 0; }
+  .cheat-wrap { overflow-x: auto; border-radius: 12px; box-shadow: var(--shadow); border: 2.5px solid var(--ink); margin-bottom: 22px; }
+  .cheat-wrap .cheat th:first-child { border-top-left-radius: 9px; }
+
+  /* ---------- Progress checkbox ---------- */
+  .done-row { margin-top: 18px; padding-top: 14px; border-top: 2px dashed var(--line); }
+  .done-row label {
+    display: inline-flex; align-items: center; gap: 10px; cursor: pointer;
+    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
+    font-size: 14.5px; letter-spacing: .05em;
+  }
+  .done-row input { width: 20px; height: 20px; accent-color: var(--cg); cursor: pointer; }
+  .card.step.is-done { opacity: .82; }
+  .card.step.is-done .stepnum { -webkit-text-stroke-color: rgba(10,162,76,.35); }
+
+  footer {
+    border-top: 2px solid var(--ink); margin-top: 60px; padding: 26px 0 46px;
+    font-size: 15px; color: var(--ink-soft); font-style: italic;
+  }
+  footer a { color: var(--ink-soft); }
+
+  /* ---------- Mobile: compact header + nav ---------- */
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    .wrap { padding: 0 14px; }
+    .card { padding: 18px 14px; }
+    .stepnum { font-size: 64px; top: -8px; }
+    .topbar .tb-row { gap: 5px; padding: 6px 0; }
+    .tb-brand { display: none; }
+    .tb-sep { height: 18px; }
+    .tabbtn { font-size: 12.5px; padding: 4px 9px; box-shadow: 2px 2px 0 rgba(33,30,25,.85); border-radius: 8px; }
+    .tabbtn .long { display: none; }
+    .tabbtn .short { display: inline; }
+    .panel-hero { padding: 14px 0 2px; }
+    .panel-hero h1 { font-size: 26px; }
+    .panel-hero p { font-size: 14px; }
+    .panel-hero .hero-flag { height: 6px; max-width: 180px; margin-bottom: 10px; }
+    nav.steps { position: static; padding: 6px 0; margin-bottom: 20px; border-top: none; }
+    nav.steps .wrap { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+    nav.steps a { font-size: 12px; padding: 3px 8px; white-space: nowrap; }
+    .card.step, .card.pro, .mode-kids .card.step { scroll-margin-top: calc(var(--tbh) + 8px); }
+    .part-head { padding: 14px 16px; }
+    h2 { font-size: 22px; }
+  }
+  @media print {
+    body { background: #fff; }
+    .card, .notcell, .part-head { box-shadow: none; }
+    .topbar, nav.steps { position: static; }
+    .done-row { display: none; }
+  }
+</style>
+</head>
+<body data-cube="a3" data-level="beginner">
+
+<div class="topbar" id="topbar">
+  <div class="wrap">
+    <div class="tb-row">
+      <span class="tb-brand">Kubi</span>
+      <div class="tb-group" role="tablist" aria-label="Kuba izvēle">
+        <button class="tabbtn cubebtn" data-cube="a2" type="button">2×2</button>
+        <button class="tabbtn cubebtn" data-cube="a3" type="button">3×3</button>
+        <button class="tabbtn cubebtn" data-cube="py" type="button">Pyraminx</button>
+      </div>
+      <span class="tb-sep" aria-hidden="true"></span>
+      <div class="tb-group" role="tablist" aria-label="Līmeņa izvēle">
+        <button class="tabbtn lvlbtn lvl-kids" data-level="kids" type="button"><span class="long">Bērniem</span><span class="short">Bērni</span></button>
+        <button class="tabbtn lvlbtn" data-level="beginner" type="button"><span class="long">Iesācējs</span><span class="short">Iesāc.</span></button>
+        <button class="tabbtn lvlbtn lvl-pro" data-level="pro" type="button"><span class="long">Pro</span><span class="short">Pro</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="steps" data-for="a3:kids" aria-label="Soļi — 3×3 bērniem">
+  <div class="wrap">
+    <a href="#a3-k0"><b>★</b> Sāc šeit</a>
+    <a class="n1" href="#a3-k1"><b>1</b> Puķīte</a>
+    <a class="n2" href="#a3-k2"><b>2</b> Stūri</a>
+    <a class="n3" href="#a3-k3"><b>3</b> Vidus</a>
+    <a class="n4" href="#a3-k4"><b>4</b> Krusts</a>
+    <a class="n5" href="#a3-k5"><b>5</b> Malas</a>
+    <a class="n6" href="#a3-k6"><b>6</b> Vietas</a>
+    <a class="n7" href="#a3-k7"><b>7</b> Fināls</a>
+  </div>
+</nav>
+
+<nav class="steps" data-for="a2:kids" aria-label="Soļi — 2×2 bērniem">
+  <div class="wrap">
+    <a href="#a2-k0"><b>★</b> Sāc šeit</a>
+    <a class="n1" href="#a2-k1"><b>1</b> Baltā puse</a>
+    <a class="n2" href="#a2-k2"><b>2</b> Dzeltenā puse</a>
+    <a class="n3" href="#a2-k3"><b>3</b> Sāni</a>
+  </div>
+</nav>
+
+<nav class="steps" data-for="py:kids" aria-label="Soļi — Pyraminx bērniem">
+  <div class="wrap">
+    <a href="#py-k0"><b>★</b> Sāc šeit</a>
+    <a class="n1" href="#py-k1"><b>1</b> Smailītes</a>
+    <a class="n2" href="#py-k2"><b>2</b> Apakša</a>
+    <a class="n3" href="#py-k3"><b>3</b> Pēdējās malas</a>
+  </div>
+</nav>
+
+<nav class="steps" data-for="a2:beginner" aria-label="Soļi — iesācējs">
+  <div class="wrap">
+    <a href="#a2-nota" title="Notācija"><b>ABC</b> Notācija</a>
+    <a class="n1" href="#a2-s1"><b>1</b> Pirmais slānis</a>
+    <a class="n2" href="#a2-s2"><b>2</b> Augšas orientācija</a>
+    <a class="n3" href="#a2-s3"><b>3</b> Stūru maiņa</a>
+    <a href="#a2-cheat" title="Kopsavilkums"><b>★</b> Kopsavilkums</a>
+  </div>
+</nav>
+
+<nav class="steps" data-for="a2:pro" aria-label="Soļi — pro">
+  <div class="wrap">
+    <a href="#a2-nota" title="Notācija"><b>ABC</b> Notācija</a>
+    <a class="pro" href="#a2-ortega"><b>◆</b> Ortega</a>
+    <a class="pro" href="#a2-cll"><b>◆</b> CLL</a>
+    <a href="#a2-cheat" title="Kopsavilkums"><b>★</b> Kopsavilkums</a>
+  </div>
+</nav>
+
+<nav class="steps" data-for="a3:beginner" aria-label="Soļi — iesācējs">
+  <div class="wrap">
+    <a href="#a3-nota" title="Notācija"><b>ABC</b> Notācija</a>
+    <a class="n1" href="#a3-s1"><b>1</b> Krusts</a>
+    <a class="n2" href="#a3-s2"><b>2</b> Stūri</a>
+    <a class="n3" href="#a3-s3"><b>3</b> Vidus</a>
+    <a class="n4" href="#a3-s4"><b>4</b> Dzelt. krusts</a>
+    <a class="n5" href="#a3-s5"><b>5</b> Malas</a>
+    <a class="n6" href="#a3-s6"><b>6</b> Stūru vietas</a>
+    <a class="n7" href="#a3-s7"><b>7</b> Stūru pagrieziens</a>
+    <a href="#a3-cheat" title="Kopsavilkums"><b>★</b> Kopsavilkums</a>
+  </div>
+</nav>
+
+<nav class="steps" data-for="a3:pro" aria-label="Soļi — pro">
+  <div class="wrap">
+    <a href="#a3-cfop" title="Par CFOP"><b>i</b> CFOP</a>
+    <a class="pro" href="#a3-cross"><b>1</b> Krusts</a>
+    <a class="pro" href="#a3-f2l"><b>2</b> F2L</a>
+    <a class="pro" href="#a3-oll"><b>3</b> OLL</a>
+    <a class="pro" href="#a3-pll"><b>4</b> PLL</a>
+    <a href="#a3-cheat-pro" title="Kopsavilkums"><b>★</b> Kopsavilkums</a>
+  </div>
+</nav>
+
+<nav class="steps" data-for="py:beginner" aria-label="Soļi — iesācējs">
+  <div class="wrap">
+    <a href="#py-nota" title="Notācija"><b>ABC</b> Notācija</a>
+    <a class="n1" href="#py-s1"><b>1</b> Stūri + gali</a>
+    <a class="n2" href="#py-s2"><b>2</b> Pirmais slānis</a>
+    <a class="n3" href="#py-s3"><b>3</b> Pēdējās 3 malas</a>
+    <a href="#py-cheat" title="Kopsavilkums"><b>★</b> Kopsavilkums</a>
+  </div>
+</nav>
+
+<nav class="steps" data-for="py:pro" aria-label="Soļi — pro">
+  <div class="wrap">
+    <a href="#py-nota" title="Notācija"><b>ABC</b> Notācija</a>
+    <a href="#py-cfop" title="Par metodēm"><b>i</b> Metodes</a>
+    <a class="pro" href="#py-l4e"><b>1</b> L4E</a>
+    <a class="pro" href="#py-oka"><b>2</b> Oka</a>
+    <a href="#py-cheat-pro" title="Kopsavilkums"><b>★</b> Kopsavilkums</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<div class="cubepanel" id="panel-a2" data-n="2">
+<section class="panel-hero">
+  <div class="hero-flag" aria-hidden="true"><span style="background:var(--cw)"></span><span style="background:var(--cy)"></span><span style="background:var(--cr)"></span><span style="background:var(--co)"></span><span style="background:var(--cg)"></span><span style="background:var(--cb)"></span></div>
+  <h1>2×2 Rubika kubs</h1>
+  <p>Kabatas kubs — 8 stūri, bez centriem. Izvēlies līmeni augšā un ej cauri soļiem; izvēle tiek saglabāta.</p>
+</section>
+<div class="mode mode-kids">
+
+<div class="part-head kids">
+  <div class="kick">Bērniem — soli pa solītim</div>
+  <h2>2×2 kubs pavisam vienkārši <span class="rule" style="background:var(--paper)"></span></h2>
+  <p>Mazais kubs ir vieglāks par lielo — tikai 3 solīši! Ja proti šo, lielais 3×3 vēlāk būs daudz vieglāks.</p>
+</div>
+
+<section>
+  <div class="card step" id="a2-k0" style="border-left:14px solid var(--cg)">
+    <h3>Pirms sākam — iepazīsti mazo kubu 👀</h3>
+    <div class="kbox see"><span class="kt">Ko tu redzēsi</span>
+      Mazajam kubam ir tikai <strong>8 gabaliņi</strong>, un visi ir <strong>stūrīši</strong> ar 3 krāsām.
+      Vidiņu šeit nav vispār! Tāpēc tu pats izlem, kur būs baltā puse.
+    </div>
+    <div class="kbox do"><span class="kt">Slepenā valoda — burtiņi</span>
+      <ul>
+        <li><span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="R"></span> — <strong>labā puse uz augšu</strong> (prom no sevis).</li>
+        <li><span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="R'"></span> — labā puse <strong>uz leju</strong>. Zīmīte <strong>'</strong> = otrā virzienā.</li>
+        <li><span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="U"></span> — <strong>augšējā kārta pa kreisi</strong>.</li>
+        <li><span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="U2"></span> — cipars 2 = pagriez <strong>divas reizes</strong>.</li>
+      </ul>
+      Kamēr dari burtiņu virkni — <strong>turi kubu nekustīgi</strong>, viena puse visu laiku skatās uz tevi!
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="a2-k0"> Sapratu, ejam tālāk!</label></div>
+  </div>
+
+  <div class="card step s1" id="a2-k1">
+    <div class="stepnum">1</div>
+    <h3>1. solītis — Baltā puse ⬜</h3>
+    <div class="kbox see"><span class="kt">Mērķis</span>
+      Visa baltā puse gatava apakšā, un sānu apakšējās rindiņas sakrīt pa krāsām.
+    </div>
+    <div class="kbox do"><span class="kt">Ko darīt — pa vienam</span>
+      <ol>
+        <li>Atrodi stūrīti ar <strong>baltu krāsu</strong> un noliec to apakšā tā, lai baltais skatās uz leju. Šis ir tavs pirmais «mājas» stūrītis.</li>
+        <li>Turi kubu ar <strong>balto uz leju</strong> un vairs neapgriez.</li>
+        <li>Atrodi augšā nākamo balto stūrīti. Paskaties uz tā pārējām 2 krāsām — tā māja apakšā ir starp tām pašām krāsām.</li>
+        <li>Griez augšu (U), kamēr stūrītis ir <strong>tieši virs savas mājas</strong>.</li>
+        <li>Turi to <strong>priekšā pa labi</strong> un atkārto burvju gājienu, kamēr stūrītis iekrīt ar balto uz leju:</li>
+      </ol>
+      <p class="alg" data-alg="R U R' U'"></p>
+      <p class="alg-label">«Pacel – pagriez – noliec – atgriez» · atkārto, cik vajag</p>
+    </div>
+    <div class="kbox help"><span class="kt">Ja neizdodas</span>
+      Ja balts stūrītis sēž apakšā, bet <strong>nepareizi</strong> — turi to priekšā pa labi, uztaisi gājienu 1 reizi (tas izlec augšā), tad ieliec no jauna pareizi.
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="a2-k1"> Solītis izdevās!</label></div>
+  </div>
+
+  <div class="card step s2" id="a2-k2">
+    <div class="stepnum">2</div>
+    <h3>2. solītis — Dzeltenā puse 🟨</h3>
+    <div class="kbox see"><span class="kt">Mērķis</span>
+      Visa augša kļūst dzeltena. (Sānu krāsas vēl var nesakrist!)
+    </div>
+    <div class="kbox do"><span class="kt">Ko darīt</span>
+      <ol>
+        <li>Baltā puse paliek apakšā.</li>
+        <li>Atrodi augšā stūrīti, kam dzeltenā krāsa <strong>skatās uz sāniem</strong> (nevis augšup).</li>
+        <li>Pagriez kubu tā, lai šis stūrītis būtu <strong>priekšā pa kreisi</strong> un tā dzeltenā uzlīme skatās <strong>uz kreiso pusi</strong>.</li>
+        <li>Dari gājienu:</li>
+      </ol>
+      <p class="alg" data-alg="R U R' U R U2 R'"></p>
+      <ol start="5">
+        <li>Vēl nav visa augša dzeltena? Pagriez kubu tāpat kā 3. punktā (nākamais nesagrieztais stūrītis priekšā pa kreisi) un <strong>atkārto</strong>. Parasti pietiek ar 1–3 reizēm.</li>
+      </ol>
+    </div>
+    <div class="kbox help"><span class="kt">Nebaidies!</span>
+      Pa vidu apakšējā baltā puse izskatīsies sajaukta — tā ir paredzēts! Kad augša būs dzeltena, apakša atgriezīsies kārtībā.
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="a2-k2"> Solītis izdevās!</label></div>
+  </div>
+
+  <div class="card step s3" id="a2-k3">
+    <div class="stepnum">3</div>
+    <h3>3. solītis — Sānu krāsas kopā 🏁</h3>
+    <div class="kbox see"><span class="kt">Mērķis</span>
+      Visas sānu krāsas saiet kopā — kubs salikts! 🎉
+    </div>
+    <div class="kbox do"><span class="kt">Ko darīt</span>
+      <ol>
+        <li>Griez <strong>tikai augšējo kārtu (U)</strong> un meklē: vai kādam sānam abi augšējie stūrīši ir <strong>vienā krāsā</strong>? To sauc par «pareizo pāri».</li>
+        <li><strong>Atradi pāri?</strong> Turi to <strong>aizmugurē</strong> un dari gājienu — priekšējie divi stūrīši samainās vietām:</li>
+      </ol>
+      <p class="alg" data-alg="L' U R' D2 R U' R' D2 R2"></p>
+      <ol start="3">
+        <li><strong>Pāra nav nekur?</strong> Tad jāmaina divi stūrīši pa diagonāli:</li>
+      </ol>
+      <p class="alg" data-alg="R U' R' U' F2 U' R U R' D R2"></p>
+      <ol start="4">
+        <li>Beigās pagriez augšu (U), lai viss saiet kopā — <strong>KUBS SALIKTS!</strong> 🎉</li>
+      </ol>
+    </div>
+    <div class="kbox help"><span class="kt">Ja neizdodas</span>
+      Šie gājieni ir garāki — izpildi tos <strong>ļoti lēni</strong>, pa vienam burtiņam, un netrīci! Ja pusgājienā apjuksi, saliec balto pusi vēlreiz (1.–2. solītis ir ātri) un mēģini no jauna.
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="a2-k3"> KUBS SALIKTS! 🎉</label></div>
+  </div>
+</section>
+
+</div><!-- /mode-kids a2 -->
+
+
+<!-- ============ KUBA UZBŪVE ============ -->
+<section class="hide-kids" id="a2-uzbuve">
+  <h2>Pirms sāc: kā 2×2 atšķiras no 3×3 <span class="rule"></span></h2>
+  <div class="card">
+    <p>2×2 kubs (saukts arī «Pocket Cube») ir daudz vienkāršāks: tam ir <strong>tikai 8 gabaliņi, un visi ir stūri</strong> —
+    katram pa <strong>3 krāsām</strong>. <strong>Nav ne centru, ne malu.</strong></p>
+    <ul>
+      <li><strong>Nav centru</strong> → nav fiksēta atskaites punkta. Kuba «puses krāsu» nosaka nevis centrs, bet
+        <strong>paši stūri</strong>. Tu pats izvēlies, ar kuru krāsu sākt (šajā pamācībā — ar <strong>balto</strong>).</li>
+      <li><strong>Nav malu</strong> → nav ko «kārtot pa vidu», tāpēc metode ir īsāka nekā 3×3.</li>
+      <li>Ja proti 3×3, daļa algoritmu būs pazīstami — <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="R U R' U'"></span>
+        un <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="R U R' U R U2 R'"></span> strādā tieši tāpat.</li>
+    </ul>
+    <p>Standarta krāsu shēma ir tā pati: <strong>balts pretī dzeltenam</strong>, <strong>sarkans pretī oranžam</strong>,
+    <strong>zils pretī zaļam</strong>.</p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="face" data-c="yyyy" data-mark="0,1,2,3"
+        ><figcaption>Viena puse = 4 stūru gabaliņi (nav centra vidū)</figcaption></figure>
+      <figure class="dg" data-kind="net" data-c="yrgobw"
+        ><figcaption>Krāsu shēma (izklājums): balts↔dzeltens, sarkans↔oranžs, zils↔zaļš</figcaption></figure>
+    </div>
+    <div class="tip"><b>Galvenā doma:</b> tu neliec uzlīmes — tu liec <strong>stūra gabaliņus</strong> pareizajās vietās
+    un pareizi pagriez. Stūris «balts-sarkans-zils» der tikai vienā vietā.</div>
+  </div>
+</section>
+
+<!-- ============ NOTĀCIJA ============ -->
+<section class="hide-kids" id="a2-nota">
+  <h2>Notācija — kā lasīt algoritmus <span class="rule"></span></h2>
+  <div class="card">
+    <p>Katrs burts apzīmē <strong>vienu kuba pusi</strong>. Burts viens pats nozīmē: pagriez šo pusi par 90°
+    <strong>pulksteņrādītāja virzienā</strong>, skatoties tieši uz to pusi. 2×2 kubā katrs grieziens pagriež
+    <strong>veselu kuba pusi</strong> (nav vidus slāņa).</p>
+    <div class="notgrid">
+      <div class="notcell"><span class="nname">R</span>
+        <div class="dg" data-kind="face" data-c="xmxm" data-arrow="colup:1"></div>
+        <span class="ndesc"><b>Right</b> — labā puse uz augšu</span></div>
+      <div class="notcell"><span class="nname">L</span>
+        <div class="dg" data-kind="face" data-c="mxmx" data-arrow="coldown:0"></div>
+        <span class="ndesc"><b>Left</b> — kreisā puse uz leju</span></div>
+      <div class="notcell"><span class="nname">U</span>
+        <div class="dg" data-kind="face" data-c="mmxx" data-arrow="rowleft:0"></div>
+        <span class="ndesc"><b>Up</b> — augšējā kārta pa kreisi</span></div>
+      <div class="notcell"><span class="nname">D</span>
+        <div class="dg" data-kind="face" data-c="xxmm" data-arrow="rowright:1"></div>
+        <span class="ndesc"><b>Down</b> — apakšējā kārta pa labi</span></div>
+      <div class="notcell"><span class="nname">F</span>
+        <div class="dg" data-kind="face" data-c="mmmm" data-arrow="cw"></div>
+        <span class="ndesc"><b>Front</b> — priekšpuse pulksteņrādītāja virzienā</span></div>
+      <div class="notcell"><span class="nname">B</span>
+        <div class="dg" data-kind="face" data-c="xxxx" data-arrow="ccw"></div>
+        <span class="ndesc"><b>Back</b> — aizmugure (no priekšas — pretēji)</span></div>
+    </div>
+    <h3>Papildu apzīmējumi</h3>
+    <ul>
+      <li><strong>' (apostrofs)</strong> — pagriez <strong>pretēji</strong> pulksteņrādītājam.
+        Piem., <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="R'"></span> = labā puse uz leju.</li>
+      <li><strong>2</strong> — pagriez par <strong>180°</strong> (divi griezieni; virziens nav svarīgs).
+        Piem., <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="D2"></span>.</li>
+    </ul>
+    <div class="warn"><b>Svarīgi!</b> Kamēr izpildi algoritmu, <strong>priekšpuse nemainās</strong> — visu laiku turi kubu
+    ar to pašu pusi pret sevi. Ja apgriezīsi kubu, algoritms nestrādās.</div>
+    <div class="tip"><b>Krāsas čipos:</b> dzeltens burts = parasts grieziens,
+    <span style="color:#1558C9;font-weight:700">zils ar '</span> = pretējais virziens,
+    <span style="color:#C25400;font-weight:700">oranžs ar 2</span> = 180°.</div>
+  </div>
+</section>
+
+<div class="mode mode-beginner">
+
+<!-- ============ 1. METODE — IESĀCĒJU ============ -->
+<div class="part-head">
+  <div class="kick">1. metode</div>
+  <h2>Iesācēju metode — tava versija <span class="rule" style="background:var(--paper)"></span></h2>
+  <p>Slānis pa slānim, tikai ar taviem 5 algoritmiem. Ja izpildīsi soļus secīgi, kubs sanāks vienmēr.</p>
+</div>
+
+<section>
+  <!-- ---- 1. solis ---- -->
+  <div class="card step s1" id="a2-s1">
+    <div class="stepnum">1</div>
+    <h3>1. solis — Pirmais slānis (baltais)</h3>
+    <p class="goal">Mērķis: visa baltā puse gatava apakšā, un katra sāna apakšējā rinda vienā krāsā.</p>
+    <p>Turi kubu ar <strong>balto uz leju, dzelteno uz augšu</strong> — un no šī brīža vairs to neapgriez.</p>
+    <ol>
+      <li>Atrodi augšējā slānī stūri ar <strong>baltu uzlīmi</strong>.</li>
+      <li>Apskati tā pārējās divas krāsas un pagriez augšu (U) tā, lai stūris būtu <strong>tieši virs savas vietas</strong>
+        (starp tām pašām divām krāsām apakšā).</li>
+      <li>Turi to <strong>priekšā pa labi augšā</strong> un atkārto stūra ievietošanas algoritmu, līdz stūris «iekrīt» ar balto uz leju:</li>
+    </ol>
+    <p class="alg" data-alg="R U R' U'"></p>
+    <p class="alg-label">Stūra ievietošanai · atkārto 1–5 reizes, līdz stūris ir pareizi</p>
+    <ul>
+      <li>Skaitīt nevajag — vienkārši atkārto, līdz stūris sēž ar balto uz leju un sānu krāsas sakrīt.</li>
+      <li>Ja balts stūris jau sēž apakšā, bet <strong>nepareizi</strong> — turi to priekšā pa labi, izpildi algoritmu vienreiz
+        (stūris izlec augšā), tad ievieto no jauna pareizi.</li>
+    </ul>
+    <div class="dgrow">
+      <figure class="dg" data-kind="uf" data-u="xxxw" data-f="xxxw"
+        data-arrows='[{"f":["u",1,1],"t":["f",1,1],"curve":24}]'
+        ><figcaption>Baltais stūris virs savas vietas → algoritms to nogādā lejā</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="wwww" data-b="bb" data-r="oo" data-f="gg" data-l="rr"
+        ><figcaption>Rezultāts (skats uz balto pusi): balta puse + visu sānu apakšrindas</figcaption></figure>
+    </div>
+    <div class="tip"><b>Pazīstams?</b> Tas ir tas pats <strong>R U R' U'</strong>, ko lieto 3×3 pirmajam slānim.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="a2-s1"> Solis apgūts</label></div>
+  </div>
+
+  <!-- ---- 2. solis ---- -->
+  <div class="card step s2" id="a2-s2">
+    <div class="stepnum">2</div>
+    <h3>2. solis — Augšas orientācija (dzeltenā puse)</h3>
+    <p class="goal">Mērķis: visa augšējā (dzeltenā) puse vienā krāsā. Sānu krāsām pagaidām nav nozīmes.</p>
+    <p>Balto slāni tagad turi <strong>apakšā</strong>. Tavs uzdevums — «uztaisīt pretējo pusi», t.i., panākt, lai visi
+    4 augšējie stūri rāda dzelteno uz augšu. To dara ar vienu algoritmu, atkārtojot:</p>
+    <p class="alg" data-alg="R U R' U R U2 R'"></p>
+    <p class="alg-label">Pretējās puses taisīšanai (Sune) · atkārto, līdz augša ir dzeltena</p>
+    <ol>
+      <li>Ja augša jau ir gatava — izlaid šo soli.</li>
+      <li>Citādi pagriez kubu tā, lai kāds vēl <strong>nepagriezts</strong> stūris (bez dzeltenā augšā) būtu
+        <strong>priekšā pa kreisi</strong> ar dzelteno uzlīmi uz kreiso pusi. Izpildi algoritmu.</li>
+      <li>Ja augša vēl nav gatava — pārorientē kubu tāpat un <strong>atkārto</strong>. Parasti pietiek ar 1–3 reizēm.</li>
+    </ol>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="yxxy" data-small="1"
+        ><figcaption>Vēl nav gatava — daži stūri rāda dzelteno sānis</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="yyyy" data-small="1"
+        ><figcaption>Gatava: visa augša dzeltena (sānu krāsas vēl var nesakrist)</figcaption></figure>
+    </div>
+    <div class="warn"><b>Nebaidies!</b> Starp atkārtojumiem apakšējais slānis izskatīsies sajaukts — tas tā ir paredzēts.
+    Kad augša būs vienā krāsā, apakša atgriezīsies vietā.</div>
+    <div class="tip"><b>Pazīstams?</b> Šis ir tas pats <strong>R U R' U R U2 R'</strong>, ko 3×3 lieto dzelteno stūru kārtošanai.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="a2-s2"> Solis apgūts</label></div>
+  </div>
+
+  <!-- ---- 3. solis ---- -->
+  <div class="card step s3" id="a2-s3">
+    <div class="stepnum">3</div>
+    <h3>3. solis — Augšējo stūru maiņa (sānu sakārtošana)</h3>
+    <p class="goal">Mērķis: visu sānu krāsas sakrīt — kubs salikts.</p>
+    <p>Augša ir dzeltena, bet sānu krāsas ap augšu var būt sajukušas. Griez tikai augšu (U) un paskaties:
+    ja kāda <strong>sāns jau ir vienā krāsā</strong> (piem., abi aizmugures stūri zili) — tas ir tavs «pareizais pāris».</p>
+
+    <h3 style="font-size:18px">A) Blakus stūru maiņa</h3>
+    <p>Kad viens sāns jau ir pareizs (pāris blakus stūru): turi <strong>pareizo pāri aizmugurē</strong> — priekšējie divi stūri jāsamaina vietām.</p>
+    <p class="alg" data-alg="L' U R' D2 R U' R' D2 R2"></p>
+    <p class="alg-label">Blakus stūriem</p>
+    <p>Ja ērtāk pareizo pāri turēt otrādi (spoguļvariants), izmanto:</p>
+    <p class="alg" data-alg="R' U R' D2 R U' R' D2 R2"></p>
+    <p class="alg-label">Sānu sakārtošanai (blakus, spoguļa versija)</p>
+
+    <h3 style="font-size:18px">B) Pretējo (diagonālo) stūru maiņa</h3>
+    <p>Ja <strong>neviens</strong> sāns nav vienā krāsā, jāsamaina divi <strong>pa diagonāli</strong> pretējie stūri:</p>
+    <p class="alg" data-alg="R U' R' U' F2 U' R U R' D R2"></p>
+    <p class="alg-label">Pretējiem stūriem</p>
+
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="yyyy" data-b="bb" data-r="oo" data-f="gg" data-l="rr"
+        data-arrows='[{"f":["u",0,1],"t":["u",1,1],"curve":18,"dbl":1}]'
+        ><figcaption>A) Aizmugure (zila) pareiza → priekšējie divi mainās vietām</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="yyyy"
+        data-arrows='[{"f":["u",0,0],"t":["u",1,1],"curve":0,"dbl":1}]'
+        ><figcaption>B) Neviens sāns nav gatavs → mainās divi pa diagonāli</figcaption></figure>
+    </div>
+    <div class="tip"><b>Padoms:</b> vispirms vienmēr pameklē pareizo pāri, griežot tikai U. Ja atrodi — tas ir gadījums A (īsāks).
+    Tikai ja pāra nav vispār — tad gadījums B.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="a2-s3"> Solis apgūts</label></div>
+  </div>
+</section>
+
+</div><!-- /mode-beginner -->
+
+<div class="mode mode-pro">
+
+<!-- ============ 2. METODE — PROFESIONĀĻA ============ -->
+<div class="part-head pro">
+  <div class="kick">2. metode</div>
+  <h2>Profesionāļa metode <span class="rule" style="background:var(--paper)"></span></h2>
+  <p>Kā liek speedcuberi. Sāc ar <strong>Ortega</strong> (~12 algoritmi, viegli apgūt, ātrs), tad — ja gribi vēl ātrāk —
+  pāriej uz <strong>CLL</strong> (pēdējais slānis vienā piegājienā).</p>
+</div>
+
+<!-- ---- ORTEGA ---- -->
+<section id="a2-ortega">
+  <div class="card step pro">
+    <h3>Ortega metode — 3 soļi</h3>
+    <p class="goal">Ideja: neveido pilnu pirmo slāni. Uztaisi tikai vienu pusi (krāsā), tad ar 2 algoritmiem pabeidz visu pārējo.</p>
+
+    <h3 style="font-size:18px">1. Uztaisi vienu pusi</h3>
+    <p>Saliec <strong>jebkuru</strong> vienu pusi vienā krāsā (parasti balto). Nav svarīgi, vai apakšējā slāņa sāni sakrīt —
+    svarīgi tikai, ka visa apakšpuse ir vienā krāsā. Dari to <strong>ar aci, bez algoritma</strong> (2–4 griezieni).</p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="face" data-c="wwww" data-small="1"
+        ><figcaption>Viena puse vienā krāsā — ar to pietiek (sāni var nesakrist)</figcaption></figure>
+    </div>
+
+    <h3 style="font-size:18px">2. OLL — orientē augšu (7 gadījumi)</h3>
+    <p>Turi gatavo pusi <strong>apakšā</strong> un panāc, lai visa augša ir vienā krāsā. Atpazīsti figūru pēc augšas
+    dzeltenajām uzlīmēm un «lukturiem» sānos, tad izpildi attiecīgo algoritmu:</p>
+    <div class="cheat-wrap">
+      <table class="cheat pro">
+        <tr><th>Gadījums</th><th>Algoritms</th></tr>
+        <tr><td>Sune</td><td><span class="alg small" data-alg="R U R' U R U2 R'"></span></td></tr>
+        <tr><td>Antisune</td><td><span class="alg small" data-alg="R U2 R' U' R U' R'"></span></td></tr>
+        <tr><td>Pi</td><td><span class="alg small" data-alg="F R U R' U' R U R' U' F'"></span></td></tr>
+        <tr><td>H</td><td><span class="alg small" data-alg="R2 U2 R U2 R2"></span></td></tr>
+        <tr><td>U</td><td><span class="alg small" data-alg="F R U R' U' F'"></span></td></tr>
+        <tr><td>T</td><td><span class="alg small" data-alg="R U R' U' R' F R F'"></span></td></tr>
+        <tr><td>L</td><td><span class="alg small" data-alg="F R U' R' U' R U R' F'"></span></td></tr>
+      </table>
+    </div>
+    <div class="tip"><b>Atpazīšana īsi:</b> saskaiti dzeltenās uzlīmes augšā. <b>1</b> dzeltena augšā → Sune vai Antisune;
+    <b>2</b> → T, U vai L (skaties, vai dzeltenie sānos ir blakus vai pretī); <b>0</b> → Pi vai H.</div>
+
+    <h3 style="font-size:18px">3. PBL — permutē abus slāņus (samaini stūrus)</h3>
+    <p>Tagad augša ir vienā krāsā, bet stūri (gan augšā, gan apakšā) var būt nepareizās vietās. Katram slānim ir 3 iespējas:
+    <strong>gatavs</strong>, <strong>blakus maiņa</strong> (viens sāns = «lukturi»), vai <strong>diagonāle</strong> (nav neviena pareiza sāna).</p>
+    <div class="cheat-wrap">
+      <table class="cheat pro">
+        <tr><th>Gadījums</th><th>Algoritms</th></tr>
+        <tr><td>Abi slāņi gatavi</td><td><em>tikai izlīdzini ar U</em></td></tr>
+        <tr><td>Blakus maiņa + otrs gatavs</td><td><span class="alg tiny" data-alg="R U R' U' R' F R2 U' R' U' R U R' F'"></span></td></tr>
+        <tr><td>Diagonāle + otrs gatavs</td><td><span class="alg tiny" data-alg="F R U' R' U' R U R' F' R U R' U' R' F R F'"></span></td></tr>
+        <tr><td>Blakus + blakus</td><td><span class="alg small" data-alg="R2 U' R2 U2 F2 U' R2"></span></td></tr>
+        <tr><td>Diagonāle + diagonāle</td><td><span class="alg small" data-alg="R2 F2 R2"></span></td></tr>
+        <tr><td>Blakus + diagonāle</td><td><span class="alg small" data-alg="R U' R F2 R' U R'"></span></td></tr>
+      </table>
+    </div>
+    <div class="tip"><b>Ātrums:</b> ar Ortega labs cuberis sanāk zem 5 sekundēm. Vari sākt tikai ar 4 algoritmiem
+    (Sune, Antisune + «diag+diag», «blakus+blakus») un pārējos pievienot vēlāk.</div>
+  </div>
+</section>
+
+<!-- ---- CLL ---- -->
+<section id="a2-cll">
+  <div class="card step pro">
+    <h3>CLL metode — pēdējais slānis vienā piegājienā</h3>
+    <p class="goal">Ideja: saliec pilnu pirmo slāni (kā iesācēju metodē), tad visu augšu — orientāciju UN permutāciju — atrisini ar VIENU algoritmu.</p>
+    <ol>
+      <li><strong>1. slānis pilnībā.</strong> Atšķirībā no Ortega, šeit apakšējais slānis jāsaliek <strong>pilnīgi pareizi</strong>
+        (arī sānu krāsas). Dari to intuitīvi vai ar <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="R U R' U'"></span>.</li>
+      <li><strong>Pēdējais slānis — 1 algoritms.</strong> Atpazīsti gadījumu un izpildi vienu no <strong>42 CLL algoritmiem</strong>.
+        Kubs salikts uzreiz — nav atsevišķa orientācijas un permutācijas soļa.</li>
+    </ol>
+    <p>42 gadījumi ir sagrupēti pēc <strong>7 augšas figūrām</strong> (tās pašas, ko zini no Ortega OLL):
+    <strong>Sune, Antisune, Pi, H, U, T, L</strong>. Katrai figūrai ir vairāki apakšgadījumi atkarībā no tā, kā stūri jāpārvieto.</p>
+    <div class="tip"><b>Ar ko sākt:</b> ja pēc pirmā slāņa augša jau <em>gadās</em> pilnībā orientēta, CLL sakrīt ar diviem PLL gadījumiem —
+    izmanto Ortega PBL «blakus» un «diagonāle» algoritmus. Pārējos 40 apgūsti pa figūru grupām.</p></div>
+    <div class="warn"><b>Godīgi:</b> visus 42 CLL algoritmus nav prātīgi mācīties no galvas no šīs lapas — tos apgūst pa grupām
+    no pilna algoritmu saraksta. Uzticami pilnie saraksti: <strong>jperm.net/algs/2x2/cll</strong> un <strong>KewbzUK CLL PDF</strong>.
+    Ortega (augstāk) ir pilnībā pietiekama «pro» metode, līdz esi gatavs CLL.</div>
+    <table class="cheat pro" style="margin-top:6px">
+      <tr><th>Metode</th><th>Algoritmu sk.</th><th>Kad izvēlēties</th></tr>
+      <tr><td>Iesācēju</td><td>5</td><td>Sākums — vienmēr strādā, viegli atcerēties</td></tr>
+      <tr><td>Ortega</td><td>~12</td><td>Ātri (&lt;5 s), maz jāmācās — ieteicamais «pro» starts</td></tr>
+      <tr><td>CLL</td><td>42</td><td>Nākamais līmenis — pēdējais slānis 1 skatienā</td></tr>
+    </table>
+  </div>
+</section>
+
+</div><!-- /mode-pro -->
+
+<!-- ============ KOPSAVILKUMS (kopīgs abiem režīmiem) ============ -->
+<section class="hide-kids" id="a2-cheat">
+  <h2>Kopsavilkums — visi algoritmi <span class="rule"></span></h2>
+
+  <h3>1. metode — iesācēju (tavējā)</h3>
+  <div class="cheat-wrap">
+    <table class="cheat">
+      <tr><th>Solis</th><th>Kad lietot</th><th>Algoritms</th></tr>
+      <tr><td>1. Pirmais slānis</td><td>Balts stūris virs savas vietas, priekšā pa labi</td>
+        <td><span class="alg small" data-alg="R U R' U'"></span></td></tr>
+      <tr><td>2. Augšas orientācija</td><td>Nepagrieztais stūris priekšā pa kreisi; atkārto līdz augša dzeltena</td>
+        <td><span class="alg small" data-alg="R U R' U R U2 R'"></span></td></tr>
+      <tr><td>3A. Blakus stūri</td><td>Viens sāns pareizs → turi to aizmugurē</td>
+        <td><span class="alg small" data-alg="L' U R' D2 R U' R' D2 R2"></span></td></tr>
+      <tr><td>3A. Blakus (spogulis)</td><td>Pareizo pāri turi otrādi</td>
+        <td><span class="alg small" data-alg="R' U R' D2 R U' R' D2 R2"></span></td></tr>
+      <tr><td>3B. Pretēji stūri</td><td>Neviens sāns nav pareizs (diagonāle)</td>
+        <td><span class="alg small" data-alg="R U' R' U' F2 U' R U R' D R2"></span></td></tr>
+    </table>
+  </div>
+
+  <h3>2. metode — Ortega (pro)</h3>
+  <div class="cheat-wrap">
+    <table class="cheat pro">
+      <tr><th>Solis</th><th>Gadījums</th><th>Algoritms</th></tr>
+      <tr><td>1. Viena puse</td><td>Jebkura krāsa vienā pusē</td><td><em>ar aci, bez algoritma</em></td></tr>
+      <tr><td>2. OLL — Sune</td><td>1 dzeltena augšā</td><td><span class="alg small" data-alg="R U R' U R U2 R'"></span></td></tr>
+      <tr><td>2. OLL — Antisune</td><td>1 dzeltena augšā (otrs virziens)</td><td><span class="alg small" data-alg="R U2 R' U' R U' R'"></span></td></tr>
+      <tr><td>2. OLL — Pi</td><td>0 dzeltenas augšā</td><td><span class="alg small" data-alg="F R U R' U' R U R' U' F'"></span></td></tr>
+      <tr><td>2. OLL — H</td><td>0 dzeltenas augšā</td><td><span class="alg small" data-alg="R2 U2 R U2 R2"></span></td></tr>
+      <tr><td>2. OLL — U</td><td>2 dzeltenas augšā</td><td><span class="alg small" data-alg="F R U R' U' F'"></span></td></tr>
+      <tr><td>2. OLL — T</td><td>2 dzeltenas augšā</td><td><span class="alg small" data-alg="R U R' U' R' F R F'"></span></td></tr>
+      <tr><td>2. OLL — L</td><td>2 dzeltenas augšā</td><td><span class="alg small" data-alg="F R U' R' U' R U R' F'"></span></td></tr>
+      <tr><td>3. PBL — blakus+blakus</td><td>Abi slāņi: blakus maiņa</td><td><span class="alg small" data-alg="R2 U' R2 U2 F2 U' R2"></span></td></tr>
+      <tr><td>3. PBL — diag+diag</td><td>Abi slāņi: diagonāle</td><td><span class="alg small" data-alg="R2 F2 R2"></span></td></tr>
+      <tr><td>3. PBL — blakus+diag</td><td>Viens blakus, otrs diagonāle</td><td><span class="alg small" data-alg="R U' R F2 R' U R'"></span></td></tr>
+      <tr><td>3. PBL — blakus+gatavs</td><td>Viens slānis gatavs, otrs blakus</td><td><span class="alg tiny" data-alg="R U R' U' R' F R2 U' R' U' R U R' F'"></span></td></tr>
+      <tr><td>3. PBL — diag+gatavs</td><td>Viens slānis gatavs, otrs diagonāle</td><td><span class="alg tiny" data-alg="F R U' R' U' R U R' F' R U R' U' R' F R F'"></span></td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ PADOMI ============ -->
+<section class="hide-kids" id="a2-padomi">
+  <h2>Padomi un biežākās kļūdas <span class="rule"></span></h2>
+  <div class="card">
+    <ul>
+      <li><strong>Negriez visu kubu algoritma laikā.</strong> Priekšpusei jāpaliek priekšā no sākuma līdz beigām.</li>
+      <li><strong>Nejauc R ar R'.</strong> Ja algoritms «neiet», visbiežāk vainīgs sajaukts virziens.</li>
+      <li><strong>2×2 nav centru</strong> — krāsu «pusi» nosaka paši stūri. Tāpēc pirmajā solī tu pats izvēlies, ar ko sākt.</li>
+      <li><strong>2. solī neizbīsties</strong> — kubs pa vidu izskatās sajaukts, bet, kad augša ir vienā krāsā, viss saliksies.</li>
+      <li><strong>Gribi ātrāk?</strong> Sāc ar iesācēju metodi, tad pārej uz <strong>Ortega</strong> — tā ir īsāka (nav jāsaliek pilns pirmais slānis)
+        un lielākā daļa algoritmu tev jau pazīstami.</li>
+      <li><strong>Vispirms Ortega, tikai tad CLL.</strong> CLL dod ātrumu, bet prasa 42 algoritmus — nav vērts, kamēr Ortega vēl nav automātiska.</li>
+    </ul>
+  </div>
+</section>
+
+
+</div>
+
+<div class="cubepanel" id="panel-a3" data-n="3">
+<section class="panel-hero">
+  <div class="hero-flag" aria-hidden="true"><span style="background:var(--cw)"></span><span style="background:var(--cy)"></span><span style="background:var(--cr)"></span><span style="background:var(--co)"></span><span style="background:var(--cg)"></span><span style="background:var(--cb)"></span></div>
+  <h1>3×3 Rubika kubs</h1>
+  <p>Klasika — slānis pa slānim (7 soļi) vai CFOP profesionāļiem. Izvēlies līmeni augšā.</p>
+</section>
+<div class="mode mode-kids">
+
+<div class="part-head kids">
+  <div class="kick">Bērniem — soli pa solītim</div>
+  <h2>3×3 kubs pavisam vienkārši <span class="rule" style="background:var(--paper)"></span></h2>
+  <p>Nesteidzies! Katrā solī ir parādīts, <strong>ko tu redzēsi</strong>, <strong>ko darīt</strong> un <strong>kā glābties</strong>, ja kaut kas neizdodas.</p>
+</div>
+
+<section>
+  <div class="card step" id="a3-k0" style="border-left:14px solid var(--cg)">
+    <h3>Pirms sākam — iepazīsti savu kubu 👀</h3>
+    <div class="kbox see"><span class="kt">Ko tu redzēsi</span>
+      Kubam ir 6 puses un 3 veidu gabaliņi. Pagriez kubu rokās un atrodi tos visus:
+      <ul style="margin-top:8px">
+        <li><strong>Vidiņi (centri)</strong> — katras puses pašā vidū ir 1 kvadrātiņš. Tas <strong>nekad neaizbēg no savas vietas</strong>! Ja vidiņš ir zils, visa šī puse beigās būs zila.</li>
+        <li><strong>Maliņas</strong> — gabaliņi ar <strong>2 krāsām</strong> (tie ir starp vidiņiem).</li>
+        <li><strong>Stūrīši</strong> — gabaliņi ar <strong>3 krāsām</strong> (kuba stūros).</li>
+      </ul>
+    </div>
+    <div class="kbox do"><span class="kt">Izmēģini</span>
+      Pagriez jebkuru pusi. Redzi? Vidiņi paliek uz vietas, bet maliņas un stūrīši ceļo apkārt.
+      <strong>Tu nekārto krāsainās uzlīmes — tu ved gabaliņus uz to mājām!</strong> Piemēram, maliņa «balts + sarkans» dzīvo tikai vienā mājā: starp balto un sarkano vidiņu.
+    </div>
+    <h3 class="sub">Slepenā valoda — burtiņi 🔤</h3>
+    <p>Instrukcijās būs burtiņi. Katrs burts nozīmē: <strong>pagriez vienu pusi vienu reizi</strong> (ceturtdaļu apļa).</p>
+    <ul>
+      <li><span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="R"></span> — <strong>labā puse</strong>. Uzliec labo roku uz labās puses un griez <strong>uz augšu</strong> (prom no sevis).</li>
+      <li><span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="R'"></span> — tas pats, bet <strong>atpakaļ</strong> (uz leju, pret sevi). Mazā zīmīte <strong>'</strong> nozīmē «otrā virzienā».</li>
+      <li><span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="U"></span> — <strong>augšējā kārta</strong>. Griez to pa kreisi (kā vāciņu pudelei — ciet).</li>
+      <li><span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="F"></span> — <strong>priekšpuse</strong> (tā, kas skatās uz tevi). Griez pulksteņa virzienā.</li>
+      <li><span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="D"></span> — <strong>apakšējā kārta</strong>, <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="L"></span> — <strong>kreisā puse</strong>.</li>
+      <li>Cipars <strong>2</strong> (piem., <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="U2"></span>) — pagriez <strong>divas reizes</strong>.</li>
+    </ul>
+    <div class="kbox help"><span class="kt">Pats svarīgākais noteikums</span>
+      Kamēr dari burtiņu virkni (mēs to saucam par <strong>burvju gājienu</strong>), <strong>turi kubu nekustīgi</strong> —
+      lai visu laiku viena un tā pati puse skatās uz tevi. Ja apgriezīsi visu kubu pa vidu, burvju gājiens nestrādās!
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="a3-k0"> Sapratu, ejam tālāk!</label></div>
+  </div>
+
+  <div class="card step s1" id="a3-k1">
+    <div class="stepnum">1</div>
+    <h3>1. solītis — Puķīte un baltais krusts 🌼</h3>
+    <div class="kbox see"><span class="kt">Mērķis</span>
+      Apakšā (baltajā pusē) būs balts <strong>krusts</strong> — kā plusiņš «+». Un katras krusta maliņas otrā krāsa sakritīs ar sava sāna vidiņu.
+    </div>
+    <div class="kbox do"><span class="kt">Ko darīt — pa vienam</span>
+      <ol>
+        <li>Turi kubu tā, lai <strong>dzeltenais vidiņš skatās uz augšu</strong>.</li>
+        <li>Atrodi maliņu (2 krāsu gabaliņu), kurai viena krāsa ir <strong>balta</strong>.</li>
+        <li>Dabū to uz augšu tā, lai <strong>baltais skatās augšup</strong> pret dzelteno vidiņu. Nesteidzies — griez sānus, kamēr izdodas.</li>
+        <li>Kad visas 4 baltās maliņas ir augšā ar balto uz augšu — tev sanākusi <strong>puķīte</strong>: dzeltenais vidiņš ar 4 baltām ziedlapiņām! 🌼</li>
+        <li>Tagad pa vienai ziedlapai: paskaties uz ziedlapas <strong>otro krāsu</strong> (to, kas sānos). Griez augšējo kārtu (U), kamēr šī krāsa ir <strong>tieši virs tāda paša vidiņa</strong> (piemēram, sarkans virs sarkanā).</li>
+        <li>Pagriez šo sānu <strong>divas reizes</strong> (par 180°). Ziedlapa nobrauc lejā uz savu vietu!</li>
+        <li>Atkārto ar visām 4 ziedlapām. Apakšā tagad ir balts krusts.</li>
+      </ol>
+    </div>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="xwxwywxwx"
+        ><figcaption>Puķīte — 4 baltas ziedlapas ap dzelteno vidiņu</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="xwxwwwxwx" data-b="xbx" data-r="xrx" data-f="xgx" data-l="xox"
+        ><figcaption>Gatavs krusts (skats uz balto pusi)</figcaption></figure>
+    </div>
+    <div class="kbox help"><span class="kt">Ja neizdodas</span>
+      Pārbaudi krustu šādi: paskaties uz katru krusta maliņu no sāna — vai tās sānu krāsa <strong>sakrīt ar vidiņu</strong>?
+      Ja nesakrīt, izcel to maliņu atpakaļ augšā (pagriez to pusi 2 reizes) un ievieto vēlreiz pareizi. Bez pareiza krusta tālāk nekas nesanāks!
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="a3-k1"> Solītis izdevās!</label></div>
+  </div>
+
+  <div class="card step s2" id="a3-k2">
+    <div class="stepnum">2</div>
+    <h3>2. solītis — Baltie stūrīši ✋</h3>
+    <div class="kbox see"><span class="kt">Mērķis</span>
+      Visa baltā puse gatava! Un katram sānam apakšējā rindiņa būs vienā krāsā.
+    </div>
+    <div class="kbox do"><span class="kt">Ko darīt — pa vienam</span>
+      <ol>
+        <li><strong>Apgriez kubu:</strong> tagad baltais krusts lai ir <strong>apakšā</strong>, dzeltenais vidiņš <strong>augšā</strong>. Tā turēsim līdz pašām beigām!</li>
+        <li>Atrodi <strong>augšējā kārtā</strong> stūrīti ar baltu krāsu.</li>
+        <li>Paskaties uz tā pārējām 2 krāsām. Piemēram, ja stūrītis ir «balts + sarkans + zils», tā māja ir apakšā starp <strong>sarkano un zilo pusi</strong>.</li>
+        <li>Griez augšējo kārtu (U), kamēr stūrītis ir <strong>tieši virs savas mājas</strong>.</li>
+        <li>Pagriez visu kubu (tagad drīkst!), lai šis stūrītis būtu <strong>priekšā, pa labi, augšā</strong>.</li>
+        <li>Dari burvju gājienu, kamēr stūrītis iekrīt mājās ar balto uz leju:</li>
+      </ol>
+      <p class="alg" data-alg="R U R' U'"></p>
+      <p class="alg-label">Saka: «pacel – pagriez – noliec – atgriez». Atkārto 1–6 reizes — skaitīt nevajag!</p>
+    </div>
+    <div class="kbox help"><span class="kt">Ja neizdodas</span>
+      <ul>
+        <li>Ja balts stūrītis jau sēž apakšā, bet <strong>nepareizā vietā vai sagriezies</strong> — turi to priekšā pa labi un uztaisi burvju gājienu 1 reizi. Stūrītis izlec augšā, un tad vari to ielikt pareizi.</li>
+        <li>Ja pēc daudzām reizēm nekas nemainās — pārbaudi, vai tiešām griez <strong>labo pusi uz augšu</strong> un <strong>augšu pa kreisi</strong>.</li>
+      </ul>
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="a3-k2"> Solītis izdevās!</label></div>
+  </div>
+
+  <div class="card step s3" id="a3-k3">
+    <div class="stepnum">3</div>
+    <h3>3. solītis — Vidējā kārta 🥪</h3>
+    <div class="kbox see"><span class="kt">Mērķis</span>
+      Divas kārtas gatavas! Vidējās kārtas maliņas aizceļo uz savām mājām.
+    </div>
+    <div class="kbox do"><span class="kt">Ko darīt — pa vienam</span>
+      <ol>
+        <li>Atrodi augšējā kārtā maliņu, kurai <strong>nav dzeltenās krāsas</strong> (piemēram, «zaļš + sarkans»).</li>
+        <li>Griez augšu (U), kamēr maliņas <strong>priekšējā krāsa</strong> sakrīt ar priekšas vidiņu. Sanāk burts <strong>«T»</strong> ar kājām gaisā!</li>
+        <li>Tagad paskaties uz maliņas <strong>augšējo krāsu</strong> (to, kas skatās augšup):</li>
+      </ol>
+      <p><strong>Ja augšējā krāsa ir tāda pati kā vidiņš PA LABI</strong> → maliņa brauks pa labi:</p>
+      <p class="alg" data-alg="U R U' R' U' F' U F"></p>
+      <p><strong>Ja augšējā krāsa ir tāda pati kā vidiņš PA KREISI</strong> → maliņa brauks pa kreisi:</p>
+      <p class="alg" data-alg="U' L' U L U F U' F'"></p>
+      <p>Atkārto ar visām 4 vidējām maliņām.</p>
+    </div>
+    <div class="dgrow">
+      <figure class="dg" data-kind="uf" data-u="xxxxxxxox" data-f="xgxxgxxxx"
+        data-arrows='[{"f":["f",1,0],"t":["f",2,1],"curve":-18}]'
+        ><figcaption>Augšā oranžs (= labais vidiņš) → brauc pa labi</figcaption></figure>
+      <figure class="dg" data-kind="uf" data-u="xxxxxxxrx" data-f="xgxxgxxxx"
+        data-arrows='[{"f":["f",1,0],"t":["f",0,1],"curve":18}]'
+        ><figcaption>Augšā sarkans (= kreisais vidiņš) → brauc pa kreisi</figcaption></figure>
+    </div>
+    <div class="kbox help"><span class="kt">Ja neizdodas</span>
+      Ja kāda maliņa jau sēž vidējā kārtā, bet <strong>otrādi vai nepareizā vietā</strong> — nebēdā!
+      Ieliec tajā vietā jebkuru citu maliņu no augšas (ar jebkuru no abiem gājieniem). Vecā maliņa izlēks augšā, un tad to varēsi ielikt pareizi.
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="a3-k3"> Solītis izdevās!</label></div>
+  </div>
+
+  <div class="card step s4" id="a3-k4">
+    <div class="stepnum">4</div>
+    <h3>4. solītis — Dzeltenais krusts ➕</h3>
+    <div class="kbox see"><span class="kt">Mērķis</span>
+      Augšpusē parādās dzeltens krusts. (Sānu krāsas vēl var nesakrist — tas nekas!)
+    </div>
+    <div class="kbox do"><span class="kt">Ko darīt</span>
+      <p>Paskaties uz dzeltenajām maliņām augšā. Tu redzēsi vienu no šīm bildēm: <strong>punkts</strong>, <strong>stūrītis «L»</strong>, <strong>svītra</strong> vai jau gatavs <strong>krusts</strong>. Viens un tas pats gājiens tevi ved pa ķēdīti uz priekšu:</p>
+      <p class="alg" data-alg="F R U R' U' F'"></p>
+      <ol>
+        <li><strong>Punkts</strong> → dari gājienu (varbūt vajadzēs 3 reizes kopā).</li>
+        <li><strong>«L» stūrītis</strong> → vispirms pagriez augšu tā, lai «L» rāda <strong>uz aizmuguri un pa kreisi</strong> (kā apgriezts grāmatas stūris). Tad gājiens.</li>
+        <li><strong>Svītra</strong> → pagriez augšu tā, lai svītra iet <strong>no kreisās uz labo pusi</strong> (guļus). Tad gājiens.</li>
+        <li><strong>Krusts</strong> → gatavs, ej uz nākamo solīti! 🎉</li>
+      </ol>
+    </div>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="xxxxyxxxx" data-small="1"
+        ><figcaption>Punkts</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="xyxyyxxxx" data-small="1"
+        ><figcaption>«L» — uz aizmuguri un pa kreisi</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="xxxyyyxxx" data-small="1"
+        ><figcaption>Svītra — guļus</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="xyxyyyxyx" data-small="1"
+        ><figcaption>Krusts — gatavs!</figcaption></figure>
+    </div>
+    <div class="kbox help"><span class="kt">Ja neizdodas</span>
+      Visbiežākā kļūda — «L» vai svītra ir nepareizi pagriezta pirms gājiena. Vēlreiz pārbaudi bildi un pagriez <strong>tikai augšējo kārtu</strong>, lai figūra stāv tieši tā, kā zīmējumā.
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="a3-k4"> Solītis izdevās!</label></div>
+  </div>
+
+  <div class="card step s5" id="a3-k5">
+    <div class="stepnum">5</div>
+    <h3>5. solītis — Krusta maliņas pa vietām 🎯</h3>
+    <div class="kbox see"><span class="kt">Mērķis</span>
+      Dzeltenā krusta maliņas sakrīt ar sānu vidiņiem: sarkanā maliņa pie sarkanā vidiņa, zilā pie zilā…
+    </div>
+    <div class="kbox do"><span class="kt">Ko darīt</span>
+      <ol>
+        <li>Griez <strong>tikai augšējo kārtu</strong> un apstājies tur, kur <strong>visvairāk</strong> maliņu sakrīt ar saviem vidiņiem.</li>
+        <li><strong>Sakrīt visas 4?</strong> Lecam uz 6. solīti!</li>
+        <li><strong>Sakrīt 2 blakus?</strong> Turi kubu tā, lai pareizās maliņas ir <strong>aizmugurē un pa labi</strong>. Tad gājiens:</li>
+      </ol>
+      <p class="alg" data-alg="R U R' U R U2 R'"></p>
+      <ol start="4">
+        <li>Pēc gājiena pagriez augšu (U), lai viss saietu kopā.</li>
+        <li><strong>Sakrīt 2 pretējās</strong> (viena priekšā, viena aizmugurē)? Dari gājienu no jebkuras puses — tad sanāks «2 blakus», un turpini kā augstāk.</li>
+      </ol>
+    </div>
+    <div class="kbox help"><span class="kt">Ja neizdodas</span>
+      Neatrodi nevienu sakritušu maliņu? Vispirms griez augšu lēnām pa vienam klikšķim un skaties uzmanīgi — vismaz viena pozīcija ar 1–2 sakritībām vienmēr ir.
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="a3-k5"> Solītis izdevās!</label></div>
+  </div>
+
+  <div class="card step s6" id="a3-k6">
+    <div class="stepnum">6</div>
+    <h3>6. solītis — Stūrīši uz savām mājām 🏠</h3>
+    <div class="kbox see"><span class="kt">Mērķis</span>
+      Visi 4 dzeltenie stūrīši nonāk <strong>savās vietās</strong>. Tie vēl drīkst būt sagriezušies — galvenais, lai pareizajā mājā!
+    </div>
+    <div class="kbox do"><span class="kt">Ko darīt</span>
+      <ol>
+        <li>Apskati katru augšējo stūrīti: vai tā <strong>3 krāsas</strong> ir tās pašas, kas 3 pusēm ap viņu? Ja jā — stūrītis ir savā mājā (kaut sagriezies).</li>
+        <li>Atrodi stūrīti, kas <strong>jau ir mājās</strong>, un turi to <strong>priekšā pa labi</strong>.</li>
+        <li>Dari gājienu — pārējie 3 stūrīši samainās vietām pa apli:</li>
+      </ol>
+      <p class="alg" data-alg="U R U' L' U R' U' L"></p>
+      <ol start="4">
+        <li>Vēl nav visi mājās? Atkārto to pašu gājienu (to pašu stūrīti turi priekšā pa labi).</li>
+        <li>Ja mājās nav <strong>neviena</strong> stūrīša — dari gājienu vienalga no kuras puses. Pēc tam viens noteikti būs mājās, un vari sākt no 2. punkta.</li>
+      </ol>
+    </div>
+    <div class="kbox help"><span class="kt">Ja neizdodas</span>
+      Atceries: šajā solītī <strong>nav svarīgi</strong>, uz kuru pusi stūrītis skatās. Skaties tikai uz krāsu <strong>komplektu</strong> — vai tās 3 krāsas pieder šai vietai.
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="a3-k6"> Solītis izdevās!</label></div>
+  </div>
+
+  <div class="card step s7" id="a3-k7">
+    <div class="stepnum">7</div>
+    <h3>7. solītis — Lielais fināls! 🏁</h3>
+    <div class="kbox see"><span class="kt">Mērķis</span>
+      Pagriezt katru stūrīti tā, lai dzeltenais skatās uz augšu. Beigās — salikts kubs! 🎉
+    </div>
+    <div class="kbox do"><span class="kt">Ko darīt — ļoti uzmanīgi</span>
+      <ol>
+        <li>Atrodi stūrīti, kam dzeltenā krāsa <strong>neskatās uz augšu</strong>. Turi to <strong>priekšā pa labi</strong>.</li>
+        <li>Dari šo mazo gājienu <strong>2 vai 4 reizes</strong>, kamēr TIEŠI ŠIS stūrītis ir ar dzelteno uz augšu:</li>
+      </ol>
+      <p class="alg" data-alg="R' D' R D"></p>
+      <ol start="3">
+        <li>Kad stūrītis gatavs — <strong>NEGRIEZI visu kubu!</strong> Pagriez <strong>tikai augšējo kārtu (U)</strong>, lai nākamais nesagrieztais stūrītis atbrauc uz priekšu pa labi.</li>
+        <li>Atkārto gājienu arī tam. Un tā ar visiem.</li>
+        <li>Beigās pagriez augšu, lai krāsas saiet kopā — <strong>KUBS SALIKTS!</strong> 🎉🎉🎉</li>
+      </ol>
+    </div>
+    <div class="warn"><b>Ļoti svarīgi!</b> Kad stūrītim dzeltenais parādās augšā pareizajā vietā — <strong>obligāti pabeidz gājienu
+      <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="R' D' R D"></span> LĪDZ GALAM</strong>
+      (visiem 4 burtiņiem jābūt izdarītiem, dažreiz pat vēl vienu pilnu reizi, līdz apakša atkal izskatās kārtīgi).
+      <strong>Tikai tad</strong> griez augšējo kārtu (U), lai dabūtu nākamo stūrīti. Ja apstāsies pusgājienā — kubs sajuks!</div>
+    <div class="kbox help"><span class="kt">Nebaidies!</span>
+      Šī solīša laikā viss kubs pa vidu izskatīsies <strong>šausmīgi sajaukts</strong>. Tā ir paredzēts!
+      Ja starp stūrīšiem griezīsi tikai augšējo kārtu (U), pēdējais gājiens visu saliks atpakaļ kā burvju mākslā. ✨
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="a3-k7"> KUBS SALIKTS! 🎉</label></div>
+  </div>
+</section>
+
+</div><!-- /mode-kids a3 -->
+
+
+<div class="mode mode-beginner">
+
+<!-- ============ KUBA UZBŪVE ============ -->
+<section id="a3-uzbuve">
+  <h2>Pirms sāc: kuba uzbūve <span class="rule"></span></h2>
+  <div class="card">
+    <p>Kubam ir <strong>trīs veidu gabaliņi</strong>, un tos nedrīkst jaukt:</p>
+    <ul>
+      <li><strong>Centri</strong> (6 gab., pa vienai krāsai) — tie <strong>nekad nekustas</strong> cits pret citu.
+        Centrs nosaka, kādā krāsā būs visa attiecīgā puse. Ja centrs ir zils — visa puse beigās būs zila.</li>
+      <li><strong>Malas</strong> (12 gab.) — gabaliņi ar <strong>2 krāsām</strong>.</li>
+      <li><strong>Stūri</strong> (8 gab.) — gabaliņi ar <strong>3 krāsām</strong>.</li>
+    </ul>
+    <p>Standarta krāsu izkārtojums: <strong>balts pretī dzeltenam</strong>, <strong>sarkans pretī oranžam</strong>,
+    <strong>zils pretī zaļam</strong>. Šajā pamācībā sākam ar <strong>balto pusi</strong> un beidzam ar <strong>dzelteno</strong>.</p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="face" data-c="xexecexex" data-mark="4"
+        ><figcaption>Centrs — 1 krāsa, nekustas</figcaption></figure>
+      <figure class="dg" data-kind="face" data-c="xexecexex" data-mark="1,3,5,7"
+        ><figcaption>Malas — 2 krāsas (4 augšējā slānī)</figcaption></figure>
+      <figure class="dg" data-kind="face" data-c="xexecexex" data-mark="0,2,6,8"
+        ><figcaption>Stūri — 3 krāsas (4 augšējā slānī)</figcaption></figure>
+      <figure class="dg" data-kind="net" data-c="yrgobw"
+        ><figcaption>Krāsu shēma (izklājums): balts↔dzeltens, sarkans↔oranžs, zils↔zaļš</figcaption></figure>
+    </div>
+    <div class="tip"><b>Galvenā doma:</b> tu nekārto uzlīmes — tu liec <strong>gabaliņus</strong> pareizajās vietās.
+    Mala «balts-sarkans» der tikai vienā vietā: starp balto un sarkano centru.</div>
+  </div>
+</section>
+
+<!-- ============ NOTĀCIJA ============ -->
+<section id="a3-nota">
+  <h2>Notācija — kā lasīt algoritmus <span class="rule"></span></h2>
+  <div class="card">
+    <p>Katrs burts apzīmē <strong>vienu kuba pusi</strong>, un burts viens pats nozīmē: pagriez šo pusi
+    par 90° <strong>pulksteņrādītāja virzienā</strong> — tā, it kā tu skatītos tieši uz šo pusi.</p>
+    <div class="notgrid">
+      <div class="notcell"><span class="nname">R</span>
+        <div class="dg" data-kind="face" data-c="xxmxxmxxm" data-arrow="colup:2"></div>
+        <span class="ndesc"><b>Right</b> — labā puse uz augšu (uz sevis skatoties)</span></div>
+      <div class="notcell"><span class="nname">L</span>
+        <div class="dg" data-kind="face" data-c="mxxmxxmxx" data-arrow="coldown:0"></div>
+        <span class="ndesc"><b>Left</b> — kreisā puse uz leju</span></div>
+      <div class="notcell"><span class="nname">U</span>
+        <div class="dg" data-kind="face" data-c="mmmxxxxxx" data-arrow="rowleft:0"></div>
+        <span class="ndesc"><b>Up</b> — augšējā kārta pa kreisi</span></div>
+      <div class="notcell"><span class="nname">D</span>
+        <div class="dg" data-kind="face" data-c="xxxxxxmmm" data-arrow="rowright:2"></div>
+        <span class="ndesc"><b>Down</b> — apakšējā kārta pa labi</span></div>
+      <div class="notcell"><span class="nname">F</span>
+        <div class="dg" data-kind="face" data-c="mmmmmmmmm" data-arrow="cw"></div>
+        <span class="ndesc"><b>Front</b> — priekšpuse pulksteņrādītāja virzienā</span></div>
+      <div class="notcell"><span class="nname">B</span>
+        <div class="dg" data-kind="face" data-c="xxxxxxxxx" data-arrow="ccw"></div>
+        <span class="ndesc"><b>Back</b> — aizmugure (no priekšas izskatās pretēji)</span></div>
+    </div>
+    <h3>Papildu apzīmējumi</h3>
+    <ul>
+      <li><strong>' (apostrofs)</strong> — pagriez <strong>pretēji</strong> pulksteņrādītājam.
+        Piemēram, <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="R'"></span> = labā puse uz leju.</li>
+      <li><strong>2</strong> — pagriez par <strong>180°</strong> (divi griezieni; virziens nav svarīgs).
+        Piemēram, <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="U2"></span> = augšējā kārta divreiz.</li>
+    </ul>
+    <div class="warn"><b>Svarīgi!</b> Kamēr izpildi algoritmu, <strong>priekšpuse nemainās</strong> —
+    visu laiku turi kubu ar to pašu pusi pret sevi. Ja apgriezīsi kubu pa vidu, algoritms nestrādās.</div>
+    <div class="tip"><b>Krāsas čipos:</b> dzeltens burts = parasts grieziens,
+    <span style="color:#1558C9;font-weight:700">zils ar '</span> = pretējais virziens,
+    <span style="color:#C25400;font-weight:700">oranžs ar 2</span> = 180°.</div>
+  </div>
+</section>
+<!-- ============ 1. SOLIS ============ -->
+<section>
+  <h2>Salikšana soli pa solim <span class="rule"></span></h2>
+
+  <div class="card step s1" id="a3-s1">
+    <div class="stepnum">1</div>
+    <h3>1. solis — Baltais krusts (caur «puķīti»)</h3>
+    <p class="goal">Mērķis: balts krusts baltajā pusē, un katras krusta malas sānu krāsa sakrīt ar sava sāna centru.</p>
+    <p>Šis solis ir <strong>bez algoritma</strong> — to dara ar aci. Vieglākais ceļš ir caur «puķīti»:</p>
+    <ol>
+      <li>Turi kubu ar <strong>dzelteno centru uz augšu</strong>.</li>
+      <li>Atrodi 4 malas ar baltu uzlīmi un savāc tās augšpusē ap dzelteno centru tā, lai
+        <strong>baltās uzlīmes skatās uz augšu</strong> — sanāk «puķīte».</li>
+      <li>Tagad pa vienai «ziedlapai»: pagriez augšējo kārtu (U), līdz ziedlapas <strong>sānu krāsa</strong>
+        sakrīt ar tās pašas puses <strong>centru</strong> (piem., balti-sarkanā mala virs sarkanā centra).</li>
+      <li>Pagriez to pusi par <strong>180°</strong> (divus griezienus) — baltā mala nonāk lejā, savā vietā.</li>
+      <li>Atkārto ar visām 4 ziedlapām. Krusts izveidojas <strong>apakšā</strong>, baltajā pusē.</li>
+    </ol>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="xwxwywxwx"
+        ><figcaption>«Puķīte» — 4 baltas malas ap dzelteno centru (skats no augšas)</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="xwxwwwxwx" data-b="xbx" data-r="xrx" data-f="xgx" data-l="xox"
+        ><figcaption>Gatavs krusts (skatoties tieši uz balto pusi) — malu sānu krāsas sakrīt ar centriem</figcaption></figure>
+    </div>
+    <div class="warn"><b>Pārbaudi!</b> Krusts ir pareizs tikai tad, ja <strong>visas 4 sānu krāsas sakrīt ar centriem</strong>.
+    Balts krusts ar nesakritīgiem sāniem ir jāpārtaisa — citādi tālākie soļi nestrādās.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="a3-s1"> Solis apgūts</label></div>
+  </div>
+
+  <!-- ============ 2. SOLIS ============ -->
+  <div class="card step s2" id="a3-s2">
+    <div class="stepnum">2</div>
+    <h3>2. solis — Baltie stūri (pirmā kārta gatava)</h3>
+    <p class="goal">Mērķis: visa baltā puse gatava apakšā, un katra sāna apakšējā rinda vienā krāsā.</p>
+    <p>No šī brīža līdz pat beigām turi kubu <strong>ar balto uz leju, dzelteno uz augšu</strong> — vairs nekad to neapgriez!</p>
+    <ol>
+      <li>Atrodi augšējā kārtā stūri ar <strong>baltu uzlīmi</strong>.</li>
+      <li>Apskati tā pārējās divas krāsas un pagriez augšējo kārtu (U) tā, lai stūris atrastos
+        <strong>tieši virs savas vietas</strong> (starp tiem pašiem diviem centriem, piem., balts-sarkans-zils
+        starp sarkano un zilo pusi).</li>
+      <li>Turi kubu tā, lai šis stūris būtu <strong>priekšā pa labi augšā</strong>, un atkārto:</li>
+    </ol>
+    <p class="alg" data-alg="R U R' U'"></p>
+    <p class="alg-label">Atkārto 1–6 reizes, līdz stūris «iekrīt» savā vietā ar balto uz leju</p>
+    <ul>
+      <li>Algoritms stūri katru reizi izceļ un ieliek citādi — <strong>skaiti nevajag</strong>, vienkārši atkārto, līdz stūris ir pareizi.</li>
+      <li>Ja balts stūris jau sēž apakšā, bet <strong>nepareizi</strong> — turi to priekšā pa labi, izpildi
+        algoritmu vienreiz (stūris izlec augšā), tad ievieto pareizi kā parasti.</li>
+    </ul>
+    <div class="dgrow">
+      <figure class="dg" data-kind="uf" data-u="xxxxxxxxm" data-f="xxxxxxxxm"
+        data-arrows='[{"f":["u",2,2],"t":["f",2,2],"curve":26}]'
+        ><figcaption>Stūris virs savas vietas → algoritms to nogādā lejā</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="wwwwwwwww" data-b="bbb" data-r="rrr" data-f="ggg" data-l="ooo"
+        ><figcaption>Rezultāts (skatoties uz balto pusi): balts + visu sānu pirmās rindas</figcaption></figure>
+    </div>
+    <div class="tip"><b>Pazīstams?</b> Šo pašu <strong>R U R' U'</strong> tu jau lieto 2×2 kubā stūru ievietošanai — šeit tas strādā tieši tāpat.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="a3-s2"> Solis apgūts</label></div>
+  </div>
+
+  <!-- ============ 3. SOLIS ============ -->
+  <div class="card step s3" id="a3-s3">
+    <div class="stepnum">3</div>
+    <h3>3. solis — Vidējā kārta</h3>
+    <p class="goal">Mērķis: visas 4 vidējās kārtas malas savās vietās — divas kārtas gatavas.</p>
+    <ol>
+      <li>Atrodi augšējā kārtā malu <strong>bez dzeltenās krāsas</strong> (tā pieder vidējai kārtai).</li>
+      <li>Pagriez augšējo kārtu (U), līdz malas <strong>priekšējā krāsa sakrīt ar priekšas centru</strong> —
+        izveidojas apgriezts «T» burts.</li>
+      <li>Paskaties uz malas <strong>augšējo krāsu</strong>:</li>
+    </ol>
+    <p><strong>Ja augšējā krāsa sakrīt ar LABO centru</strong> → mala jāieliek pa labi:</p>
+    <p class="alg" data-alg="U R U' R' U' F' U F"></p>
+    <p><strong>Ja augšējā krāsa sakrīt ar KREISO centru</strong> → mala jāieliek pa kreisi:</p>
+    <p class="alg" data-alg="U' L' U L U F U' F'"></p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="uf" data-u="xxxxxxxox" data-f="xgxxgxxxx"
+        data-arrows='[{"f":["f",1,0],"t":["f",2,1],"curve":-18}]'
+        ><figcaption>Augšā oranžs (= labais centrs) → mala iet pa labi</figcaption></figure>
+      <figure class="dg" data-kind="uf" data-u="xxxxxxxrx" data-f="xgxxgxxxx"
+        data-arrows='[{"f":["f",1,0],"t":["f",0,1],"curve":18}]'
+        ><figcaption>Augšā sarkans (= kreisais centrs) → mala iet pa kreisi</figcaption></figure>
+    </div>
+    <ul>
+      <li>Atkārto ar visām 4 malām.</li>
+      <li><strong>Ja mala jau sēž vidējā kārtā, bet nepareizi</strong> — ievieto tajā vietā jebkuru citu malu
+        no augšas (ar jebkuru no abiem algoritmiem); vecā mala izlec augšā, un tad to ievieto pareizi.</li>
+    </ul>
+    <div class="tip"><b>Padoms:</b> šī soļa algoritmi ir garākie visā metodē. Izpildi tos lēni un
+    ievēro: puse griezienu «paceļ» malu, otra puse «aizver» stūri atpakaļ.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="a3-s3"> Solis apgūts</label></div>
+  </div>
+
+  <!-- ============ 4. SOLIS ============ -->
+  <div class="card step s4" id="a3-s4">
+    <div class="stepnum">4</div>
+    <h3>4. solis — Dzeltenais krusts</h3>
+    <p class="goal">Mērķis: dzeltens krusts augšpusē (sānu krāsām pagaidām nav nozīmes).</p>
+    <p>Paskaties uz dzeltenajām malām augšpusē — redzēsi vienu no 4 attēliem. Viens un tas pats algoritms
+    ved tevi pa ķēdīti <strong>punkts → «L» → līnija → krusts</strong>:</p>
+    <p class="alg" data-alg="F R U R' U' F'"></p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="xxxxyxxxx" data-small="1"
+        ><figcaption>Punkts → algoritms (līdz 3 reizēm kopā)</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="xyxyyxxxx" data-small="1"
+        ><figcaption>«L» — turi rādām uz aizmuguri un pa kreisi → algoritms</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="xxxyyyxxx" data-small="1"
+        ><figcaption>Līnija — turi horizontāli → algoritms</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="xyxyyyxyx" data-small="1"
+        ><figcaption>Krusts — gatavs!</figcaption></figure>
+    </div>
+    <div class="warn"><b>Novietojums ir svarīgs!</b> Pirms algoritma pagriez <strong>visu kubu</strong> (vai U kārtu) tā,
+    lai «L» rādītos uz aizmuguri un pa kreisi, bet līnija ietu horizontāli — no kreisās uz labo pusi.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="a3-s4"> Solis apgūts</label></div>
+  </div>
+<!-- ============ 5. SOLIS ============ -->
+  <div class="card step s5" id="a3-s5">
+    <div class="stepnum">5</div>
+    <h3>5. solis — Dzelteno malu sakārtošana</h3>
+    <p class="goal">Mērķis: katras dzeltenā krusta malas sānu krāsa sakrīt ar sava sāna centru.</p>
+    <ol>
+      <li>Griez <strong>tikai augšējo kārtu (U)</strong> un atrodi pozīciju, kurā ar centriem sakrīt
+        <strong>pēc iespējas vairāk</strong> malu.</li>
+      <li><strong>Sakrīt visas 4</strong> → solis gatavs, ej tālāk.</li>
+      <li><strong>Sakrīt divas blakus esošas</strong> → turi kubu tā, lai pareizās malas būtu
+        <strong>aizmugurē un pa labi</strong>, izpildi algoritmu, tad pagriez U, lai viss sakristu.</li>
+      <li><strong>Sakrīt divas pretējās</strong> → izpildi algoritmu no jebkuras puses — sanāks
+        «divas blakus», tad rīkojies kā 3. punktā.</li>
+      <li><strong>Sakrīt tieši viena</strong> → turi to <strong>priekšā</strong> un izpildi algoritmu
+        (ja nepieciešams — vēlreiz tāpat).</li>
+    </ol>
+    <p class="alg" data-alg="R U R' U R U2 R'"></p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="xyxyyyxyx" data-b="xbx" data-r="xox" data-f="xrx" data-l="xgx"
+        data-arrows='[{"f":["u",1,2],"t":["u",0,1],"curve":-16,"dbl":1}]'
+        ><figcaption>Aizmugurē (zils) un pa labi (oranžs) — pareizi; priekšējā un kreisā mala mainās vietām</figcaption></figure>
+    </div>
+    <div class="tip"><b>Pazīstams?</b> Šis ir tas pats algoritms, ko 2×2 kubā lieto «pretējās puses taisīšanai» —
+    <strong>R U R' U R U2 R'</strong>.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="a3-s5"> Solis apgūts</label></div>
+  </div>
+
+  <!-- ============ 6. SOLIS ============ -->
+  <div class="card step s6" id="a3-s6">
+    <div class="stepnum">6</div>
+    <h3>6. solis — Dzelteno stūru novietošana</h3>
+    <p class="goal">Mērķis: visi 4 dzeltenie stūri savās vietās (pagriezti var būt nepareizi — tas nekas).</p>
+    <p>Stūris ir «savā vietā», ja tā <strong>trīs krāsas atbilst</strong> trim pusēm, starp kurām tas atrodas —
+    pat ja krāsas skatās nepareizos virzienos.</p>
+    <ol>
+      <li>Atrodi stūri, kas <strong>jau ir savā vietā</strong>.</li>
+      <li>Turi kubu tā, lai šis stūris būtu <strong>priekšā pa labi</strong>, un izpildi algoritmu —
+        pārējie trīs stūri mainās vietām pa apli.</li>
+      <li>Ja visi vēl nav vietās — <strong>atkārto tieši tāpat</strong> (to pašu stūri turi priekšā pa labi).</li>
+      <li>Ja savā vietā nav <strong>neviena</strong> stūra — izpildi algoritmu no jebkuras puses,
+        pēc tam viens noteikti būs vietā.</li>
+    </ol>
+    <p class="alg" data-alg="U R U' L' U R' U' L"></p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="xyxyyyxyx" data-mark="8"
+        data-arrows='[{"f":["u",0,2],"t":["u",2,0],"curve":-30},{"f":["u",2,0],"t":["u",0,0],"curve":-14},{"f":["u",0,0],"t":["u",0,2],"curve":-14}]'
+        ><figcaption>Atzīmētais stūris (priekšā pa labi) paliek uz vietas, pārējie trīs griežas pa apli</figcaption></figure>
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="a3-s6"> Solis apgūts</label></div>
+  </div>
+
+  <!-- ============ 7. SOLIS ============ -->
+  <div class="card step s7" id="a3-s7">
+    <div class="stepnum">7</div>
+    <h3>7. solis — Dzelteno stūru pagriešana (fināls!)</h3>
+    <p class="goal">Mērķis: visi stūri pagriezti ar dzelteno uz augšu — kubs salikts.</p>
+    <ol>
+      <li>Turi kubu ar dzelteno uz augšu un atrodi stūri, kam dzeltenā krāsa <strong>neskatās uz augšu</strong>.
+        Turi šo stūri <strong>priekšā pa labi</strong>.</li>
+      <li>Atkārto algoritmu, līdz <strong>tieši šis</strong> stūris ir ar dzelteno uz augšu
+        (būs vajadzīgas 2 vai 4 reizes):</li>
+    </ol>
+    <p class="alg" data-alg="R' D' R D"></p>
+    <div class="warn"><b>Ļoti svarīgi!</b> Kad stūrim dzeltenais parādās augšā pareizajā vietā — <strong>obligāti pabeidz algoritmu līdz galam</strong> (visiem 4 gājieniem <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="R' D' R D"></span> jābūt izdarītiem; ja vajag — vēl pilnu ciklu, līdz apakšējās kārtas atkal izskatās kārtīgāk). <strong>Tikai pēc tam</strong> veic U pagriezienu, lai pievērstu nākamo stūri!</div>
+    <ol start="3">
+      <li>Kad stūris gatavs, <strong>pagriez TIKAI augšējo kārtu (U)</strong>, lai nākamais nepagrieztais
+        stūris nonāktu priekšā pa labi, un atkārto algoritmu arī tam.</li>
+      <li>Kad visi stūri pagriezti, pagriez augšējo kārtu, lai krāsas saietu kopā — <strong>kubs salikts!</strong> 🎉</li>
+    </ol>
+    <div class="warn"><b>Nebaidies!</b> Šī soļa laikā pārējais kubs izskatīsies <strong>pilnīgi sajaukts</strong> —
+    tas tā ir paredzēts. Kad pēdējais stūris būs pagriezts, viss atkal saliksies. Galvenais:
+    <strong>starp stūriem griez tikai U kārtu</strong> un nekad negriez visu kubu.</div>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="xyyyyyyyx" data-mark="0,8" data-small="1"
+        ><figcaption>Pirms: diviem stūriem dzeltenais skatās sānis</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="yyyyyyyyy" data-small="1"
+        ><figcaption>Pēc: visa dzeltenā puse gatava</figcaption></figure>
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="a3-s7"> Solis apgūts</label></div>
+  </div>
+</section>
+
+<!-- ============ KOPSAVILKUMS ============ -->
+<section id="a3-cheat">
+  <h2>Kopsavilkums — visi algoritmi <span class="rule"></span></h2>
+  <div class="cheat-wrap">
+    <table class="cheat">
+      <tr><th>Solis</th><th>Kad lietot</th><th>Algoritms</th></tr>
+      <tr><td>1. Baltais krusts</td><td>«Puķīte» augšā → sānu krāsa pie centra → puse 180°</td>
+        <td><em>bez algoritma</em></td></tr>
+      <tr><td>2. Baltie stūri</td><td>Stūris virs savas vietas, priekšā pa labi</td>
+        <td><span class="alg small" data-alg="R U R' U'"></span></td></tr>
+      <tr><td>3. Vidus — pa labi</td><td>Malas augšējā krāsa = labais centrs</td>
+        <td><span class="alg small" data-alg="U R U' R' U' F' U F"></span></td></tr>
+      <tr><td>3. Vidus — pa kreisi</td><td>Malas augšējā krāsa = kreisais centrs</td>
+        <td><span class="alg small" data-alg="U' L' U L U F U' F'"></span></td></tr>
+      <tr><td>4. Dzeltenais krusts</td><td>Punkts → «L» (aizmugurē-pa kreisi) → līnija → krusts</td>
+        <td><span class="alg small" data-alg="F R U R' U' F'"></span></td></tr>
+      <tr><td>5. Dzeltenās malas</td><td>Pareizās malas aizmugurē + pa labi</td>
+        <td><span class="alg small" data-alg="R U R' U R U2 R'"></span></td></tr>
+      <tr><td>6. Stūru vietas</td><td>Pareizais stūris priekšā pa labi</td>
+        <td><span class="alg small" data-alg="U R U' L' U R' U' L"></span></td></tr>
+      <tr><td>7. Stūru pagriešana</td><td>Nepagrieztais stūris priekšā pa labi; starp stūriem tikai U</td>
+        <td><span class="alg small" data-alg="R' D' R D"></span></td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ PADOMI ============ -->
+<section id="a3-padomi">
+  <h2>Padomi un biežākās kļūdas <span class="rule"></span></h2>
+  <div class="card">
+    <ul>
+      <li><strong>Negriez visu kubu algoritma laikā.</strong> Tā ir kļūda nr. 1 — priekšpusei jāpaliek
+        priekšā no algoritma sākuma līdz beigām.</li>
+      <li><strong>Nejauc R ar R'.</strong> Ja algoritms «neiet», visbiežāk vainīgs sajaukts virziens.
+        Atceries: burts bez apostrofa = pulksteņrādītāja virzienā, skatoties uz to pusi.</li>
+      <li><strong>7. solī neizbīsties</strong> — kubs pa vidu izskatās sajaukts, bet, ja starp stūriem
+        griezīsi tikai U kārtu, beigās viss saliksies.</li>
+      <li><strong>Ja apmaldies</strong> — labāk apzināti sajauc kubu un sāc no 1. soļa, nekā mēģini «glābt».
+        Ar praksi soļi 1–3 sanāks pilnībā automātiski.</li>
+      <li><strong>Trenē pa vienam solim.</strong> Vispirms iemācies stabili uztaisīt krustu, tad pievieno
+        stūrus utt. Pēc nedēļas prakses kubu saliksi bez šīs lapas.</li>
+      <li>No 2×2 kuba tu jau zini <strong>R U R' U'</strong> (2. solis) un <strong>R U R' U R U2 R'</strong>
+        (5. solis) — puse darba jau rokā!</li>
+    </ul>
+  </div>
+</section>
+
+</div><!-- /mode-beginner -->
+
+<div class="mode mode-pro">
+
+<!-- ==================== CFOP INTRO ==================== -->
+<div class="part-head pro" id="a3-cfop">
+  <div class="kick">Profesionāļu metode</div>
+  <h2>CFOP (Fridrich) — 4 soļi <span class="rule" style="background:var(--paper)"></span></h2>
+  <p>Kā liek speedcuberi. Pilnā versijā ~119 kombinācijas, bet var sākt ar «2-look» un pakāpeniski papildināt.</p>
+</div>
+
+<section>
+  <div class="card">
+    <p><strong>CFOP</strong> = <strong>C</strong>ross · <strong>F</strong>2L · <strong>O</strong>LL · <strong>P</strong>LL. Atšķirībā no iesācēju metodes,
+    kur liek pa vienam gabaliņam, CFOP apvieno soļus, lai griezienu būtu daudz mazāk:</p>
+    <ol>
+      <li><strong>Cross</strong> — balts krusts apakšā (intuitīvi, bez algoritmiem).</li>
+      <li><strong>F2L</strong> — pirmie divi slāņi vienlaikus: stūris + mala pa pāriem (41 gadījums).</li>
+      <li><strong>OLL</strong> — visa augšējā puse vienā krāsā vienā piegājienā (57 gadījumi).</li>
+      <li><strong>PLL</strong> — pēdējā slāņa gabaliņu samainīšana vietām (21 gadījums).</li>
+    </ol>
+    <div class="tip"><b>Notācija</b> ir tā pati, kas Iesācēja režīmā (R, U, F, L, D, B, ', 2). Pro algoritmos parādās vēl:
+    <strong>plašie griezieni</strong> (mazie burti <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="r u f l"></span> — griež divus slāņus reizē),
+    <strong>vidus slānis</strong> <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="M"></span>, un
+    <strong>visa kuba pagriezieni</strong> <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="x y"></span>.</div>
+    <div class="warn"><b>Godīgi par apjomu:</b> visus 119 neviens neiemācās uzreiz. Ieteicamā secība:
+    <strong>F2L intuitīvi</strong> + <strong>2-look OLL</strong> (~10 alg.) + <strong>2-look PLL</strong> (~6 alg.), tad pakāpeniski pilnie OLL 57 un PLL 21.
+    Zemāk ir gan mācību ceļš, gan pilnās tabulas.</div>
+  </div>
+</section>
+
+<!-- ==================== CROSS ==================== -->
+<section id="a3-cross">
+  <h2>1. Krusts (Cross) <span class="rule"></span></h2>
+  <div class="card pro">
+    <p class="goal">Mērķis: balts krusts APAKŠĀ, katras malas sānu krāsa sakrīt ar sāna centru. Bez algoritmiem — tikai ar aci.</p>
+    <ul>
+      <li>Krustu liek <strong>apakšā</strong> (nevis augšā kā iesācēju «puķītē») — tā uzreiz redzi F2L slotus un neapgriez kubu.</li>
+      <li>Mērķis: <strong>4 malas ≤ 8 griezienos</strong>. Treniņā centies to izplānot jau «inspekcijas» laikā, pirms sāc.</li>
+      <li>Sānu krāsām jāsakrīt ar centriem — pārbaudi, ka krusts nav «apgriezts».</li>
+    </ul>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="xwxwwwxwx" data-b="xbx" data-r="xrx" data-f="xgx" data-l="xox"
+        ><figcaption>Balts krusts apakšā (skats uz balto pusi) — malu sānu krāsas pie centriem</figcaption></figure>
+    </div>
+    <div class="tip"><b>Padoms:</b> pieredzējuši risinātāji krustu uztaisa «akli» — vispirms atrod 4 baltās malas, tad saliek bez apstāšanās.</div>
+  </div>
+</section>
+
+<!-- ==================== F2L ==================== -->
+<section id="a3-f2l">
+  <h2>2. F2L — pirmie divi slāņi <span class="rule"></span></h2>
+  <div class="card pro">
+    <p class="goal">Mērķis: pabeigt pirmos divus slāņus, ievietojot stūri + tam piederošo malu pārī vienlaikus (4 sloti).</p>
+    <p><strong>Ideja:</strong> katram no 4 apakšējiem stūriem (ar baltu) ir sava mala. Atrodi tos augšējā slānī, «sapāro» un ievieto slotā.
+    Turi kubu ar <strong>krustu apakšā</strong>, slotu, kurā strādā — <strong>priekšā pa labi</strong>.</p>
+    <h3 class="sub">Pamata «trigger» kustības (no tām sastāv visi F2L gadījumi)</h3>
+    <ul>
+      <li>Pāris jau kopā, stūris rāda pa labi → <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="U R U' R'"></span></li>
+      <li>Pāris jau kopā, stūris rāda pa priekšu → <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="U' F' U F"></span></li>
+      <li>«Izcelt un ielikt» slotā pa labi → <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="R U' R'"></span> · pa kreisi → <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="F' U F"></span></li>
+    </ul>
+    <div class="tip"><b>F2L vislabāk mācīties INTUITĪVI</b> — saprast, kā pāris «savienojas» un «ieripo» slotā, nevis kalt 41 algoritmu.
+    Ja stūris vai mala jau sēž slotā nepareizi, vispirms to «izcel» ar to pašu trigeru, tad ievieto no jauna.</div>
+    <div class="warn"><b>Par pilno 41 gadījuma sarakstu:</b> katram gadījumam ir vairāki līdzvērtīgi publicēti algoritmi, un tos visērtāk apgūt no
+    <strong>diagrammām</strong>, nevis teksta. Pilns vizuāls saraksts ar attēliem: <strong>cubeskills.com</strong> (Feliks Zemdegs F2L PDF) un <strong>jperm.net/algs/f2l</strong>.
+    Šī lapa dod pamatus + trigerus; pilns per-gadījums saraksts ir minētajos avotos.</div>
+  </div>
+</section>
+
+<!-- ==================== OLL ==================== -->
+<section id="a3-oll">
+  <h2>3. OLL — augšas orientācija (57) <span class="rule"></span></h2>
+  <div class="card pro">
+    <p class="goal">Mērķis: visa augšējā (dzeltenā) puse vienā krāsā vienā algoritmā. 57 gadījumi.</p>
+
+    <h3 class="sub">Mācību ceļš: 2-look OLL (vispirms iemācies šos ~10)</h3>
+    <p><strong>A) Vispirms orientē MALAS</strong> (izveido dzelteno krustu augšā). 3 gadījumi pēc dzelteno malu figūras:</p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="xxxxyxxxx" data-small="1"
+        ><figcaption>Punkts → <b>F R U R' U' F'</b>, tad atkārto</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="xyxyyxxxx" data-small="1"
+        ><figcaption>«L» (turi aizmugurē-pa kreisi) → <b>F U R U' R' F'</b></figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="xxxyyyxxx" data-small="1"
+        ><figcaption>Līnija (horizontāli) → <b>F R U R' U' F'</b></figcaption></figure>
+    </div>
+    <p><strong>B) Tad orientē STŪRUS</strong> (OCLL) — 7 gadījumi. Šeit dzeltenais krusts jau ir; skaties, kā stūri pagriezti:</p>
+    <div class="cheat-wrap">
+      <table class="cheat pro">
+        <tr><th>Nosaukums</th><th>Kad</th><th>Algoritms</th></tr>
+        <tr><td>Sune</td><td>1 stūris dzeltens augšā</td><td><span class="alg tiny" data-alg="R U R' U R U2 R'"></span></td></tr>
+        <tr><td>Antisune</td><td>1 stūris dzeltens (pretēji)</td><td><span class="alg tiny" data-alg="R U2 R' U' R U' R'"></span></td></tr>
+        <tr><td>H (Double Sune)</td><td>0 dzeltenu; 2 pretī 2</td><td><span class="alg tiny" data-alg="R U R' U R U' R' U R U2 R'"></span></td></tr>
+        <tr><td>Pi (Bruno)</td><td>0 dzeltenu augšā</td><td><span class="alg tiny" data-alg="R U2 R2 U' R2 U' R2 U2 R"></span></td></tr>
+        <tr><td>U (Headlights)</td><td>2 dzeltenu, «lukturi» priekšā</td><td><span class="alg tiny" data-alg="R2 D' R U2 R' D R U2 R"></span></td></tr>
+        <tr><td>T (Chameleon)</td><td>2 dzeltenu, «T» forma</td><td><span class="alg tiny" data-alg="r U R' U' r' F R F'"></span></td></tr>
+        <tr><td>L (Bowtie)</td><td>2 dzeltenu, diagonāle</td><td><span class="alg tiny" data-alg="F R' F' r U R U' r'"></span></td></tr>
+      </table>
+    </div>
+
+    <h3 class="sub">Pilnais OLL — visi 57 (viena algoritma «1-look»)</h3>
+    <p>Grupē pēc dzeltenās figūras uz augšas (Dot, Square, Lightning, Fish, Knight, OCLL, P, T, C, W, L, Line, Awkward). Skaitlis = standarta OLL numurs.</p>
+    <div class="cheat-wrap">
+      <table class="cheat pro">
+        <tr><th>#</th><th>Grupa</th><th>Algoritms</th></tr>
+        <tr><td>1</td><td>Dot</td><td><span class="alg tiny" data-alg="R U2 R2 F R F' U2 R' F R F'"></span></td></tr>
+        <tr><td>2</td><td>Dot</td><td><span class="alg tiny" data-alg="F R U R' U' F' f R U R' U' f'"></span></td></tr>
+        <tr><td>3</td><td>Dot</td><td><span class="alg tiny" data-alg="f R U R' U' f' U' F R U R' U' F'"></span></td></tr>
+        <tr><td>4</td><td>Dot</td><td><span class="alg tiny" data-alg="f R U R' U' f' U F R U R' U' F'"></span></td></tr>
+        <tr><td>17</td><td>Dot</td><td><span class="alg tiny" data-alg="R U R' U R' F R F' U2 R' F R F'"></span></td></tr>
+        <tr><td>18</td><td>Dot</td><td><span class="alg tiny" data-alg="R U2 R2 F R F' U2 M' U R U' r'"></span></td></tr>
+        <tr><td>19</td><td>Dot</td><td><span class="alg tiny" data-alg="S' R U R' S U' R' F R F'"></span></td></tr>
+        <tr><td>20</td><td>Dot</td><td><span class="alg tiny" data-alg="r U R' U' M2 U R U' R' U' M'"></span></td></tr>
+        <tr><td>5</td><td>Square</td><td><span class="alg tiny" data-alg="l' U2 L U L' U l"></span></td></tr>
+        <tr><td>6</td><td>Square</td><td><span class="alg tiny" data-alg="r U2 R' U' R U' r'"></span></td></tr>
+        <tr><td>7</td><td>Lightning</td><td><span class="alg tiny" data-alg="r U R' U R U2 r'"></span></td></tr>
+        <tr><td>8</td><td>Lightning</td><td><span class="alg tiny" data-alg="l' U' L U' L' U2 l"></span></td></tr>
+        <tr><td>11</td><td>Lightning</td><td><span class="alg tiny" data-alg="r' R2 U R' U R U2 R' U M'"></span></td></tr>
+        <tr><td>12</td><td>Lightning</td><td><span class="alg tiny" data-alg="M' R' U' R U' R' U2 R U' M"></span></td></tr>
+        <tr><td>39</td><td>Lightning</td><td><span class="alg tiny" data-alg="L F' L' U' L U F U' L'"></span></td></tr>
+        <tr><td>40</td><td>Lightning</td><td><span class="alg tiny" data-alg="R' F R U R' U' F' U R"></span></td></tr>
+        <tr><td>9</td><td>Fish</td><td><span class="alg tiny" data-alg="R U R' U' R' F R2 U R' U' F'"></span></td></tr>
+        <tr><td>10</td><td>Fish</td><td><span class="alg tiny" data-alg="R U R' U R' F R F' R U2 R'"></span></td></tr>
+        <tr><td>35</td><td>Fish</td><td><span class="alg tiny" data-alg="R U2 R2 F R F' R U2 R'"></span></td></tr>
+        <tr><td>37</td><td>Fish</td><td><span class="alg tiny" data-alg="F R' F' R U R U' R'"></span></td></tr>
+        <tr><td>13</td><td>Knight</td><td><span class="alg tiny" data-alg="F U R U2 R' U' R U R' F'"></span></td></tr>
+        <tr><td>14</td><td>Knight</td><td><span class="alg tiny" data-alg="R' F R U R' F' R F U' F'"></span></td></tr>
+        <tr><td>15</td><td>Knight</td><td><span class="alg tiny" data-alg="l' U' l L' U' L U l' U l"></span></td></tr>
+        <tr><td>16</td><td>Knight</td><td><span class="alg tiny" data-alg="r U r' R U R' U' r U' r'"></span></td></tr>
+        <tr><td>21</td><td>OCLL · H</td><td><span class="alg tiny" data-alg="R U R' U R U' R' U R U2 R'"></span></td></tr>
+        <tr><td>22</td><td>OCLL · Pi</td><td><span class="alg tiny" data-alg="R U2 R2 U' R2 U' R2 U2 R"></span></td></tr>
+        <tr><td>23</td><td>OCLL · U</td><td><span class="alg tiny" data-alg="R2 D' R U2 R' D R U2 R"></span></td></tr>
+        <tr><td>24</td><td>OCLL · T</td><td><span class="alg tiny" data-alg="r U R' U' r' F R F'"></span></td></tr>
+        <tr><td>25</td><td>OCLL · L</td><td><span class="alg tiny" data-alg="F R' F' r U R U' r'"></span></td></tr>
+        <tr><td>26</td><td>OCLL · Antisune</td><td><span class="alg tiny" data-alg="R U2 R' U' R U' R'"></span></td></tr>
+        <tr><td>27</td><td>OCLL · Sune</td><td><span class="alg tiny" data-alg="R U R' U R U2 R'"></span></td></tr>
+        <tr><td>28</td><td>Stūri gatavi</td><td><span class="alg tiny" data-alg="r U R' U' M U R U' R'"></span></td></tr>
+        <tr><td>57</td><td>Stūri gatavi</td><td><span class="alg tiny" data-alg="R U R' U' M' U R U' r'"></span></td></tr>
+        <tr><td>29</td><td>Awkward</td><td><span class="alg tiny" data-alg="R U R' U' R U' R' F' U' F R U R'"></span></td></tr>
+        <tr><td>30</td><td>Awkward</td><td><span class="alg tiny" data-alg="F U R U2 R' U' R U2 R' U' F'"></span></td></tr>
+        <tr><td>41</td><td>Awkward</td><td><span class="alg tiny" data-alg="R U R' U R U2 R' F R U R' U' F'"></span></td></tr>
+        <tr><td>42</td><td>Awkward</td><td><span class="alg tiny" data-alg="R' U' R U' R' U2 R F R U R' U' F'"></span></td></tr>
+        <tr><td>31</td><td>P</td><td><span class="alg tiny" data-alg="R' U' F U R U' R' F' R"></span></td></tr>
+        <tr><td>32</td><td>P</td><td><span class="alg tiny" data-alg="S R U R' U' R' F R f'"></span></td></tr>
+        <tr><td>43</td><td>P</td><td><span class="alg tiny" data-alg="R' U' F' U F R"></span></td></tr>
+        <tr><td>44</td><td>P</td><td><span class="alg tiny" data-alg="f R U R' U' f'"></span></td></tr>
+        <tr><td>33</td><td>T</td><td><span class="alg tiny" data-alg="R U R' U' R' F R F'"></span></td></tr>
+        <tr><td>45</td><td>T</td><td><span class="alg tiny" data-alg="F R U R' U' F'"></span></td></tr>
+        <tr><td>34</td><td>C</td><td><span class="alg tiny" data-alg="R U R2 U' R' F R U R U' F'"></span></td></tr>
+        <tr><td>46</td><td>C</td><td><span class="alg tiny" data-alg="R' U' R' F R F' U R"></span></td></tr>
+        <tr><td>36</td><td>W</td><td><span class="alg tiny" data-alg="L' U' L U' L' U L U L F' L' F"></span></td></tr>
+        <tr><td>38</td><td>W</td><td><span class="alg tiny" data-alg="R U R' U R U' R' U' R' F R F'"></span></td></tr>
+        <tr><td>47</td><td>L</td><td><span class="alg tiny" data-alg="F R' F' R U2 R U' R' U R U2 R'"></span></td></tr>
+        <tr><td>48</td><td>L</td><td><span class="alg tiny" data-alg="F R U R' U' R U R' U' F'"></span></td></tr>
+        <tr><td>49</td><td>L</td><td><span class="alg tiny" data-alg="r U' r2 U r2 U r2 U' r"></span></td></tr>
+        <tr><td>50</td><td>L</td><td><span class="alg tiny" data-alg="R' F R2 B' R2 F' R2 B R'"></span></td></tr>
+        <tr><td>53</td><td>L</td><td><span class="alg tiny" data-alg="l' U' L U' L' U L U' L' U2 l"></span></td></tr>
+        <tr><td>54</td><td>L</td><td><span class="alg tiny" data-alg="r U R' U R U' R' U R U2 r'"></span></td></tr>
+        <tr><td>51</td><td>Line</td><td><span class="alg tiny" data-alg="F U R U' R' U R U' R' F'"></span></td></tr>
+        <tr><td>52</td><td>Line</td><td><span class="alg tiny" data-alg="R U R' U R U' B U' B' R'"></span></td></tr>
+        <tr><td>55</td><td>Line</td><td><span class="alg tiny" data-alg="R' F R U R U' R2 F' R2 U' R' U R U R'"></span></td></tr>
+        <tr><td>56</td><td>Line</td><td><span class="alg tiny" data-alg="r U r' U R U' R' U R U' R' r U' r'"></span></td></tr>
+      </table>
+    </div>
+    <div class="warn"><b>Piezīme:</b> vairākiem OLL gadījumiem ir līdzvērtīgi algoritmu varianti; šeit doti standarta publicētie (speedsolving / speedcubedb / rubiksplace).
+    Vizuālas atpazīšanas diagrammas visiem 57: <strong>cubeskills.com</strong> un <strong>jperm.net/algs/oll</strong>.</div>
+  </div>
+</section>
+
+<!-- ==================== PLL ==================== -->
+<section id="a3-pll">
+  <h2>4. PLL — pēdējā slāņa permutācija (21) <span class="rule"></span></h2>
+  <div class="card pro">
+    <p class="goal">Mērķis: samainīt pēdējā slāņa gabaliņus vietām — kubs salikts. 21 gadījums.</p>
+
+    <h3 class="sub">Mācību ceļš: 2-look PLL (vispirms šos ~6)</h3>
+    <p><strong>A) Vispirms STŪRI</strong> (atrodi 2 stūrus, kas jau pareizi — «lukturi» — un turi aizmugurē), <strong>tad MALAS.</strong></p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="yyyyyyyyy" data-b="ooo" data-r="bbb" data-f="rrr" data-l="ggg"
+        data-arrows='[{"f":["u",0,2],"t":["u",2,2],"curve":18,"dbl":1}]'
+        ><figcaption>Stūri — blakus maiņa: <b>R U R' U' R' F R2 U' R' U' R U R' F'</b></figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="yyyyyyyyy"
+        data-arrows='[{"f":["u",0,0],"t":["u",2,2],"curve":0,"dbl":1}]'
+        ><figcaption>Stūri — diagonāle: <b>F R U' R' U' R U R' F' R U R' U' R' F R F'</b></figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="yyyyyyyyy"
+        data-arrows='[{"f":["u",1,0],"t":["u",2,1],"curve":16},{"f":["u",2,1],"t":["u",1,2],"curve":16},{"f":["u",1,2],"t":["u",1,0],"curve":16}]'
+        ><figcaption>Malas — 3-cikls (Ua): <b>M2 U M U2 M' U M2</b></figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="yyyyyyyyy"
+        data-arrows='[{"f":["u",1,0],"t":["u",1,2],"curve":0,"dbl":1},{"f":["u",0,1],"t":["u",2,1],"curve":0,"dbl":1}]'
+        ><figcaption>Malas — «H» (pretējās): <b>M2 U' M2 U2 M2 U' M2</b></figcaption></figure>
+    </div>
+
+    <h3 class="sub">Pilnais PLL — visi 21</h3>
+    <div class="cheat-wrap">
+      <table class="cheat pro">
+        <tr><th>Nosaukums</th><th>Ko dara</th><th>Algoritms</th></tr>
+        <tr><td>Aa</td><td>Stūru 3-cikls</td><td><span class="alg tiny" data-alg="x R' U R' D2 R U' R' D2 R2 x'"></span></td></tr>
+        <tr><td>Ab</td><td>Stūru 3-cikls (pretēji)</td><td><span class="alg tiny" data-alg="x R2 D2 R U R' D2 R U' R x'"></span></td></tr>
+        <tr><td>E</td><td>Abas diagonāles</td><td><span class="alg tiny" data-alg="x' R U' R' D R U R' D' R U R' D R U' R' D' x"></span></td></tr>
+        <tr><td>Ua</td><td>Malu 3-cikls</td><td><span class="alg tiny" data-alg="M2 U M U2 M' U M2"></span></td></tr>
+        <tr><td>Ub</td><td>Malu 3-cikls (pretēji)</td><td><span class="alg tiny" data-alg="M2 U' M U2 M' U' M2"></span></td></tr>
+        <tr><td>H</td><td>Abas pretējās malas</td><td><span class="alg tiny" data-alg="M2 U' M2 U2 M2 U' M2"></span></td></tr>
+        <tr><td>Z</td><td>Divi blakus malu pāri</td><td><span class="alg tiny" data-alg="M' U' M2 U' M2 U' M' U2 M2"></span></td></tr>
+        <tr><td>T</td><td>Blakus stūri + malas</td><td><span class="alg tiny" data-alg="R U R' U' R' F R2 U' R' U' R U R' F'"></span></td></tr>
+        <tr><td>Ja</td><td>Blakus stūri + malas</td><td><span class="alg tiny" data-alg="x R2 F R F' R U2 r' U r U2 x'"></span></td></tr>
+        <tr><td>Jb</td><td>Blakus stūri + malas (spog.)</td><td><span class="alg tiny" data-alg="R U R' F' R U R' U' R' F R2 U' R'"></span></td></tr>
+        <tr><td>Ra</td><td>R-tips</td><td><span class="alg tiny" data-alg="R U' R' U' R U R D R' U' R D' R' U2 R'"></span></td></tr>
+        <tr><td>Rb</td><td>R-tips (spog.)</td><td><span class="alg tiny" data-alg="R' U2 R U2 R' F R U R' U' R' F' R2"></span></td></tr>
+        <tr><td>F</td><td>Blakus stūri + pretējās malas</td><td><span class="alg tiny" data-alg="R' U' F' R U R' U' R' F R2 U' R' U' R U R' U R"></span></td></tr>
+        <tr><td>V</td><td>Diagonāle + malas</td><td><span class="alg tiny" data-alg="R' U R' U' R D' R' D R' U D' R2 U' R2 D R2"></span></td></tr>
+        <tr><td>Y</td><td>Diagonāle + malas</td><td><span class="alg tiny" data-alg="F R U' R' U' R U R' F' R U R' U' R' F R F'"></span></td></tr>
+        <tr><td>Na</td><td>N-perm</td><td><span class="alg tiny" data-alg="R U R' U R U R' F' R U R' U' R' F R2 U' R' U2 R U' R'"></span></td></tr>
+        <tr><td>Nb</td><td>N-perm (spog.)</td><td><span class="alg tiny" data-alg="R' U R U' R' F' U' F R U R' F R' F' R U' R"></span></td></tr>
+        <tr><td>Ga</td><td>Stūru + malu 3-cikls</td><td><span class="alg tiny" data-alg="R2 U R' U R' U' R U' R2 D U' R' U R D'"></span></td></tr>
+        <tr><td>Gb</td><td>Stūru + malu 3-cikls</td><td><span class="alg tiny" data-alg="D R' U' R U D' R2 U R' U R U' R U' R2"></span></td></tr>
+        <tr><td>Gc</td><td>Stūru + malu 3-cikls</td><td><span class="alg tiny" data-alg="R2 U' R U' R U R' U R2 D' U R U' R' D"></span></td></tr>
+        <tr><td>Gd</td><td>Stūru + malu 3-cikls</td><td><span class="alg tiny" data-alg="R U R' U' D R2 U' R U' R' U R' U R2 D'"></span></td></tr>
+      </table>
+    </div>
+    <div class="tip"><b>Atpazīšana:</b> paskaties uz sānu «lukturiem» (2 vienādi stūri blakus) un bultiņām, kā gabaliņi jāpārvieto.
+    Vizuālas PLL diagrammas ar bultām: <strong>jperm.net/algs/pll</strong>.</div>
+  </div>
+</section>
+
+<!-- ==================== PRO SUMMARY ==================== -->
+<section id="a3-cheat-pro">
+  <h2>Pro kopsavilkums un mācību secība <span class="rule"></span></h2>
+  <div class="card pro">
+    <ol>
+      <li><strong>Krusts apakšā</strong> — intuitīvi, ≤8 griezieni.</li>
+      <li><strong>F2L intuitīvi</strong> — 4 pāri; iemācies «savienot un ielikt», nevis kalt.</li>
+      <li><strong>2-look OLL</strong> (~10 alg.: krusts + 7 OCLL) → vēlāk <strong>pilns OLL 57</strong>.</li>
+      <li><strong>2-look PLL</strong> (~6 alg.: stūri + malas) → vēlāk <strong>pilns PLL 21</strong>.</li>
+    </ol>
+    <div class="tip"><b>Progresa mērķi:</b> iesācējs → CFOP 2-look ≈ sub-40s; pilns OLL+PLL ≈ sub-20s; ar praksi (labs F2L look-ahead) sub-15s un ātrāk.</div>
+    <div class="warn"><b>Algoritmu avoti (pārbaudīti):</b>
+    <a href="https://www.speedsolving.com/wiki/index.php/OLL">speedsolving.com (OLL)</a>,
+    <a href="https://speedcubedb.com/a/3x3/PLL">speedcubedb.com (PLL)</a>,
+    <a href="https://www.cubeskills.com/uploads/pdf/tutorials/f2l.pdf">cubeskills.com (F2L)</a>,
+    <a href="https://ruwix.com/the-rubiks-cube/advanced-cfop-fridrich/">ruwix.com (CFOP)</a>. Vizuālās diagrammas: <strong>jperm.net</strong>.</div>
+  </div>
+</section>
+
+</div><!-- /mode-pro -->
+
+
+</div>
+
+<div class="cubepanel" id="panel-py" data-n="3">
+<section class="panel-hero">
+  <div class="hero-flag" aria-hidden="true"><span style="background:var(--cg)"></span><span style="background:var(--cr)"></span><span style="background:var(--cb)"></span><span style="background:var(--cy)"></span></div>
+  <h1>Pyraminx</h1>
+  <p>Piramīdas puzle — vieglākā no trim. Slānis pa slānim vai L4E/Oka profesionāļiem.</p>
+</section>
+<div class="mode mode-kids">
+
+<div class="part-head kids">
+  <div class="kick">Bērniem — soli pa solītim</div>
+  <h2>Piramīda (Pyraminx) pavisam vienkārši <span class="rule" style="background:var(--paper)"></span></h2>
+  <p>Piramīda ir vieglākā puzle no visām trim! Tikai 3 solīši — un lielākā daļa darāma bez formulām, tikai skatoties.</p>
+</div>
+
+<section>
+  <div class="card step" id="py-k0" style="border-left:14px solid var(--cg)">
+    <h3>Pirms sākam — iepazīsti piramīdu 👀</h3>
+    <div class="kbox see"><span class="kt">Ko tu redzēsi</span>
+      Piramīdai ir 4 trīsstūra puses un 3 veidu gabaliņi:
+      <ul style="margin-top:8px">
+        <li><strong>Smailītes</strong> (4 gab.) — mazie trīsstūrīši pašās virsotnēs. Tās griežas <strong>pašas par sevi</strong> un neko citu nekustina. Vieglākais, kas vispār var būt!</li>
+        <li><strong>Lielie stūri</strong> (4 gab.) — gabaliņi tieši zem smailītēm. Tie <strong>nekad nemaina vietu</strong> — tikai griežas uz vietas.</li>
+        <li><strong>Maliņas</strong> (6 gab.) — gabaliņi ar 2 krāsām starp stūriem. <strong>Tikai tās ir īstā puzle!</strong></li>
+      </ul>
+    </div>
+    <div class="kbox do"><span class="kt">Slepenā valoda — burtiņi</span>
+      <p>Turi piramīdu ar <strong>vienu virsotni uz augšu</strong> un vienu pusi pret sevi.</p>
+      <ul>
+        <li><span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="U"></span> — griez <strong>augšējo virsotni</strong> (lielo gabalu ar 3 maliņām) pa labi (pulksteņa virzienā, skatoties no augšas).</li>
+        <li><span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="R"></span> — griez <strong>labo apakšējo virsotni</strong>. <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="L"></span> — kreiso.</li>
+        <li>Zīmīte <strong>'</strong> (piem., <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="R'"></span>) — griez <strong>otrā virzienā</strong>.</li>
+        <li><strong>Mazie burtiņi</strong> (piem., <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="u"></span>) — griez <strong>tikai mazo smailīti</strong>, nekas cits nekustas.</li>
+      </ul>
+    </div>
+    <div class="kbox help"><span class="kt">Galvenais noslēpums</span>
+      LIELAIS burts griež <strong>lielu gabalu</strong> (virsotni ar visām maliņām blakus). MAZAIS burts griež <strong>tikai mazo smailīti</strong>. Nesajauc tos — tā ir kļūda numur viens!
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="py-k0"> Sapratu, ejam tālāk!</label></div>
+  </div>
+
+  <div class="card step s1" id="py-k1">
+    <div class="stepnum">1</div>
+    <h3>1. solītis — Smailītes un lielie stūri 🔺</h3>
+    <div class="kbox see"><span class="kt">Mērķis</span>
+      Katras puses vidus (liels rombs no stūriem) ir vienā krāsā, un visas smailītes sakrīt ar savu pusi.
+    </div>
+    <div class="kbox do"><span class="kt">Ko darīt — bez formulām, tikai skaties!</span>
+      <ol>
+        <li>Paņem piramīdu un apskati vienu <strong>lielo stūri</strong> (gabalu zem smailītes). Tam ir 3 krāsas — pa vienai uz katru pusi.</li>
+        <li>Pagriez šo stūri (lielais grieziens), kamēr tā krāsas <strong>sakrīt ar blakus pušu krāsām</strong>. Piemēram: zaļā uzlīme lai skatās uz to pusi, kur apkārt vairāk zaļā.</li>
+        <li>Izdari to pašu ar visiem 4 lielajiem stūriem — pa vienam, bez steigas.</li>
+        <li>Beigās pagriez katru <strong>mazo smailīti</strong> (mazais grieziens), lai tā sakrīt ar stūri zem tās. Tas ir kā uzskrūvēt pareizo cepurīti!</li>
+      </ol>
+    </div>
+    <div class="kbox help"><span class="kt">Ja apjūc</span>
+      Smailītes vari pagriezt <strong>jebkurā brīdī</strong> — tās neko nesajauc. Ja nezini, kura krāsa kur jāliek: paskaties, kāda krāsa ir <strong>vairākumā</strong> uz katras puses — tā arī būs šīs puses krāsa.
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="py-k1"> Solītis izdevās!</label></div>
+  </div>
+
+  <div class="card step s2" id="py-k2">
+    <div class="stepnum">2</div>
+    <h3>2. solītis — Apakšējā puse 🧩</h3>
+    <div class="kbox see"><span class="kt">Mērķis</span>
+      Viena vesela puse gatava! Izvēlies vienu krāsu (piemēram, zaļo) un saliec tās 3 maliņas apakšā.
+    </div>
+    <div class="kbox do"><span class="kt">Ko darīt — pa vienam</span>
+      <ol>
+        <li>Turi piramīdu ar izvēlēto krāsu (zaļo) <strong>uz leju</strong>.</li>
+        <li>Atrodi maliņu, kurai viena krāsa ir <strong>zaļa</strong> — tā dzīvo apakšā.</li>
+        <li>Ja maliņa ir <strong>augšējā daļā</strong>: griez augšu (U), kamēr maliņa ir <strong>tieši virs tās vietas</strong>, kur tai jābūt.</li>
+        <li>Tad pagriez sānu virsotni (R vai L) — maliņa «ieripo» lejā savā vietā. Ja ieripoja otrādi (zaļais uz sāniem, nevis uz leju) — izcel to atpakaļ augšā un mēģini no otras puses.</li>
+        <li>Atkārto ar visām 3 zaļajām maliņām.</li>
+      </ol>
+    </div>
+    <div class="kbox help"><span class="kt">Ja maliņa iesprūdusi apakšā otrādi</span>
+      Pagriez to virsotni, pie kuras maliņa sēž — maliņa uzbrauks augšā. Tad ievieto to no jauna pareizi (3.–4. punkts).
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="py-k2"> Solītis izdevās!</label></div>
+  </div>
+
+  <div class="card step s3" id="py-k3">
+    <div class="stepnum">3</div>
+    <h3>3. solītis — Pēdējās 3 maliņas 🏁</h3>
+    <div class="kbox see"><span class="kt">Mērķis</span>
+      Sakārtot pēdējās 3 maliņas augšējā daļā — piramīda salikta! 🎉
+    </div>
+    <div class="kbox do"><span class="kt">Ko darīt</span>
+      <p>Turi gatavo (zaļo) pusi <strong>apakšā</strong>. Palikušas tikai 3 maliņas. Paskaties uzmanīgi — būs viens no diviem gadījumiem:</p>
+      <p><strong>A) Maliņām jāsamainās pa apli</strong> (katra jāaizbīda uz blakus vietu). Skaties, uz kuru pusi tām «jāgriežas»:</p>
+      <p class="alg" data-alg="R U R' U R U R'"></p>
+      <p class="alg-label">Ja maliņām jāgriežas pretēji pulksteņam</p>
+      <p class="alg" data-alg="R U' R' U' R U' R'"></p>
+      <p class="alg-label">Ja maliņām jāgriežas pulksteņa virzienā</p>
+      <p><strong>B) Divas maliņas ir savās vietās, bet apgriezušās otrādi:</strong></p>
+      <p class="alg" data-alg="L R' L' R U' R U R'"></p>
+      <p class="alg-label">Apgriež divas maliņas uz vietas</p>
+    </div>
+    <div class="kbox help"><span class="kt">Kā saprast, kurš gadījums man ir?</span>
+      <ul>
+        <li>Paskaties uz katru no 3 maliņām: vai tās <strong>abas krāsas</strong> sakrīt ar pusēm, starp kurām tā sēž?</li>
+        <li><strong>Nevienai nesakrīt</strong> → gadījums A (maliņas jāgriež pa apli).</li>
+        <li><strong>Vienai sakrīt krāsu pāris, bet otrādi</strong> → gadījums B.</li>
+        <li>Ja pēc gājiena piramīda vēl nav gatava — paskaties vēlreiz un izdari atbilstošo gājienu. Maksimums pāris mēģinājumu, un būs! 🎉</li>
+      </ul>
+    </div>
+    <div class="done-row"><label><input type="checkbox" data-step="py-k3"> PIRAMĪDA SALIKTA! 🎉</label></div>
+  </div>
+</section>
+
+</div><!-- /mode-kids py -->
+
+
+<!-- ============ UZBŪVE (kopīga) ============ -->
+<section class="hide-kids" id="py-uzbuve">
+  <h2>Pirms sāc: Pyraminx uzbūve <span class="rule"></span></h2>
+  <div class="card">
+    <p>Pyraminx ir <strong>tetraedrs</strong> (4 trīsstūrveida sejas, 4 virsotnes). Tam ir trīs veidu gabaliņi:</p>
+    <ul>
+      <li><strong>Gali</strong> (4 gab.) — mazie smaili virsotnēs. Griežas <strong>paši par sevi</strong> un neietekmē neko citu. Salikt triviāli — vienkārši pagriez, lai krāsas sakrīt.</li>
+      <li><strong>Stūri / centri</strong> (4 gab.) — gabaliņi tieši zem galiem. Tie <strong>nekad nemaina vietu</strong> — tikai orientējas. Tie nosaka katras sejas krāsu.</li>
+      <li><strong>Malas</strong> (6 gab.) — gabaliņi ar 2 krāsām. <strong>Tikai tās</strong> jāpozicionē un jāorientē. Pyraminx atrisināšana būtībā ir 6 malu salikšana.</li>
+    </ul>
+    <div class="dgrow">
+      <figure class="dg" data-kind="pyra" data-c="gggggggggg" data-mark="0,4,8"
+        ><figcaption>Gali (4) — virsotnēs, griežas paši</figcaption></figure>
+      <figure class="dg" data-kind="pyra" data-c="gggggggggg" data-mark="1,3,6"
+        ><figcaption>Stūri/centri (4) — tikai orientējas</figcaption></figure>
+      <figure class="dg" data-kind="pyra" data-c="gggggggggg" data-mark="2,5,7"
+        ><figcaption>Malas (6) — tikai tās īsti jārisina</figcaption></figure>
+    </div>
+    <div class="tip"><b>Galvenā doma:</b> gali un stūri ir viegli (tikai jāorientē). Viss noslēpums ir <strong>6 malās</strong>.
+    Tāpēc Pyraminx ir daudz vienkāršāks par Rubika kubu.</div>
+  </div>
+</section>
+
+<!-- ============ NOTĀCIJA (kopīga) ============ -->
+<section class="hide-kids" id="py-nota">
+  <h2>Notācija — kā lasīt algoritmus <span class="rule"></span></h2>
+  <div class="card">
+    <p>Turi Pyraminx ar <strong>vienu virsotni uz augšu</strong> un vienu seju pret sevi. Tad trīs redzamās virsotnes ir
+    <strong>U</strong> (augšā), <strong>L</strong> (apakšā pa kreisi), <strong>R</strong> (apakšā pa labi); <strong>B</strong> ir aizmugurē (neredzamā).</p>
+    <div class="notgrid">
+      <div class="notcell"><span class="nname">U</span>
+        <div class="dg" data-kind="pyra" data-c="mgggggggg" data-small="1" data-rot="top:cw"></div>
+        <span class="ndesc"><b>Up</b> — augšējā virsotne (stūris + 3 malas) pulksteņa virzienā</span></div>
+      <div class="notcell"><span class="nname">L</span>
+        <div class="dg" data-kind="pyra" data-c="ggggmgggg" data-small="1" data-rot="left:cw"></div>
+        <span class="ndesc"><b>Left</b> — kreisā apakšas virsotne</span></div>
+      <div class="notcell"><span class="nname">R</span>
+        <div class="dg" data-kind="pyra" data-c="ggggggggm" data-small="1" data-rot="right:cw"></div>
+        <span class="ndesc"><b>Right</b> — labā apakšas virsotne</span></div>
+      <div class="notcell"><span class="nname">B</span>
+        <div class="dg" data-kind="pyra" data-c="ggggggggg" data-small="1" data-rot="center:cw"></div>
+        <span class="ndesc"><b>Back</b> — aizmugures virsotne (neredzama)</span></div>
+      <div class="notcell"><span class="nname">u l r b</span>
+        <div class="dg" data-kind="pyra" data-c="mgggggggg" data-small="1" data-mark="0"></div>
+        <span class="ndesc"><b>Mazie burti</b> = tikai <strong>gals</strong> (nekas cits nekustas)</span></div>
+    </div>
+    <h3>Papildu apzīmējumi</h3>
+    <ul>
+      <li><strong>' (apostrofs)</strong> — pagriez <strong>pretēji</strong> pulksteņrādītājam.
+        Piem., <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="R'"></span>.</li>
+      <li><strong>Nav «2»!</strong> Katrai virsotnei ir tikai 2 stāvokļi, tāpēc divi vienādi griezieni = pretējais:
+        <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="U U"></span> = <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="U'"></span>.</li>
+    </ul>
+    <div class="warn"><b>Uzmanību!</b> Lielie burti (U, L, R, B) griež <strong>visu virsotnes slāni</strong> (stūri + 3 malas).
+    Mazie burti (u, l, r, b) griež <strong>tikai galu</strong>. Tā ir galvenā atšķirība!</div>
+    <div class="tip"><b>Krāsas čipos:</b> dzeltens = parasts grieziens (lielais burts),
+    <span style="color:#1558C9;font-weight:700">zils ar '</span> = pretējais virziens,
+    <span style="color:#0AA24C;font-weight:700">zaļš mazais burts</span> = tikai gals.</div>
+  </div>
+</section>
+
+<!-- ==================== 1. METODE — IESĀCĒJU ==================== -->
+<div class="mode mode-beginner">
+
+<div class="part-head">
+  <div class="kick">1. metode</div>
+  <h2>Iesācēju metode — slānis pa slānim <span class="rule" style="background:var(--paper)"></span></h2>
+  <p>Vienkāršākā pieeja: 2 soļi bez formulām (tikai ar aci) + 3 algoritmi pašās beigās. Katrs solis sīki izskaidrots.</p>
+</div>
+
+<section>
+  <!-- 1. solis -->
+  <div class="card step s1" id="py-s1">
+    <div class="stepnum">1</div>
+    <h3>1. solis — Stūri un gali</h3>
+    <p class="goal">Mērķis: visi 4 lielie stūri pagriezti pareizi (katrai sejai vidū izveidojas viena krāsa) + mazie gali sakrīt.</p>
+
+    <h3 class="sub">Kas vispār ir «pagriezt stūri pareizi»?</h3>
+    <p>Katrs <strong>lielais stūris</strong> (gabals zem smailītes) rāda 3 krāsas — pa vienai uz katru no trim sejām.
+    Stūris ir «pareizi», kad <strong>katra tā krāsa skatās uz to seju, kur šī krāsa ir vairākumā</strong>.
+    Konkrēts piemērs: ja stūra krāsas ir zaļš–sarkans–zils un tu redzi, ka zaļā uzlīme skatās uz seju, kur pārsvarā sarkans — pagriez stūri, līdz zaļš iet pie zaļā.</p>
+
+    <ol>
+      <li>Paņem piramīdu jebkurā stāvoklī. Apskati <strong>vienu</strong> lielo virsotni (U, L, R vai B) un tās 3 krāsas.</li>
+      <li>Pagriez šo virsotni (lielais grieziens — griežas stūris + smailīte) par vienu vai diviem klikšķiem un salīdzini:
+        vai tagad stūra krāsas <strong>sader ar apkārtējām sejām</strong>? Katrai virsotnei ir tikai 3 iespējamie stāvokļi — vienkārši izmēģini.</li>
+      <li>Atkārto ar visiem 4 stūriem. Kad tie visi pareizi, katras sejas <strong>vidū redzēsi vienas krāsas rombu</strong> —
+        tā tagad ir šīs sejas «oficiālā» krāsa.</li>
+      <li>Beigās pagriez katru <strong>mazo galu</strong> (mazais grieziens — kustas tikai smailīte), lai tā krāsa sakrīt ar stūri zem tā.</li>
+    </ol>
+    <div class="dgrow">
+      <figure class="dg" data-kind="pyra" data-c="gggggggggg" data-mark="1,3,6"
+        ><figcaption>Stūri veido sejas «rombu» — pēc šī soļa tas ir vienā krāsā</figcaption></figure>
+      <figure class="dg" data-kind="pyra" data-c="gggggggggg" data-mark="0,4,8"
+        ><figcaption>Gali (smailītes) — pagriez pēdējos, lai sakrīt ar stūri</figcaption></figure>
+    </div>
+    <div class="tip"><b>Bez algoritma!</b> Šis solis ir tīri intuitīvs — te nav ko iegaumēt. Stūri <strong>nekad nemaina vietu</strong>,
+    tie tikai griežas uz vietas, tāpēc neko nevar «sabojāt». Gali ir tīra kosmētika — tos vari pagriezt jebkurā brīdī, arī pašās beigās.</div>
+    <div class="warn"><b>Ja nesaproti, kura krāsa kurai sejai:</b> saskaiti — uz katras sejas jau tagad kāda krāsa ir redzama visvairāk.
+    Tā arī ir šīs sejas krāsa. Standarta Pyraminx krāsas: zaļš, dzeltens, zils, sarkans — katra sava seja.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="py-s1"> Solis apgūts</label></div>
+  </div>
+
+  <!-- 2. solis -->
+  <div class="card step s2" id="py-s2">
+    <div class="stepnum">2</div>
+    <h3>2. solis — Pirmais slānis (apakšējā seja)</h3>
+    <p class="goal">Mērķis: viena vesela seja gatava apakšā — tās 3 malas ieliktas savās vietās ar pareizo krāsu uz leju.</p>
+
+    <p>Izvēlies vienu krāsu, ar ko strādāsi (ērtākais ir <strong>zaļais</strong> — turpmāk piemēros to arī lietosim), un turi piramīdu ar
+    <strong>zaļo seju uz leju</strong>. Tev jāatrod 3 malas, kurām viena krāsa ir zaļa, un jāieliek katra savā vietā.</p>
+
+    <h3 class="sub">Kā zināt, kura ir malas «sava vieta»?</h3>
+    <p>Malai ir 2 krāsas — piemēram, <strong>zaļš + sarkans</strong>. Tās vieta ir apakšā tieši tur, kur <strong>zaļā seja saskaras ar sarkano seju</strong>.
+    Turklāt malai jāsēž ar <strong>zaļo pusi uz leju</strong> un sarkano pret sarkano seju — citādi tā ir «apgriezta» un skaitās nepareizi.</p>
+
+    <ol>
+      <li>Atrodi malu ar zaļu krāsu. Ja tā ir <strong>augšējā daļā</strong> — lieliski, ej uz 2. punktu.
+        Ja tā jau ir apakšā, bet <strong>apgriezta vai nepareizā vietā</strong> — pagriez attiecīgo sānu virsotni (R vai L), lai mala uzbrauc augšā, un tad turpini kā parasti.</li>
+      <li>Griez augšējo virsotni (U), līdz mala atrodas <strong>tieši virs tās spraugas</strong>, kur tai jāiekrīt
+        (skaties pēc malas otrās krāsas: zaļi-sarkanajai malai jābūt virs vietas pie sarkanās sejas).</li>
+      <li>Tagad paskaties, <strong>uz kuru pusi skatās malas zaļā uzlīme</strong>:
+        <ul>
+          <li>Zaļais skatās <strong>pa kreisi</strong> → pagriez <strong>labo</strong> virsotni (R vai R', kā sanāk īsāk) — mala ieripo apakšā ar zaļo uz leju.</li>
+          <li>Zaļais skatās <strong>pa labi</strong> → pagriez <strong>kreiso</strong> virsotni (L vai L').</li>
+        </ul>
+      </li>
+      <li>Pārbaudi: vai mala tiešām sēž ar zaļo uz leju un otrā krāsa sakrīt ar savu seju? Ja iebrauca «otrādi» — izcel augšā un mēģini no otras puses.</li>
+      <li>Atkārto ar visām 3 zaļajām malām. Apakšējā seja gatava!</li>
+    </ol>
+    <div class="dgrow">
+      <figure class="dg" data-kind="pyra" data-c="ggggggggg"
+        ><figcaption>Apakšējā seja gatava — visas 3 apakšas malas savās vietās</figcaption></figure>
+    </div>
+    <div class="tip"><b>Kāpēc tas strādā:</b> griežot U, tu «piegādā» malu pareizajā pozīcijā; griežot sānu virsotni, tu to «ievieto».
+    Šie divi gājieni ir visa šī soļa būtība — pamēģini pāris reizes, un roka pati sapratīs.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="py-s2"> Solis apgūts</label></div>
+  </div>
+
+  <!-- 3. solis -->
+  <div class="card step s3" id="py-s3">
+    <div class="stepnum">3</div>
+    <h3>3. solis — Pēdējās 3 malas</h3>
+    <p class="goal">Mērķis: sakārtot 3 atlikušās augšējās malas — Pyraminx salikts.</p>
+
+    <p>Turi piramīdu ar gatavo (zaļo) seju <strong>apakšā</strong>. Palikušas tieši 3 malas ap augšējo virsotni.
+    Vispirms <strong>diagnosticē</strong>, kurš gadījums tev ir — tad izpildi atbilstošo algoritmu.</p>
+
+    <h3 class="sub">Kā atpazīt savu gadījumu</h3>
+    <ul>
+      <li>Apskati katru no 3 malām: vai tās abas krāsas <strong>sakrīt ar sejām</strong>, starp kurām tā sēž?</li>
+      <li><strong>Neviena mala nav savā vietā</strong> → gadījums <strong>A</strong>: visas 3 jāpārbīda pa apli (3-cikls).</li>
+      <li><strong>Malas ir savās vietās, bet 2 no tām «apgrieztas»</strong> (krāsas samainījušās vietām) → gadījums <strong>B</strong>.</li>
+      <li><strong>Viss sakrīt</strong> → piramīda jau salikta! 🎉</li>
+    </ul>
+
+    <h3 class="sub">A) Trīs malas jāmaina pa apli (3-cikls)</h3>
+    <p>Vēro vienu konkrētu malu: uz kuru vietu tai «jāaizbrauc»? Ja malām jāgriežas <strong>pretēji pulksteņrādītājam</strong> (skatoties no augšas):</p>
+    <p class="alg" data-alg="R U R' U R U R'"></p>
+    <p class="alg-label">3-cikls pretēji pulksteņrādītājam (CCW)</p>
+    <p>Ja malām jāgriežas <strong>pulksteņrādītāja virzienā</strong>:</p>
+    <p class="alg" data-alg="R U' R' U' R U' R'"></p>
+    <p class="alg-label">3-cikls pulksteņrādītāja virzienā (CW)</p>
+    <div class="tip"><b>Ja sajauci virzienu</b> — nekas slikts nenotiek! Vienkārši izpildi to pašu algoritmu vēlreiz,
+    vai izpildi otru. 3-cikls nekad neko nesabojā apakšā.</div>
+
+    <h3 class="sub">B) Divas malas jāapgriež uz vietas</h3>
+    <p>Malas sēž savās vietās, bet divām krāsas ir «uz nepareizo pusi». Turi piramīdu tā, lai <strong>abas apgrieztās malas ir priekšā</strong>
+    (viena priekšā-kreisajā, otra priekšā-labajā pusē), un izpildi:</p>
+    <p class="alg" data-alg="L R' L' R U' R U R'"></p>
+    <p class="alg-label">Divu malu apgriešana</p>
+
+    <div class="dgrow">
+      <figure class="dg" data-kind="pyra" data-c="ggggggggg"
+        data-parrows='[{"f":2,"t":5,"curve":10},{"f":5,"t":7,"curve":10},{"f":7,"t":2,"curve":10}]'
+        ><figcaption>A) 3 malas griežas pa apli</figcaption></figure>
+      <figure class="dg" data-kind="pyra" data-c="ggggggggg" data-mark="2,7"
+        data-parrows='[{"f":2,"t":7,"curve":0,"dbl":1}]'
+        ><figcaption>B) 2 malas apgriežas uz vietas</figcaption></figure>
+    </div>
+    <div class="tip"><b>Pazīstams?</b> <strong>R U R' U R U R'</strong> ir tā pati «Sune» ģimene, ko lieto 2×2 un 3×3 —
+    šeit tā cikliski maina 3 malas.</div>
+    <div class="warn"><b>Ja algoritms «neiet»:</b> visbiežāk vainīgs sajaukts grieziena virziens (R vietā R') vai
+    pa vidu nejauši pagriezta visa piramīda. Turi to stingri ar gatavo seju uz leju un izpildi lēni, burtu pa burtam.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="py-s3"> Solis apgūts</label></div>
+  </div>
+</section>
+
+<!-- iesācēju kopsavilkums -->
+<section id="py-cheat">
+  <h2>Kopsavilkums — iesācēju metode <span class="rule"></span></h2>
+  <div class="cheat-wrap">
+    <table class="cheat">
+      <tr><th>Solis</th><th>Kad lietot</th><th>Algoritms</th></tr>
+      <tr><td>1. Stūri + gali</td><td>Pagriez 4 stūrus pareizi, tad galus</td><td><em>ar aci, bez algoritma</em></td></tr>
+      <tr><td>2. Pirmais slānis</td><td>Apakšējās sejas 3 malas</td><td><em>intuitīvi: U piegādā, R/L ievieto</em></td></tr>
+      <tr><td>3A. 3-cikls (CCW)</td><td>3 malas jāgriež pretēji pulkstenim</td><td><span class="alg small" data-alg="R U R' U R U R'"></span></td></tr>
+      <tr><td>3A. 3-cikls (CW)</td><td>3 malas pulksteņa virzienā</td><td><span class="alg small" data-alg="R U' R' U' R U' R'"></span></td></tr>
+      <tr><td>3B. 2 malu apgriešana</td><td>2 malas vietās, bet apgrieztas</td><td><span class="alg small" data-alg="L R' L' R U' R U R'"></span></td></tr>
+    </table>
+  </div>
+</section>
+
+</div><!-- /mode-beginner -->
+
+<!-- ==================== 2. METODE — PROFESIONĀĻA ==================== -->
+<div class="mode mode-pro">
+
+<div class="part-head pro" id="py-cfop">
+  <div class="kick">2. metode</div>
+  <h2>Profesionāļa metodes <span class="rule" style="background:var(--paper)"></span></h2>
+  <p>Kā liek speedcuberi. Divas populārākās pieejas: <strong>L4E</strong> (slānis + pēdējās 4 malas) un <strong>Oka</strong> (top-first).</p>
+</div>
+
+<section>
+  <div class="card">
+    <p>Abas pro metodes sākas ar to pašu ideju: <strong>stūrus un galus salikt intuitīvi</strong> (kā iesācēju 1. solī),
+    un tad visu grūtību — <strong>malas</strong> — atrisināt gudrāk un ar mazāk griezieniem nekā slānis-pa-slānim.</p>
+    <ul>
+      <li><strong>L4E</strong> — atrisini visu, izņemot pēdējās 4 malas, tad tās vienā piegājienā.</li>
+      <li><strong>Oka</strong> — sāc no augšas (top-first): viena mala apzināti «nepareizā» vietā, izmanto to kā «atslēgas caurumu».</li>
+    </ul>
+    <div class="tip"><b>Ar ko sākt:</b> lielākā daļa sāk ar <strong>L4E intuitīvi</strong> (salikc 1 malu, tad pārējās 3 ar 3-ciklu),
+    jo tas prasa maz jaunu algoritmu virs iesācēju metodes.</div>
+    <div class="warn"><b>Godīgi par avotiem:</b> pilnais L4E ir ~35 algoritmu sistēma (šeit — verificētais kodols + intuitīvā pieeja;
+    pilns saraksts: cubingapp). <strong>Oka</strong> konkrētie algoritmi netiek publicēti kā notācija — tāpēc doti tās
+    <strong>koncepta soļi</strong> + pēdējā slāņa malu (ELL) algoritmi, ko Oka lieto nobeigumam.</div>
+  </div>
+</section>
+
+<!-- L4E -->
+<section id="py-l4e">
+  <h2>1. L4E — pēdējās 4 malas <span class="rule"></span></h2>
+  <div class="card pro">
+    <p class="goal">Mērķis: salikc visu, izņemot 4 malas, tad pēdējās 4 malas — vienā solī.</p>
+    <h3 class="sub">Solis 1 — «V» (stūri + 2 malas)</h3>
+    <p>Salikc visus 4 stūrus (intuitīvi) un <strong>2 blakus apakšējās malas</strong> — sanāk «V» forma. Ar treniņu to var
+    izplānot inspekcijas laikā un uztaisīt «akli».</p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="pyra" data-c="ggggggggg" data-mark="4,5,8"
+        ><figcaption>«V»: stūri + 2 apakšas malas gatavas</figcaption></figure>
+    </div>
+    <h3 class="sub">Solis 2 — pēdējās 4 malas</h3>
+    <p><strong>Intuitīvā L4E (ieteicams sākumā):</strong> salikc <strong>1 malu</strong> ar aci, tad atlikušās 3 ar 3-ciklu
+    (tie paši algoritmi, ko iesācēju 3. solī):</p>
+    <p class="alg small" data-alg="R U R' U R U R'"></p>
+    <p class="alg small" data-alg="R U' R' U' R U' R'"></p>
+    <p><strong>Algoritmiskā L4E — verificētais kodols</strong> (kad apakšas mala jau vietā):</p>
+    <div class="cheat-wrap">
+      <table class="cheat pro">
+        <tr><th>Gadījums</th><th>Algoritms</th></tr>
+        <tr><td>Sune (3-cikls)</td><td><span class="alg small" data-alg="R U R' U R U R'"></span></td></tr>
+        <tr><td>Antisune (3-cikls)</td><td><span class="alg small" data-alg="R U' R' U' R U' R'"></span></td></tr>
+        <tr><td>2 malu apgriešana</td><td><span class="alg small" data-alg="L R' L' R U' R U R'"></span></td></tr>
+        <tr><td>Sledgehammer</td><td><span class="alg small" data-alg="R' L R L'"></span></td></tr>
+        <tr><td>Hedgeslammer</td><td><span class="alg small" data-alg="L R' L' R"></span></td></tr>
+      </table>
+    </div>
+    <div class="warn"><b>Pilns L4E (visi ~35 gadījumi)</b> ar diagrammām: <strong>cubingapp.com/algorithms/Pyraminx-L4E</strong>.
+    Šeit dotais kodols + intuitīvā pieeja pietiek, lai risinātu jebkuru gadījumu.</div>
+  </div>
+</section>
+
+<!-- OKA -->
+<section id="py-oka">
+  <h2>2. Oka metode (top-first) <span class="rule"></span></h2>
+  <div class="card pro">
+    <p class="goal">Mērķis: sākt no augšas — viena mala apzināti «nepareizā» vietā (Oka mala), izmanto to kā atslēgas caurumu.</p>
+    <ol>
+      <li><strong>Salikc vienu malu ap centru</strong> un ieliec vēl vienu malu (<strong>«Oka mala»</strong>) —
+        pareizi orientētu, bet <strong>nepareizā vietā</strong>.</li>
+      <li><strong>Izmanto brīvo slotu (kā «keyhole»)</strong>, lai atrisinātu stūrus/centrus.</li>
+      <li><strong>Vienā solī</strong> ieliec apgriezto malu + aizver atslēgas caurumu.</li>
+      <li><strong>Pabeidz pēdējā slāņa malas (ELL)</strong> ar zemāk dotajiem algoritmiem.</li>
+    </ol>
+    <p>Oka nobeiguma malu (ELL) algoritmi:</p>
+    <div class="cheat-wrap">
+      <table class="cheat pro">
+        <tr><th>Gadījums</th><th>Algoritms</th></tr>
+        <tr><td>Sledgehammer</td><td><span class="alg small" data-alg="R' L R L'"></span></td></tr>
+        <tr><td>Hedgeslammer</td><td><span class="alg small" data-alg="L R' L' R"></span></td></tr>
+        <tr><td>U-perm</td><td><span class="alg small" data-alg="R' L R L2' U L U'"></span></td></tr>
+        <tr><td>Mirror U</td><td><span class="alg small" data-alg="L R' L' R' U' R' U"></span></td></tr>
+        <tr><td>2 malu apgriešana</td><td><span class="alg small" data-alg="L R' L' R U' R U R'"></span></td></tr>
+      </table>
+    </div>
+    <div class="tip"><b>Radniecīgās metodes:</b> <strong>WO</strong> (salikc visas 3 augšas malas, tad 1 algoritms centriem),
+    <strong>Nutella</strong> (2 malas pretējos stāvokļos). Oka atšķiras ar apzināti nepareizi novietoto «Oka malu».</div>
+    <div class="warn"><b>Piezīme:</b> Oka konkrētie soļu algoritmi publiski netiek doti kā notācija (tikai koncepts) —
+    tāpēc doti verificētie ELL nobeiguma algoritmi (Speedsolving). Detaļas ar video: speedsolving.com «Top First».</div>
+  </div>
+</section>
+
+<!-- pro kopsavilkums -->
+<section id="py-cheat-pro">
+  <h2>Pro kopsavilkums <span class="rule"></span></h2>
+  <div class="cheat-wrap">
+    <table class="cheat pro">
+      <tr><th>Solis</th><th>Kad</th><th>Algoritms</th></tr>
+      <tr><td>Stūri + gali</td><td>Vienmēr sākumā</td><td><em>intuitīvi</em></td></tr>
+      <tr><td>L4E — «V»</td><td>Stūri + 2 malas</td><td><em>intuitīvi</em></td></tr>
+      <tr><td>L4E — 3-cikls CCW</td><td>3 malas pa apli</td><td><span class="alg small" data-alg="R U R' U R U R'"></span></td></tr>
+      <tr><td>L4E — 3-cikls CW</td><td>3 malas otrādi</td><td><span class="alg small" data-alg="R U' R' U' R U' R'"></span></td></tr>
+      <tr><td>L4E / Oka — 2-flip</td><td>2 malas apgrieztas</td><td><span class="alg small" data-alg="L R' L' R U' R U R'"></span></td></tr>
+      <tr><td>Oka — Sledgehammer</td><td>ELL nobeigums</td><td><span class="alg small" data-alg="R' L R L'"></span></td></tr>
+      <tr><td>Oka — Hedgeslammer</td><td>ELL nobeigums</td><td><span class="alg small" data-alg="L R' L' R"></span></td></tr>
+      <tr><td>Oka — U-perm</td><td>ELL nobeigums</td><td><span class="alg small" data-alg="R' L R L2' U L U'"></span></td></tr>
+    </table>
+  </div>
+</section>
+
+</div><!-- /mode-pro -->
+
+<!-- ============ PADOMI (kopīgi) ============ -->
+<section class="hide-kids" id="py-padomi">
+  <h2>Padomi un biežākās kļūdas <span class="rule"></span></h2>
+  <div class="card">
+    <ul>
+      <li><strong>Nejauc lielos ar mazajiem burtiem.</strong> U (liels) griež visu slāni; u (mazs) — tikai galu. Tā ir kļūda nr. 1.</li>
+      <li><strong>Gali ir triviāli.</strong> Neuztraucies par tiem risināšanas laikā — salikc pašā beigās ar aci.</li>
+      <li><strong>Viss ir malās.</strong> Pyraminx = 6 malu puzle. Ja saproti malu pārvietošanu, tu proti visu.</li>
+      <li><strong>Nav «2» griezienu.</strong> Katrai virsotnei ir tikai 2 stāvokļi — <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="U U"></span> = <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="U'"></span>.</li>
+      <li><strong>Gribi ātrāk?</strong> No iesācēju metodes pāriej uz <strong>L4E intuitīvo</strong> — tie paši 3 algoritmi, bet mazāk griezienu.</li>
+    </ul>
+  </div>
+</section>
+
+
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Kubu pamācības vienā lapā: 2×2 (iesācēju + Ortega/CLL), 3×3 (slānis pa slānim + CFOP), Pyraminx (slānis pa slānim + L4E/Oka).
+    Trīs līmeņi: bērniem, iesācējiem un pro. Lapa strādā pilnībā bez interneta — vienkārši atver failu pārlūkā. Veiksmi salikšanā!</p>
+    <p style="margin-top:10px;font-size:13px">Algoritmu avoti (pārbaudīti):
+    <a href="https://cubingcheatsheet.com/algs2x.html">cubingcheatsheet.com (2×2)</a>,
+    <a href="https://www.jperm.net/algs/2x2/cll">jperm.net (CLL)</a>,
+    <a href="https://www.speedsolving.com/wiki/index.php/OLL">speedsolving.com (OLL)</a>,
+    <a href="https://speedcubedb.com/a/3x3/PLL">speedcubedb.com (PLL)</a>,
+    <a href="https://www.cubeskills.com/uploads/pdf/tutorials/f2l.pdf">cubeskills.com (F2L)</a>,
+    <a href="https://www.speedsolving.com/wiki/index.php/Pyraminx_algorithms">speedsolving.com (Pyraminx)</a>,
+    <a href="https://cubingapp.com/algorithms/Pyraminx-L4E">cubingapp.com (L4E)</a>,
+    <a href="https://ruwix.com/">ruwix.com</a>.</p>
+  </div>
+</footer>
+<script>
+(function () {
+  'use strict';
+  var NS = 'http://www.w3.org/2000/svg';
+  var INK = '#211E19';
+  var COL = {
+    y: '#FFD500', w: '#FFFFFF', r: '#D6382E', o: '#FF7A00', g: '#0AA24C',
+    b: '#1558C9', x: '#E6E1D2', e: '#F0EBDC', c: '#D9D2BD', m: '#FFE9A0'
+  };
+
+  function el(name, attrs, parent) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function mkSvg(w, h, dispW) {
+    var s = el('svg', { viewBox: '0 0 ' + w + ' ' + h, width: dispW, role: 'img' });
+    s.style.height = 'auto';
+    return s;
+  }
+  function cell(svg, x, y, cs, colorCode) {
+    el('rect', {
+      x: x, y: y, width: cs, height: cs, rx: 4,
+      fill: COL[colorCode] || COL.x, stroke: INK, 'stroke-width': 2
+    }, svg);
+  }
+  function gridN(svg, ox, oy, cs, colors, n) {
+    colors = colors || '';
+    for (var i = 0; i < n * n; i++) {
+      cell(svg, ox + (i % n) * cs, oy + Math.floor(i / n) * cs, cs, colors[i]);
+    }
+  }
+  function ringsN(svg, ox, oy, cs, marks, n) {
+    marks.forEach(function (i) {
+      el('rect', {
+        x: ox + (i % n) * cs - 2.5, y: oy + Math.floor(i / n) * cs - 2.5,
+        width: cs + 5, height: cs + 5, rx: 7, fill: 'none',
+        stroke: INK, 'stroke-width': 3.4
+      }, svg);
+    });
+  }
+  function head(svg, tipX, tipY, dirX, dirY) {
+    var len = Math.sqrt(dirX * dirX + dirY * dirY) || 1;
+    var ux = dirX / len, uy = dirY / len;
+    var px = -uy, py = ux, s = 9;
+    el('polygon', {
+      points: tipX + ',' + tipY + ' ' +
+        (tipX - ux * s + px * s * 0.55) + ',' + (tipY - uy * s + py * s * 0.55) + ' ' +
+        (tipX - ux * s - px * s * 0.55) + ',' + (tipY - uy * s - py * s * 0.55),
+      fill: INK
+    }, svg);
+  }
+  function arrow(svg, x1, y1, x2, y2, curve, dbl) {
+    curve = curve || 0;
+    var dx = x2 - x1, dy = y2 - y1;
+    var len = Math.sqrt(dx * dx + dy * dy) || 1;
+    var cx = (x1 + x2) / 2 - (dy / len) * curve;
+    var cy = (y1 + y2) / 2 + (dx / len) * curve;
+    var d = 'M ' + x1 + ' ' + y1 + ' Q ' + cx + ' ' + cy + ' ' + x2 + ' ' + y2;
+    el('path', { d: d, fill: 'none', stroke: '#FFFDF6', 'stroke-width': 7, 'stroke-linecap': 'round' }, svg);
+    el('path', { d: d, fill: 'none', stroke: INK, 'stroke-width': 3.2, 'stroke-linecap': 'round' }, svg);
+    head(svg, x2, y2, x2 - cx, y2 - cy);
+    if (dbl) head(svg, x1, y1, x1 - cx, y1 - cy);
+  }
+  function circleArrow(svg, cx, cy, r, ccw, dashed) {
+    var a0 = ccw ? 200 : -50, a1 = ccw ? -50 : 200;
+    var p0 = [cx + r * Math.cos(a0 * Math.PI / 180), cy + r * Math.sin(a0 * Math.PI / 180)];
+    var p1 = [cx + r * Math.cos(a1 * Math.PI / 180), cy + r * Math.sin(a1 * Math.PI / 180)];
+    var sweep = ccw ? 0 : 1;
+    var d = 'M ' + p0[0] + ' ' + p0[1] + ' A ' + r + ' ' + r + ' 0 1 ' + sweep + ' ' + p1[0] + ' ' + p1[1];
+    var attrs = { d: d, fill: 'none', stroke: INK, 'stroke-width': 3.4, 'stroke-linecap': 'round' };
+    if (dashed) attrs['stroke-dasharray'] = '7 5';
+    el('path', { d: d, fill: 'none', stroke: '#FFFDF6', 'stroke-width': 7, 'stroke-linecap': 'round' }, svg);
+    el('path', attrs, svg);
+    var rad = a1 * Math.PI / 180;
+    var t = ccw ? -1 : 1;
+    head(svg, p1[0], p1[1], -Math.sin(rad) * t, Math.cos(rad) * t);
+  }
+  function parseMarks(host) {
+    var m = host.getAttribute('data-mark');
+    return m ? m.split(',').map(Number) : [];
+  }
+  function panelN(host) {
+    var p = host.closest('.cubepanel');
+    return p && p.getAttribute('data-n') === '2' ? 2 : 3;
+  }
+
+  /* ---- kind: face (single NxN, notation & piece types) ---- */
+  function renderFace(host) {
+    var n = panelN(host);
+    var cs = n === 2 ? 34 : 30, off = 4, size = cs * n + off * 2;
+    var disp = n === 2 ? (host.getAttribute('data-small') ? 62 : 74) : 92;
+    var svg = mkSvg(size, size, disp);
+    gridN(svg, off, off, cs, host.getAttribute('data-c'), n);
+    ringsN(svg, off, off, cs, parseMarks(host), n);
+    var ar = host.getAttribute('data-arrow');
+    if (ar) {
+      var parts = ar.split(':'), idx = Number(parts[1] || 0);
+      var mid = off + idx * cs + cs / 2, c = size / 2;
+      var m = n === 2 ? 6 : 8, r = n === 2 ? 23 : 27;
+      if (parts[0] === 'colup') arrow(svg, mid, size - m, mid, m, 0);
+      else if (parts[0] === 'coldown') arrow(svg, mid, m, mid, size - m, 0);
+      else if (parts[0] === 'rowleft') arrow(svg, size - m, mid, m, mid, 0);
+      else if (parts[0] === 'rowright') arrow(svg, m, mid, size - m, mid, 0);
+      else if (parts[0] === 'cw') circleArrow(svg, c, c, r, false, false);
+      else if (parts[0] === 'ccw') circleArrow(svg, c, c, r, true, true);
+    }
+    host.insertBefore(svg, host.firstChild);
+  }
+
+  /* ---- kind: top (U face from above + 4 side strips) ---- */
+  function renderTop(host) {
+    var n = panelN(host);
+    var cs = n === 2 ? 34 : 30, off = 18, T = n === 2 ? 12 : 11, size = off * 2 + cs * n;
+    var disp = host.getAttribute('data-small') ? (n === 2 ? 92 : 102) : (n === 2 ? 116 : 138);
+    var svg = mkSvg(size, size, disp);
+    gridN(svg, off, off, cs, host.getAttribute('data-c'), n);
+    function strip(str, horiz, fixed) {
+      if (!str) return;
+      for (var i = 0; i < n; i++) {
+        var x = horiz ? off + i * cs : fixed;
+        var y = horiz ? fixed : off + i * cs;
+        el('rect', {
+          x: x, y: y, width: horiz ? cs : T, height: horiz ? T : cs, rx: 3,
+          fill: COL[str[i]] || COL.x, stroke: INK, 'stroke-width': 2
+        }, svg);
+      }
+    }
+    strip(host.getAttribute('data-b'), true, off - T - 3);
+    strip(host.getAttribute('data-f'), true, off + cs * n + 3);
+    strip(host.getAttribute('data-l'), false, off - T - 3);
+    strip(host.getAttribute('data-r'), false, off + cs * n + 3);
+    ringsN(svg, off, off, cs, parseMarks(host), n);
+    drawArrows(svg, host, { u: [off, off] }, cs);
+    host.insertBefore(svg, host.firstChild);
+  }
+
+  /* ---- kind: uf (U face above F face — for insertions) ---- */
+  function renderUF(host) {
+    var n = panelN(host);
+    var cs = n === 2 ? 34 : 30, ox = 18, uy = 4;
+    var fy = 4 + cs * n + (n === 2 ? 16 : 14);
+    var w = ox + cs * n + 4, h = fy + cs * n + 4;
+    var svg = mkSvg(w, h, n === 2 ? 104 : 116);
+    gridN(svg, ox, uy, cs, host.getAttribute('data-u'), n);
+    gridN(svg, ox, fy, cs, host.getAttribute('data-f'), n);
+    function label(txt, y) {
+      var t = el('text', {
+        x: 8, y: y, 'text-anchor': 'middle', fill: '#57503F',
+        'font-family': 'Bahnschrift, Arial Narrow, sans-serif', 'font-size': 13, 'font-weight': 700
+      }, svg);
+      t.textContent = txt;
+    }
+    label('U', uy + cs * n / 2 + 5);
+    label('F', fy + cs * n / 2 + 5);
+    ringsN(svg, ox, uy, cs, parseMarks(host), n);
+    drawArrows(svg, host, { u: [ox, uy], f: [ox, fy] }, cs);
+    host.insertBefore(svg, host.firstChild);
+  }
+
+  function drawArrows(svg, host, grids, cs) {
+    var spec = host.getAttribute('data-arrows');
+    if (!spec) return;
+    JSON.parse(spec).forEach(function (a) {
+      var g1 = grids[a.f[0]], g2 = grids[a.t[0]];
+      arrow(svg,
+        g1[0] + a.f[1] * cs + cs / 2, g1[1] + a.f[2] * cs + cs / 2,
+        g2[0] + a.t[1] * cs + cs / 2, g2[1] + a.t[2] * cs + cs / 2,
+        a.curve || 0, a.dbl);
+    });
+  }
+
+  /* ---- kind: net (unfolded cube, 6 faces U L F R B D) ---- */
+  function renderNet(host) {
+    var n = panelN(host);
+    var FS = 27, unit = FS + 3;
+    var pos = { U: [1, 0], L: [0, 1], F: [1, 1], R: [2, 1], B: [3, 1], D: [1, 2] };
+    var order = 'ULFRBD';
+    var c = host.getAttribute('data-c');
+    var svg = mkSvg(unit * 4 + 3, unit * 3 + 3, 196);
+    for (var i = 0; i < 6; i++) {
+      var name = order[i], code = c[i];
+      var x = 3 + pos[name][0] * unit, y = 3 + pos[name][1] * unit;
+      el('rect', { x: x, y: y, width: FS, height: FS, rx: 4, fill: COL[code], stroke: INK, 'stroke-width': 2 }, svg);
+      for (var j = 1; j < n; j++) {
+        el('line', { x1: x + FS * j / n, y1: y, x2: x + FS * j / n, y2: y + FS, stroke: INK, 'stroke-width': .8, opacity: .3 }, svg);
+        el('line', { x1: x, y1: y + FS * j / n, x2: x + FS, y2: y + FS * j / n, stroke: INK, 'stroke-width': .8, opacity: .3 }, svg);
+      }
+      var dark = 'rgb'.indexOf(code) >= 0;
+      var t = el('text', {
+        x: x + FS / 2, y: y + FS / 2 + 4, 'text-anchor': 'middle',
+        fill: dark ? '#FFFFFF' : INK, opacity: dark ? .9 : .6,
+        'font-family': 'Bahnschrift, Arial Narrow, sans-serif', 'font-size': 11, 'font-weight': 700
+      }, svg);
+      t.textContent = name;
+    }
+    host.insertBefore(svg, host.firstChild);
+  }
+
+  /* ---- kind: pyra (one triangular face, 9 small triangles) ---- */
+  var TRI = [
+    [[0,0],[1,0],[1,1]], [[1,0],[2,0],[2,1]], [[1,0],[1,1],[2,1]],
+    [[1,1],[2,1],[2,2]], [[2,0],[3,0],[3,1]], [[2,0],[2,1],[3,1]],
+    [[2,1],[3,1],[3,2]], [[2,1],[2,2],[3,2]], [[2,2],[3,2],[3,3]]
+  ];
+  function renderPyra(host) {
+    var small = host.getAttribute('data-small');
+    var cs = small ? 34 : 44, h = cs * 0.8660254, ox = 8, oy = 8;
+    var W = ox * 2 + 3 * cs, H = oy * 2 + 3 * h;
+    var svg = mkSvg(W, H, small ? 104 : 130);
+    var cx = ox + 1.5 * cs;
+    var P = [];
+    for (var i = 0; i <= 3; i++) { P[i] = []; for (var j = 0; j <= i; j++) { P[i][j] = [cx + (j - i / 2) * cs, oy + i * h]; } }
+    var c = host.getAttribute('data-c') || 'xxxxxxxxx';
+    var polys = [];
+    TRI.forEach(function (t, idx) {
+      var pts = t.map(function (pt) { return P[pt[0]][pt[1]]; });
+      polys.push(pts);
+      el('polygon', {
+        points: pts.map(function (p) { return p[0] + ',' + p[1]; }).join(' '),
+        fill: COL[c[idx]] || COL.x, stroke: INK, 'stroke-width': 1.8, 'stroke-linejoin': 'round'
+      }, svg);
+    });
+    parseMarks(host).forEach(function (idx) {
+      var pts = polys[idx];
+      el('polygon', {
+        points: pts.map(function (p) { return p[0] + ',' + p[1]; }).join(' '),
+        fill: 'none', stroke: INK, 'stroke-width': 3.8, 'stroke-linejoin': 'round'
+      }, svg);
+    });
+    function cent(idx) { var p = polys[idx]; return [(p[0][0] + p[1][0] + p[2][0]) / 3, (p[0][1] + p[1][1] + p[2][1]) / 3]; }
+    var pa = host.getAttribute('data-parrows');
+    if (pa) { JSON.parse(pa).forEach(function (a) { var f = cent(a.f), t = cent(a.t); arrow(svg, f[0], f[1], t[0], t[1], a.curve || 0, a.dbl); }); }
+    var rot = host.getAttribute('data-rot');
+    if (rot) {
+      var parts = rot.split(':'), ccw = parts[1] === 'ccw', pos;
+      if (parts[0] === 'top') pos = [cx, oy + cs * 0.62];
+      else if (parts[0] === 'left') pos = [P[3][0][0] + cs * 0.55, P[3][0][1] - cs * 0.4];
+      else if (parts[0] === 'right') pos = [P[3][3][0] - cs * 0.55, P[3][3][1] - cs * 0.4];
+      else pos = [cx, oy + 1.9 * h];
+      circleArrow(svg, pos[0], pos[1], cs * 0.4, ccw);
+    }
+    host.insertBefore(svg, host.firstChild);
+  }
+
+  document.querySelectorAll('.dg').forEach(function (host) {
+    var kind = host.getAttribute('data-kind');
+    try {
+      if (kind === 'face') renderFace(host);
+      else if (kind === 'top') renderTop(host);
+      else if (kind === 'uf') renderUF(host);
+      else if (kind === 'net') renderNet(host);
+      else if (kind === 'pyra') renderPyra(host);
+    } catch (e) { /* diagram is decorative — never break the page */ }
+  });
+
+  /* ---- Algorithm chips ---- */
+  document.querySelectorAll('[data-alg]').forEach(function (elx) {
+    var moves = elx.getAttribute('data-alg').trim().split(/\s+/);
+    var isPyra = !!elx.closest('#panel-py');
+    elx.textContent = '';
+    moves.forEach(function (mv) {
+      var s = document.createElement('span');
+      var cls = 'mv';
+      if (mv.indexOf("'") >= 0) cls += ' prime';
+      else if (!isPyra && mv.indexOf('2') >= 0) cls += ' dbl';
+      if (isPyra && /^[ulrb]/.test(mv)) cls += ' tip';
+      s.className = cls;
+      s.textContent = mv;
+      elx.appendChild(s);
+    });
+  });
+
+  /* ---- Progress checkboxes (saved in the browser) ---- */
+  var KEY = 'cubes-progress-v1';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
+  document.querySelectorAll('.done-row input[data-step]').forEach(function (box) {
+    var id = box.getAttribute('data-step');
+    box.checked = !!saved[id];
+    var card = box.closest('.card');
+    if (card) card.classList.toggle('is-done', box.checked);
+    box.addEventListener('change', function () {
+      saved[id] = box.checked;
+      if (card) card.classList.toggle('is-done', box.checked);
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    });
+  });
+
+  /* ---- Cube + level switching ---- */
+  var SKEY = 'cubes-state-v1';
+  var state = { cube: 'a3', level: 'beginner' };
+  try {
+    var s = JSON.parse(localStorage.getItem(SKEY));
+    if (s && s.cube && s.level) state = s;
+  } catch (e) {}
+  var cubeBtns = document.querySelectorAll('.cubebtn');
+  var lvlBtns = document.querySelectorAll('.lvlbtn');
+  function apply(scroll) {
+    document.body.setAttribute('data-cube', state.cube);
+    document.body.setAttribute('data-level', state.level);
+    cubeBtns.forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-cube') === state.cube); });
+    lvlBtns.forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-level') === state.level); });
+    try { localStorage.setItem(SKEY, JSON.stringify(state)); } catch (e) {}
+    if (scroll) window.scrollTo(0, 0);
+  }
+  cubeBtns.forEach(function (b) {
+    b.addEventListener('click', function () { state.cube = b.getAttribute('data-cube'); apply(true); });
+  });
+  lvlBtns.forEach(function (b) {
+    b.addEventListener('click', function () { state.level = b.getAttribute('data-level'); apply(true); });
+  });
+  apply(false);
+
+  /* ---- Sticky offsets: measure topbar height ---- */
+  var topbar = document.getElementById('topbar');
+  function setTbh() {
+    if (topbar) document.documentElement.style.setProperty('--tbh', topbar.offsetHeight + 'px');
+  }
+  setTbh();
+  window.addEventListener('resize', setTbh);
+})();
+</script>
+</body>
+</html>
