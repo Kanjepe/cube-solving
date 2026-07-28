@@ -274,7 +274,7 @@
       <span style="background:var(--cg)"></span><span style="background:var(--cb)"></span>
     </div>
     <h1>2×2 Rubika kubs<br><span class="thin">Divas metodes</span></h1>
-    <p class="hero-sub">Divas metodes vienā lapā — <strong>pārslēdz augšā</strong>: <strong>iesācēju</strong> (tavējā, 5 algoritmi,
+    <p class="hero-sub">Divas metodes vienā lapā — <strong>pārslēdz augšā</strong>: <strong>iesācēju</strong> (4 algoritmi,
     slānis pa slānim) vai <strong>profesionāļa</strong> (Ortega + CLL) ātrai salikšanai.</p>
     <div class="hero-badges">
       <span class="badge">2 metodes</span>
@@ -387,8 +387,9 @@
 <!-- ============ 1. METODE — IESĀCĒJU ============ -->
 <div class="part-head">
   <div class="kick">1. metode</div>
-  <h2>Iesācēju metode — tava versija <span class="rule" style="background:var(--paper)"></span></h2>
-  <p>Slānis pa slānim, tikai ar taviem 5 algoritmiem. Ja izpildīsi soļus secīgi, kubs sanāks vienmēr.</p>
+  <h2>Iesācēju metode — slānis pa slānim <span class="rule" style="background:var(--paper)"></span></h2>
+  <p>Slānis pa slānim ar 4 algoritmiem. Plāns: 1) baltā puse apakšā → 2) dzeltenā puse augšā → 3) sānu sakārtošana — gatavs.
+  Visi soļi ir viena secīga ķēde: baltais no 1. soļa līdz beigām paliek apakšā, un soļi nav jāatkārto katrai pusei.</p>
 </div>
 
 <section>
@@ -397,7 +398,10 @@
     <div class="stepnum">1</div>
     <h3>1. solis — Pirmais slānis (baltais)</h3>
     <p class="goal">Mērķis: visa baltā puse gatava apakšā, un katra sāna apakšējā rinda vienā krāsā.</p>
-    <p>Turi kubu ar <strong>balto uz leju, dzelteno uz augšu</strong> — un no šī brīža vairs to neapgriez.</p>
+    <p>Turi kubu ar <strong>balto uz leju, dzelteno uz augšu</strong> — un no šī brīža vairs to neapgriez otrādi.
+    (Pagriezt kubu rokās <strong>ap vertikālo asi</strong>, lai izvēlētos citu priekšpusi, drīkst jebkurā brīdī — tikai ne algoritma vidū.)</p>
+    <div class="tip"><b>Pirmais stūris:</b> 2×2 nav centru, tāpēc pirmo balto stūri vienkārši noliec apakšā <strong>jebkurā vietā</strong> —
+    tas kļūst par atskaites punktu. Visu pārējo stūru «savas vietas» tagad nosaka šis pirmais stūris.</div>
     <ol>
       <li>Atrodi augšējā slānī stūri ar <strong>baltu uzlīmi</strong>.</li>
       <li>Apskati tā pārējās divas krāsas un pagriez augšu (U) tā, lai stūris būtu <strong>tieši virs savas vietas</strong>
@@ -412,9 +416,9 @@
         (stūris izlec augšā), tad ievieto no jauna pareizi.</li>
     </ul>
     <div class="dgrow">
-      <figure class="dg" data-kind="uf" data-u="xxxw" data-f="xxxw"
-        data-arrows='[{"f":["u",1,1],"t":["f",1,1],"curve":24}]'
-        ><figcaption>Baltais stūris virs savas vietas → algoritms to nogādā lejā</figcaption></figure>
+      <figure class="dg" data-kind="uf" data-u="xxxw" data-f="xgxx"
+        data-arrows='[{"f":["u",1,1],"t":["f",1,0],"curve":24}]'
+        ><figcaption>Baltais stūris virs savas vietas → algoritms to nogādā lejā (baltais nogriežas uz leju)</figcaption></figure>
       <figure class="dg" data-kind="top" data-c="wwww" data-b="bb" data-r="oo" data-f="gg" data-l="rr"
         ><figcaption>Rezultāts (skats uz balto pusi): balta puse + visu sānu apakšrindas</figcaption></figure>
     </div>
@@ -433,9 +437,15 @@
     <p class="alg-label">Pretējās puses taisīšanai (Sune) · atkārto, līdz augša ir dzeltena</p>
     <ol>
       <li>Ja augša jau ir gatava — izlaid šo soli.</li>
-      <li>Citādi pagriez kubu tā, lai kāds vēl <strong>nepagriezts</strong> stūris (bez dzeltenā augšā) būtu
-        <strong>priekšā pa kreisi</strong> ar dzelteno uzlīmi uz kreiso pusi. Izpildi algoritmu.</li>
-      <li>Ja augša vēl nav gatava — pārorientē kubu tāpat un <strong>atkārto</strong>. Parasti pietiek ar 1–3 reizēm.</li>
+      <li>Saskaiti, cik stūru augšā rāda dzelteno:
+        <ul>
+          <li><strong>Tieši viens</strong> → pagriez kubu (ap vertikālo asi), lai šis dzeltenais stūris būtu <strong>priekšā pa kreisi</strong>.</li>
+          <li><strong>Neviens vai divi</strong> → pagriez kubu, līdz <strong>priekšējā kreisā</strong> stūra dzeltenā uzlīme
+            <strong>skatās pa kreisi</strong> (uz sāniem, tieši pret tavu kreiso roku).</li>
+        </ul>
+      </li>
+      <li>Izpildi algoritmu. Ja augša vēl nav dzeltena — atgriezies pie 2. punkta un <strong>atkārto</strong>.
+        Vairāk par 3 reizēm nekad nevajadzēs.</li>
     </ol>
     <div class="dgrow">
       <figure class="dg" data-kind="top" data-c="yxxy" data-small="1"
@@ -455,28 +465,27 @@
     <h3>3. solis — Augšējo stūru maiņa (sānu sakārtošana)</h3>
     <p class="goal">Mērķis: visu sānu krāsas sakrīt — kubs salikts.</p>
     <p>Augša ir dzeltena, bet sānu krāsas ap augšu var būt sajukušas. Griez tikai augšu (U) un paskaties:
-    ja kāda <strong>sāns jau ir vienā krāsā</strong> (piem., abi aizmugures stūri zili) — tas ir tavs «pareizais pāris».</p>
+    ja kāds <strong>sāns jau ir vienā krāsā</strong> (piem., abi aizmugures stūri zili) — tas ir tavs «pareizais pāris».</p>
 
     <h3 style="font-size:18px">A) Blakus stūru maiņa</h3>
-    <p>Kad viens sāns jau ir pareizs (pāris blakus stūru): turi <strong>pareizo pāri aizmugurē</strong> — priekšējie divi stūri jāsamaina vietām.</p>
-    <p class="alg" data-alg="L' U R' D2 R U' R' D2 R2"></p>
-    <p class="alg-label">Blakus stūriem</p>
-    <p>Ja ērtāk pareizo pāri turēt otrādi (spoguļvariants), izmanto:</p>
-    <p class="alg" data-alg="R' U R' D2 R U' R' D2 R2"></p>
-    <p class="alg-label">Sānu sakārtošanai (blakus, spoguļa versija)</p>
+    <p>Kad viens sāns jau ir pareizs (pāris blakus stūru): turi <strong>pareizo pāri pa kreisi</strong> — labie divi stūri samainīsies vietām.</p>
+    <p class="alg" data-alg="R U R' U' R' F R2 U' R' U' R U R' F'"></p>
+    <p class="alg-label">Blakus stūriem (pareizais pāris pa kreisi)</p>
+    <p>Beigās, ja vajag, pagriez augšu (U), līdz visas sānu krāsas sakrīt.</p>
 
     <h3 style="font-size:18px">B) Pretējo (diagonālo) stūru maiņa</h3>
     <p>Ja <strong>neviens</strong> sāns nav vienā krāsā, jāsamaina divi <strong>pa diagonāli</strong> pretējie stūri:</p>
     <p class="alg" data-alg="R U' R' U' F2 U' R U R' D R2"></p>
-    <p class="alg-label">Pretējiem stūriem</p>
+    <p class="alg-label">Pretējiem stūriem (jebkurš leņķis)</p>
+    <p>Pēc algoritma pagriez augšu (U) un, ja vajag, arī apakšu (D), līdz visas krāsas sakrīt — kubs gatavs.</p>
 
     <div class="dgrow">
-      <figure class="dg" data-kind="top" data-c="yyyy" data-b="bb" data-r="oo" data-f="gg" data-l="rr"
-        data-arrows='[{"f":["u",0,1],"t":["u",1,1],"curve":18,"dbl":1}]'
-        ><figcaption>A) Aizmugure (zila) pareiza → priekšējie divi mainās vietām</figcaption></figure>
-      <figure class="dg" data-kind="top" data-c="yyyy"
+      <figure class="dg" data-kind="top" data-c="yyyy" data-b="bo" data-r="gb" data-f="go" data-l="rr"
+        data-arrows='[{"f":["u",1,0],"t":["u",1,1],"curve":18,"dbl":1}]'
+        ><figcaption>A) Kreisais sāns (sarkans) pareizs → labie divi mainās vietām</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="yyyy" data-b="gb" data-r="or" data-f="gb" data-l="or"
         data-arrows='[{"f":["u",0,0],"t":["u",1,1],"curve":0,"dbl":1}]'
-        ><figcaption>B) Neviens sāns nav gatavs → mainās divi pa diagonāli</figcaption></figure>
+        ><figcaption>B) Neviens sāns nav vienā krāsā → mainās divi pa diagonāli</figcaption></figure>
     </div>
     <div class="tip"><b>Padoms:</b> vispirms vienmēr pameklē pareizo pāri, griežot tikai U. Ja atrodi — tas ir gadījums A (īsāks).
     Tikai ja pāra nav vispār — tad gadījums B.</div>
@@ -492,8 +501,10 @@
 <div class="part-head pro">
   <div class="kick">2. metode</div>
   <h2>Profesionāļa metode <span class="rule" style="background:var(--paper)"></span></h2>
-  <p>Kā liek speedcuberi. Sāc ar <strong>Ortega</strong> (~12 algoritmi, viegli apgūt, ātrs), tad — ja gribi vēl ātrāk —
+  <p>Kā kubu saliek ātrsalicēji (speedcuberi). Sāc ar <strong>Ortega</strong> (~12 algoritmi, viegli apgūt, ātrs), tad — ja gribi vēl ātrāk —
   pāriej uz <strong>CLL</strong> (pēdējais slānis vienā piegājienā).</p>
+  <p><strong>Kad esi gatavs Pro līmenim?</strong> Kad iesācēju metodi izpildi bez lapas. Labā ziņa: lielākā daļa Ortega algoritmu
+  tev jau ir pazīstami no iesācēju soļiem — pa īstam jauni ir tikai daži.</p>
 </div>
 
 <!-- ---- ORTEGA ---- -->
@@ -504,15 +515,17 @@
 
     <h3 style="font-size:18px">1. Uztaisi vienu pusi</h3>
     <p>Saliec <strong>jebkuru</strong> vienu pusi vienā krāsā (parasti balto). Nav svarīgi, vai apakšējā slāņa sāni sakrīt —
-    svarīgi tikai, ka visa apakšpuse ir vienā krāsā. Dari to <strong>ar aci, bez algoritma</strong> (2–4 griezieni).</p>
+    svarīgi tikai, ka visa apakšpuse ir vienā krāsā. Dari to <strong>ar aci, bez algoritma</strong> (2–4 griezieni):
+    sāc ar diviem baltiem stūriem, kas jau ir kopā, un pievieno pārējos divus — tāpat kā iesācēju 1. solī,
+    tikai sānu krāsas šoreiz nav jākontrolē.</p>
     <div class="dgrow">
       <figure class="dg" data-kind="face" data-c="wwww" data-small="1"
         ><figcaption>Viena puse vienā krāsā — ar to pietiek (sāni var nesakrist)</figcaption></figure>
     </div>
 
     <h3 style="font-size:18px">2. OLL — orientē augšu (7 gadījumi)</h3>
-    <p>Turi gatavo pusi <strong>apakšā</strong> un panāc, lai visa augša ir vienā krāsā. Atpazīsti figūru pēc augšas
-    dzeltenajām uzlīmēm un «lukturiem» sānos, tad izpildi attiecīgo algoritmu:</p>
+    <p>Turi gatavo pusi <strong>apakšā</strong> un panāc, lai visa augša ir vienā krāsā. Atpazīsti figūru pēc dzeltenajām
+    uzlīmēm augšā <em>un</em> sānos, tad izpildi attiecīgo algoritmu:</p>
     <div class="cheat-wrap">
       <table class="cheat pro">
         <tr><th>Gadījums</th><th>Algoritms</th></tr>
@@ -525,24 +538,46 @@
         <tr><td>L</td><td><span class="alg small" data-alg="F R U' R' U' R U R' F'"></span></td></tr>
       </table>
     </div>
-    <div class="tip"><b>Atpazīšana īsi:</b> saskaiti dzeltenās uzlīmes augšā. <b>1</b> dzeltena augšā → Sune vai Antisune;
-    <b>2</b> → T, U vai L (skaties, vai dzeltenie sānos ir blakus vai pretī); <b>0</b> → Pi vai H.</div>
+    <p>Katra gadījuma izskats (dzeltenās uzlīmes augšā un sānu strīpās). Pagriez kubu ap vertikālo asi,
+    līdz tavs kubs izskatās <strong>tieši</strong> kā diagrammā, tad izpildi algoritmu:</p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-small="1" data-c="xxyx" data-b="yx" data-f="xy" data-l="xx" data-r="yx"
+        ><figcaption>Sune</figcaption></figure>
+      <figure class="dg" data-kind="top" data-small="1" data-c="xyxx" data-b="xx" data-f="yx" data-l="yx" data-r="xy"
+        ><figcaption>Antisune</figcaption></figure>
+      <figure class="dg" data-kind="top" data-small="1" data-c="xxxx" data-b="xy" data-f="xy" data-l="yy" data-r="xx"
+        ><figcaption>Pi</figcaption></figure>
+      <figure class="dg" data-kind="top" data-small="1" data-c="xxxx" data-b="yy" data-f="yy" data-l="xx" data-r="xx"
+        ><figcaption>H</figcaption></figure>
+      <figure class="dg" data-kind="top" data-small="1" data-c="xyxy" data-b="xx" data-f="xx" data-l="yy" data-r="xx"
+        ><figcaption>U</figcaption></figure>
+      <figure class="dg" data-kind="top" data-small="1" data-c="xyxy" data-b="yx" data-f="yx" data-l="xx" data-r="xx"
+        ><figcaption>T</figcaption></figure>
+      <figure class="dg" data-kind="top" data-small="1" data-c="yxxy" data-b="xx" data-f="yx" data-l="xx" data-r="yx"
+        ><figcaption>L</figcaption></figure>
+    </div>
+    <div class="tip"><b>Atpazīšana īsi:</b> saskaiti dzeltenās uzlīmes augšā: <b>1</b> → Sune vai Antisune;
+    <b>2</b> → U, T vai L; <b>0</b> → Pi vai H. Tad atrodi diagrammu, kurā sakrīt arī sānu dzeltenās uzlīmes.</div>
 
     <h3 style="font-size:18px">3. PBL — permutē abus slāņus (samaini stūrus)</h3>
     <p>Tagad augša ir vienā krāsā, bet stūri (gan augšā, gan apakšā) var būt nepareizās vietās. Katram slānim ir 3 iespējas:
-    <strong>gatavs</strong>, <strong>blakus maiņa</strong> (viens sāns = «lukturi»), vai <strong>diagonāle</strong> (nav neviena pareiza sāna).</p>
+    <strong>gatavs</strong>, <strong>blakus maiņa</strong> — viens sāns vienā krāsā (t.s. <strong>«lukturi»</strong>: divi
+    vienādas krāsas stūri vienā sānā, kā auto priekšējie lukturi), vai <strong>diagonāle</strong> (neviens sāns nav vienā krāsā).</p>
     <div class="cheat-wrap">
       <table class="cheat pro">
-        <tr><th>Gadījums</th><th>Algoritms</th></tr>
-        <tr><td>Abi slāņi gatavi</td><td><em>tikai izlīdzini ar U</em></td></tr>
-        <tr><td>Blakus maiņa + otrs gatavs</td><td><span class="alg tiny" data-alg="R U R' U' R' F R2 U' R' U' R U R' F'"></span></td></tr>
-        <tr><td>Diagonāle + otrs gatavs</td><td><span class="alg tiny" data-alg="F R U' R' U' R U R' F' R U R' U' R' F R F'"></span></td></tr>
-        <tr><td>Blakus + blakus</td><td><span class="alg small" data-alg="R2 U' R2 U2 F2 U' R2"></span></td></tr>
-        <tr><td>Diagonāle + diagonāle</td><td><span class="alg small" data-alg="R2 F2 R2"></span></td></tr>
-        <tr><td>Blakus + diagonāle</td><td><span class="alg small" data-alg="R U' R F2 R' U R'"></span></td></tr>
+        <tr><th>Gadījums</th><th>Kā turēt</th><th>Algoritms</th></tr>
+        <tr><td>Abi slāņi gatavi</td><td>—</td><td><em>tikai izlīdzini ar U</em></td></tr>
+        <tr><td>Blakus maiņa + otrs gatavs</td><td>nesakārtotais slānis augšā, «lukturi» pa kreisi</td><td><span class="alg tiny" data-alg="R U R' U' R' F R2 U' R' U' R U R' F'"></span></td></tr>
+        <tr><td>Diagonāle + otrs gatavs</td><td>nesakārtotais slānis augšā, leņķis vienalga</td><td><span class="alg tiny" data-alg="F R U' R' U' R U R' F' R U R' U' R' F R F'"></span></td></tr>
+        <tr><td>Blakus + blakus</td><td>abi pareizie pāri aizmugurē</td><td><span class="alg small" data-alg="R2 U' R2 U2 F2 U' R2"></span></td></tr>
+        <tr><td>Diagonāle + diagonāle</td><td>jebkurš leņķis</td><td><span class="alg small" data-alg="R2 F2 R2"></span></td></tr>
+        <tr><td>Blakus + diagonāle</td><td>blakus-slānis augšā, tā pareizais pāris priekšā</td><td><span class="alg small" data-alg="R U' R F2 R' U R'"></span></td></tr>
       </table>
     </div>
-    <div class="tip"><b>Ātrums:</b> ar Ortega labs cuberis sanāk zem 5 sekundēm. Vari sākt tikai ar 4 algoritmiem
+    <div class="tip"><b>Svarīgi:</b> ja slānis, kam pēc tabulas jābūt augšā, ir apakšā — vienkārši <strong>apgriez kubu otrādi
+    pirms algoritma</strong> (šajā solī tas ir atļauts: augša jau ir vienā krāsā, apakša arī). Pēc katra PBL algoritma
+    beigās izlīdzini slāņus ar U (un, ja vajag, D).</div>
+    <div class="tip"><b>Ātrums:</b> ar Ortega labs risinātājs kubu saliek ātrāk nekā 5 sekundēs. Vari sākt tikai ar 4 algoritmiem
     (Sune, Antisune + «diag+diag», «blakus+blakus») un pārējos pievienot vēlāk.</div>
   </div>
 </section>
@@ -560,14 +595,14 @@
     </ol>
     <p>42 gadījumi ir sagrupēti pēc <strong>7 augšas figūrām</strong> (tās pašas, ko zini no Ortega OLL):
     <strong>Sune, Antisune, Pi, H, U, T, L</strong>. Katrai figūrai ir vairāki apakšgadījumi atkarībā no tā, kā stūri jāpārvieto.</p>
-    <div class="tip"><b>Ar ko sākt:</b> ja pēc pirmā slāņa augša jau <em>gadās</em> pilnībā orientēta, CLL sakrīt ar diviem PLL gadījumiem —
-    izmanto Ortega PBL «blakus» un «diagonāle» algoritmus. Pārējos 40 apgūsti pa figūru grupām.</p></div>
+    <div class="tip"><b>Ar ko sākt:</b> ja pēc pirmā slāņa augša jau <em>gadās</em> pilnībā orientēta, CLL sakrīt ar diviem
+    permutācijas gadījumiem — izmanto Ortega PBL «blakus» un «diagonāle» algoritmus. Pārējos 40 apgūsti pa figūru grupām.</div>
     <div class="warn"><b>Godīgi:</b> visus 42 CLL algoritmus nav prātīgi mācīties no galvas no šīs lapas — tos apgūst pa grupām
     no pilna algoritmu saraksta. Uzticami pilnie saraksti: <strong>jperm.net/algs/2x2/cll</strong> un <strong>KewbzUK CLL PDF</strong>.
     Ortega (augstāk) ir pilnībā pietiekama «pro» metode, līdz esi gatavs CLL.</div>
     <table class="cheat pro" style="margin-top:6px">
       <tr><th>Metode</th><th>Algoritmu sk.</th><th>Kad izvēlēties</th></tr>
-      <tr><td>Iesācēju</td><td>5</td><td>Sākums — vienmēr strādā, viegli atcerēties</td></tr>
+      <tr><td>Iesācēju</td><td>4</td><td>Sākums — vienmēr strādā, viegli atcerēties</td></tr>
       <tr><td>Ortega</td><td>~12</td><td>Ātri (&lt;5 s), maz jāmācās — ieteicamais «pro» starts</td></tr>
       <tr><td>CLL</td><td>42</td><td>Nākamais līmenis — pēdējais slānis 1 skatienā</td></tr>
     </table>
@@ -580,19 +615,17 @@
 <section id="cheat">
   <h2>Kopsavilkums — visi algoritmi <span class="rule"></span></h2>
 
-  <h3>1. metode — iesācēju (tavējā)</h3>
+  <h3>1. metode — iesācēju</h3>
   <div class="cheat-wrap">
     <table class="cheat">
       <tr><th>Solis</th><th>Kad lietot</th><th>Algoritms</th></tr>
       <tr><td>1. Pirmais slānis</td><td>Balts stūris virs savas vietas, priekšā pa labi</td>
         <td><span class="alg small" data-alg="R U R' U'"></span></td></tr>
-      <tr><td>2. Augšas orientācija</td><td>Nepagrieztais stūris priekšā pa kreisi; atkārto līdz augša dzeltena</td>
+      <tr><td>2. Augšas orientācija</td><td>1 dzeltens augšā → to priekšā pa kreisi; 0 vai 2 → priekšējā kreisā stūra dzeltenā uzlīme pa kreisi; atkārto</td>
         <td><span class="alg small" data-alg="R U R' U R U2 R'"></span></td></tr>
-      <tr><td>3A. Blakus stūri</td><td>Viens sāns pareizs → turi to aizmugurē</td>
-        <td><span class="alg small" data-alg="L' U R' D2 R U' R' D2 R2"></span></td></tr>
-      <tr><td>3A. Blakus (spogulis)</td><td>Pareizo pāri turi otrādi</td>
-        <td><span class="alg small" data-alg="R' U R' D2 R U' R' D2 R2"></span></td></tr>
-      <tr><td>3B. Pretēji stūri</td><td>Neviens sāns nav pareizs (diagonāle)</td>
+      <tr><td>3A. Blakus stūri</td><td>Viens sāns pareizs → turi to pa kreisi; beigās izlīdzini ar U</td>
+        <td><span class="alg tiny" data-alg="R U R' U' R' F R2 U' R' U' R U R' F'"></span></td></tr>
+      <tr><td>3B. Pretēji stūri</td><td>Neviens sāns nav pareizs (diagonāle); beigās izlīdzini ar U un D</td>
         <td><span class="alg small" data-alg="R U' R' U' F2 U' R U R' D R2"></span></td></tr>
     </table>
   </div>
@@ -623,7 +656,8 @@
   <h2>Padomi un biežākās kļūdas <span class="rule"></span></h2>
   <div class="card">
     <ul>
-      <li><strong>Negriez visu kubu algoritma laikā.</strong> Priekšpusei jāpaliek priekšā no sākuma līdz beigām.</li>
+      <li><strong>Negriez visu kubu algoritma laikā.</strong> Priekšpusei jāpaliek priekšā no sākuma līdz beigām.
+        Toties <strong>starp</strong> algoritmiem kubu grozīt drīkst — tieši tā tu izvēlies pareizo priekšpusi.</li>
       <li><strong>Nejauc R ar R'.</strong> Ja algoritms «neiet», visbiežāk vainīgs sajaukts virziens.</li>
       <li><strong>2×2 nav centru</strong> — krāsu «pusi» nosaka paši stūri. Tāpēc pirmajā solī tu pats izvēlies, ar ko sākt.</li>
       <li><strong>2. solī neizbīsties</strong> — kubs pa vidu izskatās sajaukts, bet, kad augša ir vienā krāsā, viss saliksies.</li>
@@ -638,7 +672,7 @@
 
 <footer>
   <div class="wrap">
-    <p>2×2 Rubika kuba pamācība — iesācēju (tavā versijā) + profesionāļa (Ortega, CLL) metode.
+    <p>2×2 Rubika kuba pamācība — iesācēju + profesionāļa (Ortega, CLL) metode.
     Lapa strādā pilnībā bez interneta — vienkārši atver failu pārlūkā. Veiksmi salikšanā!</p>
     <p style="margin-top:10px;font-size:13px">Pro algoritmu avoti:
     <a href="https://cubingcheatsheet.com/algs2x.html">cubingcheatsheet.com</a>,

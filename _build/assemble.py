@@ -1,6 +1,6 @@
-# Assembles the unified cube guide (index.html) from the three original
-# guides plus authored shell/kids fragments in _build/.
-# Originals are read-only; output is written to ../index.html.
+# Assembles the unified cube guide (cube-solving.html) from the three original
+# guides plus authored shell fragments in _build/.
+# Originals are read-only; output is written to ../cube-solving.html.
 import re
 import io
 import os
@@ -55,13 +55,8 @@ main_a2 = extract_main(src_a2, 'a2')
 main_a3 = extract_main(src_a3, 'a3')
 main_py = extract_main(src_py, 'py')
 
-# 2x2: shared sections get hide-kids (kids level has its own intro/steps)
-for sec in ('a2-uzbuve', 'a2-nota', 'a2-cheat', 'a2-padomi'):
-    main_a2 = add_class(main_a2, sec, 'hide-kids')
-
-# Pyraminx: shared sections get hide-kids
-for sec in ('py-uzbuve', 'py-nota', 'py-padomi'):
-    main_py = add_class(main_py, sec, 'hide-kids')
+# Pyraminx piece-diagram labels (G/S/M) and corrected marks now live directly
+# in the original guide file.
 
 # Pyraminx: replace original beginner block with the rewritten detailed version
 pat = re.compile(r'<div class="mode mode-beginner">.*?</div><!-- /mode-beginner -->', re.S)
@@ -88,28 +83,32 @@ def hero(flag_colors, title, sub):
             '  <p>%s</p>\n'
             '</section>\n' % (spans, title, sub))
 
-kids_a2 = read(os.path.join(BUILD, 'kids-a2.html')).strip()
-kids_a3 = read(os.path.join(BUILD, 'kids-a3.html')).strip()
-kids_py = read(os.path.join(BUILD, 'kids-py.html')).strip()
-
 panels = []
 panels.append('<div class="cubepanel" id="panel-a2" data-n="2">\n' +
               hero(['cw', 'cy', 'cr', 'co', 'cg', 'cb'], '2×2 Rubika kubs',
                    'Kabatas kubs — 8 stūri, bez centriem. Izvēlies līmeni augšā un ej cauri soļiem; izvēle tiek saglabāta.') +
-              kids_a2 + '\n' + main_a2 + '\n</div>')
+              main_a2 + '\n</div>')
 panels.append('<div class="cubepanel" id="panel-a3" data-n="3">\n' +
               hero(['cw', 'cy', 'cr', 'co', 'cg', 'cb'], '3×3 Rubika kubs',
                    'Klasika — slānis pa slānim (7 soļi) vai CFOP profesionāļiem. Izvēlies līmeni augšā.') +
-              kids_a3 + '\n' + main_a3 + '\n</div>')
+              main_a3 + '\n</div>')
 panels.append('<div class="cubepanel" id="panel-py" data-n="3">\n' +
               hero(['cg', 'cr', 'cb', 'cy'], 'Pyraminx',
                    'Piramīdas puzle — vieglākā no trim. Slānis pa slānim vai L4E/Oka profesionāļiem.') +
-              kids_py + '\n' + main_py + '\n</div>')
+              main_py + '\n</div>')
+
+GENERATED = ('<!-- GENERATED FILE - do not edit by hand.\n'
+             '     Built by _build/assemble.py from _build/ fragments and the\n'
+             '     three original guides. Edit those sources and rebuild. -->')
 
 out = (read(os.path.join(BUILD, 'shell-top.html')).rstrip() + '\n\n' +
        '\n\n'.join(navs) + '\n\n' +
        '<main class="wrap">\n\n' + '\n\n'.join(panels) + '\n\n</main>\n\n' +
        read(os.path.join(BUILD, 'shell-end.html')))
+
+if out.count('<!DOCTYPE html>') != 1:
+    raise SystemExit('doctype anchor count != 1')
+out = out.replace('<!DOCTYPE html>', '<!DOCTYPE html>\n' + GENERATED, 1)
 
 dst = os.path.join(ROOT, 'cube-solving.html')
 with io.open(dst, 'w', encoding='utf-8') as f:

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kubu salikšana — 2×2 · 3×3 · Pyraminx (Bērniem / Iesācējs / Pro)</title>
+<title>Kubu salikšana — 2×2 · 3×3 · Pyraminx (Iesācējs / Pro)</title>
 <style>
   :root {
     --paper: #F4EFE3;
@@ -63,7 +63,6 @@
   }
   .tabbtn:hover { transform: translate(-1px,-1px); }
   .tabbtn.active { background: var(--ink); color: var(--paper); }
-  .tabbtn.lvl-kids.active { background: var(--cg); border-color: var(--cg); }
   .tabbtn.lvl-pro.active { background: var(--cpro); border-color: var(--cpro); }
   .tabbtn .short { display: none; }
 
@@ -80,10 +79,8 @@
   body[data-cube="a3"] #panel-a3 { display: block; }
   body[data-cube="py"] #panel-py { display: block; }
   .mode { display: none; }
-  body[data-level="kids"] .mode-kids { display: block; }
   body[data-level="beginner"] .mode-beginner { display: block; }
   body[data-level="pro"] .mode-pro { display: block; }
-  body[data-level="kids"] .hide-kids { display: none; }
 
   /* ---------- Sticky step nav ---------- */
   nav.steps {
@@ -93,13 +90,10 @@
     padding: 8px 0; margin-bottom: 30px;
     display: none;
   }
-  body[data-cube="a2"][data-level="kids"] nav[data-for="a2:kids"],
   body[data-cube="a2"][data-level="beginner"] nav[data-for="a2:beginner"],
   body[data-cube="a2"][data-level="pro"] nav[data-for="a2:pro"],
-  body[data-cube="a3"][data-level="kids"] nav[data-for="a3:kids"],
   body[data-cube="a3"][data-level="beginner"] nav[data-for="a3:beginner"],
   body[data-cube="a3"][data-level="pro"] nav[data-for="a3:pro"],
-  body[data-cube="py"][data-level="kids"] nav[data-for="py:kids"],
   body[data-cube="py"][data-level="beginner"] nav[data-for="py:beginner"],
   body[data-cube="py"][data-level="pro"] nav[data-for="py:pro"] { display: block; }
   nav.steps .wrap { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
@@ -131,7 +125,6 @@
   h2 .rule { flex: 1; height: 4px; background: var(--ink); min-width: 40px; }
   .part-head { background: var(--ink); color: var(--paper); border-radius: 16px; padding: 20px 26px; margin: 12px 0 22px; box-shadow: var(--shadow); }
   .part-head.pro { background: var(--cpro); }
-  .part-head.kids { background: var(--cg); }
   .part-head .kick { font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase; letter-spacing: .12em; font-size: 13px; opacity: .85; }
   .part-head h2 { color: var(--paper); margin: 4px 0 6px; }
   .part-head p { margin: 0; font-style: italic; opacity: .92; }
@@ -202,18 +195,6 @@
     font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
     letter-spacing: .04em; font-size: 14px;
   }
-
-  /* ---------- Kids boxes ---------- */
-  .kbox { border: 2.5px solid var(--ink); border-radius: 14px; padding: 14px 16px; margin: 12px 0; font-size: 16.5px; }
-  .kbox .kt {
-    font-family: Bahnschrift, 'Arial Narrow', sans-serif; text-transform: uppercase;
-    font-size: 13px; letter-spacing: .06em; display: block; margin-bottom: 6px;
-  }
-  .kbox.see { background: #E3F2FD; border-left: 10px solid var(--cb); }
-  .kbox.do { background: #E9F5EA; border-left: 10px solid var(--cg); }
-  .kbox.help { background: #FFF3E0; border-left: 10px solid var(--co); }
-  .mode-kids .card.step { scroll-margin-top: calc(var(--tbh) + 58px); }
-  .mode-kids ol li, .mode-kids ul li { margin-bottom: 10px; }
 
   /* ---------- Diagrams ---------- */
   .dgrow { display: flex; gap: 22px; flex-wrap: wrap; margin: 18px 0; align-items: flex-start; }
@@ -294,7 +275,7 @@
     nav.steps { position: static; padding: 6px 0; margin-bottom: 20px; border-top: none; }
     nav.steps .wrap { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
     nav.steps a { font-size: 12px; padding: 3px 8px; white-space: nowrap; }
-    .card.step, .card.pro, .mode-kids .card.step { scroll-margin-top: calc(var(--tbh) + 8px); }
+    .card.step, .card.pro { scroll-margin-top: calc(var(--tbh) + 8px); }
     .part-head { padding: 14px 16px; }
     h2 { font-size: 22px; }
   }
@@ -319,41 +300,9 @@
       </div>
       <span class="tb-sep" aria-hidden="true"></span>
       <div class="tb-group" role="tablist" aria-label="Līmeņa izvēle">
-        <button class="tabbtn lvlbtn lvl-kids" data-level="kids" type="button"><span class="long">Bērniem</span><span class="short">Bērni</span></button>
         <button class="tabbtn lvlbtn" data-level="beginner" type="button"><span class="long">Iesācējs</span><span class="short">Iesāc.</span></button>
         <button class="tabbtn lvlbtn lvl-pro" data-level="pro" type="button"><span class="long">Pro</span><span class="short">Pro</span></button>
       </div>
     </div>
   </div>
 </div>
-
-<nav class="steps" data-for="a3:kids" aria-label="Soļi — 3×3 bērniem">
-  <div class="wrap">
-    <a href="#a3-k0"><b>★</b> Sāc šeit</a>
-    <a class="n1" href="#a3-k1"><b>1</b> Puķīte</a>
-    <a class="n2" href="#a3-k2"><b>2</b> Stūri</a>
-    <a class="n3" href="#a3-k3"><b>3</b> Vidus</a>
-    <a class="n4" href="#a3-k4"><b>4</b> Krusts</a>
-    <a class="n5" href="#a3-k5"><b>5</b> Malas</a>
-    <a class="n6" href="#a3-k6"><b>6</b> Vietas</a>
-    <a class="n7" href="#a3-k7"><b>7</b> Fināls</a>
-  </div>
-</nav>
-
-<nav class="steps" data-for="a2:kids" aria-label="Soļi — 2×2 bērniem">
-  <div class="wrap">
-    <a href="#a2-k0"><b>★</b> Sāc šeit</a>
-    <a class="n1" href="#a2-k1"><b>1</b> Baltā puse</a>
-    <a class="n2" href="#a2-k2"><b>2</b> Dzeltenā puse</a>
-    <a class="n3" href="#a2-k3"><b>3</b> Sāni</a>
-  </div>
-</nav>
-
-<nav class="steps" data-for="py:kids" aria-label="Soļi — Pyraminx bērniem">
-  <div class="wrap">
-    <a href="#py-k0"><b>★</b> Sāc šeit</a>
-    <a class="n1" href="#py-k1"><b>1</b> Smailītes</a>
-    <a class="n2" href="#py-k2"><b>2</b> Apakša</a>
-    <a class="n3" href="#py-k3"><b>3</b> Pēdējās malas</a>
-  </div>
-</nav>

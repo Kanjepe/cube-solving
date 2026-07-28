@@ -45,6 +45,18 @@ Everything is plain HTML/CSS/JS — no frameworks, no build dependencies beyond 
 python _build/assemble.py
 ```
 
-The script extracts the `<main>` content and step navigation from each standalone guide, prefixes element IDs to avoid collisions (`a2-`, `a3-`, `py-`), injects the kids-level fragments and shell, and writes the result to `cube-solving.html`.
+The script extracts the `<main>` content and step navigation from each standalone guide, prefixes element IDs to avoid collisions (`a2-`, `a3-`, `py-`), wraps them in the shell fragments, and writes the result to `cube-solving.html` (two levels: Iesācējs / Pro).
 
 The three standalone guides in `2x2/`, `3x3/`, and `pyraminx/` remain fully usable on their own.
+
+## Testing
+
+```
+python -m unittest discover -s _build -p "test_*.py"
+```
+
+- `_build/test_cubesim.py` — cube-simulator correctness against independently known facts (move orders, famous identities) plus regression tests for every algorithm claim the guides teach.
+- `_build/test_guides.py` — build pipeline and HTML content: every `data-alg` string must parse, OLL/OCLL recognition diagrams are recomputed from the algorithms and compared against the HTML.
+- `_build/verify_algs*.py` — one-off derivation scripts kept for reference (how the diagrams, holdings, and the step-2 rule were computed).
+
+Known gap: the in-page JavaScript (SVG rendering, level switching, localStorage) has no automated tests — diagram data is validated at the attribute level only.

@@ -321,9 +321,7 @@
 
 <main class="wrap">
 
-<div class="mode mode-beginner">
-
-<!-- ============ KUBA UZBŪVE ============ -->
+<!-- ============ KUBA UZBŪVE (kopīga abiem režīmiem) ============ -->
 <section id="uzbuve">
   <h2>Pirms sāc: kuba uzbūve <span class="rule"></span></h2>
   <div class="card">
@@ -336,6 +334,9 @@
     </ul>
     <p>Standarta krāsu izkārtojums: <strong>balts pretī dzeltenam</strong>, <strong>sarkans pretī oranžam</strong>,
     <strong>zils pretī zaļam</strong>. Šajā pamācībā sākam ar <strong>balto pusi</strong> un beidzam ar <strong>dzelteno</strong>.</p>
+    <p><strong>Kopējais plāns (iesācēju metode):</strong> visi 7 soļi ir <strong>viena secīga ķēde</strong> — izej tos pēc kārtas
+    un tikai vienu reizi, nevis atsevišķi katrai pusei. No 2. soļa līdz pat beigām <strong>baltā puse vienmēr ir apakšā</strong>,
+    dzeltenā augšā. Kad 7. solis pabeigts, viss kubs ir salikts.</p>
     <div class="dgrow">
       <figure class="dg" data-kind="face" data-c="xexecexex" data-mark="4"
         ><figcaption>Centrs — 1 krāsa, nekustas</figcaption></figure>
@@ -360,7 +361,7 @@
     <div class="notgrid">
       <div class="notcell"><span class="nname">R</span>
         <div class="dg" data-kind="face" data-c="xxmxxmxxm" data-arrow="colup:2"></div>
-        <span class="ndesc"><b>Right</b> — labā puse uz augšu (uz sevis skatoties)</span></div>
+        <span class="ndesc"><b>Right</b> — labā kolonna iet uz augšu (skatoties no priekšas)</span></div>
       <div class="notcell"><span class="nname">L</span>
         <div class="dg" data-kind="face" data-c="mxxmxxmxx" data-arrow="coldown:0"></div>
         <span class="ndesc"><b>Left</b> — kreisā puse uz leju</span></div>
@@ -385,12 +386,17 @@
         Piemēram, <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="U2"></span> = augšējā kārta divreiz.</li>
     </ul>
     <div class="warn"><b>Svarīgi!</b> Kamēr izpildi algoritmu, <strong>priekšpuse nemainās</strong> —
-    visu laiku turi kubu ar to pašu pusi pret sevi. Ja apgriezīsi kubu pa vidu, algoritms nestrādās.</div>
+    visu laiku turi kubu ar to pašu pusi pret sevi. Ja apgriezīsi kubu pa vidu, algoritms nestrādās.
+    Toties <strong>starp</strong> algoritmiem kubu pagriezt drīkst (un bieži vajag!) — tā tu izvēlies jaunu priekšpusi.
+    Vienīgais izņēmums: 7. solī starp stūriem griez tikai U kārtu.</div>
     <div class="tip"><b>Krāsas čipos:</b> dzeltens burts = parasts grieziens,
     <span style="color:#1558C9;font-weight:700">zils ar '</span> = pretējais virziens,
     <span style="color:#C25400;font-weight:700">oranžs ar 2</span> = 180°.</div>
   </div>
 </section>
+
+<div class="mode mode-beginner">
+
 <!-- ============ 1. SOLIS ============ -->
 <section>
   <h2>Salikšana soli pa solim <span class="rule"></span></h2>
@@ -416,7 +422,7 @@
         ><figcaption>Gatavs krusts (skatoties tieši uz balto pusi) — malu sānu krāsas sakrīt ar centriem</figcaption></figure>
     </div>
     <div class="warn"><b>Pārbaudi!</b> Krusts ir pareizs tikai tad, ja <strong>visas 4 sānu krāsas sakrīt ar centriem</strong>.
-    Balts krusts ar nesakritīgiem sāniem ir jāpārtaisa — citādi tālākie soļi nestrādās.</div>
+    Balts krusts ar nesakrītošiem sāniem ir jāpārtaisa — citādi tālākie soļi nestrādās.</div>
     <div class="done-row"><label><input type="checkbox" data-step="s1"> Solis apgūts</label></div>
   </div>
 
@@ -496,14 +502,15 @@
       <figure class="dg" data-kind="top" data-c="xxxxyxxxx" data-small="1"
         ><figcaption>Punkts → algoritms (līdz 3 reizēm kopā)</figcaption></figure>
       <figure class="dg" data-kind="top" data-c="xyxyyxxxx" data-small="1"
-        ><figcaption>«L» — turi rādām uz aizmuguri un pa kreisi → algoritms</figcaption></figure>
+        ><figcaption>«L» — turi tā, lai tas rāda uz aizmuguri un pa kreisi → algoritms</figcaption></figure>
       <figure class="dg" data-kind="top" data-c="xxxyyyxxx" data-small="1"
         ><figcaption>Līnija — turi horizontāli → algoritms</figcaption></figure>
       <figure class="dg" data-kind="top" data-c="xyxyyyxyx" data-small="1"
         ><figcaption>Krusts — gatavs!</figcaption></figure>
     </div>
     <div class="warn"><b>Novietojums ir svarīgs!</b> Pirms algoritma pagriez <strong>visu kubu</strong> (vai U kārtu) tā,
-    lai «L» rādītos uz aizmuguri un pa kreisi, bet līnija ietu horizontāli — no kreisās uz labo pusi.</div>
+    lai «L» rādītos uz aizmuguri un pa kreisi, bet līnija ietu horizontāli — no kreisās uz labo pusi.
+    Pēc katras algoritma reizes <strong>apskaties, kāda figūra sanākusi</strong>, novieto to pareizi un tikai tad atkārto.</div>
     <div class="done-row"><label><input type="checkbox" data-step="s4"> Solis apgūts</label></div>
   </div>
 <!-- ============ 5. SOLIS ============ -->
@@ -523,6 +530,8 @@
         (ja nepieciešams — vēlreiz tāpat).</li>
     </ol>
     <p class="alg" data-alg="R U R' U R U2 R'"></p>
+    <p>Pēc algoritma <strong>vienmēr pagriez U kārtu</strong>, līdz sakrīt pēc iespējas vairāk malu — tikai tad
+    vērtē rezultātu un, ja vajag, atkārto.</p>
     <div class="dgrow">
       <figure class="dg" data-kind="top" data-c="xyxyyyxyx" data-b="xbx" data-r="xox" data-f="xrx" data-l="xgx"
         data-arrows='[{"f":["u",1,2],"t":["u",0,1],"curve":-16,"dbl":1}]'
@@ -603,7 +612,7 @@
         <td><span class="alg small" data-alg="U' L' U L U F U' F'"></span></td></tr>
       <tr><td>4. Dzeltenais krusts</td><td>Punkts → «L» (aizmugurē-pa kreisi) → līnija → krusts</td>
         <td><span class="alg small" data-alg="F R U R' U' F'"></span></td></tr>
-      <tr><td>5. Dzeltenās malas</td><td>Pareizās malas aizmugurē + pa labi</td>
+      <tr><td>5. Dzeltenās malas</td><td>Pareizās malas aizmugurē + pa labi; pēc algoritma izlīdzini ar U</td>
         <td><span class="alg small" data-alg="R U R' U R U2 R'"></span></td></tr>
       <tr><td>6. Stūru vietas</td><td>Pareizais stūris priekšā pa labi</td>
         <td><span class="alg small" data-alg="U R U' L' U R' U' L"></span></td></tr>
@@ -642,7 +651,7 @@
 <div class="part-head pro" id="cfop">
   <div class="kick">Profesionāļu metode</div>
   <h2>CFOP (Fridrich) — 4 soļi <span class="rule" style="background:var(--paper)"></span></h2>
-  <p>Kā liek speedcuberi. Pilnā versijā ~119 kombinācijas, bet var sākt ar «2-look» un pakāpeniski papildināt.</p>
+  <p>Kā kubu saliek ātrsalicēji (speedcuberi). Pilnā versijā ~119 kombinācijas, bet var sākt ar «2-look» un pakāpeniski papildināt.</p>
 </div>
 
 <section>
@@ -655,10 +664,13 @@
       <li><strong>OLL</strong> — visa augšējā puse vienā krāsā vienā piegājienā (57 gadījumi).</li>
       <li><strong>PLL</strong> — pēdējā slāņa gabaliņu samainīšana vietām (21 gadījums).</li>
     </ol>
-    <div class="tip"><b>Notācija</b> ir tā pati, kas Iesācēja režīmā (R, U, F, L, D, B, ', 2). Pro algoritmos parādās vēl:
-    <strong>plašie griezieni</strong> (mazie burti <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="r u f l"></span> — griež divus slāņus reizē),
-    <strong>vidus slānis</strong> <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="M"></span>, un
-    <strong>visa kuba pagriezieni</strong> <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="x y"></span>.</div>
+    <div class="tip"><b>Notācija</b> ir tā pati, kas Iesācēja režīmā (R, U, F, L, D, B, ', 2 — skat. sadaļu «Notācija» augstāk). Pro algoritmos parādās vēl:
+    <strong>plašie griezieni</strong> (mazie burti <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="r u f l"></span> — griež divus slāņus reizē, tajā pašā virzienā kā lielais burts),
+    <strong>vidus slāņi</strong> <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="M S"></span> (M — slānis starp L un R, griežas tāpat kā L; S — slānis starp F un B, griežas kā F), un
+    <strong>visa kuba pagriezieni</strong> <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="x y"></span> (x pagriež visu kubu kā R, y — kā U).</div>
+    <div class="tip"><b>Kad pāriet uz CFOP?</b> Kad iesācēju metodi saliec apmēram 2 minūtēs bez lapas. Sāc ar F2L, bet pēdējo
+    slāni pagaidām turpini likt ar iesācēju 4.–7. soli. Ņem vērā: CFOP maina secību — vispirms <strong>visa augša vienā krāsā</strong>
+    (OLL) un tikai tad <strong>gabaliņi pa vietām</strong> (PLL); iesācēju metodē 6.–7. solī ir otrādi.</div>
     <div class="warn"><b>Godīgi par apjomu:</b> visus 119 neviens neiemācās uzreiz. Ieteicamā secība:
     <strong>F2L intuitīvi</strong> + <strong>2-look OLL</strong> (~10 alg.) + <strong>2-look PLL</strong> (~6 alg.), tad pakāpeniski pilnie OLL 57 un PLL 21.
     Zemāk ir gan mācību ceļš, gan pilnās tabulas.</div>
@@ -671,8 +683,10 @@
   <div class="card pro">
     <p class="goal">Mērķis: balts krusts APAKŠĀ, katras malas sānu krāsa sakrīt ar sāna centru. Bez algoritmiem — tikai ar aci.</p>
     <ul>
-      <li>Krustu liek <strong>apakšā</strong> (nevis augšā kā iesācēju «puķītē») — tā uzreiz redzi F2L slotus un neapgriez kubu.</li>
-      <li>Mērķis: <strong>4 malas ≤ 8 griezienos</strong>. Treniņā centies to izplānot jau «inspekcijas» laikā, pirms sāc.</li>
+      <li>Krustu liek <strong>apakšā</strong> (nevis augšā kā iesācēju «puķītē») — tā uzreiz redzi F2L slotus
+        (slots = stūra + malas vieta starp divām krusta malām) un neapgriez kubu.</li>
+      <li>Mērķis: <strong>4 malas ≤ 8 griezienos</strong>. Treniņā centies to izplānot jau «inspekcijas» laikā
+        (15 sekunžu apskate pirms starta sacensībās), pirms sāc.</li>
       <li>Sānu krāsām jāsakrīt ar centriem — pārbaudi, ka krusts nav «apgriezts».</li>
     </ul>
     <div class="dgrow">
@@ -728,10 +742,28 @@
         <tr><td>Antisune</td><td>1 stūris dzeltens (pretēji)</td><td><span class="alg tiny" data-alg="R U2 R' U' R U' R'"></span></td></tr>
         <tr><td>H (Double Sune)</td><td>0 dzeltenu; 2 pretī 2</td><td><span class="alg tiny" data-alg="R U R' U R U' R' U R U2 R'"></span></td></tr>
         <tr><td>Pi (Bruno)</td><td>0 dzeltenu augšā</td><td><span class="alg tiny" data-alg="R U2 R2 U' R2 U' R2 U2 R"></span></td></tr>
-        <tr><td>U (Headlights)</td><td>2 dzeltenu, «lukturi» priekšā</td><td><span class="alg tiny" data-alg="R2 D' R U2 R' D R U2 R"></span></td></tr>
+        <tr><td>U (Headlights)</td><td>2 dzelteni stūri priekšā; «lukturi» aizmugurē</td><td><span class="alg tiny" data-alg="R2 D' R U2 R' D R U2 R"></span></td></tr>
         <tr><td>T (Chameleon)</td><td>2 dzeltenu, «T» forma</td><td><span class="alg tiny" data-alg="r U R' U' r' F R F'"></span></td></tr>
         <tr><td>L (Bowtie)</td><td>2 dzeltenu, diagonāle</td><td><span class="alg tiny" data-alg="F R' F' r U R U' r'"></span></td></tr>
       </table>
+    </div>
+    <p>Katra gadījuma izskats (dzeltenās uzlīmes augšā un sānu strīpās). Pagriez augšējo kārtu (U) un, ja vajag,
+    visu kubu, līdz tavs kubs izskatās <strong>tieši</strong> kā diagrammā — tad izpildi algoritmu:</p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-small="1" data-c="xyxyyyyyx" data-b="yxx" data-f="xxy" data-l="xxx" data-r="yxx"
+        ><figcaption>Sune</figcaption></figure>
+      <figure class="dg" data-kind="top" data-small="1" data-c="xyyyyyxyx" data-b="xxx" data-f="yxx" data-l="yxx" data-r="xxy"
+        ><figcaption>Antisune</figcaption></figure>
+      <figure class="dg" data-kind="top" data-small="1" data-c="xyxyyyxyx" data-b="xxx" data-f="xxx" data-l="yxy" data-r="yxy"
+        ><figcaption>H (Double Sune)</figcaption></figure>
+      <figure class="dg" data-kind="top" data-small="1" data-c="xyxyyyxyx" data-b="xxy" data-f="xxy" data-l="yxy" data-r="xxx"
+        ><figcaption>Pi (Bruno)</figcaption></figure>
+      <figure class="dg" data-kind="top" data-small="1" data-c="xyxyyyyyy" data-b="yxy" data-f="xxx" data-l="xxx" data-r="xxx"
+        ><figcaption>U (Headlights)</figcaption></figure>
+      <figure class="dg" data-kind="top" data-small="1" data-c="xyyyyyxyy" data-b="yxx" data-f="yxx" data-l="xxx" data-r="xxx"
+        ><figcaption>T (Chameleon)</figcaption></figure>
+      <figure class="dg" data-kind="top" data-small="1" data-c="yyxyyyxyy" data-b="xxx" data-f="yxx" data-l="xxx" data-r="yxx"
+        ><figcaption>L (Bowtie)</figcaption></figure>
     </div>
 
     <h3 class="sub">Pilnais OLL — visi 57 (viena algoritma «1-look»)</h3>
@@ -810,17 +842,20 @@
     <p class="goal">Mērķis: samainīt pēdējā slāņa gabaliņus vietām — kubs salikts. 21 gadījums.</p>
 
     <h3 class="sub">Mācību ceļš: 2-look PLL (vispirms šos ~6)</h3>
-    <p><strong>A) Vispirms STŪRI</strong> (atrodi 2 stūrus, kas jau pareizi — «lukturi» — un turi aizmugurē), <strong>tad MALAS.</strong></p>
+    <p><strong>A) Vispirms STŪRI, tad MALAS.</strong> Atrodi «lukturus» — divus <strong>blakus stūrus ar vienādu sānu
+    krāsu</strong> (kā auto priekšējie lukturi) — un turi tos <strong>pa kreisi</strong>: algoritms samainīs labos divus stūrus.
+    Ja lukturu nav nevienā pusē — diagonāles gadījums (leņķis vienalga). Pēc katra algoritma beigās pagriez U, lai slānis
+    saietu ar sāniem.</p>
     <div class="dgrow">
-      <figure class="dg" data-kind="top" data-c="yyyyyyyyy" data-b="ooo" data-r="bbb" data-f="rrr" data-l="ggg"
-        data-arrows='[{"f":["u",0,2],"t":["u",2,2],"curve":18,"dbl":1}]'
-        ><figcaption>Stūri — blakus maiņa: <b>R U R' U' R' F R2 U' R' U' R U R' F'</b></figcaption></figure>
-      <figure class="dg" data-kind="top" data-c="yyyyyyyyy"
+      <figure class="dg" data-kind="top" data-c="yyyyyyyyy" data-b="bxo" data-r="gxb" data-f="gxo" data-l="rxr"
+        data-arrows='[{"f":["u",2,0],"t":["u",2,2],"curve":18,"dbl":1}]'
+        ><figcaption>Stūri — blakus maiņa («lukturi» pa kreisi): <b>R U R' U' R' F R2 U' R' U' R U R' F'</b></figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="yyyyyyyyy" data-b="gxb" data-r="oxr" data-f="gxb" data-l="oxr"
         data-arrows='[{"f":["u",0,0],"t":["u",2,2],"curve":0,"dbl":1}]'
-        ><figcaption>Stūri — diagonāle: <b>F R U' R' U' R U R' F' R U R' U' R' F R F'</b></figcaption></figure>
+        ><figcaption>Stūri — diagonāle (nav lukturu): <b>F R U' R' U' R U R' F' R U R' U' R' F R F'</b></figcaption></figure>
       <figure class="dg" data-kind="top" data-c="yyyyyyyyy"
-        data-arrows='[{"f":["u",1,0],"t":["u",2,1],"curve":16},{"f":["u",2,1],"t":["u",1,2],"curve":16},{"f":["u",1,2],"t":["u",1,0],"curve":16}]'
-        ><figcaption>Malas — 3-cikls (Ua): <b>M2 U M U2 M' U M2</b></figcaption></figure>
+        data-arrows='[{"f":["u",1,2],"t":["u",2,1],"curve":16},{"f":["u",2,1],"t":["u",0,1],"curve":16},{"f":["u",0,1],"t":["u",1,2],"curve":16}]'
+        ><figcaption>Malas — 3-cikls (Ua), aizmugures mala paliek uz vietas: <b>M2 U M U2 M' U M2</b></figcaption></figure>
       <figure class="dg" data-kind="top" data-c="yyyyyyyyy"
         data-arrows='[{"f":["u",1,0],"t":["u",1,2],"curve":0,"dbl":1},{"f":["u",0,1],"t":["u",2,1],"curve":0,"dbl":1}]'
         ><figcaption>Malas — «H» (pretējās): <b>M2 U' M2 U2 M2 U' M2</b></figcaption></figure>
@@ -868,7 +903,8 @@
       <li><strong>2-look OLL</strong> (~10 alg.: krusts + 7 OCLL) → vēlāk <strong>pilns OLL 57</strong>.</li>
       <li><strong>2-look PLL</strong> (~6 alg.: stūri + malas) → vēlāk <strong>pilns PLL 21</strong>.</li>
     </ol>
-    <div class="tip"><b>Progresa mērķi:</b> iesācējs → CFOP 2-look ≈ sub-40s; pilns OLL+PLL ≈ sub-20s; ar praksi (labs F2L look-ahead) sub-15s un ātrāk.</div>
+    <div class="tip"><b>Progresa mērķi:</b> iesācējs → CFOP 2-look ≈ sub-40s (ātrāk nekā 40 sekundēs); pilns OLL+PLL ≈ sub-20s;
+    ar praksi sub-15s un ātrāk — galvenais ir «look-ahead» (nākamā F2L pāra meklēšana ar acīm, kamēr rokas vēl griež iepriekšējo).</div>
     <div class="warn"><b>Algoritmu avoti (pārbaudīti):</b>
     <a href="https://www.speedsolving.com/wiki/index.php/OLL">speedsolving.com (OLL)</a>,
     <a href="https://speedcubedb.com/a/3x3/PLL">speedcubedb.com (PLL)</a>,

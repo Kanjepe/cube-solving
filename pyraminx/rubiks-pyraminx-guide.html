@@ -245,17 +245,17 @@
   <div class="card">
     <p>Pyraminx ir <strong>tetraedrs</strong> (4 trīsstūrveida sejas, 4 virsotnes). Tam ir trīs veidu gabaliņi:</p>
     <ul>
-      <li><strong>Gali</strong> (4 gab.) — mazie smaili virsotnēs. Griežas <strong>paši par sevi</strong> un neietekmē neko citu. Salikt triviāli — vienkārši pagriez, lai krāsas sakrīt.</li>
-      <li><strong>Stūri / centri</strong> (4 gab.) — gabaliņi tieši zem galiem. Tie <strong>nekad nemaina vietu</strong> — tikai orientējas. Tie nosaka katras sejas krāsu.</li>
-      <li><strong>Malas</strong> (6 gab.) — gabaliņi ar 2 krāsām. <strong>Tikai tās</strong> jāpozicionē un jāorientē. Pyraminx atrisināšana būtībā ir 6 malu salikšana.</li>
+      <li><strong>Gali — G</strong> (4 gab.) — mazie smaili virsotnēs. Griežas <strong>paši par sevi</strong> un neietekmē neko citu. Salikt triviāli — vienkārši pagriez, lai krāsas sakrīt.</li>
+      <li><strong>Stūri / centri — S</strong> (4 gab.) — gabaliņi tieši zem galiem. Tie <strong>nekad nemaina vietu</strong> — tikai orientējas. Tie nosaka katras sejas krāsu.</li>
+      <li><strong>Malas — M</strong> (6 gab.) — gabaliņi ar 2 krāsām. <strong>Tikai tās</strong> jāpozicionē un jāorientē. Pyraminx atrisināšana būtībā ir 6 malu salikšana.</li>
     </ul>
     <div class="dgrow">
-      <figure class="dg" data-kind="pyra" data-c="gggggggggg" data-mark="0,4,8"
+      <figure class="dg" data-kind="pyra" data-c="gggggggggg" data-mark="0,4,8" data-plabels="G...G...G"
         ><figcaption>Gali (4) — virsotnēs, griežas paši</figcaption></figure>
-      <figure class="dg" data-kind="pyra" data-c="gggggggggg" data-mark="1,3,6"
-        ><figcaption>Stūri/centri (4) — tikai orientējas</figcaption></figure>
-      <figure class="dg" data-kind="pyra" data-c="gggggggggg" data-mark="2,5,7"
-        ><figcaption>Malas (6) — tikai tās īsti jārisina</figcaption></figure>
+      <figure class="dg" data-kind="pyra" data-c="gggggggggg" data-mark="2,5,7" data-plabels="..S..S.S."
+        ><figcaption>Stūri/centri (4) — tieši zem galiem, tikai orientējas</figcaption></figure>
+      <figure class="dg" data-kind="pyra" data-c="gggggggggg" data-mark="1,3,6" data-plabels=".M.M..M.."
+        ><figcaption>Malas (6) — sejas malu vidos, tikai tās īsti jārisina</figcaption></figure>
     </div>
     <div class="tip"><b>Galvenā doma:</b> gali un stūri ir viegli (tikai jāorientē). Viss noslēpums ir <strong>6 malās</strong>.
     Tāpēc Pyraminx ir daudz vienkāršāks par Rubika kubu.</div>
@@ -268,15 +268,20 @@
   <div class="card">
     <p>Turi Pyraminx ar <strong>vienu virsotni uz augšu</strong> un vienu seju pret sevi. Tad trīs redzamās virsotnes ir
     <strong>U</strong> (augšā), <strong>L</strong> (apakšā pa kreisi), <strong>R</strong> (apakšā pa labi); <strong>B</strong> ir aizmugurē (neredzamā).</p>
+    <div class="tip"><b>Tas pats tvēriens, kas metodē:</b> kad iesācēju metodē zaļā seja ir apakšā, viena virsotne automātiski
+    ir augšā — tieši šis tvēriens. U ir augšējā virsotne, L un R — apakšā pa kreisi un pa labi.</div>
+    <div class="warn"><b>«Pulksteņa virzienā» — no kurienes skatoties?</b> Vienmēr <strong>skatoties tieši uz griežamo virsotni
+    no ārpuses</strong> — it kā šī virsotne būtu pulksteņa centrs, kas pavērsts pret tevi. Ja to nezina, R vietā sanāk R',
+    un algoritmi «nestrādā» — šī ir biežākā kļūda.</div>
     <div class="notgrid">
       <div class="notcell"><span class="nname">U</span>
-        <div class="dg" data-kind="pyra" data-c="mgggggggg" data-small="1" data-rot="top:cw"></div>
-        <span class="ndesc"><b>Up</b> — augšējā virsotne (stūris + 3 malas) pulksteņa virzienā</span></div>
+        <div class="dg" data-kind="pyra" data-c="mmmmggggg" data-small="1" data-rot="top:cw"></div>
+        <span class="ndesc"><b>Up</b> — augšējā virsotne (gals + stūris + 3 malas) pulksteņa virzienā</span></div>
       <div class="notcell"><span class="nname">L</span>
-        <div class="dg" data-kind="pyra" data-c="ggggmgggg" data-small="1" data-rot="left:cw"></div>
+        <div class="dg" data-kind="pyra" data-c="gmggmmmgg" data-small="1" data-rot="left:cw"></div>
         <span class="ndesc"><b>Left</b> — kreisā apakšas virsotne</span></div>
       <div class="notcell"><span class="nname">R</span>
-        <div class="dg" data-kind="pyra" data-c="ggggggggm" data-small="1" data-rot="right:cw"></div>
+        <div class="dg" data-kind="pyra" data-c="gggmggmmm" data-small="1" data-rot="right:cw"></div>
         <span class="ndesc"><b>Right</b> — labā apakšas virsotne</span></div>
       <div class="notcell"><span class="nname">B</span>
         <div class="dg" data-kind="pyra" data-c="ggggggggg" data-small="1" data-rot="center:cw"></div>
@@ -289,7 +294,7 @@
     <ul>
       <li><strong>' (apostrofs)</strong> — pagriez <strong>pretēji</strong> pulksteņrādītājam.
         Piem., <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="R'"></span>.</li>
-      <li><strong>Nav «2»!</strong> Katrai virsotnei ir tikai 2 stāvokļi, tāpēc divi vienādi griezieni = pretējais:
+      <li><strong>Nav «2»!</strong> Katrai virsotnei ir tikai 3 stāvokļi (sākuma stāvoklis + 2 pagriezieni), tāpēc divi vienādi griezieni = viens grieziens pretējā virzienā:
         <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="U U"></span> = <span class="alg small" style="display:inline-flex;vertical-align:middle" data-alg="U'"></span>.</li>
     </ul>
     <div class="warn"><b>Uzmanību!</b> Lielie burti (U, L, R, B) griež <strong>visu virsotnes slāni</strong> (stūri + 3 malas).
@@ -405,7 +410,8 @@
 <div class="part-head pro" id="cfop">
   <div class="kick">2. metode</div>
   <h2>Profesionāļa metodes <span class="rule" style="background:var(--paper)"></span></h2>
-  <p>Kā liek speedcuberi. Divas populārākās pieejas: <strong>L4E</strong> (slānis + pēdējās 4 malas) un <strong>Oka</strong> (top-first).</p>
+  <p>Kā saliek ātrsalicēji (speedcuberi). Divas populārākās pieejas: <strong>L4E</strong> (Last 4 Edges — «pēdējās 4 malas»)
+  un <strong>Oka</strong> (top-first — risināšana «no augšas»).</p>
 </div>
 
 <section>
@@ -416,8 +422,9 @@
       <li><strong>L4E</strong> — atrisini visu, izņemot pēdējās 4 malas, tad tās vienā piegājienā.</li>
       <li><strong>Oka</strong> — sāc no augšas (top-first): viena mala apzināti «nepareizā» vietā, izmanto to kā «atslēgas caurumu».</li>
     </ul>
-    <div class="tip"><b>Ar ko sākt:</b> lielākā daļa sāk ar <strong>L4E intuitīvi</strong> (salikc 1 malu, tad pārējās 3 ar 3-ciklu),
-    jo tas prasa maz jaunu algoritmu virs iesācēju metodes.</div>
+    <div class="tip"><b>Ar ko sākt:</b> esi gatavs Pro līmenim, kad iesācēju metodi izpildi bez pamācības. Lielākā daļa sāk ar
+    <strong>L4E intuitīvi</strong> (saliec 1 malu, tad pārējās 3 ar 3-ciklu) — tur pa īstam jaunu algoritmu gandrīz nav:
+    tie paši iesācēju 3. soļa algoritmi, tikai gudrāka secība.</div>
     <div class="warn"><b>Godīgi par avotiem:</b> pilnais L4E ir ~35 algoritmu sistēma (šeit — verificētais kodols + intuitīvā pieeja;
     pilns saraksts: cubingapp). <strong>Oka</strong> konkrētie algoritmi netiek publicēti kā notācija — tāpēc doti tās
     <strong>koncepta soļi</strong> + pēdējā slāņa malu (ELL) algoritmi, ko Oka lieto nobeigumam.</div>
@@ -428,16 +435,17 @@
 <section id="l4e">
   <h2>1. L4E — pēdējās 4 malas <span class="rule"></span></h2>
   <div class="card pro">
-    <p class="goal">Mērķis: salikc visu, izņemot 4 malas, tad pēdējās 4 malas — vienā solī.</p>
+    <p class="goal">Mērķis: saliec visu, izņemot 4 malas, tad pēdējās 4 malas — vienā solī.</p>
     <h3 class="sub">Solis 1 — «V» (stūri + 2 malas)</h3>
-    <p>Salikc visus 4 stūrus (intuitīvi) un <strong>2 blakus apakšējās malas</strong> — sanāk «V» forma. Ar treniņu to var
-    izplānot inspekcijas laikā un uztaisīt «akli».</p>
+    <p>Saliec visus 4 stūrus (intuitīvi) un <strong>2 blakus apakšējās malas</strong> — sanāk «V» forma. Ar treniņu to var
+    izplānot apskates laikā («inspekcija» — 15 sekundes pirms starta sacensībās) un uztaisīt «akli».</p>
     <div class="dgrow">
-      <figure class="dg" data-kind="pyra" data-c="ggggggggg" data-mark="4,5,8"
-        ><figcaption>«V»: stūri + 2 apakšas malas gatavas</figcaption></figure>
+      <figure class="dg" data-kind="pyra" data-c="ggggggggg" data-mark="0,2,4,5,6,7,8"
+        ><figcaption>«V»: gatavs viss, izņemot abas sānu malas (šeit — visas sejas iezīmētās daļas)</figcaption></figure>
     </div>
     <h3 class="sub">Solis 2 — pēdējās 4 malas</h3>
-    <p><strong>Intuitīvā L4E (ieteicams sākumā):</strong> salikc <strong>1 malu</strong> ar aci, tad atlikušās 3 ar 3-ciklu
+    <p>Turi «V» <strong>apakšā</strong> — tāpat kā iesācēju metodē zaļo seju.
+    <strong>Intuitīvā L4E (ieteicams sākumā):</strong> saliec <strong>1 malu</strong> ar aci, tad atlikušās 3 ar 3-ciklu
     (tie paši algoritmi, ko iesācēju 3. solī):</p>
     <p class="alg small" data-alg="R U R' U R U R'"></p>
     <p class="alg small" data-alg="R U' R' U' R U' R'"></p>
@@ -448,8 +456,8 @@
         <tr><td>Sune (3-cikls)</td><td><span class="alg small" data-alg="R U R' U R U R'"></span></td></tr>
         <tr><td>Antisune (3-cikls)</td><td><span class="alg small" data-alg="R U' R' U' R U' R'"></span></td></tr>
         <tr><td>2 malu apgriešana</td><td><span class="alg small" data-alg="L R' L' R U' R U R'"></span></td></tr>
-        <tr><td>Sledgehammer</td><td><span class="alg small" data-alg="R' L R L'"></span></td></tr>
-        <tr><td>Hedgeslammer</td><td><span class="alg small" data-alg="L R' L' R"></span></td></tr>
+        <tr><td>Sledgehammer — pēdējā mala jāievieto no labās puses ar apgriešanos</td><td><span class="alg small" data-alg="R' L R L'"></span></td></tr>
+        <tr><td>Hedgeslammer — tas pats no kreisās puses (spogulis)</td><td><span class="alg small" data-alg="L R' L' R"></span></td></tr>
       </table>
     </div>
     <div class="warn"><b>Pilns L4E (visi ~35 gadījumi)</b> ar diagrammām: <strong>cubingapp.com/algorithms/Pyraminx-L4E</strong>.
@@ -463,24 +471,25 @@
   <div class="card pro">
     <p class="goal">Mērķis: sākt no augšas — viena mala apzināti «nepareizā» vietā (Oka mala), izmanto to kā atslēgas caurumu.</p>
     <ol>
-      <li><strong>Salikc vienu malu ap centru</strong> un ieliec vēl vienu malu (<strong>«Oka mala»</strong>) —
+      <li><strong>Saliec vienu malu pie tās stūriem</strong> un ieliec vēl vienu malu (<strong>«Oka mala»</strong>) —
         pareizi orientētu, bet <strong>nepareizā vietā</strong>.</li>
-      <li><strong>Izmanto brīvo slotu (kā «keyhole»)</strong>, lai atrisinātu stūrus/centrus.</li>
-      <li><strong>Vienā solī</strong> ieliec apgriezto malu + aizver atslēgas caurumu.</li>
-      <li><strong>Pabeidz pēdējā slāņa malas (ELL)</strong> ar zemāk dotajiem algoritmiem.</li>
+      <li><strong>Izmanto brīvo vietu — «atslēgas caurumu»</strong> (angliski keyhole), lai atrisinātu stūrus/centrus,
+        neizjaucot jau salikto.</li>
+      <li><strong>Vienā solī</strong> pārcel «Oka malu» uz tās īsto vietu un aizver atslēgas caurumu.</li>
+      <li><strong>Pabeidz pēdējā slāņa malas (ELL — Edges of Last Layer)</strong> ar zemāk dotajiem algoritmiem.</li>
     </ol>
     <p>Oka nobeiguma malu (ELL) algoritmi:</p>
     <div class="cheat-wrap">
       <table class="cheat pro">
         <tr><th>Gadījums</th><th>Algoritms</th></tr>
-        <tr><td>Sledgehammer</td><td><span class="alg small" data-alg="R' L R L'"></span></td></tr>
-        <tr><td>Hedgeslammer</td><td><span class="alg small" data-alg="L R' L' R"></span></td></tr>
-        <tr><td>U-perm</td><td><span class="alg small" data-alg="R' L R L2' U L U'"></span></td></tr>
-        <tr><td>Mirror U</td><td><span class="alg small" data-alg="L R' L' R' U' R' U"></span></td></tr>
+        <tr><td>Sledgehammer — mala ievietojas no labās puses ar apgriešanos</td><td><span class="alg small" data-alg="R' L R L'"></span></td></tr>
+        <tr><td>Hedgeslammer — tas pats no kreisās puses (spogulis)</td><td><span class="alg small" data-alg="L R' L' R"></span></td></tr>
+        <tr><td>U-perm — 3 augšas malas jāpārbīda pa apli</td><td><span class="alg small" data-alg="R' L R L U L U'"></span></td></tr>
+        <tr><td>Mirror U — tas pats pretējā virzienā</td><td><span class="alg small" data-alg="L R' L' R' U' R' U"></span></td></tr>
         <tr><td>2 malu apgriešana</td><td><span class="alg small" data-alg="L R' L' R U' R U R'"></span></td></tr>
       </table>
     </div>
-    <div class="tip"><b>Radniecīgās metodes:</b> <strong>WO</strong> (salikc visas 3 augšas malas, tad 1 algoritms centriem),
+    <div class="tip"><b>Radniecīgās metodes:</b> <strong>WO</strong> (saliec visas 3 augšas malas, tad 1 algoritms centriem),
     <strong>Nutella</strong> (2 malas pretējos stāvokļos). Oka atšķiras ar apzināti nepareizi novietoto «Oka malu».</div>
     <div class="warn"><b>Piezīme:</b> Oka konkrētie soļu algoritmi publiski netiek doti kā notācija (tikai koncepts) —
     tāpēc doti verificētie ELL nobeiguma algoritmi (Speedsolving). Detaļas ar video: speedsolving.com «Top First».</div>
@@ -500,7 +509,7 @@
       <tr><td>L4E / Oka — 2-flip</td><td>2 malas apgrieztas</td><td><span class="alg small" data-alg="L R' L' R U' R U R'"></span></td></tr>
       <tr><td>Oka — Sledgehammer</td><td>ELL nobeigums</td><td><span class="alg small" data-alg="R' L R L'"></span></td></tr>
       <tr><td>Oka — Hedgeslammer</td><td>ELL nobeigums</td><td><span class="alg small" data-alg="L R' L' R"></span></td></tr>
-      <tr><td>Oka — U-perm</td><td>ELL nobeigums</td><td><span class="alg small" data-alg="R' L R L2' U L U'"></span></td></tr>
+      <tr><td>Oka — U-perm</td><td>ELL nobeigums</td><td><span class="alg small" data-alg="R' L R L U L U'"></span></td></tr>
     </table>
   </div>
 </section>
@@ -513,9 +522,9 @@
   <div class="card">
     <ul>
       <li><strong>Nejauc lielos ar mazajiem burtiem.</strong> U (liels) griež visu slāni; u (mazs) — tikai galu. Tā ir kļūda nr. 1.</li>
-      <li><strong>Gali ir triviāli.</strong> Neuztraucies par tiem risināšanas laikā — salikc pašā beigās ar aci.</li>
+      <li><strong>Gali ir triviāli.</strong> Neuztraucies par tiem risināšanas laikā — saliec pašās beigās ar aci.</li>
       <li><strong>Viss ir malās.</strong> Pyraminx = 6 malu puzle. Ja saproti malu pārvietošanu, tu proti visu.</li>
-      <li><strong>Nav «2» griezienu.</strong> Katrai virsotnei ir tikai 2 stāvokļi — <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="U U"></span> = <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="U'"></span>.</li>
+      <li><strong>Nav «2» griezienu.</strong> Katrai virsotnei ir tikai 3 stāvokļi (sākums + 2 pagriezieni) — <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="U U"></span> = <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="U'"></span>.</li>
       <li><strong>Gribi ātrāk?</strong> No iesācēju metodes pāriej uz <strong>L4E intuitīvo</strong> — tie paši 3 algoritmi, bet mazāk griezienu.</li>
     </ul>
   </div>
@@ -624,6 +633,22 @@
       }, svg);
     });
     function cent(idx) { var p = polys[idx]; return [(p[0][0] + p[1][0] + p[2][0]) / 3, (p[0][1] + p[1][1] + p[2][1]) / 3]; }
+    /* data-plabels: 9-char string, letter per triangle index, '.' = none */
+    var labels = host.getAttribute('data-plabels');
+    if (labels) {
+      var lsmall = host.getAttribute('data-small');
+      for (var li = 0; li < 9 && li < labels.length; li++) {
+        if (labels[li] === '.') continue;
+        var lc = cent(li), dark = 'rgb'.indexOf(c[li]) >= 0;
+        var lt = el('text', {
+          x: lc[0], y: lc[1] + (lsmall ? 4 : 5), 'text-anchor': 'middle',
+          fill: dark ? '#FFFFFF' : INK, opacity: dark ? .95 : .75,
+          'font-family': 'Bahnschrift, Arial Narrow, sans-serif',
+          'font-size': lsmall ? 11 : 14, 'font-weight': 700
+        }, svg);
+        lt.textContent = labels[li];
+      }
+    }
     var pa = host.getAttribute('data-parrows');
     if (pa) { JSON.parse(pa).forEach(function (a) { var f = cent(a.f), t = cent(a.t); arrow(svg, f[0], f[1], t[0], t[1], a.curve || 0, a.dbl); }); }
     var rot = host.getAttribute('data-rot');
