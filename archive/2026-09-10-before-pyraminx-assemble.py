@@ -58,11 +58,11 @@ main_py = extract_main(src_py, 'py')
 # Pyraminx piece-diagram labels (G/S/M) and corrected marks now live directly
 # in the original guide file.
 
-# The standalone Pyraminx owns its beginner content, styles and runtime.
-# Keep py-beginner.html as an inactive historical reference, not a build input.
+# Pyraminx: replace original beginner block with the rewritten detailed version
 pat = re.compile(r'<div class="mode mode-beginner">.*?</div><!-- /mode-beginner -->', re.S)
 if not pat.search(main_py):
     raise SystemExit('pyraminx mode-beginner block not found')
+main_py = pat.sub(lambda m: read(os.path.join(BUILD, 'py-beginner.html')).strip(), main_py, count=1)
 
 # The 3x3 beginner guide owns its step-7 warning and scoped mobile runtime.
 # Keeping these in the source also makes the standalone guide consistent.

@@ -383,410 +383,116 @@
 </section>
 
 <div class="mode mode-beginner">
-<div class="guide2">
-  <div class="g2-heading">
-    <p class="g2-eyebrow">2×2 · Iesācējs</p>
-    <p class="g2-location" data-g2-location aria-live="polite">Pirms sākuma</p>
+
+<!-- ============ 1. METODE — IESĀCĒJU ============ -->
+<div class="part-head">
+  <div class="kick">1. metode</div>
+  <h2>Iesācēju metode — slānis pa slānim <span class="rule" style="background:var(--paper)"></span></h2>
+  <p>Slānis pa slānim ar 4 algoritmiem. Plāns: 1) baltā puse apakšā → 2) dzeltenā puse augšā → 3) sānu sakārtošana — gatavs.
+  Visi soļi ir viena secīga ķēde: baltais no 1. soļa līdz beigām paliek apakšā, un soļi nav jāatkārto katrai pusei.</p>
+</div>
+
+<section>
+  <!-- ---- 1. solis ---- -->
+  <div class="card step s1" id="s1">
+    <div class="stepnum">1</div>
+    <h3>1. solis — Pirmais slānis (baltais)</h3>
+    <p class="goal">Mērķis: visa baltā puse gatava apakšā, un katra sāna apakšējā rinda vienā krāsā.</p>
+    <p>Turi kubu ar <strong>balto uz leju, dzelteno uz augšu</strong> — un no šī brīža vairs to neapgriez otrādi.
+    (Pagriezt kubu rokās <strong>ap vertikālo asi</strong>, lai izvēlētos citu priekšpusi, drīkst jebkurā brīdī — tikai ne algoritma vidū.)</p>
+    <div class="tip"><b>Pirmais stūris:</b> 2×2 nav centru, tāpēc pirmo balto stūri vienkārši noliec apakšā <strong>jebkurā vietā</strong> —
+    tas kļūst par atskaites punktu. Visu pārējo stūru «savas vietas» tagad nosaka šis pirmais stūris.</div>
+    <ol>
+      <li>Atrodi augšējā slānī stūri ar <strong>baltu uzlīmi</strong>.</li>
+      <li>Apskati tā pārējās divas krāsas un pagriez augšu (U) tā, lai stūris būtu <strong>tieši virs savas vietas</strong>
+        (starp tām pašām divām krāsām apakšā).</li>
+      <li>Turi to <strong>priekšā pa labi augšā</strong> un atkārto stūra ievietošanas algoritmu, līdz stūris «iekrīt» ar balto uz leju:</li>
+    </ol>
+    <p class="alg" data-alg="R U R' U'"></p>
+    <p class="alg-label">Stūra ievietošanai · atkārto 1–5 reizes, līdz stūris ir pareizi</p>
+    <ul>
+      <li>Skaitīt nevajag — vienkārši atkārto, līdz stūris sēž ar balto uz leju un sānu krāsas sakrīt.</li>
+      <li>Ja balts stūris jau sēž apakšā, bet <strong>nepareizi</strong> — turi to priekšā pa labi, izpildi algoritmu vienreiz
+        (stūris izlec augšā), tad ievieto no jauna pareizi.</li>
+    </ul>
+    <div class="dgrow">
+      <figure class="dg" data-kind="uf" data-u="xxxw" data-f="xgxx"
+        data-arrows='[{"f":["u",1,1],"t":["f",1,0],"curve":24}]'
+        ><figcaption>Baltais stūris virs savas vietas → algoritms to nogādā lejā (baltais nogriežas uz leju)</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="wwww" data-b="bb" data-r="oo" data-f="gg" data-l="rr"
+        ><figcaption>Rezultāts (skats uz balto pusi): balta puse + visu sānu apakšrindas</figcaption></figure>
+    </div>
+    <div class="tip"><b>Pazīstams?</b> Tas ir tas pats <strong>R U R' U'</strong>, ko lieto 3×3 pirmajam slānim.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="s1"> Solis apgūts</label></div>
   </div>
 
-  <section class="g2-page" data-g2-page="intro">
-    <h2 tabindex="-1">Saliec savu 2×2 kubu</h2>
-    <p>Trīs soļi: baltais slānis → dzeltenā puse → sānu sakārtošana. Tie ir vienas salikšanas posmi; katrai krāsai visu metodi neatkārto.</p>
-    <div class="g2-result"><strong>Tev vajag:</strong> 2×2 kubu un laiku nesteidzīgi izpildīt gājienus. Iepriekšēja pieredze nav vajadzīga.</div>
-    <h3>Katrs gabaliņš ir stūris</h3>
-    <figure class="dg" data-kind="face" data-c="xxxx" data-mark="3"><figcaption>Vienā pusē redzamas četras uzlīmes. Katrs stūris turpinās vēl divās pusēs, tāpēc tam ir trīs krāsas.</figcaption></figure>
-    <p>2×2 kubam ir astoņi stūri, <strong>nav centru un malu gabaliņu</strong>. Krāsas nosaka paši stūri. Standarta kubā balts ir pretī dzeltenam, sarkans pretī oranžam, zaļš pretī zilam.</p>
-    <div class="g2-warning"><strong>Viena puse nav tas pats, kas slānis.</strong> Pirmajā solī nepietiek ar četrām baltām uzlīmēm kopā: arī abu apakšējo uzlīmju krāsām katrā sānā jāsakrīt.</div>
-    <h3>Kā lasīt gājienus</h3>
-    <p><strong>R</strong> – labā kārta; <strong>U</strong> – augšējā; <strong>D</strong> – apakšējā; <strong>F</strong> – priekšējā. Apostrofs <strong>'</strong> maina virzienu; <strong>2</strong> nozīmē 180°.</p>
-    <p class="alg" data-alg="R U R' U'"></p>
-    <button type="button" data-g2-help="moves">Parādīt gājienu skaidrojumu</button>
-    <p>Pieskaries jebkuram algoritma burtam, lai redzētu tā nozīmi. Palīdzība atveras tepat, saglabājot lasīšanas vietu.</p>
-    <div class="g2-warning"><strong>Viena secība = viens algoritms.</strong> Izpildi visus gājienus no kreisās uz labo. Visa kuba priekšpuse algoritma laikā paliek pret Tevi.</div>
-    <div class="g2-actions"><button type="button" class="g2-primary" data-g2-goto="1">Sākt ar balto slāni →</button><button type="button" data-g2-goto="scramble">Vispirms sajaukt kubu</button></div>
-  </section>
-
-  <section class="g2-page" data-g2-page="1" id="s1">
-    <h2 tabindex="-1">Baltais slānis</h2>
-    <p class="g2-goal">Rezultāts: balta puse apakšā un katrā sānā abas apakšējās uzlīmes vienā krāsā.</p>
-    <h3>A. Izvēlies pirmo balto stūri</h3>
-    <p>Atrodi jebkuru stūri ar baltu uzlīmi. Pagriez <strong>visu kubu rokās</strong>, lai baltais skatītos uz leju un šis gabaliņš atrastos apakšā priekšā pa kreisi. Pagaidām kārtas nav jāgriež.</p>
-    <div class="g2-example"><strong>Tavs atskaites punkts:</strong> ja šī stūra zaļais skatās uz priekšu un sarkanais pa kreisi, priekšpuse būs zaļa, kreisā puse sarkana, labā oranža un aizmugure zila. Citu stūri izvēloties, krāsu izvietojums būs citāds; princips nemainās.</div>
-    <h3>B. Atrodi nākamā stūra vietu</h3>
+  <!-- ---- 2. solis ---- -->
+  <div class="card step s2" id="s2">
+    <div class="stepnum">2</div>
+    <h3>2. solis — Augšas orientācija (dzeltenā puse)</h3>
+    <p class="goal">Mērķis: visa augšējā (dzeltenā) puse vienā krāsā. Sānu krāsām pagaidām nav nozīmes.</p>
+    <p>Balto slāni tagad turi <strong>apakšā</strong>. Tavs uzdevums — «uztaisīt pretējo pusi», t.i., panākt, lai visi
+    4 augšējie stūri rāda dzelteno uz augšu. To dara ar vienu algoritmu, atkārtojot:</p>
+    <p class="alg" data-alg="R U R' U R U2 R'"></p>
+    <p class="alg-label">Pretējās puses taisīšanai (Sune) · atkārto, līdz augša ir dzeltena</p>
     <ol>
-      <li>Augšējā kārtā atrodi stūri ar balto. Apskati abas pārējās krāsas.</li>
-      <li>Nosaki, starp kurām sānu krāsām tam jāatrodas apakšā. Piemērā balti zaļi oranžais pieder priekšā pa labi; balti zili oranžais – aizmugurē pa labi.</li>
-      <li>Pagriez visu kubu ap vertikālo asi, lai izvēlētā vieta būtu <strong>apakšā priekšā pa labi</strong>. Baltais paliek apakšā.</li>
-      <li>Griez tikai U, līdz izvēlētais stūris ir <strong>tieši virs šīs vietas</strong>.</li>
+      <li>Ja augša jau ir gatava — izlaid šo soli.</li>
+      <li>Saskaiti, cik stūru augšā rāda dzelteno:
+        <ul>
+          <li><strong>Tieši viens</strong> → pagriez kubu (ap vertikālo asi), lai šis dzeltenais stūris būtu <strong>priekšā pa kreisi</strong>.</li>
+          <li><strong>Neviens vai divi</strong> → pagriez kubu, līdz <strong>priekšējā kreisā</strong> stūra dzeltenā uzlīme
+            <strong>skatās pa kreisi</strong> (uz sāniem, tieši pret tavu kreiso roku).</li>
+        </ul>
+      </li>
+      <li>Izpildi algoritmu. Ja augša vēl nav dzeltena — atgriezies pie 2. punkta un <strong>atkārto</strong>.
+        Vairāk par 3 reizēm nekad nevajadzēs.</li>
     </ol>
-    <div class="g2-grip"><strong>Kā turēt</strong><br>Baltais apakšā. Ievietojamais stūris – augšā, priekšā pa labi. Tā baltā uzlīme drīkst skatīties uz jebkuru no trim pusēm.</div>
-    <figure class="g2-grip-figure"><svg viewBox="0 0 200 225" role="img" aria-label="Atzīmēts augšējais priekšējais labais stūris"><polygon points="100,12 142,33 100,54 58,33" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="142,33 184,54 142,75 100,54" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="58,33 100,54 58,75 16,54" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="100,54 142,75 100,96 58,75" fill="#ffe574" stroke="#211e19" stroke-width="3"/><polygon points="16,54 58,75 58,117 16,96" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="58,75 100,96 100,138 58,117" fill="#ffe574" stroke="#211e19" stroke-width="3"/><polygon points="16,96 58,117 58,159 16,138" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="58,117 100,138 100,180 58,159" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="184,54 142,75 142,117 184,96" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="142,75 100,96 100,138 142,117" fill="#ffe574" stroke="#211e19" stroke-width="3"/><polygon points="184,96 142,117 142,159 184,138" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="142,117 100,138 100,180 142,159" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><text x="49" y="207" text-anchor="middle" font-size="12" fill="#211e19">Priekšpuse</text><text x="153" y="207" text-anchor="middle" font-size="12" fill="#211e19">Labā puse</text></svg><figcaption>Atzīmēts viens gabaliņš: augšā, priekšā pa labi.<br>Trīs dzeltenīgie laukumi rāda tā atrašanās vietu, nevis uzlīmju krāsas.</figcaption></figure>
-    <h3>C. Ievieto vienu stūri</h3>
-    <p class="alg" data-alg="R U R' U'"></p>
-    <p>Izpildi visus četrus gājienus un pārbaudi <strong>apakšējo priekšējo labo stūri</strong>. Ja baltais vēl neskatās uz leju <strong>vai abas sānu krāsas neatbilst izvēlētajai vietai</strong>, atkārto visu secību ar to pašu priekšpusi. Starp atkārtojumiem papildu U negriez. Apstājies tikai tad, kad visas trīs krāsas ir pareizi.</p>
-    <div class="g2-check"><strong>Šis stūris gatavs:</strong> baltais ir lejā, un sānu krāsas atbilst izvēlētajai vietai. Tad atgriezies pie B daļas un izvēlies nākamo stūri.</div>
-    <details><summary>Baltais stūris jau apakšā, bet nepareizi</summary><p>Turi nepareizo stūri apakšā priekšā pa labi. Izpildi R U R' U' vienu reizi, lai izceltu to augšā. Tad pēc abām sānu krāsām no jauna nosaki pareizo vietu un turpini ar B daļu.</p></details>
-    <details><summary>Augšā vairs nav balto stūru, bet slānis nav gatavs</summary><p>Kāds baltais stūris ir nepareizi ievietots apakšā. Salīdzini sānu krāsas ar sākumā izvēlēto atskaites stūri. Nepareizo stūri izcel ar iepriekšējo paņēmienu. Pareizo atskaites stūri atstāj vietā.</p></details>
-    <details><summary>Pēc sešām secībām atkal esmu sākumā</summary><p>Pārbaudi, vai izvēlētais gabaliņš pirms algoritma bija augšā priekšā pa labi, vai nemainīji priekšpusi un vai pabeidzi U'. Ja baltais nonāk lejā, bet sāni nesakrīt, bija izvēlēta nepareizā vieta – stūris jāizceļ un jāievieto pareizi.</p></details>
-    <figure class="dg" data-kind="top" data-c="wwww" data-b="bb" data-r="oo" data-f="gg" data-l="rr"><figcaption>Gatavs slānis, skatoties uz balto pusi: balts vidū un vienādas krāsas pāris katrā sānā. Sānu krāsas ir piemērs.</figcaption></figure>
-    <div class="g2-check"><strong>Vai gatavs?</strong> Pārbaudi visus četrus sānus. Katrā sānā abas apakšējās uzlīmes sakrīt. Tikai tad pārej pie dzeltenās puses.</div>
-    <label class="g2-done"><input type="checkbox" data-g2-done="1"> Baltais un visu sānu apakšējās rindas gatavas</label>
-  </section>
-
-  <section class="g2-page" data-g2-page="2" id="s2">
-    <h2 tabindex="-1">Dzeltenā puse</h2>
-    <p class="g2-goal">Rezultāts: četras dzeltenās uzlīmes augšā; baltais slānis atkal gatavs apakšā. Augšējo sānu krāsas sakārtosim 3. solī.</p>
-    <div class="g2-warning"><strong>Pirms pirmā grieziena:</strong><ul>
-      <li>Izvēlies priekšpusi un <strong>nemaini to līdz šī soļa beigām</strong>. Arī tad, ja apakša izskatās sajaukta.</li>
-      <li>Vienmēr pabeidz <strong>visus 4 gājienus</strong>, arī pēdējo D. Apstājies pārbaudei tikai pēc pilnas secības.</li>
-      <li>Starp stūriem griez <strong>tikai U</strong>. Apakšu pa vidu nelabo un visu kubu rokās nepagriez.</li>
-    </ul></div>
-    <p>Ja augša jau visa dzeltena, šis solis gatavs. Citādi atrodi augšējā slāņa stūri, kam dzeltenais skatās uz sānu.</p>
-    <div class="g2-grip"><strong>Kā turēt</strong><br>Baltais slānis sākumā apakšā. Ar U novieto izvēlēto stūri <strong>augšā priekšā pa labi</strong>. Nav svarīgi, vai tā dzeltenais skatās uz priekšu vai pa labi.</div>
-    <figure class="g2-grip-figure"><svg viewBox="0 0 200 225" role="img" aria-label="Atzīmēts augšējais priekšējais labais stūris"><polygon points="100,12 142,33 100,54 58,33" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="142,33 184,54 142,75 100,54" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="58,33 100,54 58,75 16,54" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="100,54 142,75 100,96 58,75" fill="#ffe574" stroke="#211e19" stroke-width="3"/><polygon points="16,54 58,75 58,117 16,96" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="58,75 100,96 100,138 58,117" fill="#ffe574" stroke="#211e19" stroke-width="3"/><polygon points="16,96 58,117 58,159 16,138" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="58,117 100,138 100,180 58,159" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="184,54 142,75 142,117 184,96" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="142,75 100,96 100,138 142,117" fill="#ffe574" stroke="#211e19" stroke-width="3"/><polygon points="184,96 142,117 142,159 184,138" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="142,117 100,138 100,180 142,159" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><text x="49" y="207" text-anchor="middle" font-size="12" fill="#211e19">Priekšpuse</text><text x="153" y="207" text-anchor="middle" font-size="12" fill="#211e19">Labā puse</text></svg><figcaption>Atzīmēts viens gabaliņš: augšā, priekšā pa labi.<br>Trīs dzeltenīgie laukumi rāda tā atrašanās vietu, nevis uzlīmju krāsas.</figcaption></figure>
-    <h3>A. Pagriez vienu stūri</h3>
-    <p class="alg" data-alg="R' D' R D"></p>
-    <p>Pēc pilnas četru gājienu secības skaties <strong>tikai uz augšējo priekšējo labo stūri</strong>. Ja dzeltenais vēl nav augšā, atkārto visu secību. Parasti vajadzīgas divas vai četras pilnas reizes.</p>
-    <div class="g2-check"><strong>Šis stūris pagriezts:</strong> tā dzeltenā uzlīme skatās uz augšu. Citu gabaliņu krāsas šajā brīdī nevērtē.</div>
-    <h3>B. Pievērs nākamo stūri</h3>
-    <p>Ar <strong>U</strong> pievērs nākamo augšējo stūri, kam dzeltenais skatās sānis. Visa kuba priekšpuse paliek tā pati. Stūrus, kuri jau ir dzelteni augšā, izlaid. Tad atkārto A daļu.</p>
-    <h3>C. Pārbaudi abas puses</h3>
-    <p>Kad visi četri stūri ir dzelteni augšā, pabeidz šo soli. Apakšējam baltajam slānim tagad jābūt atjaunotam. Augšējās sānu krāsas vēl drīkst nesakrist ar apakšējām.</p>
-    <figure class="dg" data-kind="top" data-c="yyyy"><figcaption>Gatava dzeltenā puse. Sānu krāsas šajā attēlā apzināti nav norādītas.</figcaption></figure>
-    <details><summary>Apakša pa vidu izskatās sajaukta</summary><p>Tas šajā metodē ir paredzēts. Turpini pārbaudīt tikai izvēlētā augšējā stūra dzelteno uzlīmi. Apakša atjaunojas pēc visu vajadzīgo stūru pagriešanas, ja katra četru gājienu secība pabeigta un priekšpuse nav mainīta.</p></details>
-    <details><summary>Dzeltenā puse gatava, bet apakša nav atjaunojusies</summary><p>Vispirms pārbaudi, vai pēc pēdējā R izpildīji arī D. Ja precīzi atceries izlaisto gājienu, pabeidz to. Ja neatceries vai pagriezi visu kubu starp stūriem, neatkārto algoritmu uz jau dzeltena stūra – atgriezies 1. solī un pārbaudi balto slāni.</p></details>
-    <details data-g2-sune><summary>Piezīme: Tavs pazīstamais Sune</summary><p class="alg" data-alg="R U R' U R U2 R'"></p><p>Arī šo kombināciju var izmantot pretējās puses veidošanai, <strong>ja jau saproti, kad to lietot un kā turēt kubu</strong>. Tā nav obligāta šīs pamācības daļa. Sāc to tikai ar gatavu balto slāni; neizmanto to pa vidu nepabeigtajam R' D' R D procesam. Gadījumu attēli ir Pro sadaļā.</p></details>
-    <div class="g2-check"><strong>Vai gatavs?</strong> Augša visa dzeltena. Apakša visa balta, un katra sāna abas apakšējās uzlīmes vienā krāsā.</div>
-    <label class="g2-done"><input type="checkbox" data-g2-done="2"> Dzeltenā puse gatava, baltais slānis atjaunots</label>
-  </section>
-
-  <section class="g2-page" data-g2-page="3" id="s3">
-    <h2 tabindex="-1">Sānu sakārtošana</h2>
-    <p class="g2-goal">Rezultāts: visas sešas puses vienā krāsā. Tagad mainām stūru vietas, saglabājot balto un dzelteno pusi.</p>
-    <div class="g2-grip"><strong>Kā turēt</strong><br>Baltais apakšā, dzeltenais augšā. Apskati katra sāna <strong>divas augšējās uzlīmes</strong>. Pāris nozīmē vienādu krāsu blakus – tam vēl nav jāsakrīt ar apakšējo rindu.</div>
-    <h3>Izvēlies vienu gadījumu</h3>
-    <details><summary>Visos četros sānos augšā ir vienādas krāsas pāri</summary><p>Abi slāņi jau sakārtoti. Griez tikai U, līdz augšējo pāru krāsas sakrīt ar apakšējām rindām. Pārbaudi visus četrus sānus; ja sakrīt, kubs gatavs.</p></details>
-    <details><summary>Atrodu vienu pāri – blakus stūru maiņa</summary>
-      <p>Pagriez <strong>visu kubu ap vertikālo asi</strong>, lai vienādas krāsas augšējais pāris būtu <strong>pa kreisi</strong>. Baltais paliek apakšā. Algoritma laikā priekšpusi nemaini.</p>
-      <figure class="dg" data-kind="top" data-c="yyyy" data-b="bo" data-r="gb" data-f="go" data-l="rr" data-mark="1,3"><figcaption>Skats no augšas, priekšpuse attēla apakšā. Sarkanais pāris pa kreisi; apvilktie labās puses stūri mainīs vietas. Sānu krāsas ir piemērs.</figcaption></figure>
-      <p class="alg" data-alg="R U R' U' R' F R2 U' R' U' R U R' F'"></p>
-      <p>Izpildi visu secību vienreiz. Tad griez tikai U, līdz augšējās sānu krāsas sakrīt ar apakšējām. Pārbaudi visas sešas puses.</p>
-    </details>
-    <details><summary>Neatrodu nevienu pāri – pretējie stūri pa diagonāli</summary>
-      <p>Visos četros sānos augšējās divas krāsas atšķiras. Baltais paliek apakšā, dzeltenais augšā; priekšā drīkst būt jebkurš sāns.</p>
-      <figure class="dg" data-kind="top" data-c="yyyy" data-b="or" data-r="bg" data-f="or" data-l="bg" data-mark="0,3"><figcaption>Skats no augšas, priekšpuse attēla apakšā. Nevienā sānu strīpā nav vienādas krāsas pāra – diagonāles gadījums.</figcaption></figure>
-      <p class="alg" data-alg="R U' R' U' F2 U' R U R' D R2"></p>
-      <p>Tā ir Tava pazīstamā kombinācija. Pabeidz arī pēdējo R2. Tad <strong>griez U, līdz augšējās krāsas sakrīt ar apakšējām</strong>. Apakšējā kārta var būt pagriezusies attiecībā pret sākumu, taču tās pāri saglabājas; izlīdzini augšu pret pašreizējo apakšu.</p>
-    </details>
-    <details><summary>Nesaprotu, vai man ir pāris</summary><p>Skaties uz vienu sānu, tikai uz tā augšējo rindu. Ja abas uzlīmes ir, piemēram, zilas, tas ir pāris, pat ja apakšējās ir sarkanas. Pa diagonāli izvietotas vienādas krāsas nav šāds pāris. Ja apakšā nav gatava balta slāņa vai augša nav dzeltena, vispirms pabeidz iepriekšējos soļus.</p></details>
-    <details><summary>Par Tavām divām citām sānu kombinācijām</summary>
-      <p>Pieraksti saglabāti salīdzināšanai:</p>
-      <p><code>R' U R' D2 R U' R' D2 R2</code><br><code>L' U R' D2 R U' R' D2 R2</code></p>
-      <p>Tās šeit nelietojam kā blakus stūru maiņu: dotajā pierakstā un šī soļa turējumā tās nesaglabā vajadzīgo balto un dzelteno pusi. To lietojumam jānoskaidro precīzs sākuma stāvoklis un turējums. Šī soļa blakus gadījumam izmanto augstāk parādīto pārbaudīto secību.</p>
-    </details>
-    <details><summary>Par Tavu FINISH: R2 U2</summary>
-      <p class="alg" data-alg="R2 U2"></p>
-      <p>Šis ir konkrēta stāvokļa finišs, <strong>nevis obligāts pēdējais solis</strong>. Piemēram, tas atceļ no salikta kuba izpildītu U2 R2. Uz jau salikta kuba R2 U2 atkal sajauc krāsas. Šajā metodē pēc stūru maiņas pietiek ar U izlīdzināšanu; ja viss sakrīt, apstājies.</p>
-    </details>
-    <div class="g2-check"><strong>Vai gatavs?</strong> Katra no sešām pusēm pilnībā vienā krāsā. Kubs salikts!</div>
-    <label class="g2-done"><input type="checkbox" data-g2-done="3"> Visas sešas puses saliktas</label>
-    <button type="button" class="g2-primary" data-g2-goto="scramble">Nākamais izaicinājums – sajaukt kubu →</button>
-  </section>
-
-  <section class="g2-page" data-g2-page="scramble">
-    <h2 tabindex="-1">Sajaukšana un Tavs MIX</h2>
-    <p>Pirmais treniņš ir Tava MIX secība ar 10 gājieniem. Pārējās četras ir 25 gājienu treniņu secības. Numuri nenozīmē grūtības pakāpes, un tās nav oficiāli sacensību sajaukumi.</p>
-    <div class="g2-grip"><strong>Sākuma turējums</strong><br>Sāc ar saliktu kubu: baltais augšā, zaļais pret Tevi. Saglabā šo priekšpusi visā secībā. R un U apzīmē vietas, nevis konkrētas krāsas.</div>
-    <label class="g2-select-label">Sajaukšanas secība<select data-g2-select aria-label="Sajaukšanas secība"><option value="0">Tavs MIX – 10 gājieni</option><option value="1">2. sajaukums – 25 gājieni</option><option value="2">3. sajaukums – 25 gājieni</option><option value="3">4. sajaukums – 25 gājieni</option><option value="4">5. sajaukums – 25 gājieni</option></select></label>
-    <div data-g2-scramble="U R F2 U R F2 R U F' R"><p class="g2-small">Tavs MIX – 10 gājieni</p><p class="alg" data-alg="U R F2 U R F2 R U F' R"></p></div>
-    <div data-g2-scramble="F R' F' U' B2 R' F' R2 B L2 B2 R F2 R2 B' D2 L2 F' D2 L2 U R F2 R U2"><p class="g2-small">2. sajaukums – 25 gājieni</p><p class="alg" data-alg="F R' F' U' B2 R' F' R2 B L2 B2 R F2 R2 B' D2 L2 F' D2 L2 U R F2 R U2"></p></div>
-    <div data-g2-scramble="R' B' R' D2 L2 F D F U2 R' U' R' B' D2 B2 L B' L' B2 U' L' B' U' F' R"><p class="g2-small">3. sajaukums – 25 gājieni</p><p class="alg" data-alg="R' B' R' D2 L2 F D F U2 R' U' R' B' D2 B2 L B' L' B2 U' L' B' U' F' R"></p></div>
-    <div data-g2-scramble="F2 L2 D' R2 B D' L D2 F' L' F R D F2 D B' L U L2 B R B2 D L F2"><p class="g2-small">4. sajaukums – 25 gājieni</p><p class="alg" data-alg="F2 L2 D' R2 B D' L D2 F' L' F R D F2 D B' L U L2 B R B2 D L F2"></p></div>
-    <div data-g2-scramble="D L' D2 B D R' F2 U2 L B2 U2 R B2 R U2 B' U F' R' D' L D' R D B"><p class="g2-small">5. sajaukums – 25 gājieni</p><p class="alg" data-alg="D L' D2 B D R' F2 U2 L B2 U2 R B2 R U2 B' U F' R' D' L D' R D B"></p></div>
-    <div class="g2-practice" data-g2-practice>
-      <p data-g2-counter aria-live="polite"></p>
-      <strong class="g2-current-move" data-g2-current></strong>
-      <p data-g2-description></p>
-      <div class="g2-actions"><button type="button" data-g2-move-back>← Iepriekšējais gājiens</button><button type="button" class="g2-primary" data-g2-move-next>Izpildīts →</button></div>
-      <p class="g2-small">Pogas pārvieto atzīmi ekrānā. Kubu griez Tu; “Iepriekšējais” neatceļ fiziski izdarītu griezienu.</p>
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="yxxy" data-small="1"
+        ><figcaption>Vēl nav gatava — daži stūri rāda dzelteno sānis</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="yyyy" data-small="1"
+        ><figcaption>Gatava: visa augša dzeltena (sānu krāsas vēl var nesakrist)</figcaption></figure>
     </div>
-    <details><summary>Kā izpildīt sajaukumu?</summary><p>Pieskaries jebkuram burtam, lai redzētu grieziena nozīmi. Pēc fiziski izpildīta gājiena spied “Izpildīts”. Ja pārslēdzies uz citu secību pa vidu, jaunam atkārtojamam izaicinājumam vispirms atkal saliec kubu.</p><p>Kad sajaukums pabeigts, 1. solī izvēlies vienu balto stūri par atskaites punktu.</p></details>
-    <button type="button" data-g2-goto="1">Kubs sajaukts – sākt salikšanu →</button>
-  </section>
+    <div class="warn"><b>Nebaidies!</b> Starp atkārtojumiem apakšējais slānis izskatīsies sajaukts — tas tā ir paredzēts.
+    Kad augša būs vienā krāsā, apakša atgriezīsies vietā.</div>
+    <div class="tip"><b>Pazīstams?</b> Šis ir tas pats <strong>R U R' U R U2 R'</strong>, ko 3×3 lieto dzelteno stūru kārtošanai.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="s2"> Solis apgūts</label></div>
+  </div>
 
-  <nav class="g2-bottom" aria-label="2×2 iesācēja navigācija">
-    <button type="button" data-g2-prev>← Atpakaļ</button>
-    <button type="button" data-g2-menu>Soļi ☰</button>
-    <button type="button" class="g2-primary" data-g2-next>Tālāk →</button>
-  </nav>
-  <dialog class="g2-dialog" data-g2-dialog aria-label="2×2 palīdzība un soļi">
-    <div class="g2-dialog-top"><strong data-g2-dialog-title></strong><button type="button" data-g2-close aria-label="Aizvērt palīdzību">Aizvērt ×</button></div>
-    <div data-g2-dialog-content></div>
-  </dialog>
-<style data-guide2-styles>
-  body.g2-active { font-family: 'Segoe UI', Arial, sans-serif; }
-  body.g2-active nav.steps, body.g2-active .panel-hero,
-  body.g2-active header.hero, body.g2-active .hero,
-  body.g2-active #uzbuve, body.g2-active #nota,
-  body.g2-active #a2-uzbuve, body.g2-active #a2-nota,
-  body.g2-active footer, body.g2-active .mb-hint { display: none; }
-  body.g2-active nav.steps { display: none !important; }
-  .guide2 { max-width: 680px; margin: 0 auto; padding-bottom: 110px; }
-  .guide2 [hidden] { display: none !important; }
-  .guide2 .g2-heading { padding: 24px 0 12px; border-bottom: 1px solid var(--line); margin-bottom: 22px; }
-  .guide2 .g2-eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-soft); }
-  .guide2 .g2-location { font-weight: 700; margin-top: 3px; }
-  .guide2 .g2-page { margin-bottom: 0; }
-  .guide2 h2 { font-family: 'Segoe UI', Arial, sans-serif; font-size: clamp(25px, 5vw, 34px); line-height: 1.2; text-transform: none; letter-spacing: -.025em; margin: 0 0 14px; }
-  .guide2 h2:focus { outline: none; }
-  .guide2 h3 { font-family: inherit; font-size: 21px; margin: 26px 0 10px; text-transform: none; letter-spacing: normal; }
-  .guide2 p { margin: 12px 0; }
-  .guide2 li { margin: 10px 0; padding-left: 3px; }
-  .guide2 ol, .guide2 ul { padding-left: 24px; margin: 12px 0; }
-  .guide2 .g2-goal { color: var(--ink-soft); font-size: 18px; }
-  .guide2 .g2-grip, .guide2 .g2-result, .guide2 .g2-example,
-  .guide2 .g2-check, .guide2 .g2-warning { padding: 15px 17px; border-radius: 12px; margin: 18px 0; background: var(--card); border: 1px solid var(--line); }
-  .guide2 .g2-grip { border-left: 4px solid var(--cb); }
-  .guide2 .g2-check { border-left: 4px solid #167449; background: #edf6ec; }
-  .guide2 .g2-warning { border-left: 4px solid #ac6400; background: #fff0c4; }
-  .guide2 .g2-warning ul { margin-bottom: 0; }
-  .guide2 .g2-pieces { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-  .guide2 .dg { margin: 18px auto; max-width: 100%; text-align: center; }
-  .guide2 .dg svg { max-width: 100%; }
-  .guide2 .dg figcaption { font: inherit; font-size: 15px; line-height: 1.45; max-width: 360px; margin: 8px auto 0; }
-  .guide2 .g2-grip-figure { margin: 16px auto; text-align: center; }
-  .guide2 .g2-grip-figure svg { width: 210px; max-width: 100%; height: auto; }
-  .guide2 .g2-grip-figure figcaption { font-size: 14px; color: var(--ink-soft); }
-  .guide2 details { border: 1px solid var(--line); border-radius: 12px; padding: 0 15px; margin: 12px 0; background: var(--card); }
-  .guide2 summary { cursor: pointer; font-weight: 650; min-height: 52px; padding: 14px 0; line-height: 1.45; }
-  .guide2 details[open] { border-color: #8b8370; }
-  .guide2 details[open] summary { border-bottom: 1px solid var(--line); margin-bottom: 12px; }
-  .guide2 button, .guide2 select { font: inherit; font-size: 16px; min-height: 46px; padding: 10px 14px; border: 1px solid #8b8370; border-radius: 10px; background: var(--card); color: var(--ink); cursor: pointer; line-height: 1.4; }
-  .guide2 button:focus-visible, .guide2 select:focus-visible, .guide2 summary:focus-visible, .guide2 input:focus-visible { outline: 3px solid var(--cb); outline-offset: 3px; }
-  .guide2 button:hover { background: #ebe5d7; }
-  .guide2 button:disabled { opacity: .45; cursor: default; }
-  .guide2 button.g2-primary { background: var(--ink); color: var(--card); border-color: var(--ink); }
-  .guide2 .g2-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
-  .guide2 .g2-actions > button { flex: 1 1 180px; }
-  .guide2 .alg { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); max-width: 100%; white-space: normal; }
-  .guide2 .alg .mv { font-family: Consolas, monospace; font-size: 22px; min-width: 46px; min-height: 46px; padding: 5px 9px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; background: #ffe574; color: #211e19; }
-  .guide2 .alg .mv.prime { background: #dfebff; color: #174789; }
-  .guide2 .alg .mv.dbl { background: #ffe3c3; color: #854600; }
-  .guide2 .g2-done { display: flex; align-items: flex-start; gap: 12px; padding: 16px 0; cursor: pointer; }
-  .guide2 .g2-done input { flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px; accent-color: #167449; }
-  .guide2 .g2-bottom { display: none; }
-  body.g2-active .guide2.g2-ready .g2-bottom { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; position: fixed; bottom: 0; left: 0; right: 0; z-index: 80; background: var(--card); border-top: 1px solid var(--line); padding: 12px max(14px, calc((100% - 680px) / 2)) calc(12px + env(safe-area-inset-bottom)); }
-  .guide2 .g2-bottom button { white-space: nowrap; padding-left: 6px; padding-right: 6px; }
-  .guide2 .g2-dialog { position: fixed; margin: auto; inset: 0; width: min(620px, calc(100vw - 24px)); max-height: calc(100dvh - 32px); padding: 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); color: var(--ink); overflow-y: auto; overscroll-behavior: contain; }
-  .guide2 .g2-dialog::backdrop { background: rgba(24, 22, 18, .58); }
-  .guide2 .g2-dialog-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
-  .guide2 .g2-menu-list { display: grid; gap: 9px; }
-  .guide2 .g2-menu-list button { text-align: left; }
-  .guide2 [aria-current="step"] { border: 2px solid var(--cb); background: #dfebff; }
-  .guide2 .g2-select-label { display: grid; gap: 8px; font-weight: 650; margin: 20px 0; }
-  .guide2 select { width: 100%; }
-  .guide2 .g2-practice { display: none; }
-  .guide2.g2-ready .g2-practice { display: block; border: 1px solid var(--line); padding: 16px; border-radius: 12px; background: var(--card); }
-  .guide2 .g2-current-move { font: 700 52px/1.2 Consolas, monospace; display: block; }
-  .guide2 .g2-small { color: var(--ink-soft); font-size: 14px; }
-  .guide2 .alg .g2-move-current { outline: 3px solid var(--ink); outline-offset: 2px; }
-  @media (max-width: 560px) {
-    body.g2-active { font-size: 17px; line-height: 1.6; }
-    body.g2-active .topbar .tabbtn { min-height: 44px; font-size: 13px; padding: 6px 8px; }
-    body.g2-active .topbar .tb-row { justify-content: center; gap: 6px; }
-    body.g2-active .topbar .tb-group { gap: 5px; }
-    body.g2-active .topbar .tb-sep { display: none; }
-    .guide2 .g2-heading { padding-top: 18px; margin-bottom: 18px; }
-    .guide2 .g2-pieces { gap: 8px; }
-    .guide2 .g2-pieces figcaption { font-size: 13px; }
-    .guide2 .g2-pieces svg { width: 72px; }
-    .guide2 .g2-bottom button { font-size: 15px; }
-    .guide2 .g2-dialog { padding: 16px; }
-  }
-  @media (prefers-reduced-motion: reduce) { body.g2-active { scroll-behavior: auto; } }
-  @media print {
-    .guide2 { padding-bottom: 0; }
-    .guide2 [data-g2-page][hidden], .guide2 [data-g2-scramble][hidden] { display: block !important; }
-    .guide2 .g2-page { break-before: page; }
-    body.g2-active .guide2.g2-ready .g2-bottom, .guide2 .g2-dialog, .guide2 .g2-practice, .guide2 .g2-done { display: none; }
-  }
-  /* Standalone shared reference sections stay available in Pro mode. */
-  body.g2-active #cheat, body.g2-active #padomi,
-  body.g2-active #a2-cheat, body.g2-active #a2-padomi { display: none; }
-  .guide2 code { overflow-wrap: anywhere; }
-</style>
-<script data-guide2-runtime>
-(function () {
-  'use strict';
-  var pages = ['intro', '1', '2', '3', 'scramble'];
-  var titles = ['Pirms sākuma', 'Baltais slānis', 'Dzeltenā puse', 'Sānu sakārtošana', 'Sajaukšana'];
-  function validPage(value) {
-    return pages.indexOf(value) >= 0 ? value : 'intro';
-  }
-  function adjacentPage(value, direction) {
-    var index = pages.indexOf(validPage(value));
-    return pages[Math.max(0, Math.min(pages.length - 1, index + direction))];
-  }
-  function describeMove(move) {
-    if (!/^[RLUDFB](2|')?$/.test(move)) return '';
-    var faces = { R: 'Labā kārta', L: 'Kreisā kārta', U: 'Augšējā kārta', D: 'Apakšējā kārta', F: 'Priekšējā kārta', B: 'Aizmugurējā kārta' };
-    var hints = { R: 'Priekšējās labās kolonnas gabaliņi iet uz augšu.', L: 'Priekšējās kreisās kolonnas gabaliņi iet uz leju.', U: 'Priekšējās augšējās rindas gabaliņi iet pa kreisi.', D: 'Priekšējās apakšējās rindas gabaliņi iet pa labi.' };
-    var reverse = { R: 'Priekšējās labās kolonnas gabaliņi iet uz leju.', L: 'Priekšējās kreisās kolonnas gabaliņi iet uz augšu.', U: 'Priekšējās augšējās rindas gabaliņi iet pa labi.', D: 'Priekšējās apakšējās rindas gabaliņi iet pa kreisi.' };
-    if (move[1] === '2') return faces[move[0]] + ': 180° jeb pusapgrieziens. Virziens nav svarīgs.';
-    var prime = move[1] === "'";
-    var text = faces[move[0]] + ': 90° ' + (prime ? 'pretēji pulksteņrādītāja virzienam' : 'pulksteņrādītāja virzienā') + ', skatoties tieši uz šo pusi.';
-    return text + ' ' + ((prime ? reverse : hints)[move[0]] || 'Visa kuba priekšpuse paliek pret Tevi; griez tikai norādīto kārtu.');
-  }
-  function validPractice(value, lengths) {
-    if (!value || !Number.isInteger(value.sequence) || value.sequence < 0 || value.sequence >= lengths.length || !Number.isInteger(value.move) || value.move < 0 || value.move > lengths[value.sequence]) return { sequence: 0, move: 0 };
-    return { sequence: value.sequence, move: value.move };
-  }
-  if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { validPage: validPage, adjacentPage: adjacentPage, describeMove: describeMove, validPractice: validPractice };
-  }
-  if (typeof document === 'undefined') return;
+  <!-- ---- 3. solis ---- -->
+  <div class="card step s3" id="s3">
+    <div class="stepnum">3</div>
+    <h3>3. solis — Augšējo stūru maiņa (sānu sakārtošana)</h3>
+    <p class="goal">Mērķis: visu sānu krāsas sakrīt — kubs salikts.</p>
+    <p>Augša ir dzeltena, bet sānu krāsas ap augšu var būt sajukušas. Griez tikai augšu (U) un paskaties:
+    ja kāds <strong>sāns jau ir vienā krāsā</strong> (piem., abi aizmugures stūri zili) — tas ir tavs «pareizais pāris».</p>
 
-  document.addEventListener('DOMContentLoaded', function () {
-    var root = document.querySelector('.guide2');
-    if (!root) return;
-    var storageKey = 'cube2-beginner-v2';
-    var stored = {};
-    try { stored = JSON.parse(localStorage.getItem(storageKey)) || {}; } catch (error) {}
-    var current = validPage(stored.page);
-    var lengths = Array.from(root.querySelectorAll('[data-g2-scramble]')).map(function (node) {
-      return node.getAttribute('data-g2-scramble').trim().split(/\s+/).length;
-    });
-    var practice = validPractice(stored.practice, lengths);
-    var completed = stored.done && typeof stored.done === 'object' ? stored.done : {};
-    var pageNodes = Array.from(root.querySelectorAll('[data-g2-page]'));
-    var dialog = root.querySelector('[data-g2-dialog]');
-    var dialogContent = root.querySelector('[data-g2-dialog-content]');
-    var dialogTitle = root.querySelector('[data-g2-dialog-title]');
-    var previous = root.querySelector('[data-g2-prev]');
-    var next = root.querySelector('[data-g2-next]');
-    var scrambles = Array.from(root.querySelectorAll('[data-g2-scramble]'));
-    var select = root.querySelector('[data-g2-select]');
+    <h3 style="font-size:18px">A) Blakus stūru maiņa</h3>
+    <p>Kad viens sāns jau ir pareizs (pāris blakus stūru): turi <strong>pareizo pāri pa kreisi</strong> — labie divi stūri samainīsies vietām.</p>
+    <p class="alg" data-alg="R U R' U' R' F R2 U' R' U' R U R' F'"></p>
+    <p class="alg-label">Blakus stūriem (pareizais pāris pa kreisi)</p>
+    <p>Beigās, ja vajag, pagriez augšu (U), līdz visas sānu krāsas sakrīt.</p>
 
-    function save() {
-      try { localStorage.setItem(storageKey, JSON.stringify({ page: current, done: completed, practice: practice })); } catch (error) {}
-    }
-    function navigate(value, focus) {
-      current = validPage(value);
-      pageNodes.forEach(function (page) { page.hidden = page.getAttribute('data-g2-page') !== current; });
-      root.querySelector('[data-g2-location]').textContent = /^\d$/.test(current) ? current + '. no 3 · ' + titles[pages.indexOf(current)] : titles[pages.indexOf(current)];
-      previous.disabled = current === 'intro';
-      next.disabled = current === 'scramble';
-      next.textContent = current === '3' ? 'Sajaukt →' : 'Tālāk →';
-      save();
-      if (focus) {
-        if (dialog.open) dialog.close();
-        var page = pageNodes.find(function (node) { return node.getAttribute('data-g2-page') === current; });
-        page.querySelector('h2').focus({ preventScroll: true });
-        var offset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--tbh')) || 60;
-        window.scrollTo({ top: Math.max(0, root.getBoundingClientRect().top + window.scrollY - offset - 12), behavior: 'instant' });
-      }
-    }
-    function openDialog(title) {
-      dialogTitle.textContent = title;
-      dialogContent.replaceChildren();
-      if (!dialog.open) dialog.showModal();
-    }
-    function paragraph(text) {
-      var p = document.createElement('p');
-      p.textContent = text;
-      dialogContent.appendChild(p);
-    }
-    function help(move) {
-      openDialog(move ? 'Gājiens ' + move : 'Gājienu skaidrojums');
-      if (move) paragraph(describeMove(move));
-      else {
-        ['R', 'L', 'U', 'D', 'F', 'B'].forEach(function (letter) { paragraph(letter + ' – ' + describeMove(letter)); });
-        paragraph("Apostrofs ' nozīmē pretēju virzienu. 2 nozīmē 180° jeb divus ceturtdaļapgriezienus.");
-      }
-      paragraph('Algoritmu lasi no kreisās uz labo. Pabeidz visu secību ar to pašu priekšpusi, tad pārbaudi rezultātu.');
-    }
-    function menu() {
-      openDialog('Kur vēlies turpināt?');
-      var list = document.createElement('div');
-      list.className = 'g2-menu-list';
-      pages.forEach(function (page, index) {
-        var button = document.createElement('button');
-        button.type = 'button';
-        button.textContent = (index > 0 && index < 4 ? index + '. ' : '') + titles[index] + (completed[page] === true ? ' ✓' : '');
-        if (page === current) button.setAttribute('aria-current', 'step');
-        button.addEventListener('click', function () { navigate(page, true); });
-        list.appendChild(button);
-      });
-      dialogContent.appendChild(list);
-    }
-    function renderPractice() {
-      select.value = String(practice.sequence);
-      scrambles.forEach(function (node, index) { node.hidden = index !== practice.sequence; });
-      var moves = scrambles[practice.sequence].getAttribute('data-g2-scramble').split(' ');
-      var finished = practice.move === moves.length;
-      root.querySelector('[data-g2-counter]').textContent = finished ? 'Visi ' + moves.length + ' gājieni izpildīti' : 'Gājiens ' + (practice.move + 1) + ' no ' + moves.length;
-      root.querySelector('[data-g2-current]').textContent = finished ? '✓' : moves[practice.move];
-      root.querySelector('[data-g2-description]').textContent = finished ? 'Sajaukums gatavs. Atrodi vienu balto stūri un sāc ar 1. soli.' : describeMove(moves[practice.move]);
-      root.querySelector('[data-g2-move-back]').disabled = practice.move === 0;
-      root.querySelector('[data-g2-move-next]').disabled = finished;
-      scrambles.forEach(function (node, index) {
-        node.querySelectorAll('.mv').forEach(function (chip, moveIndex) {
-          chip.classList.toggle('g2-move-current', index === practice.sequence && moveIndex === practice.move);
-        });
-      });
-      save();
-    }
-    root.querySelectorAll('[data-alg]').forEach(function (algorithm) {
-      var moves = algorithm.getAttribute('data-alg').trim().split(/\s+/);
-      algorithm.replaceChildren();
-      moves.forEach(function (move) {
-        var button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'mv' + (move.indexOf("'") >= 0 ? ' prime' : move.indexOf('2') >= 0 ? ' dbl' : '');
-        button.textContent = move;
-        button.setAttribute('aria-label', move + ': atvērt skaidrojumu');
-        button.addEventListener('click', function () { help(move); });
-        algorithm.appendChild(button);
-      });
-    });
-    root.querySelectorAll('[data-g2-done]').forEach(function (box) {
-      var step = box.getAttribute('data-g2-done');
-      box.checked = completed[step] === true;
-      box.addEventListener('change', function () { completed[step] = box.checked; save(); });
-    });
-    root.querySelectorAll('[data-g2-goto]').forEach(function (button) {
-      button.addEventListener('click', function () { navigate(button.getAttribute('data-g2-goto'), true); });
-    });
-    root.querySelectorAll('[data-g2-help]').forEach(function (button) { button.addEventListener('click', function () { help(); }); });
-    previous.addEventListener('click', function () { navigate(adjacentPage(current, -1), true); });
-    next.addEventListener('click', function () { navigate(adjacentPage(current, 1), true); });
-    root.querySelector('[data-g2-menu]').addEventListener('click', menu);
-    root.querySelector('[data-g2-close]').addEventListener('click', function () { dialog.close(); });
-    select.addEventListener('change', function () { practice = { sequence: Number(select.value), move: 0 }; renderPractice(); });
-    root.querySelector('[data-g2-move-back]').addEventListener('click', function () { practice.move = Math.max(0, practice.move - 1); renderPractice(); });
-    root.querySelector('[data-g2-move-next]').addEventListener('click', function () { practice.move = Math.min(lengths[practice.sequence], practice.move + 1); renderPractice(); });
-    function syncActive() {
-      var body = document.body;
-      var unified = root.closest('.cubepanel');
-      var active = unified ? body.getAttribute('data-cube') === 'a2' && body.getAttribute('data-level') === 'beginner' : !body.classList.contains('pro');
-      if (body.classList.contains('g2-active') !== active) body.classList.toggle('g2-active', active);
-      if (!active && dialog.open) dialog.close();
-    }
-    function followHash() {
-      var match = location.hash.match(/^#(?:a2-)?s([1-3])$/);
-      if (match && document.body.classList.contains('g2-active')) navigate(match[1], true);
-    }
-    root.classList.add('g2-ready');
-    navigate(current, false);
-    renderPractice();
-    syncActive();
-    new MutationObserver(syncActive).observe(document.body, { attributes: true, attributeFilter: ['class', 'data-cube', 'data-level'] });
-    window.addEventListener('hashchange', followHash);
-    followHash();
-  });
-})();
-</script>
-</div>
+    <h3 style="font-size:18px">B) Pretējo (diagonālo) stūru maiņa</h3>
+    <p>Ja <strong>neviens</strong> sāns nav vienā krāsā, jāsamaina divi <strong>pa diagonāli</strong> pretējie stūri:</p>
+    <p class="alg" data-alg="R U' R' U' F2 U' R U R' D R2"></p>
+    <p class="alg-label">Pretējiem stūriem (jebkurš leņķis)</p>
+    <p>Pēc algoritma pagriez augšu (U) un, ja vajag, arī apakšu (D), līdz visas krāsas sakrīt — kubs gatavs.</p>
+
+    <div class="dgrow">
+      <figure class="dg" data-kind="top" data-c="yyyy" data-b="bo" data-r="gb" data-f="go" data-l="rr"
+        data-arrows='[{"f":["u",1,0],"t":["u",1,1],"curve":18,"dbl":1}]'
+        ><figcaption>A) Kreisais sāns (sarkans) pareizs → labie divi mainās vietām</figcaption></figure>
+      <figure class="dg" data-kind="top" data-c="yyyy" data-b="gb" data-r="or" data-f="gb" data-l="or"
+        data-arrows='[{"f":["u",0,0],"t":["u",1,1],"curve":0,"dbl":1}]'
+        ><figcaption>B) Neviens sāns nav vienā krāsā → mainās divi pa diagonāli</figcaption></figure>
+    </div>
+    <div class="tip"><b>Padoms:</b> vispirms vienmēr pameklē pareizo pāri, griežot tikai U. Ja atrodi — tas ir gadījums A (īsāks).
+    Tikai ja pāra nav vispār — tad gadījums B.</div>
+    <div class="done-row"><label><input type="checkbox" data-step="s3"> Solis apgūts</label></div>
+  </div>
+</section>
+
 </div><!-- /mode-beginner -->
 
 <div class="mode mode-pro">
@@ -915,11 +621,11 @@
       <tr><th>Solis</th><th>Kad lietot</th><th>Algoritms</th></tr>
       <tr><td>1. Pirmais slānis</td><td>Balts stūris virs savas vietas, priekšā pa labi</td>
         <td><span class="alg small" data-alg="R U R' U'"></span></td></tr>
-      <tr><td>2. Augšas orientācija</td><td>Neorientētais stūris augšā priekšā pa labi; pabeidz pilnus 4 gājienu ciklus, starp stūriem tikai U; priekšpusi nemaini</td>
-        <td><span class="alg small" data-alg="R' D' R D"></span></td></tr>
+      <tr><td>2. Augšas orientācija</td><td>1 dzeltens augšā → to priekšā pa kreisi; 0 vai 2 → priekšējā kreisā stūra dzeltenā uzlīme pa kreisi; atkārto</td>
+        <td><span class="alg small" data-alg="R U R' U R U2 R'"></span></td></tr>
       <tr><td>3A. Blakus stūri</td><td>Viens sāns pareizs → turi to pa kreisi; beigās izlīdzini ar U</td>
         <td><span class="alg tiny" data-alg="R U R' U' R' F R2 U' R' U' R U R' F'"></span></td></tr>
-      <tr><td>3B. Pretēji stūri</td><td>Augšējās sānu rindās nav vienādas krāsas pāra; beigās izlīdzini ar U pret apakšu</td>
+      <tr><td>3B. Pretēji stūri</td><td>Neviens sāns nav pareizs (diagonāle); beigās izlīdzini ar U un D</td>
         <td><span class="alg small" data-alg="R U' R' U' F2 U' R U R' D R2"></span></td></tr>
     </table>
   </div>

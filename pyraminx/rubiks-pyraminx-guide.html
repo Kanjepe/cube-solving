@@ -307,101 +307,452 @@
 
 <!-- ==================== 1. METODE — IESĀCĒJU ==================== -->
 <div class="mode mode-beginner">
+<div class="guidepy">
+  <div class="gpy-heading"><p class="gpy-eyebrow">Pyraminx · Iesācējs</p><p class="gpy-location" data-gpy-location aria-live="polite">Pirms sākuma</p></div>
+  <section class="gpy-page" data-gpy-page="intro">
+    <h2 tabindex="-1">Saliec savu Pyraminx</h2>
+    <p>Viena salikšana, trīs soļi: <strong>stūri un gali → zaļais slānis → pēdējās 3 malas</strong>. Metodi neatkārto katrai krāsai. Kad pēdējās malas sakārtotas, gatava ir visa piramīda.</p>
+    <div class="gpy-result"><strong>Sākam no jebkura sajaukuma.</strong> Tev nav jāatpazīst sarežģītu formu nosaukumi. Katrā solī būs konkrēti norādīts, ko apskatīt, kā turēt un kad pāriet tālāk.</div>
+    <h3>Trīs dažādi gabaliņu veidi</h3>
+    <div class="gpy-pieces">
+      <figure class="dg" data-kind="pyra" data-c="xxxxxxxxx" data-mark="0,4,8" data-plabels="G...G...G"><figcaption><strong>G – gals.</strong> Mazā smailīte pašā virsotnē. Griežas arī atsevišķi.</figcaption></figure>
+      <figure class="dg" data-kind="pyra" data-c="xxxxxxxxx" data-mark="2,5,7" data-plabels="..S..S.S."><figcaption><strong>S – stūris.</strong> Gabals tūlīt zem gala. Tam ir trīs krāsas; vietu tas nemaina.</figcaption></figure>
+      <figure class="dg" data-kind="pyra" data-c="xxxxxxxxx" data-mark="1,3,6" data-plabels=".M.M..M.."><figcaption><strong>M – mala.</strong> Gabals starp diviem stūriem. Tam ir divas krāsas; tas maina vietu.</figcaption></figure>
+    </div>
+    <p>Visā piramīdā ir 4 gali, 4 stūri un 6 malas. Attēlos redzi vienas sejas uzlīmes; viens gabaliņš turpinās arī uz citām sejām.</p>
+    <h3>Kā turēt un lasīt burtus</h3>
+    <p>Viena virsotne ir augšā (<strong>U</strong>), divas – priekšā apakšā: kreisā (<strong>L</strong>) un labā (<strong>R</strong>). Ceturtā ir aizmugurē (<strong>B</strong>). Apakšējā seja ir horizontāla.</p>
+    <figure class="gpy-grip-figure"><svg class="gpy-topview" data-gpy-topview viewBox="0 0 360 250" role="img" aria-label="Skats no augšas: trīs augšējās malas, aizmugure augšā, priekšpuse pie Tevis">
+  <polygon points="180,30 40,195 320,195" fill="#edf6ec" stroke="#167449" stroke-width="2"/>
+  <path d="M180 120 L180 30 M180 120 L40 195 M180 120 L320 195" fill="none" stroke="#211e19" stroke-width="3"/>
+  <circle cx="180" cy="120" r="15" fill="#fffdf6" stroke="#211e19"/><text x="180" y="125" text-anchor="middle" font-size="14">U</text>
+  <rect x="147" y="56" width="66" height="28" rx="7" fill="#ffe574" stroke="#211e19"/><text x="180" y="75" text-anchor="middle" font-size="14">AM</text>
+  <rect x="78" y="145" width="66" height="28" rx="7" fill="#ffe574" stroke="#211e19"/><text x="111" y="164" text-anchor="middle" font-size="14">PK</text>
+  <rect x="216" y="145" width="66" height="28" rx="7" fill="#ffe574" stroke="#211e19"/><text x="249" y="164" text-anchor="middle" font-size="14">PL</text>
+  <text x="180" y="18" text-anchor="middle" font-size="15">Aizmugure (B)</text>
+  <text x="47" y="213" text-anchor="middle" font-size="14">L</text><text x="313" y="213" text-anchor="middle" font-size="14">R</text>
+  <text x="180" y="239" text-anchor="middle" font-size="16">Priekšpuse · Tu esi šeit</text>
+</svg><figcaption>PK = priekšā pa kreisi, PL = priekšā pa labi, AM = aizmugures mala. Dzeltenie lodziņi apzīmē malas, nevis to krāsas. Zaļā seja ir zem tām.</figcaption></figure>
+    <p><strong>Lielais burts</strong> kustina divus slānīšus kopā: G, S un trīs blakus malas. <strong>Mazais burts</strong> kustina tikai pašu smailīti G. Viens klikšķis ir <strong>120°</strong>; apostrofs <strong>'</strong> nozīmē pretēju virzienu. Divi U dod to pašu stāvokli kā U'.</p>
+    <p class="alg" data-alg="R R' r r'"></p>
+    <button type="button" data-gpy-help="moves">Parādīt griezienu skaidrojumu</button>
+    <p>Pieskaries jebkuram algoritma burtam. Skaidrojums atvērsies tepat, nezaudējot lasīšanas vietu. Virzienu nosaka, skatoties <strong>no attiecīgās virsotnes uz piramīdas vidu</strong>, nevis vienmēr no priekšpuses.</p>
+    <div class="gpy-warning"><strong>Grieziens nav tas pats, kas turējuma maiņa.</strong> “Pagriez visu piramīdu” nozīmē tikai izvēlēties citu priekšpusi rokās, neizdarot griezienu. Vienas kombinācijas laikā priekšpuse nemainās.</div>
+    <p class="gpy-small">Griezienu apzīmējumi: <a href="https://www.worldcubeassociation.org/regulations/#12e" target="_blank" rel="noopener">WCA Pyraminx notācija</a>.</p>
+    <div class="gpy-actions"><button type="button" class="gpy-primary" data-gpy-goto="1">Sākt ar stūriem un galiem →</button><button type="button" data-gpy-goto="scramble">Vispirms sajaukt</button></div>
+  </section>
 
-<div class="part-head">
-  <div class="kick">1. metode</div>
-  <h2>Iesācēju metode — slānis pa slānim <span class="rule" style="background:var(--paper)"></span></h2>
-  <p>Vienkāršākā pieeja. 3 soļi, 3 algoritmi pēdējām malām. Pārējais — ar aci.</p>
+  <section class="gpy-page" data-gpy-page="1" id="s1">
+    <h2 tabindex="-1">Stūri un gali</h2>
+    <p class="gpy-goal">Rezultāts: ir noteikta zaļā apakša un katras sānu sejas krāsa. Gali sakrīt ar stūriem zem tiem. Malas vēl nav jāsaliek.</p>
+    <h3>A. Atrodi augšējo virsotni</h3>
+    <ol>
+      <li>Apskati viena <strong>S gabala visas trīs krāsas</strong>. Tas ir gabals zem smailītes, nevis pati smailīte un nevis mala M.</li>
+      <li>Atrodi vienīgo S, kura trīs krāsās <strong>nav zaļās</strong>. Uz parasta četru krāsu Pyraminx pārējiem trim S zaļā ir.</li>
+      <li>Pagriez <strong>visu piramīdu rokās</strong>, lai atrastā virsotne būtu augšā. Pretējā lielā trijstūra seja tagad ir apakšā – tā būs zaļā.</li>
+    </ol>
+    <div class="gpy-grip"><strong>Kā turēt</strong><br>Augšā U ir stūris bez zaļās krāsas. Pret Tevi skatās viena trijstūra sānu seja, ar L un R virsotnēm apakšā. B atrodas aizmugurē. Pagaidām priekšpuses krāsu neizvēlies.</div>
+    <figure class="dg" data-kind="pyra" data-c="xxxxxxxxx" data-mark="2" data-plabels="..S......"><figcaption>Atzīmētā S gabala visas trīs uzlīmes ir jāapskata ap augšējo virsotni. Šajā skatā redzi tikai vienu.</figcaption></figure>
+    <h3>B. Pagriez trīs apakšējos stūrus</h3>
+    <ol>
+      <li>Pie L atrodi tā S zaļo uzlīmi. Pagriez <strong>lielo L daļu</strong> pa vienam klikšķim, līdz zaļā uzlīme skatās uz apakšējo seju. Ja tā jau ir apakšā, negriez.</li>
+      <li>Tāpat izdari pie R un B: katra šo trīs S zaļajai uzlīmei jāskatās uz <strong>vienu un to pašu apakšējo seju</strong>. Katram stūrim vajag ne vairāk kā divus klikšķus.</li>
+      <li>Apskati katru sānu seju. Abi tās apakšējie S tagad rāda vienādu krāsu. <strong>Tā ir šīs sejas atskaites krāsa</strong>, pat ja malas rāda pavisam ko citu.</li>
+      <li>Griez U pa vienam klikšķim, līdz augšējā S priekšējā uzlīme sakrīt ar abiem apakšējiem S priekšpusē. Tad pārbaudi arī pārējos sānus.</li>
+    </ol>
+    <figure class="dg" data-kind="pyra" data-c="xxrxxrxrx" data-mark="2,5,7" data-plabels="..S..S.S."><figcaption>Piemērs: trīs sarkanie S nosaka sarkano seju. Pelēkie laukumi nav jāvērtē. Uz pārējām sejām princips ir tāds pats.</figcaption></figure>
+    <h3>C. Pielīdzini mazos galus</h3>
+    <p>Katru G pagriez <strong>atsevišķi</strong> ar mazo griezienu u, l, r vai b, līdz visas tā krāsas sakrīt ar S tieši zem tā. Vienā sejā G un S kopā veido vienas krāsas rombu. Pārbaudi visas četras virsotnes.</p>
+    <div class="gpy-check"><strong>Var pāriet tālāk, ja:</strong> trīs apakšējie S rāda zaļo uz leju, katrā sānu sejā visi trīs S sakrīt un katrs G sakrīt ar savu S. Malu M krāsas šajā pārbaudē ignorē.</div>
+    <details><summary>Apakšējie S nesakrīt vai nesaprotu sejas krāsu</summary><p>Atgriezies pie A: vai augšā tiešām ir S bez zaļās? Pēc tam apskati apakšējo seju: vai tajā zaļi ir visi trīs S, nevis tikai G vai kāda mala? Krāsu nenosaka pēc uzlīmju vairākuma.</p></details>
+    <div class="gpy-warning">Lielie griezieni kustina arī malas – šajā solī tas ir normāli. Nākamajā solī U atkal pagriezīs augšējo S; to sakārtosim no jauna pirms pēdējo malu pārbaudes. G un S savstarpējā sakritība saglabājas, ja griez tos kopā.</div>
+    <label class="gpy-done"><input type="checkbox" data-gpy-done="1"> Šo soli saprotu un esmu izpildījis</label>
+  </section>
+
+  <section class="gpy-page" data-gpy-page="2" id="s2">
+    <h2 tabindex="-1">Zaļais slānis</h2>
+    <p class="gpy-goal">Rezultāts: visas trīs zaļās malas ir apakšā; katrai sakrīt gan zaļā, gan otra krāsa. Saliekam vienu malu pēc otras.</p>
+    <div class="gpy-grip"><strong>Kā turēt</strong><br>Zaļā atskaites seja paliek apakšā. Visu piramīdu drīkst pagriezt ap vertikālo asi, lai izvēlētos citu priekšpusi. U grieziens savukārt pārvieto augšējās malas. Tie ir divi dažādi soļi.</div>
+    <h3>Vispirms atrodi malu un tās vietu</h3>
+    <ol>
+      <li>Augšējā grupā atrodi M ar zaļu uzlīmi. Augšējās malas ir tās, kas savieno U ar L, R vai B; viena ir aizmugurē.</li>
+      <li>Apskati malas otru krāsu. Piemēram, <strong>zaļi sarkana mala</strong> pieder starp zaļo apakšu un sarkano sānu.</li>
+      <li>Pagriez visu piramīdu, saglabājot zaļo apakšā, līdz pret Tevi ir šīs otrās krāsas seja. To atpazīsti pēc <strong>abiem apakšējiem S</strong>. Augšējo S pagaidām neņem vērā.</li>
+      <li>Mērķa vieta tagad ir <strong>priekšējās sejas apakšējā mala</strong>. Griez tikai U pa vienam klikšķim, līdz izvēlētā mala atbilst A vai B turējumam zemāk.</li>
+    </ol>
+    <div class="gpy-example"><strong>Ko tieši meklēt pēc U?</strong> Izvēlētās malas ne-zaļajai uzlīmei jāskatās tieši pret Tevi, bet zaļajai – uz sānu. Ja priekšā redzi zaļo vai mala ir aizmugurē, vēl neievieto: izdari nākamo U un apskati to pašu malu. Trīs U pozīciju vidū būs viens no abiem gadījumiem.</div>
+    <div data-gpy-case="left">
+    <h3>A. Mala priekšā pa kreisi</h3>
+    <div class="gpy-grip"><strong>Kā turēt</strong><br>Zaļā seja apakšā. Izvēlētās malas vieta ir priekšpuses apakšējā mala. Ievietojamā mala atrodas <strong>priekšā pa kreisi (PK)</strong>. Tās <strong>zaļā uzlīme skatās uz kreiso sānu, nevis uz priekšu</strong>. Otra uzlīme skatās uz priekšu un sakrīt ar abiem apakšējiem S.</div>
+    <figure class="dg" data-kind="pyra" data-c="xrxxxrxrx" data-mark="1" data-plabels=".M...S.S."><figcaption>Skats uz priekšpusi. Piemērā priekšpuse ir sarkana: M sarkanā uzlīme jau skatās pret Tevi. Zaļā uzlīme ir ap to pašu malu uz kreisā sāna.</figcaption></figure>
+    <div class="gpy-edge-pair" aria-label="Viena malas gabaliņa abas uzlīmes"><span class="gpy-sticker red">Uz priekšu: sarkans</span><span class="gpy-sticker green">Uz kreiso sānu: zaļš</span></div>
+    <p class="alg" data-alg="R U' R'"></p>
+    <p>Izpildi <strong>visus trīs griezienus</strong> ar nemainīgu priekšpusi. Pirmais grieziens atver vietu, otrais pārvieto malu, trešais atgriež sānu. Starp tiem piramīdu rokās nepārgriez.</p>
+    <div class="gpy-check"><strong>Pēc secības:</strong> šī mala ir priekšā apakšā, zaļais skatās uz leju, otrā krāsa – uz savu priekšpusi. Pārējās jau pareizās apakšējās malas un apakšējie S ir atjaunoti.</div>
+  </div>
+    <div data-gpy-case="right">
+    <h3>B. Mala priekšā pa labi</h3>
+    <div class="gpy-grip"><strong>Kā turēt</strong><br>Zaļā seja apakšā. Izvēlētās malas vieta ir priekšpuses apakšējā mala. Ievietojamā mala atrodas <strong>priekšā pa labi (PL)</strong>. Tās <strong>zaļā uzlīme skatās uz labo sānu, nevis uz priekšu</strong>. Otra uzlīme skatās uz priekšu un sakrīt ar abiem apakšējiem S.</div>
+    <figure class="dg" data-kind="pyra" data-c="xxxrxrxrx" data-mark="3" data-plabels="...M.S.S."><figcaption>Skats uz priekšpusi. Piemērā priekšpuse ir sarkana: M sarkanā uzlīme jau skatās pret Tevi. Zaļā uzlīme ir ap to pašu malu uz labā sāna.</figcaption></figure>
+    <div class="gpy-edge-pair" aria-label="Viena malas gabaliņa abas uzlīmes"><span class="gpy-sticker red">Uz priekšu: sarkans</span><span class="gpy-sticker green">Uz labo sānu: zaļš</span></div>
+    <p class="alg" data-alg="L' U L"></p>
+    <p>Izpildi <strong>visus trīs griezienus</strong> ar nemainīgu priekšpusi. Pirmais grieziens atver vietu, otrais pārvieto malu, trešais atgriež sānu. Starp tiem piramīdu rokās nepārgriez.</p>
+    <div class="gpy-check"><strong>Pēc secības:</strong> šī mala ir priekšā apakšā, zaļais skatās uz leju, otrā krāsa – uz savu priekšpusi. Pārējās jau pareizās apakšējās malas un apakšējie S ir atjaunoti.</div>
+  </div>
+    <figure class="dg" data-kind="pyra" data-c="xxxxxrrrx" data-mark="6" data-plabels=".....SMS."><figcaption>Pēc ievietošanas: priekšpuses apakšējā M sakrīt ar abiem S. Uz šīs pašas malas apakšpusē jābūt zaļajam.</figcaption></figure>
+    <h3>Izvēlies nākamo malu</h3>
+    <p>Ja augšā vēl ir zaļa mala, atkārto atlasi un ievietošanu tai. <strong>Jau pareizi ievietotās malas neaiztiec.</strong> Ja augšā zaļo vairs nav, pārbaudi visas trīs apakšējās malas pēc abām krāsām.</p>
+    <details><summary>Zaļā mala jau ir apakšā, bet nepareizi</summary><p>Vispirms ievieto augšā pieejamās zaļās malas. Ja augšā tādu nav, bet apakša vēl nav pareiza, pagriez visu piramīdu tā, lai <strong>viena nepareizā apakšējā mala būtu priekšā</strong>. Zaļā seja joprojām ir lejā.</p><p class="alg" data-alg="R U' R'"></p><p>Šoreiz secība ir <strong>izcelšana</strong>: nepareizā priekšējā apakšējā mala nonāk augšā aizmugurē. Citas pareizās apakšējās malas paliek savās vietās. Atgriezies pie “Vispirms atrodi malu un tās vietu”, apskati izceltās malas abas krāsas un sagatavo A vai B. Neatkārto secību akli.</p></details>
+    <details><summary>Pēc ievietošanas zaļais ir uz sāna vai izjuka cita mala</summary><p>Pārbaudi, vai pirms secības zaļais bija uz ārējā sāna, nevis priekšā, un vai tika izpildīti visi trīs burti ar pareiziem apostrofiem. Ja tikko izpildīji tieši norādīto secību nepareizā turējumā un vēl neko citu negriezi, A secību atceļ <strong>R U R'</strong>, bet B secību atceļ <strong>L' U' L</strong>. Tad sagatavo turējumu no jauna. Ja neatceries izdarītos gājienus, vispirms pārbaudi 1. soļa apakšējos S un pēc tam atkārto šo soli.</p></details>
+    <div class="gpy-check"><strong>2. solis gatavs:</strong> visa apakša ir zaļa, un katrā no trim sānu sejām apakšējā M sakrīt ar abiem apakšējiem S. Tikai zaļas uzlīmes apakšā nav pietiekami. Augšējo S un trīs augšējās malas sakārtosim nākamajā solī.</div>
+    <label class="gpy-done"><input type="checkbox" data-gpy-done="2"> Šo soli saprotu un esmu izpildījis</label>
+  </section>
+
+  <section class="gpy-page" data-gpy-page="3" id="s3">
+    <h2 tabindex="-1">Pēdējās 3 malas</h2>
+    <p class="gpy-goal">Rezultāts: sakārtotas malas ap U. Zaļais slānis paliek apakšā; nav jāsāk likt cita seja no jauna.</p>
+    <div class="gpy-grip"><strong>Kā turēt</strong><br>Zaļā seja apakšā, U augšā. Pirms gadījuma izvēles griez U, līdz augšējā S uzlīme priekšpusē sakrīt ar abiem apakšējiem S. Pārbaudi arī pārējos sānus. <strong>Pēc šīs pielīdzināšanas papildu U sagatavošanai vairs negriez.</strong></div>
+    <h3>A. Pārbaudi malas vietu, nevis tikai vienu uzlīmi</h3>
+    <p>Apskati visas trīs augšējās malas. Lai redzētu aizmuguri, drīkst pagriezt visu piramīdu ap vertikālo asi; tad atkal izvēlies priekšpusi. Kārtas atsevišķi negriez.</p>
+    <div class="gpy-example"><strong>“Savā vietā”:</strong> starp sarkano un zilo seju atrodas sarkani zila mala. Tā ir savā vietā arī tad, ja sarkanais skatās uz zilo seju un zilais uz sarkano. Tad tā ir <strong>apgriezta</strong>, nevis nepareizajā vietā.</div>
+    <figure class="gpy-grip-figure"><svg class="gpy-topview" data-gpy-topview viewBox="0 0 360 250" role="img" aria-label="Skats no augšas: trīs augšējās malas, aizmugure augšā, priekšpuse pie Tevis">
+  <polygon points="180,30 40,195 320,195" fill="#edf6ec" stroke="#167449" stroke-width="2"/>
+  <path d="M180 120 L180 30 M180 120 L40 195 M180 120 L320 195" fill="none" stroke="#211e19" stroke-width="3"/>
+  <circle cx="180" cy="120" r="15" fill="#fffdf6" stroke="#211e19"/><text x="180" y="125" text-anchor="middle" font-size="14">U</text>
+  <rect x="147" y="56" width="66" height="28" rx="7" fill="#ffe574" stroke="#211e19"/><text x="180" y="75" text-anchor="middle" font-size="14">AM</text>
+  <rect x="78" y="145" width="66" height="28" rx="7" fill="#ffe574" stroke="#211e19"/><text x="111" y="164" text-anchor="middle" font-size="14">PK</text>
+  <rect x="216" y="145" width="66" height="28" rx="7" fill="#ffe574" stroke="#211e19"/><text x="249" y="164" text-anchor="middle" font-size="14">PL</text>
+  <text x="180" y="18" text-anchor="middle" font-size="15">Aizmugure (B)</text>
+  <text x="47" y="213" text-anchor="middle" font-size="14">L</text><text x="313" y="213" text-anchor="middle" font-size="14">R</text>
+  <text x="180" y="239" text-anchor="middle" font-size="16">Priekšpuse · Tu esi šeit</text>
+</svg><figcaption>PK = priekšā pa kreisi, PL = priekšā pa labi, AM = aizmugures mala. Dzeltenie lodziņi apzīmē malas, nevis to krāsas. Zaļā seja ir zem tām.</figcaption></figure>
+    <ol>
+      <li><strong>Visas malas ir savās vietās un uzlīmes sakrīt?</strong> Gatavs – pārbaudi arī galus.</li>
+      <li><strong>Neviena no trim malām nav savā vietā?</strong> Vajag ciklu: turpini ar B zemāk.</li>
+      <li><strong>Visas ir savās vietās, bet divām uzlīmes ir otrādi?</strong> Izlaid B un ej uz C.</li>
+    </ol>
+    <h3>B. Pārvieto malas uz pareizajām vietām</h3>
+    <p>Izvēlies priekšpusi un apskati <strong>PK malas abas krāsas</strong>. Atrodi, kuras divas sānu sejas ir šajās krāsās. Tā nosaki tās galamērķi. Nevajag minēt pēc kopējās krāsu formas.</p>
+    <div data-gpy-case="ccw"><h3>PK malai jānonāk priekšā pa labi (PL)</h3>
+      <p>Malas pārvietojas: <strong>PK → PL → AM → PK</strong>. Tas ir pretēji pulksteņrādītāja virzienam, skatoties diagrammā no augšas.</p>
+      <p class="alg" data-alg="R U R' U R U R'"></p>
+    </div>
+    <div data-gpy-case="cw"><h3>PK malai jānonāk aizmugurē (AM)</h3>
+      <p>Malas pārvietojas: <strong>PK → AM → PL → PK</strong>. Tas ir pulksteņrādītāja virzienā, skatoties diagrammā no augšas.</p>
+      <p class="alg" data-alg="R U' R' U' R U' R'"></p>
+    </div>
+    <div class="gpy-check"><strong>Pēc viena pareizi izvēlēta cikla:</strong> visu trīs malu krāsu pāri pieder savām vietām. Tagad pārbaudi uzlīmju virzienu: ja viss sakrīt, gatavs; ja divas malas apgrieztas, turpini ar C. Tas ir paredzēts nākamais gadījums, nevis obligāti kļūda.</div>
+    <details><summary>Sajaucu cikla virzienu</summary><p>Ja izpildīji vienu pilnu, bet pretējā virziena ciklu, un kopš tā neko citu neesi griezis, <strong>atkārto tieši to pašu ciklu vēl vienu reizi ar to pašu priekšpusi</strong>. Pēc tam atkal pārbaudi krāsu pāru vietas un, ja vajag, ej uz C. Šis noteikums attiecas uz nepareizi izvēlētu pilnu ciklu, nevis izlaistu burtu vai kļūdainu griezienu.</p></details>
+    <div data-gpy-case="flip">
+      <h3>C. Divas malas jāapgriež savās vietās</h3>
+      <p>Šo kombināciju izmanto <strong>tikai tad, kad visas trīs malas pieder savām vietām</strong>. Divām ir samainīts uzlīmju virziens, trešā ir pilnīgi pareiza.</p>
+      <div class="gpy-grip"><strong>Kā turēt</strong><br>Pagriez <strong>visu piramīdu</strong> ap vertikālo asi, līdz pilnīgi pareizā augšējā mala atrodas aizmugurē (AM). Abas apgrieztās tad ir priekšā: PK un PL. Zaļais paliek apakšā. U atsevišķi negriez.</div>
+      <p class="alg" data-alg="L R' L' R U' R U R'"></p>
+      <p>Pabeidz visus astoņus griezienus ar nemainīgu priekšpusi. Kombinācija apgriež abas priekšējās malas savās vietās; aizmugures mala un zaļais slānis beigās paliek pareizi.</p>
+    </div>
+    <details><summary>Redzu citu situāciju: tikai viena mala vietā vai viena apgriezta</summary><p>Vispirms pārbaudi trīs lietas: vai augšējais S ir pielīdzināts; vai apakšējās malas sakrīt pēc <strong>abām</strong> krāsām; vai neesi sajaucis “mala savā vietā” ar “uzlīmes pareizi”. Ja tikai viena mala izskatās gatava, pārējās divas var būt savās vietās, bet apgrieztas – tad tas ir C. Ja patiešām tikai viens krāsu pāris pieder savai vietai, solim nav izpildīti priekšnoteikumi vai puzle nav parastā legālā stāvoklī. Neizvēlies kombināciju uz minēšanu.</p></details>
+    <div class="gpy-check"><strong>Pyraminx salikts:</strong> katra no četrām sejām ir vienā krāsā. Ja atšķiras tikai maza smailīte G, pagriez tikai šo galu, līdz tas sakrīt ar S zem tā. Visa metode citām pusēm nav jāatkārto.</div>
+    <label class="gpy-done"><input type="checkbox" data-gpy-done="3"> Šo soli saprotu un esmu izpildījis</label>
+    <button type="button" data-gpy-goto="scramble">Patrenēties ar jaunu sajaukumu →</button>
+  </section>
+
+  <section class="gpy-page" data-gpy-page="scramble">
+    <h2 tabindex="-1">Sajaukšana un treniņš</h2>
+    <p>Sāc ar <strong>saliktu Pyraminx</strong>, zaļo seju apakšā un sarkano priekšā. Visu secību saglabā šo priekšpusi. Šie ir pieci atkārtojami treniņa sajaukumi, nevis oficiāli sacensību sajaukumi.</p>
+    <label class="gpy-select-label">Izvēlies sajaukumu<select data-gpy-select><option value="0">1. Īsais treniņš</option><option value="1">2. Treniņš ar galiem</option><option value="2">3. Treniņš ar galiem</option><option value="3">4. Treniņš ar galiem</option><option value="4">5. Treniņš ar galiem</option></select></label>
+    <p class="alg" data-alg="U R L' B U' R' L B'" data-gpy-scramble="U R L' B U' R' L B'"></p>
+    <p class="alg" data-alg="R U' L B' R' U B L' U R' u l'" data-gpy-scramble="R U' L B' R' U B L' U R' u l'"></p>
+    <p class="alg" data-alg="L' U R B U' L R' B' L U' r b" data-gpy-scramble="L' U R B U' L R' B' L U' r b"></p>
+    <p class="alg" data-alg="B R' U L' B' U' R L B U l b'" data-gpy-scramble="B R' U L' B' U' R L B U l b'"></p>
+    <p class="alg" data-alg="U' L B R' U L' B' R U' B u' r'" data-gpy-scramble="U' L B R' U L' B' R U' B u' r'"></p>
+    <div class="gpy-practice">
+      <p data-gpy-counter aria-live="polite">Gājiens 1</p><strong class="gpy-current-move" data-gpy-current></strong><p data-gpy-description></p>
+      <div class="gpy-actions"><button type="button" data-gpy-move-back>← Iepriekšējais</button><button type="button" class="gpy-primary" data-gpy-move-next>Izpildīts →</button></div>
+      <p class="gpy-small">Pogas pārvieto atzīmi ekrānā. Piramīdu griez Tu; “Iepriekšējais” neatceļ fiziski izdarītu griezienu.</p>
+    </div>
+    <details><summary>Kā izmantot treniņu?</summary><p>Pēc katra izdarītā grieziena spied “Izpildīts”. Mazais burts, piemēram, u, kustina tikai galu. Pieskaries burtam pilnajā secībā, ja vajag skaidrojumu. Lai sāktu citu atkārtojamu sajaukumu, vispirms atkal saliec piramīdu. Pēc sajaukšanas sāc 1. soli no stūra, kuram nav zaļās krāsas.</p></details>
+    <button type="button" data-gpy-goto="1">Piramīda sajaukta – sākt salikšanu →</button>
+  </section>
+  <nav class="gpy-bottom" aria-label="Pyraminx iesācēja navigācija">
+    <button type="button" data-gpy-prev>← Atpakaļ</button><button type="button" data-gpy-menu>Soļi ☰</button><button type="button" class="gpy-primary" data-gpy-next>Tālāk →</button>
+  </nav>
+  <dialog class="gpy-dialog" data-gpy-dialog aria-label="Pyraminx palīdzība un soļi">
+    <div class="gpy-dialog-top"><strong data-gpy-dialog-title></strong><button type="button" data-gpy-close aria-label="Aizvērt palīdzību">Aizvērt ×</button></div>
+    <div data-gpy-dialog-content></div>
+  </dialog>
+<style data-guidepy-styles>
+  body.gpy-active { font-family: 'Segoe UI', Arial, sans-serif; }
+  body.gpy-active nav.steps, body.gpy-active .panel-hero,
+  body.gpy-active header.hero, body.gpy-active .hero,
+  body.gpy-active #uzbuve, body.gpy-active #nota,
+  body.gpy-active #py-uzbuve, body.gpy-active #py-nota,
+  body.gpy-active footer, body.gpy-active .mb-hint { display: none; }
+  body.gpy-active nav.steps { display: none !important; }
+  .guidepy { max-width: 680px; margin: 0 auto; padding-bottom: 110px; }
+  .guidepy [hidden] { display: none !important; }
+  .guidepy .gpy-heading { padding: 24px 0 12px; border-bottom: 1px solid var(--line); margin-bottom: 22px; }
+  .guidepy .gpy-eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-soft); }
+  .guidepy .gpy-location { font-weight: 700; margin-top: 3px; }
+  .guidepy .gpy-page { margin-bottom: 0; }
+  .guidepy h2 { font-family: 'Segoe UI', Arial, sans-serif; font-size: clamp(25px, 5vw, 34px); line-height: 1.2; text-transform: none; letter-spacing: -.025em; margin: 0 0 14px; }
+  .guidepy h2:focus { outline: none; }
+  .guidepy h3 { font-family: inherit; font-size: 21px; margin: 26px 0 10px; text-transform: none; letter-spacing: normal; }
+  .guidepy p { margin: 12px 0; }
+  .guidepy li { margin: 10px 0; padding-left: 3px; }
+  .guidepy ol, .guidepy ul { padding-left: 24px; margin: 12px 0; }
+  .guidepy .gpy-goal { color: var(--ink-soft); font-size: 18px; }
+  .guidepy .gpy-grip, .guidepy .gpy-result, .guidepy .gpy-example,
+  .guidepy .gpy-check, .guidepy .gpy-warning { padding: 15px 17px; border-radius: 12px; margin: 18px 0; background: var(--card); border: 1px solid var(--line); }
+  .guidepy .gpy-grip { border-left: 4px solid var(--cb); }
+  .guidepy .gpy-check { border-left: 4px solid #167449; background: #edf6ec; }
+  .guidepy .gpy-warning { border-left: 4px solid #ac6400; background: #fff0c4; }
+  .guidepy .gpy-warning ul { margin-bottom: 0; }
+  .guidepy .gpy-pieces { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .guidepy .dg { margin: 18px auto; max-width: 100%; text-align: center; }
+  .guidepy .dg svg { max-width: 100%; }
+  .guidepy .dg figcaption { font: inherit; font-size: 15px; line-height: 1.45; max-width: 360px; margin: 8px auto 0; }
+  .guidepy .gpy-grip-figure { margin: 16px auto; text-align: center; }
+  .guidepy .gpy-grip-figure svg { width: 210px; max-width: 100%; height: auto; }
+  .guidepy .gpy-grip-figure figcaption { font-size: 14px; color: var(--ink-soft); }
+  .guidepy details { border: 1px solid var(--line); border-radius: 12px; padding: 0 15px; margin: 12px 0; background: var(--card); }
+  .guidepy summary { cursor: pointer; font-weight: 650; min-height: 52px; padding: 14px 0; line-height: 1.45; }
+  .guidepy details[open] { border-color: #8b8370; }
+  .guidepy details[open] summary { border-bottom: 1px solid var(--line); margin-bottom: 12px; }
+  .guidepy button, .guidepy select { font: inherit; font-size: 16px; min-height: 46px; padding: 10px 14px; border: 1px solid #8b8370; border-radius: 10px; background: var(--card); color: var(--ink); cursor: pointer; line-height: 1.4; }
+  .guidepy button:focus-visible, .guidepy select:focus-visible, .guidepy summary:focus-visible, .guidepy input:focus-visible { outline: 3px solid var(--cb); outline-offset: 3px; }
+  .guidepy button:hover { background: #ebe5d7; }
+  .guidepy button:disabled { opacity: .45; cursor: default; }
+  .guidepy button.gpy-primary { background: var(--ink); color: var(--card); border-color: var(--ink); }
+  .guidepy .gpy-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
+  .guidepy .gpy-actions > button { flex: 1 1 180px; }
+  .guidepy .alg { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); max-width: 100%; white-space: normal; }
+  .guidepy .alg .mv { font-family: Consolas, monospace; font-size: 22px; min-width: 46px; min-height: 46px; padding: 5px 9px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; background: #ffe574; color: #211e19; }
+  .guidepy .alg .mv.prime { background: #dfebff; color: #174789; }
+  .guidepy .alg .mv.dbl { background: #ffe3c3; color: #854600; }
+  .guidepy .gpy-done { display: flex; align-items: flex-start; gap: 12px; padding: 16px 0; cursor: pointer; }
+  .guidepy .gpy-done input { flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px; accent-color: #167449; }
+  .guidepy .gpy-bottom { display: none; }
+  body.gpy-active .guidepy.gpy-ready .gpy-bottom { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; position: fixed; bottom: 0; left: 0; right: 0; z-index: 80; background: var(--card); border-top: 1px solid var(--line); padding: 12px max(14px, calc((100% - 680px) / 2)) calc(12px + env(safe-area-inset-bottom)); }
+  .guidepy .gpy-bottom button { white-space: nowrap; padding-left: 6px; padding-right: 6px; }
+  .guidepy .gpy-dialog { position: fixed; margin: auto; inset: 0; width: min(620px, calc(100vw - 24px)); max-height: calc(100dvh - 32px); padding: 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); color: var(--ink); overflow-y: auto; overscroll-behavior: contain; }
+  .guidepy .gpy-dialog::backdrop { background: rgba(24, 22, 18, .58); }
+  .guidepy .gpy-dialog-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+  .guidepy .gpy-menu-list { display: grid; gap: 9px; }
+  .guidepy .gpy-menu-list button { text-align: left; }
+  .guidepy [aria-current="step"] { border: 2px solid var(--cb); background: #dfebff; }
+  .guidepy .gpy-select-label { display: grid; gap: 8px; font-weight: 650; margin: 20px 0; }
+  .guidepy select { width: 100%; }
+  .guidepy .gpy-practice { display: none; }
+  .guidepy.gpy-ready .gpy-practice { display: block; border: 1px solid var(--line); padding: 16px; border-radius: 12px; background: var(--card); }
+  .guidepy .gpy-current-move { font: 700 52px/1.2 Consolas, monospace; display: block; }
+  .guidepy .gpy-small { color: var(--ink-soft); font-size: 14px; }
+  .guidepy .alg .gpy-move-current { outline: 3px solid var(--ink); outline-offset: 2px; }
+  @media (max-width: 560px) {
+    body.gpy-active { font-size: 17px; line-height: 1.6; }
+    body.gpy-active .topbar .tabbtn { min-height: 44px; font-size: 13px; padding: 6px 8px; }
+    body.gpy-active .topbar .tb-row { justify-content: center; gap: 6px; }
+    body.gpy-active .topbar .tb-group { gap: 5px; }
+    body.gpy-active .topbar .tb-sep { display: none; }
+    .guidepy .gpy-heading { padding-top: 18px; margin-bottom: 18px; }
+    .guidepy .gpy-pieces { gap: 8px; }
+    .guidepy .gpy-pieces figcaption { font-size: 13px; }
+    .guidepy .gpy-pieces svg { width: 72px; }
+    .guidepy .gpy-bottom button { font-size: 15px; }
+    .guidepy .gpy-dialog { padding: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) { body.gpy-active { scroll-behavior: auto; } }
+  @media print {
+    .guidepy { padding-bottom: 0; }
+    .guidepy [data-gpy-page][hidden], .guidepy [data-gpy-scramble][hidden] { display: block !important; }
+    .guidepy .gpy-page { break-before: page; }
+    body.gpy-active .guidepy.gpy-ready .gpy-bottom, .guidepy .gpy-dialog, .guidepy .gpy-practice, .guidepy .gpy-done { display: none; }
+  }
+  /* Standalone shared reference sections stay available in Pro mode. */
+  body.gpy-active #cheat, body.gpy-active #padomi,
+  body.gpy-active #py-cheat, body.gpy-active #py-padomi { display: none; }
+  .guidepy code { overflow-wrap: anywhere; }
+  .guidepy .gpy-topview { width: 360px; max-width: 100%; height: auto; }
+  .guidepy .gpy-edge-pair { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 12px 0; }
+  .guidepy .gpy-sticker { padding: 8px 12px; border: 2px solid var(--ink); border-radius: 8px; color: white; font-weight: 700; }
+  .guidepy .gpy-sticker.green { background: #087c3a; }
+  .guidepy .gpy-sticker.red { background: #b52b24; }
+  .guidepy .alg .mv.tip { border: 2px dashed #167449; }
+</style>
+<script data-guidepy-runtime>
+(function () {
+  'use strict';
+  var pages = ['intro', '1', '2', '3', 'scramble'];
+  var titles = ['Pirms sākuma', 'Stūri un gali', 'Zaļais slānis', 'Pēdējās 3 malas', 'Sajaukšana'];
+  function validPage(value) {
+    return pages.indexOf(value) >= 0 ? value : 'intro';
+  }
+  function adjacentPage(value, direction) {
+    var index = pages.indexOf(validPage(value));
+    return pages[Math.max(0, Math.min(pages.length - 1, index + direction))];
+  }
+  function describeMove(move) {
+    if (!/^[ULRBulrb]'?$/.test(move)) return '';
+    var names = { U: 'Augšējā virsotne', L: 'Kreisā virsotne', R: 'Labā virsotne', B: 'Aizmugurējā virsotne' };
+    var tip = move[0] === move[0].toLowerCase();
+    var prime = move[1] === "'";
+    return names[move[0].toUpperCase()] + ': 120° ' +
+      (prime ? 'pretēji pulksteņrādītāja virzienam' : 'pulksteņrādītāja virzienā') +
+      ', skatoties no šīs virsotnes ārpuses uz piramīdas vidu. ' +
+      (tip ? 'Griez tikai mazo galu (G); gabals zem tā paliek nekustīgs.' :
+        'Griez divus slānīšus kopā: galu (G), stūri (S) un trīs blakus malas (M).') +
+      ' Visa piramīda rokās negriežas.';
+  }
+  function validPractice(value, lengths) {
+    if (!value || !Number.isInteger(value.sequence) || value.sequence < 0 || value.sequence >= lengths.length || !Number.isInteger(value.move) || value.move < 0 || value.move > lengths[value.sequence]) return { sequence: 0, move: 0 };
+    return { sequence: value.sequence, move: value.move };
+  }
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { validPage: validPage, adjacentPage: adjacentPage, describeMove: describeMove, validPractice: validPractice };
+  }
+  if (typeof document === 'undefined') return;
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var root = document.querySelector('.guidepy');
+    if (!root) return;
+    var storageKey = 'pyraminx-beginner-v2';
+    var stored = {};
+    try { stored = JSON.parse(localStorage.getItem(storageKey)) || {}; } catch (error) {}
+    var current = validPage(stored.page);
+    var lengths = Array.from(root.querySelectorAll('[data-gpy-scramble]')).map(function (node) {
+      return node.getAttribute('data-gpy-scramble').trim().split(/\s+/).length;
+    });
+    var practice = validPractice(stored.practice, lengths);
+    var completed = stored.done && typeof stored.done === 'object' ? stored.done : {};
+    var pageNodes = Array.from(root.querySelectorAll('[data-gpy-page]'));
+    var dialog = root.querySelector('[data-gpy-dialog]');
+    var dialogContent = root.querySelector('[data-gpy-dialog-content]');
+    var dialogTitle = root.querySelector('[data-gpy-dialog-title]');
+    var previous = root.querySelector('[data-gpy-prev]');
+    var next = root.querySelector('[data-gpy-next]');
+    var scrambles = Array.from(root.querySelectorAll('[data-gpy-scramble]'));
+    var select = root.querySelector('[data-gpy-select]');
+
+    function save() {
+      try { localStorage.setItem(storageKey, JSON.stringify({ page: current, done: completed, practice: practice })); } catch (error) {}
+    }
+    function navigate(value, focus) {
+      current = validPage(value);
+      pageNodes.forEach(function (page) { page.hidden = page.getAttribute('data-gpy-page') !== current; });
+      root.querySelector('[data-gpy-location]').textContent = /^\d$/.test(current) ? current + '. no 3 · ' + titles[pages.indexOf(current)] : titles[pages.indexOf(current)];
+      previous.disabled = current === 'intro';
+      next.disabled = current === 'scramble';
+      next.textContent = current === '3' ? 'Sajaukt →' : 'Tālāk →';
+      save();
+      if (focus) {
+        if (dialog.open) dialog.close();
+        var page = pageNodes.find(function (node) { return node.getAttribute('data-gpy-page') === current; });
+        page.querySelector('h2').focus({ preventScroll: true });
+        var offset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--tbh')) || 60;
+        window.scrollTo({ top: Math.max(0, root.getBoundingClientRect().top + window.scrollY - offset - 12), behavior: 'instant' });
+      }
+    }
+    function openDialog(title) {
+      dialogTitle.textContent = title;
+      dialogContent.replaceChildren();
+      if (!dialog.open) dialog.showModal();
+    }
+    function paragraph(text) {
+      var p = document.createElement('p');
+      p.textContent = text;
+      dialogContent.appendChild(p);
+    }
+    function help(move) {
+      openDialog(move ? 'Gājiens ' + move : 'Gājienu skaidrojums');
+      if (move) paragraph(describeMove(move));
+      else {
+        ['R', 'L', 'U', 'B', 'r', 'u'].forEach(function (letter) { paragraph(letter + ' – ' + describeMove(letter)); });
+        paragraph("Apostrofs ' maina virzienu. Viens klikšķis ir 120°. Divi U griezieni dod to pašu stāvokli kā U'. Mazais burts kustina tikai galu.");
+      }
+      paragraph('Algoritmu lasi no kreisās uz labo. Pabeidz visu secību ar to pašu priekšpusi, tad pārbaudi rezultātu.');
+    }
+    function menu() {
+      openDialog('Kur vēlies turpināt?');
+      var list = document.createElement('div');
+      list.className = 'gpy-menu-list';
+      pages.forEach(function (page, index) {
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = (index > 0 && index < 4 ? index + '. ' : '') + titles[index] + (completed[page] === true ? ' ✓' : '');
+        if (page === current) button.setAttribute('aria-current', 'step');
+        button.addEventListener('click', function () { navigate(page, true); });
+        list.appendChild(button);
+      });
+      dialogContent.appendChild(list);
+    }
+    function renderPractice() {
+      select.value = String(practice.sequence);
+      scrambles.forEach(function (node, index) { node.hidden = index !== practice.sequence; });
+      var moves = scrambles[practice.sequence].getAttribute('data-gpy-scramble').split(' ');
+      var finished = practice.move === moves.length;
+      root.querySelector('[data-gpy-counter]').textContent = finished ? 'Visi ' + moves.length + ' gājieni izpildīti' : 'Gājiens ' + (practice.move + 1) + ' no ' + moves.length;
+      root.querySelector('[data-gpy-current]').textContent = finished ? '✓' : moves[practice.move];
+      root.querySelector('[data-gpy-description]').textContent = finished ? 'Sajaukums gatavs. Atrodi stūri bez zaļās krāsas un sāc ar 1. soli.' : describeMove(moves[practice.move]);
+      root.querySelector('[data-gpy-move-back]').disabled = practice.move === 0;
+      root.querySelector('[data-gpy-move-next]').disabled = finished;
+      scrambles.forEach(function (node, index) {
+        node.querySelectorAll('.mv').forEach(function (chip, moveIndex) {
+          chip.classList.toggle('gpy-move-current', index === practice.sequence && moveIndex === practice.move);
+        });
+      });
+      save();
+    }
+    root.querySelectorAll('[data-alg]').forEach(function (algorithm) {
+      var moves = algorithm.getAttribute('data-alg').trim().split(/\s+/);
+      algorithm.replaceChildren();
+      moves.forEach(function (move) {
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'mv' + (move.indexOf("'") >= 0 ? ' prime' : move.indexOf('2') >= 0 ? ' dbl' : '');
+        if (/^[ulrb]/.test(move)) button.className += ' tip';
+        button.textContent = move;
+        button.setAttribute('aria-label', move + ': atvērt skaidrojumu');
+        button.addEventListener('click', function () { help(move); });
+        algorithm.appendChild(button);
+      });
+    });
+    root.querySelectorAll('[data-gpy-done]').forEach(function (box) {
+      var step = box.getAttribute('data-gpy-done');
+      box.checked = completed[step] === true;
+      box.addEventListener('change', function () { completed[step] = box.checked; save(); });
+    });
+    root.querySelectorAll('[data-gpy-goto]').forEach(function (button) {
+      button.addEventListener('click', function () { navigate(button.getAttribute('data-gpy-goto'), true); });
+    });
+    root.querySelectorAll('[data-gpy-help]').forEach(function (button) { button.addEventListener('click', function () { help(); }); });
+    previous.addEventListener('click', function () { navigate(adjacentPage(current, -1), true); });
+    next.addEventListener('click', function () { navigate(adjacentPage(current, 1), true); });
+    root.querySelector('[data-gpy-menu]').addEventListener('click', menu);
+    root.querySelector('[data-gpy-close]').addEventListener('click', function () { dialog.close(); });
+    select.addEventListener('change', function () { practice = { sequence: Number(select.value), move: 0 }; renderPractice(); });
+    root.querySelector('[data-gpy-move-back]').addEventListener('click', function () { practice.move = Math.max(0, practice.move - 1); renderPractice(); });
+    root.querySelector('[data-gpy-move-next]').addEventListener('click', function () { practice.move = Math.min(lengths[practice.sequence], practice.move + 1); renderPractice(); });
+    function syncActive() {
+      var body = document.body;
+      var unified = root.closest('.cubepanel');
+      var active = unified ? body.getAttribute('data-cube') === 'py' && body.getAttribute('data-level') === 'beginner' : !body.classList.contains('pro');
+      if (body.classList.contains('gpy-active') !== active) body.classList.toggle('gpy-active', active);
+      if (!active && dialog.open) dialog.close();
+    }
+    function followHash() {
+      var match = location.hash.match(/^#(?:py-)?s([1-3])$/);
+      if (match && document.body.classList.contains('gpy-active')) navigate(match[1], true);
+    }
+    root.classList.add('gpy-ready');
+    navigate(current, false);
+    renderPractice();
+    syncActive();
+    new MutationObserver(syncActive).observe(document.body, { attributes: true, attributeFilter: ['class', 'data-cube', 'data-level'] });
+    window.addEventListener('hashchange', followHash);
+    followHash();
+  });
+})();
+</script>
 </div>
-
-<section>
-  <!-- 1. solis -->
-  <div class="card step s1" id="s1">
-    <div class="stepnum">1</div>
-    <h3>1. solis — Stūri un gali</h3>
-    <p class="goal">Mērķis: visi 4 lielie stūri orientēti pareizi (katras sejas krāsa noteikta) + gali sakrīt.</p>
-    <ol>
-      <li>Paņem kubu rokā un pagriez katru <strong>lielo virsotni</strong> (U, L, R, B) tā, lai tās <strong>3 sānu krāsas
-        sakristu ar blakus sejām</strong>. To dara <strong>ar aci</strong>, pa vienam stūrim.</li>
-      <li>Kad visi 4 stūri orientēti, katras sejas centra «rombs» ir vienā krāsā.</li>
-      <li>Beigās pagriez katru <strong>galu (mazais burts)</strong>, lai tā krāsa sakrīt ar stūri zem tā.</li>
-    </ol>
-    <div class="dgrow">
-      <figure class="dg" data-kind="pyra" data-c="ggggggggg"
-        ><figcaption>Stūri + gali sakārtoti — sejas «rombs» vienā krāsā, malas vēl jauktas</figcaption></figure>
-    </div>
-    <div class="tip"><b>Bez algoritma!</b> Šis solis ir tīri intuitīvs. Gali ir tikai kosmētika — tos var salikt jebkurā brīdī.</div>
-    <div class="done-row"><label><input type="checkbox" data-step="s1"> Solis apgūts</label></div>
-  </div>
-
-  <!-- 2. solis -->
-  <div class="card step s2" id="s2">
-    <div class="stepnum">2</div>
-    <h3>2. solis — Pirmais slānis (apakšējā seja)</h3>
-    <p class="goal">Mērķis: viena vesela seja gatava (parasti apakšā) — tās 3 malas savās vietās.</p>
-    <p>Izvēlies apakšējo krāsu (piem., zaļo). Atrodi tās 3 malas un ieliec katru savā vietā ap apakšējo virsotni:</p>
-    <ol>
-      <li>Ja mala ir <strong>augšējā slānī</strong>, pagriez augšu (U), lai mala būtu <strong>tieši virs savas vietas</strong>.</li>
-      <li>Pagriez sānu virsotni (R vai L), lai mala «ieripo» apakšā pareizi.</li>
-      <li>Ja mala ir apakšā, bet <strong>apgriezta</strong>, vispirms izcel to augšā un ieliec no jauna.</li>
-    </ol>
-    <div class="dgrow">
-      <figure class="dg" data-kind="pyra" data-c="ggggggggg"
-        ><figcaption>Apakšējā seja gatava — visas 3 apakšas malas savās vietās</figcaption></figure>
-    </div>
-    <div class="tip"><b>Intuitīvi:</b> šis solis ir kā kuba «krusts» — dari to ar aci. Nav jākaļ algoritms;
-    galvenais — mala pareizajā vietā un ar pareizo pusi uz āru.</div>
-    <div class="done-row"><label><input type="checkbox" data-step="s2"> Solis apgūts</label></div>
-  </div>
-
-  <!-- 3. solis -->
-  <div class="card step s3" id="s3">
-    <div class="stepnum">3</div>
-    <h3>3. solis — Pēdējās 3 malas</h3>
-    <p class="goal">Mērķis: sakārtot 3 atlikušās augšējās malas — Pyraminx salikts.</p>
-    <p>Turi kubu ar gatavo seju <strong>apakšā</strong>. Paliek 3 augšējās malas. Iespējami 3 gadījumi:</p>
-
-    <h3 class="sub">A) Trīs malas jācikliski jāsamaina</h3>
-    <p>Ja visas 3 malas vietās, bet jāpagriež pa apli. Skaties virzienu:</p>
-    <p class="alg" data-alg="R U R' U R U R'"></p>
-    <p class="alg-label">3-cikls pretēji pulksteņrādītājam (CCW)</p>
-    <p class="alg" data-alg="R U' R' U' R U' R'"></p>
-    <p class="alg-label">3-cikls pulksteņrādītāja virzienā (CW)</p>
-
-    <h3 class="sub">B) Divas malas jāapgriež (grūtākais gadījums)</h3>
-    <p>Ja divas malas ir vietās, bet «apgrieztas» (nepareizā pusē):</p>
-    <p class="alg" data-alg="L R' L' R U' R U R'"></p>
-    <p class="alg-label">Divu malu apgriešana</p>
-
-    <div class="dgrow">
-      <figure class="dg" data-kind="pyra" data-c="ggggggggg"
-        data-parrows='[{"f":2,"t":5,"curve":10},{"f":5,"t":7,"curve":10},{"f":7,"t":2,"curve":10}]'
-        ><figcaption>A) 3 malas griežas pa apli</figcaption></figure>
-      <figure class="dg" data-kind="pyra" data-c="ggggggggg" data-mark="2,7"
-        data-parrows='[{"f":2,"t":7,"curve":0,"dbl":1}]'
-        ><figcaption>B) 2 malas apgriežas vietā</figcaption></figure>
-    </div>
-    <div class="tip"><b>Pazīstams?</b> <strong>R U R' U R U R'</strong> ir tā pati «Sune» ģimene, ko lieto 2×2 un 3×3 —
-    šeit tā cikliski maina 3 malas.</div>
-    <div class="done-row"><label><input type="checkbox" data-step="s3"> Solis apgūts</label></div>
-  </div>
-</section>
-
-<!-- iesācēju kopsavilkums -->
-<section id="cheat">
-  <h2>Kopsavilkums — iesācēju metode <span class="rule"></span></h2>
-  <div class="cheat-wrap">
-    <table class="cheat">
-      <tr><th>Solis</th><th>Kad lietot</th><th>Algoritms</th></tr>
-      <tr><td>1. Stūri + gali</td><td>Orientē 4 stūrus, tad gali</td><td><em>ar aci, bez algoritma</em></td></tr>
-      <tr><td>2. Pirmais slānis</td><td>Apakšējās sejas 3 malas</td><td><em>intuitīvi</em></td></tr>
-      <tr><td>3A. 3-cikls (CCW)</td><td>3 malas jāgriež pa apli</td><td><span class="alg small" data-alg="R U R' U R U R'"></span></td></tr>
-      <tr><td>3A. 3-cikls (CW)</td><td>3 malas otrā virzienā</td><td><span class="alg small" data-alg="R U' R' U' R U' R'"></span></td></tr>
-      <tr><td>3B. 2 malu apgriešana</td><td>2 malas vietās, bet apgrieztas</td><td><span class="alg small" data-alg="L R' L' R U' R U R'"></span></td></tr>
-    </table>
-  </div>
-</section>
-
 </div><!-- /mode-beginner -->
 
 <!-- ==================== 2. METODE — PROFESIONĀĻA ==================== -->

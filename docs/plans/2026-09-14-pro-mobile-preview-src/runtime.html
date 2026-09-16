@@ -1,0 +1,402 @@
+
+<!-- PREVIEW: one shared Pro runtime for all three puzzles. In the real
+     implementation each standalone guide carries its own namespaced copy
+     (.guide2pro / .guide3pro / .guidepypro), like the beginner guides do. -->
+<style data-guidepro-styles>
+  body[class*="gp-active-"] { font-family: 'Segoe UI', Arial, sans-serif; }
+  body[class*="gp-active-"] nav.steps, body[class*="gp-active-"] .panel-hero,
+  body[class*="gp-active-"] header.hero, body[class*="gp-active-"] .hero,
+  body[class*="gp-active-"] #uzbuve, body[class*="gp-active-"] #nota,
+  body[class*="gp-active-"] #a2-uzbuve, body[class*="gp-active-"] #a2-nota,
+  body[class*="gp-active-"] #a3-uzbuve, body[class*="gp-active-"] #a3-nota,
+  body[class*="gp-active-"] #py-uzbuve, body[class*="gp-active-"] #py-nota,
+  body[class*="gp-active-"] footer, body[class*="gp-active-"] .mb-hint { display: none; }
+  body[class*="gp-active-"] nav.steps { display: none !important; }
+  .guidepro { max-width: 680px; margin: 0 auto; padding-bottom: 110px; --pro: #7A3FB5; --pro-soft: #F1E9F8; --pro-line: #C9B3E3; }
+  .guidepro [hidden] { display: none !important; }
+  .guidepro .gp-heading { padding: 24px 0 12px; border-bottom: 1px solid var(--line); margin-bottom: 22px; }
+  .guidepro .gp-eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--pro); }
+  .guidepro .gp-location { font-weight: 700; margin-top: 3px; }
+  .guidepro h2 { font-family: 'Segoe UI', Arial, sans-serif; font-size: clamp(25px, 5vw, 34px); line-height: 1.2; text-transform: none; letter-spacing: -.025em; margin: 0 0 14px; display: block; }
+  .guidepro h2:focus { outline: none; }
+  .guidepro h3 { font-family: inherit; font-size: 21px; margin: 26px 0 10px; text-transform: none; letter-spacing: normal; }
+  .guidepro p { margin: 12px 0; }
+  .guidepro li { margin: 10px 0; padding-left: 3px; }
+  .guidepro ol, .guidepro ul { padding-left: 24px; margin: 12px 0; }
+  .guidepro .gp-goal { color: var(--ink-soft); font-size: 18px; }
+  .guidepro .gp-grip, .guidepro .gp-result, .guidepro .gp-example, .guidepro .gp-progress,
+  .guidepro .gp-check, .guidepro .gp-warning { padding: 15px 17px; border-radius: 12px; margin: 18px 0; background: var(--card); border: 1px solid var(--line); }
+  .guidepro .gp-grip { border-left: 4px solid var(--pro); }
+  .guidepro .gp-result { border-left: 4px solid var(--pro); background: var(--pro-soft); }
+  .guidepro .gp-check { border-left: 4px solid #167449; background: #edf6ec; }
+  .guidepro .gp-warning { border-left: 4px solid #ac6400; background: #fff0c4; }
+  .guidepro .gp-progress { display: block; }
+  .guidepro .gp-bar { height: 8px; border-radius: 6px; background: var(--gray); margin-top: 10px; overflow: hidden; }
+  .guidepro .gp-bar span { display: block; height: 100%; width: 0; background: var(--pro); transition: width .25s ease; }
+  .guidepro .dg { margin: 18px auto; max-width: 100%; text-align: center; }
+  .guidepro .dg svg { max-width: 100%; }
+  .guidepro .dg figcaption { font: inherit; font-size: 15px; line-height: 1.45; max-width: 360px; margin: 8px auto 0; text-transform: none; letter-spacing: normal; color: var(--ink); }
+  .guidepro .gp-grip-figure { margin: 16px auto; text-align: center; }
+  .guidepro .gp-grip-figure svg { width: 300px; max-width: 100%; height: auto; }
+  .guidepro .gp-grip-figure figcaption { font-size: 14px; color: var(--ink-soft); }
+  .guidepro details { border: 1px solid var(--line); border-radius: 12px; padding: 0 15px; margin: 12px 0; background: var(--card); }
+  .guidepro summary { cursor: pointer; font-weight: 650; min-height: 52px; padding: 14px 0; line-height: 1.45; }
+  .guidepro details[open] { border-color: #8b8370; }
+  .guidepro details[open] summary { border-bottom: 1px solid var(--line); margin-bottom: 12px; }
+  .guidepro details.gp-group summary { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .guidepro .gp-badge { font-size: 13px; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: var(--pro-soft); color: var(--pro); border: 1px solid var(--pro-line); white-space: nowrap; }
+  .guidepro .gp-badge.is-complete { background: #edf6ec; color: #167449; border-color: #9fcaa9; }
+  .guidepro button, .guidepro select { font: inherit; font-size: 16px; min-height: 46px; padding: 10px 14px; border: 1px solid #8b8370; border-radius: 10px; background: var(--card); color: var(--ink); cursor: pointer; line-height: 1.4; }
+  .guidepro button:focus-visible, .guidepro select:focus-visible, .guidepro summary:focus-visible, .guidepro input:focus-visible { outline: 3px solid var(--pro); outline-offset: 3px; }
+  .guidepro button:hover { background: #ebe5d7; }
+  .guidepro button:disabled { opacity: .45; cursor: default; }
+  .guidepro button.gp-primary { background: var(--pro); color: #fff; border-color: var(--pro); }
+  .guidepro button.gp-primary:hover { background: #64318f; }
+  .guidepro .gp-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
+  .guidepro .gp-actions > button { flex: 1 1 180px; }
+  .guidepro .alg { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); max-width: 100%; white-space: normal; margin: 12px 0; font-size: inherit; font-weight: normal; }
+  .guidepro .alg .mv { font-family: Consolas, monospace; font-size: 22px; min-width: 46px; min-height: 46px; padding: 5px 9px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; background: #ffe574; color: #211e19; box-shadow: none; border: 0; }
+  .guidepro .alg .mv.prime { background: #dfebff; color: #174789; }
+  .guidepro .alg .mv.dbl { background: #ffe3c3; color: #854600; }
+  .guidepro .alg .mv.wide { background: #e7f3e8; color: #135c33; }
+  .guidepro .alg .mv.rot { background: #eee6f7; color: #4c2a73; }
+  .guidepro .alg .mv.tip { background: #e7f3e8; color: #135c33; }
+  .guidepro .gp-case { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 6px 14px; align-items: start; padding: 14px 0; border-top: 1px solid var(--line); }
+  .guidepro .gp-case:first-of-type { border-top: 0; }
+  .guidepro .gp-case-figs { display: grid; gap: 6px; }
+  .guidepro .gp-case-figs .dg { margin: 0; }
+  .guidepro .gp-case-figs .dg svg { width: 102px; }
+  .guidepro .gp-case-figs .dg[data-kind="f2l"] svg { width: 112px; }
+  .guidepro .gp-case-figs .dg figcaption { font-size: 12px; color: var(--ink-soft); margin: 2px 0 0; max-width: 112px; }
+  .guidepro .gp-cheat { display: grid; gap: 4px; margin: 6px 0 18px; }
+  .guidepro .gp-cheat-row { display: grid; grid-template-columns: minmax(96px, 30%) minmax(0, 1fr); gap: 8px; align-items: center; border-top: 1px solid var(--line); padding: 6px 0; }
+  .guidepro .gp-cheat-row .gp-cheat-name { font-weight: 650; font-size: 15px; }
+  .guidepro .gp-cheat-row .alg { margin: 0; padding: 6px; gap: 4px; border: 0; background: transparent; }
+  .guidepro .gp-cheat-row .alg .mv { font-size: 15px; min-width: 30px; min-height: 34px; padding: 2px 5px; }
+  .guidepro .gp-sources li { margin: 8px 0; }
+  .guidepro .gp-sources a { color: var(--pro); font-weight: 650; }
+  .guidepro .gp-case-body { min-width: 0; }
+  .guidepro .gp-case-name { font-weight: 700; margin: 0 0 6px; }
+  .guidepro .gp-case .alg { padding: 8px; gap: 6px; margin: 6px 0; }
+  .guidepro .gp-case .alg .mv { font-size: 17px; min-width: 36px; min-height: 40px; padding: 3px 6px; }
+  .guidepro .gp-case .gp-small { margin: 6px 0; }
+  .guidepro .gp-learned { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 650; padding: 8px 0; cursor: pointer; }
+  .guidepro .gp-learned input { width: 22px; height: 22px; accent-color: var(--pro); }
+  .guidepro .gp-case.is-learned .gp-case-name::after { content: " ✓"; color: #167449; }
+  .guidepro .gp-done { display: flex; align-items: flex-start; gap: 12px; padding: 16px 0; cursor: pointer; }
+  .guidepro .gp-done input { flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px; accent-color: #167449; }
+  .guidepro .gp-bottom { display: none; }
+  body[class*="gp-active-"] .guidepro.gp-ready .gp-bottom { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; position: fixed; bottom: 0; left: 0; right: 0; z-index: 80; background: var(--card); border-top: 1px solid var(--line); padding: 12px max(14px, calc((100% - 680px) / 2)) calc(12px + env(safe-area-inset-bottom)); }
+  .guidepro .gp-bottom button { white-space: nowrap; padding-left: 6px; padding-right: 6px; }
+  .guidepro .gp-dialog { position: fixed; margin: auto; inset: 0; width: min(620px, calc(100vw - 24px)); max-height: calc(100dvh - 32px); padding: 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); color: var(--ink); overflow-y: auto; overscroll-behavior: contain; }
+  .guidepro .gp-dialog::backdrop { background: rgba(24, 22, 18, .58); }
+  .guidepro .gp-dialog-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+  .guidepro .gp-menu-list { display: grid; gap: 9px; }
+  .guidepro .gp-menu-list button { text-align: left; }
+  .guidepro [aria-current="step"] { border: 2px solid var(--pro); background: var(--pro-soft); }
+  .guidepro .gp-select-label { display: grid; gap: 8px; font-weight: 650; margin: 20px 0; }
+  .guidepro select { width: 100%; }
+  .guidepro .gp-practice { border: 1px solid var(--line); padding: 16px; border-radius: 12px; background: var(--card); }
+  .guidepro .gp-answer { border-top: 1px dashed var(--line); margin-top: 14px; padding-top: 10px; }
+  .guidepro .gp-answer .dg { margin: 6px 0; text-align: left; }
+  .guidepro .gp-small { color: var(--ink-soft); font-size: 14px; }
+  .guidepro .gp-table-wrap { overflow-x: auto; margin: 14px 0; }
+  .guidepro .gp-table { border-collapse: collapse; width: 100%; background: var(--card); font-size: 15px; }
+  .guidepro .gp-table th, .guidepro .gp-table td { border: 1px solid var(--line); padding: 9px 11px; text-align: left; vertical-align: top; font-weight: normal; }
+  .guidepro .gp-table th { font-weight: 700; background: var(--pro-soft); font-family: inherit; text-transform: none; letter-spacing: normal; color: var(--ink); font-size: 15px; }
+  @media (max-width: 560px) {
+    body[class*="gp-active-"] { font-size: 17px; line-height: 1.6; }
+    body[class*="gp-active-"] .topbar .tabbtn { min-height: 44px; font-size: 13px; padding: 6px 8px; }
+    body[class*="gp-active-"] .topbar .tb-row { justify-content: center; gap: 6px; }
+    body[class*="gp-active-"] .topbar .tb-group { gap: 5px; }
+    body[class*="gp-active-"] .topbar .tb-sep { display: none; }
+    .guidepro .gp-heading { padding-top: 18px; margin-bottom: 18px; }
+    .guidepro .gp-bottom button { font-size: 15px; }
+    .guidepro .gp-dialog { padding: 16px; }
+    .guidepro .gp-case { grid-template-columns: 96px minmax(0, 1fr); gap: 4px 10px; }
+    .guidepro .gp-case-figs .dg svg { width: 90px; }
+    .guidepro .gp-case-figs .dg[data-kind="f2l"] svg { width: 96px; }
+    .guidepro .gp-cheat-row { grid-template-columns: 1fr; gap: 2px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .guidepro .gp-bar span { transition: none; } }
+  @media print {
+    .guidepro { padding-bottom: 0; }
+    .guidepro [data-gp-page][hidden] { display: block !important; }
+    .guidepro .gp-page { break-before: page; }
+    body[class*="gp-active-"] .guidepro.gp-ready .gp-bottom, .guidepro .gp-dialog, .guidepro .gp-practice, .guidepro .gp-done { display: none; }
+  }
+</style>
+<script data-guidepro-runtime>
+(function () {
+  'use strict';
+  function invert(alg) {
+    return alg.trim().split(/\s+/).reverse().map(function (m) {
+      if (m.slice(-1) === '2') return m;
+      return m.slice(-1) === "'" ? m.slice(0, -1) : m + "'";
+    }).join(' ');
+  }
+  function describeCube(move) {
+    if (!/^[RLUDFBrludfbMSExyz](2|')?$/.test(move)) return '';
+    var base = move[0], suffix = move.slice(1);
+    var faces = { R: 'Labā kārta', L: 'Kreisā kārta', U: 'Augšējā kārta', D: 'Apakšējā kārta', F: 'Priekšējā kārta', B: 'Aizmugurējā kārta' };
+    var wide = { r: 'Labās divas kārtas kopā (R un vidējā)', l: 'Kreisās divas kārtas kopā (L un vidējā)', u: 'Augšējās divas kārtas kopā', d: 'Apakšējās divas kārtas kopā', f: 'Priekšējās divas kārtas kopā', b: 'Aizmugurējās divas kārtas kopā' };
+    var slice = { M: 'Vidējā kārta starp L un R; griežas tāpat kā L', S: 'Vidējā kārta starp F un B; griežas tāpat kā F', E: 'Vidējā kārta starp U un D; griežas tāpat kā D' };
+    var rot = { x: 'Viss kubs rokās, tāpat kā R', y: 'Viss kubs rokās, tāpat kā U', z: 'Viss kubs rokās, tāpat kā F' };
+    var name = faces[base] || wide[base] || slice[base] || rot[base];
+    var ref = wide[base] ? ' Virziens kā lielajam burtam ' + base.toUpperCase() + '.' : '';
+    if (suffix === '2') return name + ': 180° jeb pusapgrieziens. Virziens nav svarīgs.' + ref;
+    var prime = suffix === "'";
+    return name + ': 90° ' + (prime ? 'pretēji pulksteņrādītāja virzienam' : 'pulksteņrādītāja virzienā') + (rot[base] ? '.' : ', skatoties tieši uz šo pusi.') + ref;
+  }
+  function describePyra(move) {
+    if (!/^[ULRBulrb]'?$/.test(move)) return '';
+    var names = { U: 'Augšējā virsotne', L: 'Kreisā virsotne', R: 'Labā virsotne', B: 'Aizmugurējā virsotne' };
+    var tip = move[0] === move[0].toLowerCase();
+    var prime = move[1] === "'";
+    return names[move[0].toUpperCase()] + ': 120° ' + (prime ? 'pretēji pulksteņrādītāja virzienam' : 'pulksteņrādītāja virzienā') +
+      ', skatoties no šīs virsotnes ārpuses uz piramīdas vidu. ' +
+      (tip ? 'Griez tikai mazo galu (G); gabals zem tā paliek nekustīgs.' : 'Griez divus slānīšus kopā: galu (G), stūri (S) un trīs blakus malas (M).') +
+      ' Visa piramīda rokās negriežas.';
+  }
+  function chipClass(move, pyra) {
+    if (move.indexOf("'") >= 0) return 'mv prime';
+    if (!pyra && move.indexOf('2') >= 0) return 'mv dbl';
+    if (pyra && /^[ulrb]/.test(move)) return 'mv tip';
+    if (!pyra && /^[xyz]/.test(move)) return 'mv rot';
+    if (!pyra && /^[rludfbMSE]/.test(move)) return 'mv wide';
+    return 'mv';
+  }
+  if (typeof module !== 'undefined' && module.exports) module.exports = { invert: invert, describeCube: describeCube, describePyra: describePyra };
+  if (typeof document === 'undefined') return;
+
+  // Case picture for F2L: U face above F face, R face to the right (flat net of the three visible faces).
+  function renderF2L(host) {
+    var NS = 'http://www.w3.org/2000/svg';
+    var COL = { y: '#FFD500', w: '#FFFFFF', r: '#D6382E', o: '#FF7A00', g: '#0AA24C', b: '#1558C9', x: '#E6E1D2' };
+    var cs = 22, gap = 6, off = 3;
+    var w = off * 2 + cs * 6 + gap, h = off * 2 + cs * 6 + gap;
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    svg.setAttribute('width', 112);
+    svg.setAttribute('role', 'img');
+    svg.style.height = 'auto';
+    function grid(str, ox, oy, faded) {
+      for (var i = 0; i < 9; i++) {
+        var r = document.createElementNS(NS, 'rect');
+        r.setAttribute('x', ox + (i % 3) * cs); r.setAttribute('y', oy + Math.floor(i / 3) * cs);
+        r.setAttribute('width', cs); r.setAttribute('height', cs); r.setAttribute('rx', 3);
+        r.setAttribute('fill', COL[str[i]] || COL.x); r.setAttribute('stroke', '#211E19'); r.setAttribute('stroke-width', 1.6);
+        if (faded) r.setAttribute('opacity', '.9');
+        svg.appendChild(r);
+      }
+    }
+    grid(host.getAttribute('data-u') || '', off, off);
+    grid(host.getAttribute('data-f') || '', off, off + cs * 3 + gap);
+    grid(host.getAttribute('data-r') || '', off + cs * 3 + gap, off + cs * 3 + gap, true);
+    function label(t, x, y) { var e = document.createElementNS(NS, 'text'); e.setAttribute('x', x); e.setAttribute('y', y); e.setAttribute('font-size', 11); e.setAttribute('font-weight', 700); e.setAttribute('fill', '#57503F'); e.setAttribute('font-family', 'Segoe UI, Arial, sans-serif'); e.textContent = t; svg.appendChild(e); }
+    label('U', off + cs * 3 + gap + 4, off + 12);
+    label('F', off + cs * 3 - 12, h - 6);
+    label('R', w - 12, h - 6);
+    host.insertBefore(svg, host.firstChild);
+  }
+  document.addEventListener('DOMContentLoaded', function () { document.querySelectorAll('.guidepro .dg[data-kind="f2l"]').forEach(renderF2L); });
+
+  function init(root) {
+    var cube = root.getAttribute('data-gp-cube');
+    var pyra = cube === 'py';
+    var describe = pyra ? describePyra : describeCube;
+    var storageKey = root.getAttribute('data-gp-key');
+    var steps = Number(root.getAttribute('data-gp-steps')) || 0;
+    var pageNodes = Array.from(root.querySelectorAll('[data-gp-page]'));
+    var pages = pageNodes.map(function (p) { return p.getAttribute('data-gp-page'); });
+    var titles = pageNodes.map(function (p) { return p.getAttribute('data-gp-title'); });
+    var stored = {};
+    try { stored = JSON.parse(localStorage.getItem(storageKey)) || {}; } catch (e) {}
+    var current = pages.indexOf(stored.page) >= 0 ? stored.page : 'intro';
+    var completed = stored.done && typeof stored.done === 'object' ? stored.done : {};
+    var learned = stored.learned && typeof stored.learned === 'object' ? stored.learned : {};
+    var drillState = stored.drill && typeof stored.drill === 'object' ? stored.drill : {};
+    var dialog = root.querySelector('[data-gp-dialog]');
+    var dialogContent = root.querySelector('[data-gp-dialog-content]');
+    var dialogTitle = root.querySelector('[data-gp-dialog-title]');
+    var previous = root.querySelector('[data-gp-prev]');
+    var next = root.querySelector('[data-gp-next]');
+
+    function save() {
+      try { localStorage.setItem(storageKey, JSON.stringify({ page: current, done: completed, learned: learned, drill: drillState })); } catch (e) {}
+    }
+    function chips(container, algText, asButtons) {
+      container.replaceChildren();
+      algText.trim().split(/\s+/).forEach(function (move) {
+        var chip = document.createElement(asButtons ? 'button' : 'span');
+        if (asButtons) { chip.type = 'button'; chip.setAttribute('aria-label', move + ': atvērt skaidrojumu'); chip.addEventListener('click', function () { help(move); }); }
+        chip.className = chipClass(move, pyra);
+        chip.textContent = move;
+        container.appendChild(chip);
+      });
+    }
+    function navigate(value, focus) {
+      current = pages.indexOf(value) >= 0 ? value : 'intro';
+      pageNodes.forEach(function (p) { p.hidden = p.getAttribute('data-gp-page') !== current; });
+      var index = pages.indexOf(current);
+      root.querySelector('[data-gp-location]').textContent = /^\d+$/.test(current) ? current + '. no ' + steps + ' · ' + titles[index] : titles[index];
+      previous.disabled = index === 0;
+      next.disabled = index === pages.length - 1;
+      save();
+      if (focus) {
+        if (dialog.open) dialog.close();
+        pageNodes[index].querySelector('h2').focus({ preventScroll: true });
+        var offset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--tbh')) || 60;
+        window.scrollTo({ top: Math.max(0, root.getBoundingClientRect().top + window.scrollY - offset - 12), behavior: 'instant' });
+      }
+    }
+    function openDialog(title) { dialogTitle.textContent = title; dialogContent.replaceChildren(); if (!dialog.open) dialog.showModal(); }
+    function paragraph(text) { var p = document.createElement('p'); p.textContent = text; dialogContent.appendChild(p); }
+    function help(move) {
+      openDialog(move ? 'Gājiens ' + move : 'Apzīmējumu skaidrojums');
+      if (move) paragraph(describe(move));
+      else if (pyra) {
+        ['U', 'L', 'R', 'B', 'u'].forEach(function (m) { paragraph(m + ' – ' + describe(m)); });
+        paragraph("Apostrofs ' nozīmē pretēju virzienu. Mazie burti griež tikai galu.");
+      } else {
+        ['R', 'L', 'U', 'D', 'F', 'B', 'r', 'M', 'S', 'E', 'x', 'y', 'z'].forEach(function (m) { paragraph(m + ' – ' + describe(m)); });
+        paragraph("Apostrofs ' nozīmē pretēju virzienu. 2 nozīmē 180° jeb divus ceturtdaļapgriezienus.");
+      }
+      paragraph('Algoritmu lasi no kreisās uz labo. Pabeidz visu secību ar to pašu priekšpusi, tad pārbaudi rezultātu.');
+    }
+    function menu() {
+      openDialog('Kur vēlies turpināt?');
+      var list = document.createElement('div');
+      list.className = 'gp-menu-list';
+      pages.forEach(function (p, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = (/^\d+$/.test(p) ? p + '. ' : '') + titles[i] + (completed[p] === true ? ' ✓' : '');
+        if (p === current) b.setAttribute('aria-current', 'step');
+        b.addEventListener('click', function () { navigate(p, true); });
+        list.appendChild(b);
+      });
+      dialogContent.appendChild(list);
+    }
+
+    // cases + learned state
+    var caseNodes = Array.from(root.querySelectorAll('.gp-case'));
+    var cases = [];
+    var seen = {};
+    caseNodes.forEach(function (node) {
+      var id = node.getAttribute('data-gp-case');
+      var algNode = node.querySelector('[data-alg]');
+      if (!seen[id]) {
+        seen[id] = true;
+        cases.push({ id: id, sets: node.getAttribute('data-gp-sets').split(/\s+/), name: node.querySelector('.gp-case-name').textContent, alg: algNode.getAttribute('data-alg'), figure: node.querySelector('figure.dg') });
+      } else {
+        var known = cases.filter(function (c) { return c.id === id; })[0];
+        known.sets = known.sets.concat(node.getAttribute('data-gp-sets').split(/\s+/));
+      }
+    });
+    function refreshLearned() {
+      root.querySelectorAll('[data-gp-learned]').forEach(function (box) {
+        var id = box.getAttribute('data-gp-learned');
+        box.checked = learned[id] === true;
+        box.closest('.gp-case').classList.toggle('is-learned', box.checked);
+      });
+      var total = cases.length, n = cases.filter(function (c) { return learned[c.id] === true; }).length;
+      root.querySelectorAll('[data-gp-total]').forEach(function (el) { el.textContent = n + ' no ' + total; });
+      root.querySelectorAll('[data-gp-total-bar]').forEach(function (el) { el.style.width = (total ? Math.round(100 * n / total) : 0) + '%'; });
+      root.querySelectorAll('[data-gp-group-count]').forEach(function (el) {
+        var det = el.closest('details');
+        var ids = [];
+        det.querySelectorAll('.gp-case').forEach(function (c) { if (ids.indexOf(c.getAttribute('data-gp-case')) < 0) ids.push(c.getAttribute('data-gp-case')); });
+        var k = ids.filter(function (id) { return learned[id] === true; }).length;
+        el.textContent = k + ' / ' + ids.length;
+        el.classList.toggle('is-complete', k === ids.length && ids.length > 0);
+      });
+      renderDrillProgress();
+    }
+    root.querySelectorAll('[data-gp-learned]').forEach(function (box) {
+      box.addEventListener('change', function () { learned[box.getAttribute('data-gp-learned')] = box.checked; save(); refreshLearned(); });
+    });
+
+    // drill
+    var drillSelect = root.querySelector('[data-gp-drill-set]');
+    var drillCase = null;
+    function drillPool() {
+      var set = drillSelect ? drillSelect.value : 'all';
+      return cases.filter(function (c) { return set === 'all' || c.sets.indexOf(set) >= 0; });
+    }
+    function renderDrillProgress() {
+      var el = root.querySelector('[data-gp-drill-progress]');
+      if (!el) return;
+      var pool = drillPool();
+      var k = pool.filter(function (c) { return learned[c.id] === true; }).length;
+      el.textContent = 'Šajā kopā apgūti ' + k + ' no ' + pool.length + '.';
+    }
+    function newDrillCase() {
+      var pool = drillPool();
+      if (!pool.length) return;
+      var fresh = pool.filter(function (c) { return learned[c.id] !== true && (!drillCase || c.id !== drillCase.id); });
+      var pick = (fresh.length ? fresh : pool)[Math.floor(Math.random() * (fresh.length ? fresh : pool).length)];
+      showDrill(pick, false);
+    }
+    function showDrill(c, revealed) {
+      drillCase = c;
+      drillState = { set: drillSelect.value, id: c.id, revealed: !!revealed };
+      chips(root.querySelector('[data-gp-drill-setup]'), invert(c.alg), true);
+      var answer = root.querySelector('[data-gp-drill-answer]');
+      answer.hidden = !revealed;
+      root.querySelector('[data-gp-drill-reveal]').disabled = !!revealed;
+      var figHost = root.querySelector('[data-gp-drill-figure]');
+      figHost.replaceChildren();
+      if (c.figure) { var clone = c.figure.cloneNode(true); var cap = clone.querySelector('figcaption'); if (cap) cap.remove(); figHost.appendChild(clone); }
+      root.querySelector('[data-gp-drill-name]').textContent = c.name;
+      chips(root.querySelector('[data-gp-drill-alg]'), c.alg, true);
+      root.querySelector('[data-gp-drill-learned]').checked = learned[c.id] === true;
+      save();
+    }
+    if (drillSelect) {
+      if (drillState.set && Array.from(drillSelect.options).some(function (o) { return o.value === drillState.set; })) drillSelect.value = drillState.set;
+      drillSelect.addEventListener('change', function () { drillCase = null; newDrillCase(); renderDrillProgress(); });
+      root.querySelector('[data-gp-drill-next]').addEventListener('click', newDrillCase);
+      root.querySelector('[data-gp-drill-reveal]').addEventListener('click', function () { if (drillCase) showDrill(drillCase, true); });
+      root.querySelector('[data-gp-drill-learned]').addEventListener('change', function (ev) { if (drillCase) { learned[drillCase.id] = ev.target.checked; save(); refreshLearned(); } });
+      var restored = cases.filter(function (c) { return c.id === drillState.id; })[0];
+      if (restored) showDrill(restored, drillState.revealed); else newDrillCase();
+    }
+
+    root.querySelectorAll('[data-alg]').forEach(function (a) { if (!a.closest('[data-gp-drill]')) chips(a, a.getAttribute('data-alg'), true); });
+    root.querySelectorAll('[data-gp-done]').forEach(function (box) {
+      var step = box.getAttribute('data-gp-done');
+      box.checked = completed[step] === true;
+      box.addEventListener('change', function () { completed[step] = box.checked; save(); });
+    });
+    root.querySelectorAll('[data-gp-goto]').forEach(function (b) { b.addEventListener('click', function () { navigate(b.getAttribute('data-gp-goto'), true); }); });
+    root.querySelectorAll('[data-gp-help]').forEach(function (b) { b.addEventListener('click', function () { help(); }); });
+    previous.addEventListener('click', function () { navigate(pages[Math.max(0, pages.indexOf(current) - 1)], true); });
+    next.addEventListener('click', function () { navigate(pages[Math.min(pages.length - 1, pages.indexOf(current) + 1)], true); });
+    root.querySelector('[data-gp-menu]').addEventListener('click', menu);
+    root.querySelector('[data-gp-close]').addEventListener('click', function () { dialog.close(); });
+
+    function syncActive() {
+      var body = document.body;
+      var unified = root.closest('.cubepanel');
+      var active = unified ? body.getAttribute('data-cube') === cube && body.getAttribute('data-level') === 'pro' : body.classList.contains('pro');
+      if (body.classList.contains('gp-active-' + cube) !== active) body.classList.toggle('gp-active-' + cube, active);
+      if (!active && dialog.open) dialog.close();
+    }
+    function followHash() {
+      var id = location.hash.slice(1);
+      if (!id || !document.body.classList.contains('gp-active-' + cube)) return;
+      var target = pageNodes.filter(function (p) { return p.id === id; })[0];
+      if (target) navigate(target.getAttribute('data-gp-page'), true);
+    }
+    root.classList.add('gp-ready');
+    navigate(current, false);
+    refreshLearned();
+    syncActive();
+    new MutationObserver(syncActive).observe(document.body, { attributes: true, attributeFilter: ['class', 'data-cube', 'data-level'] });
+    window.addEventListener('hashchange', followHash);
+    followHash();
+  }
+  document.addEventListener('DOMContentLoaded', function () { document.querySelectorAll('.guidepro').forEach(init); });
+})();
+</script>

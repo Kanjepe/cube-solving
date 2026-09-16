@@ -60,3 +60,29 @@ python -m unittest discover -s _build -p "test_*.py"
 - `_build/verify_algs*.py` — one-off derivation scripts kept for reference (how the diagrams, holdings, and the step-2 rule were computed).
 
 Known gap: the in-page JavaScript (SVG rendering, level switching, localStorage) has no automated tests — diagram data is validated at the attribute level only.
+
+## 3x3 beginner mobile guide (September 2026)
+
+The current build has two levels, Beginner and Pro; the Kids entries above describe the historical layout and their files are now archived. The 3x3 beginner guide presents one learning step at a time with saved progress, local move explanations, troubleshooting and five guided 25-move practice scrambles. It works in both the standalone guide and the generated unified page.
+
+The JavaScript testing gap noted above is now covered for the new 3x3 beginner flow:
+
+```powershell
+node --test _build/test_guide3_state.cjs
+node --test _build/test_guide3_browser.cjs
+```
+
+Browser tests require Playwright and Microsoft Edge. If Playwright is installed outside the repository, set `CUBE_PLAYWRIGHT` to its module directory. Optional `CUBE_SCREENSHOTS` specifies a screenshot output directory. The Python discovery command also runs `_build/test_guide3_mobile.py` and `_build/test_guide3_solves.py`.
+
+See [the implementation and verification record](docs/plans/2026-09-09-3x3-beginner-mobile.md) for scope, commands and remaining physical-user testing.
+
+## 2x2 beginner mobile guide
+
+The 2x2 standalone source now uses the same step-by-step layout: white layer, yellow face and side permutation. The yellow face uses complete `R' D' R D` cycles; Sune remains an optional collapsed note. Practice starts with the user's ten-move MIX and includes four longer sequences, with counters based on the selected sequence's actual length.
+
+```powershell
+node --test _build/test_guide2_state.cjs _build/test_guide3_state.cjs
+node --test _build/test_guide2_browser.cjs _build/test_guide3_browser.cjs
+```
+
+The browser prerequisites are the same as above. Python discovery includes the 2x2 content, case-diagram, all-648-last-layer-state and complete-solve checks. See [the 2x2 implementation record](docs/plans/2026-09-10-2x2-beginner-mobile.md).

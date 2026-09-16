@@ -1,0 +1,1802 @@
+{
+ "oll": [
+  {
+   "n": 1,
+   "g": "Dot",
+   "alg": "R U2 R2 F R F' U2 R' F R F'",
+   "c": "xxxxyxxxx",
+   "b": "xyx",
+   "f": "xyx",
+   "l": "yyy",
+   "r": "yyy",
+   "ycount": 1
+  },
+  {
+   "n": 2,
+   "g": "Dot",
+   "alg": "F R U R' U' F' f R U R' U' f'",
+   "c": "xxxxyxxxx",
+   "b": "xyy",
+   "f": "xyy",
+   "l": "yyy",
+   "r": "xyx",
+   "ycount": 1
+  },
+  {
+   "n": 3,
+   "g": "Dot",
+   "alg": "f R U R' U' f' U' F R U R' U' F'",
+   "c": "xxxxyxxxy",
+   "b": "yyx",
+   "f": "xyx",
+   "l": "xyy",
+   "r": "yyx",
+   "ycount": 2
+  },
+  {
+   "n": 4,
+   "g": "Dot",
+   "alg": "f R U R' U' f' U F R U R' U' F'",
+   "c": "xxyxyxxxx",
+   "b": "xyx",
+   "f": "yyx",
+   "l": "yyx",
+   "r": "xyy",
+   "ycount": 2
+  },
+  {
+   "n": 17,
+   "g": "Dot",
+   "alg": "R U R' U R' F R F' U2 R' F R F'",
+   "c": "yxxxyxxxy",
+   "b": "xyy",
+   "f": "xyx",
+   "l": "xyy",
+   "r": "xyx",
+   "ycount": 3
+  },
+  {
+   "n": 18,
+   "g": "Dot",
+   "alg": "R U2 R2 F R F' U2 M' U R U' r'",
+   "c": "xxyxyxxxy",
+   "b": "xyx",
+   "f": "xyx",
+   "l": "yyy",
+   "r": "xyx",
+   "ycount": 3
+  },
+  {
+   "n": 19,
+   "g": "Dot",
+   "alg": "S' R U R' S U' R' F R F'",
+   "c": "xxyxyxxxy",
+   "b": "yyx",
+   "f": "yyx",
+   "l": "xyx",
+   "r": "xyx",
+   "ycount": 3
+  },
+  {
+   "n": 20,
+   "g": "Dot",
+   "alg": "r U R' U' M2 U R U' R' U' M'",
+   "c": "yxyxyxyxy",
+   "b": "xyx",
+   "f": "xyx",
+   "l": "xyx",
+   "r": "xyx",
+   "ycount": 5
+  },
+  {
+   "n": 5,
+   "g": "Square",
+   "alg": "l' U2 L U L' U l",
+   "c": "yyxyyxxxx",
+   "b": "xxx",
+   "f": "xyy",
+   "l": "xxy",
+   "r": "yyx",
+   "ycount": 4
+  },
+  {
+   "n": 6,
+   "g": "Square",
+   "alg": "r U2 R' U' R U' r'",
+   "c": "xyyxyyxxx",
+   "b": "xxx",
+   "f": "yyx",
+   "l": "yyx",
+   "r": "xxy",
+   "ycount": 4
+  },
+  {
+   "n": 7,
+   "g": "Lightning",
+   "alg": "r U R' U R U2 r'",
+   "c": "xyxyyxyxx",
+   "b": "yxx",
+   "f": "xyy",
+   "l": "xxx",
+   "r": "yyx",
+   "ycount": 4
+  },
+  {
+   "n": 8,
+   "g": "Lightning",
+   "alg": "l' U' L U' L' U2 l",
+   "c": "xyxxyyxxy",
+   "b": "xxy",
+   "f": "yyx",
+   "l": "yyx",
+   "r": "xxx",
+   "ycount": 4
+  },
+  {
+   "n": 11,
+   "g": "Lightning",
+   "alg": "r' R2 U R' U R U2 R' U M'",
+   "c": "xxxxyyyyx",
+   "b": "yyx",
+   "f": "xxy",
+   "l": "xyx",
+   "r": "yxx",
+   "ycount": 4
+  },
+  {
+   "n": 12,
+   "g": "Lightning",
+   "alg": "M' R' U' R U' R' U2 R U' M",
+   "c": "yyxxyyxxx",
+   "b": "xxy",
+   "f": "yyx",
+   "l": "xyx",
+   "r": "xxy",
+   "ycount": 4
+  },
+  {
+   "n": 39,
+   "g": "Lightning",
+   "alg": "L F' L' U' L U F U' L'",
+   "c": "xxyyyyyxx",
+   "b": "yyx",
+   "f": "xyx",
+   "l": "xxx",
+   "r": "xxy",
+   "ycount": 5
+  },
+  {
+   "n": 40,
+   "g": "Lightning",
+   "alg": "R' F R U R' U' F' U R",
+   "c": "yxxyyyxxy",
+   "b": "xyy",
+   "f": "xyx",
+   "l": "xxy",
+   "r": "xxx",
+   "ycount": 5
+  },
+  {
+   "n": 9,
+   "g": "Fish",
+   "alg": "R U R' U' R' F R2 U R' U' F'",
+   "c": "xyxyyxxxy",
+   "b": "xxy",
+   "f": "yyx",
+   "l": "yxx",
+   "r": "xyx",
+   "ycount": 4
+  },
+  {
+   "n": 10,
+   "g": "Fish",
+   "alg": "R U R' U R' F R F' R U2 R'",
+   "c": "xxyyyxxyx",
+   "b": "yyx",
+   "f": "xxy",
+   "l": "xxy",
+   "r": "xyx",
+   "ycount": 4
+  },
+  {
+   "n": 35,
+   "g": "Fish",
+   "alg": "R U2 R2 F R F' R U2 R'",
+   "c": "yxxxyyxyy",
+   "b": "xyx",
+   "f": "yxx",
+   "l": "xyx",
+   "r": "yxx",
+   "ycount": 5
+  },
+  {
+   "n": 37,
+   "g": "Fish",
+   "alg": "F R' F' R U R U' R'",
+   "c": "yyxyyxxxy",
+   "b": "xxx",
+   "f": "yyx",
+   "l": "xxx",
+   "r": "yyx",
+   "ycount": 5
+  },
+  {
+   "n": 13,
+   "g": "Knight",
+   "alg": "F U R U2 R' U' R U R' F'",
+   "c": "xxxyyyyxx",
+   "b": "yyx",
+   "f": "xyy",
+   "l": "xxx",
+   "r": "yxx",
+   "ycount": 4
+  },
+  {
+   "n": 14,
+   "g": "Knight",
+   "alg": "R' F R U R' F' R F U' F'",
+   "c": "xxxyyyxxy",
+   "b": "xyy",
+   "f": "yyx",
+   "l": "yxx",
+   "r": "xxx",
+   "ycount": 4
+  },
+  {
+   "n": 15,
+   "g": "Knight",
+   "alg": "l' U' l L' U' L U l' U l",
+   "c": "yxxyyyxxx",
+   "b": "xyx",
+   "f": "xyy",
+   "l": "xxy",
+   "r": "yxx",
+   "ycount": 4
+  },
+  {
+   "n": 16,
+   "g": "Knight",
+   "alg": "r U r' R U R' U' r U' r'",
+   "c": "xxyyyyxxx",
+   "b": "xyx",
+   "f": "yyx",
+   "l": "yxx",
+   "r": "xxy",
+   "ycount": 4
+  },
+  {
+   "n": 21,
+   "g": "OCLL",
+   "alg": "R U R' U R U' R' U R U2 R'",
+   "c": "xyxyyyxyx",
+   "b": "xxx",
+   "f": "xxx",
+   "l": "yxy",
+   "r": "yxy",
+   "ycount": 5
+  },
+  {
+   "n": 22,
+   "g": "OCLL",
+   "alg": "R U2 R2 U' R2 U' R2 U2 R",
+   "c": "xyxyyyxyx",
+   "b": "xxy",
+   "f": "xxy",
+   "l": "yxy",
+   "r": "xxx",
+   "ycount": 5
+  },
+  {
+   "n": 23,
+   "g": "OCLL",
+   "alg": "R2 D' R U2 R' D R U2 R",
+   "c": "xyxyyyyyy",
+   "b": "yxy",
+   "f": "xxx",
+   "l": "xxx",
+   "r": "xxx",
+   "ycount": 7
+  },
+  {
+   "n": 24,
+   "g": "OCLL",
+   "alg": "r U R' U' r' F R F'",
+   "c": "xyyyyyxyy",
+   "b": "yxx",
+   "f": "yxx",
+   "l": "xxx",
+   "r": "xxx",
+   "ycount": 7
+  },
+  {
+   "n": 25,
+   "g": "OCLL",
+   "alg": "F R' F' r U R U' r'",
+   "c": "yyxyyyxyy",
+   "b": "xxx",
+   "f": "yxx",
+   "l": "xxx",
+   "r": "yxx",
+   "ycount": 7
+  },
+  {
+   "n": 26,
+   "g": "OCLL",
+   "alg": "R U2 R' U' R U' R'",
+   "c": "xyyyyyxyx",
+   "b": "xxx",
+   "f": "yxx",
+   "l": "yxx",
+   "r": "xxy",
+   "ycount": 6
+  },
+  {
+   "n": 27,
+   "g": "OCLL",
+   "alg": "R U R' U R U2 R'",
+   "c": "xyxyyyyyx",
+   "b": "yxx",
+   "f": "xxy",
+   "l": "xxx",
+   "r": "yxx",
+   "ycount": 6
+  },
+  {
+   "n": 28,
+   "g": "Stūri gatavi",
+   "alg": "r U R' U' M U R U' R'",
+   "c": "yyyyyxyxy",
+   "b": "xxx",
+   "f": "xyx",
+   "l": "xxx",
+   "r": "xyx",
+   "ycount": 7
+  },
+  {
+   "n": 57,
+   "g": "Stūri gatavi",
+   "alg": "R U R' U' M' U R U' r'",
+   "c": "yxyyyyyxy",
+   "b": "xyx",
+   "f": "xyx",
+   "l": "xxx",
+   "r": "xxx",
+   "ycount": 7
+  },
+  {
+   "n": 29,
+   "g": "Awkward",
+   "alg": "R U R' U' R U' R' F' U' F R U R'",
+   "c": "xyyyyxxxy",
+   "b": "yxx",
+   "f": "yyx",
+   "l": "xxx",
+   "r": "xyx",
+   "ycount": 5
+  },
+  {
+   "n": 30,
+   "g": "Awkward",
+   "alg": "F U R U2 R' U' R U2 R' U' F'",
+   "c": "xyxyyxyxy",
+   "b": "xxx",
+   "f": "xyx",
+   "l": "yxx",
+   "r": "yyx",
+   "ycount": 5
+  },
+  {
+   "n": 41,
+   "g": "Awkward",
+   "alg": "R U R' U R U2 R' F R U R' U' F'",
+   "c": "xyxyyxyxy",
+   "b": "yxy",
+   "f": "xyx",
+   "l": "xxx",
+   "r": "xyx",
+   "ycount": 5
+  },
+  {
+   "n": 42,
+   "g": "Awkward",
+   "alg": "R' U' R U' R' U2 R F R U R' U' F'",
+   "c": "yxyyyxxyx",
+   "b": "xyx",
+   "f": "yxy",
+   "l": "xxx",
+   "r": "xyx",
+   "ycount": 5
+  },
+  {
+   "n": 31,
+   "g": "P",
+   "alg": "R' U' F U R U' R' F' R",
+   "c": "xyyxyyxxy",
+   "b": "yxx",
+   "f": "yyx",
+   "l": "xyx",
+   "r": "xxx",
+   "ycount": 5
+  },
+  {
+   "n": 32,
+   "g": "P",
+   "alg": "S R U R' U' R' F R f'",
+   "c": "xxyxyyxyy",
+   "b": "yyx",
+   "f": "yxx",
+   "l": "xyx",
+   "r": "xxx",
+   "ycount": 5
+  },
+  {
+   "n": 43,
+   "g": "P",
+   "alg": "R' U' F' U F R",
+   "c": "yyyyyxxxx",
+   "b": "xxx",
+   "f": "yyy",
+   "l": "xxx",
+   "r": "xyx",
+   "ycount": 5
+  },
+  {
+   "n": 44,
+   "g": "P",
+   "alg": "f R U R' U' f'",
+   "c": "xxyxyyxyy",
+   "b": "xyx",
+   "f": "xxx",
+   "l": "yyy",
+   "r": "xxx",
+   "ycount": 5
+  },
+  {
+   "n": 33,
+   "g": "T",
+   "alg": "R U R' U' R' F R F'",
+   "c": "xxyyyyxxy",
+   "b": "yyx",
+   "f": "yyx",
+   "l": "xxx",
+   "r": "xxx",
+   "ycount": 5
+  },
+  {
+   "n": 45,
+   "g": "T",
+   "alg": "F R U R' U' F'",
+   "c": "xxyyyyxxy",
+   "b": "xyx",
+   "f": "xyx",
+   "l": "yxy",
+   "r": "xxx",
+   "ycount": 5
+  },
+  {
+   "n": 34,
+   "g": "C",
+   "alg": "R U R2 U' R' F R U R U' F'",
+   "c": "xxxyyyyxy",
+   "b": "xyx",
+   "f": "xyx",
+   "l": "yxx",
+   "r": "yxx",
+   "ycount": 5
+  },
+  {
+   "n": 46,
+   "g": "C",
+   "alg": "R' U' R' F R F' U R",
+   "c": "yyxxyxyyx",
+   "b": "xxx",
+   "f": "xxx",
+   "l": "xyx",
+   "r": "yyy",
+   "ycount": 5
+  },
+  {
+   "n": 36,
+   "g": "W",
+   "alg": "L' U' L U' L' U L U L F' L' F",
+   "c": "yyxxyyxxy",
+   "b": "xxy",
+   "f": "xyx",
+   "l": "xyy",
+   "r": "xxx",
+   "ycount": 5
+  },
+  {
+   "n": 38,
+   "g": "W",
+   "alg": "R U R' U R U' R' U' R' F R F'",
+   "c": "xyyyyxyxx",
+   "b": "yxx",
+   "f": "xyx",
+   "l": "xxx",
+   "r": "xyy",
+   "ycount": 5
+  },
+  {
+   "n": 47,
+   "g": "L",
+   "alg": "F R' F' R U2 R U' R' U R U2 R'",
+   "c": "xyxyyxxxx",
+   "b": "yxy",
+   "f": "xyx",
+   "l": "xxy",
+   "r": "xyy",
+   "ycount": 3
+  },
+  {
+   "n": 48,
+   "g": "L",
+   "alg": "F R U R' U' R U R' U' F'",
+   "c": "xyxyyxxxx",
+   "b": "xxy",
+   "f": "xyy",
+   "l": "yxy",
+   "r": "xyx",
+   "ycount": 3
+  },
+  {
+   "n": 49,
+   "g": "L",
+   "alg": "r U' r2 U r2 U r2 U' r",
+   "c": "xyxxyyxxx",
+   "b": "xxy",
+   "f": "xyy",
+   "l": "yyy",
+   "r": "xxx",
+   "ycount": 3
+  },
+  {
+   "n": 50,
+   "g": "L",
+   "alg": "R' F R2 B' R2 F' R2 B R'",
+   "c": "xyxyyxxxx",
+   "b": "yxx",
+   "f": "yyx",
+   "l": "xxx",
+   "r": "yyy",
+   "ycount": 3
+  },
+  {
+   "n": 53,
+   "g": "L",
+   "alg": "l' U' L U' L' U L U' L' U2 l",
+   "c": "xyxyyxxxx",
+   "b": "xxx",
+   "f": "xyx",
+   "l": "yxy",
+   "r": "yyy",
+   "ycount": 3
+  },
+  {
+   "n": 54,
+   "g": "L",
+   "alg": "r U R' U R U' R' U R U2 r'",
+   "c": "xyxxyyxxx",
+   "b": "xxx",
+   "f": "xyx",
+   "l": "yyy",
+   "r": "yxy",
+   "ycount": 3
+  },
+  {
+   "n": 51,
+   "g": "Line",
+   "alg": "F U R U' R' U R U' R' F'",
+   "c": "xxxyyyxxx",
+   "b": "yyx",
+   "f": "yyx",
+   "l": "xxx",
+   "r": "yxy",
+   "ycount": 3
+  },
+  {
+   "n": 52,
+   "g": "Line",
+   "alg": "R U R' U R U' B U' B' R'",
+   "c": "xyxxyxxyx",
+   "b": "yxx",
+   "f": "yxx",
+   "l": "xyx",
+   "r": "yyy",
+   "ycount": 3
+  },
+  {
+   "n": 55,
+   "g": "Line",
+   "alg": "R' F R U R U' R2 F' R2 U' R' U R U R'",
+   "c": "xxxyyyxxx",
+   "b": "yyy",
+   "f": "yyy",
+   "l": "xxx",
+   "r": "xxx",
+   "ycount": 3
+  },
+  {
+   "n": 56,
+   "g": "Line",
+   "alg": "r U r' U R U' R' U R U' R' r U' r'",
+   "c": "xxxyyyxxx",
+   "b": "xyx",
+   "f": "xyx",
+   "l": "yxy",
+   "r": "yxy",
+   "ycount": 3
+  }
+ ],
+ "pll": [
+  {
+   "n": "Aa",
+   "d": "Stūru 3-cikls",
+   "alg": "x R' U R' D2 R U' R' D2 R2 x'",
+   "b": "rbr",
+   "f": "ggb",
+   "l": "boo",
+   "r": "gro",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      2,
+      2
+     ],
+     "t": [
+      "u",
+      0,
+      0
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      0,
+      0
+     ],
+     "t": [
+      "u",
+      2,
+      0
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      2,
+      0
+     ],
+     "t": [
+      "u",
+      2,
+      2
+     ],
+     "curve": 14
+    }
+   ],
+   "auf": 0
+  },
+  {
+   "n": "Ab",
+   "d": "Stūru 3-cikls (pretēji)",
+   "alg": "x R2 D2 R U R' D2 R U' R x'",
+   "b": "gbo",
+   "f": "ggr",
+   "l": "roo",
+   "r": "brb",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      2,
+      0
+     ],
+     "t": [
+      "u",
+      0,
+      0
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      2,
+      2
+     ],
+     "t": [
+      "u",
+      2,
+      0
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      0,
+      0
+     ],
+     "t": [
+      "u",
+      2,
+      2
+     ],
+     "curve": 14
+    }
+   ],
+   "auf": 0
+  },
+  {
+   "n": "E",
+   "d": "Abas diagonāles",
+   "alg": "x' R U' R' D R U R' D' R U R' D R U' R' D' x",
+   "b": "obr",
+   "f": "ogr",
+   "l": "gob",
+   "r": "grb",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      0,
+      2
+     ],
+     "t": [
+      "u",
+      0,
+      0
+     ],
+     "curve": 0,
+     "dbl": 1
+    },
+    {
+     "f": [
+      "u",
+      2,
+      2
+     ],
+     "t": [
+      "u",
+      2,
+      0
+     ],
+     "curve": 0,
+     "dbl": 1
+    }
+   ],
+   "auf": 0
+  },
+  {
+   "n": "Ua",
+   "d": "Malu 3-cikls",
+   "alg": "M2 U M U2 M' U M2",
+   "b": "bbb",
+   "f": "grg",
+   "l": "ogo",
+   "r": "ror",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      2,
+      1
+     ],
+     "t": [
+      "u",
+      0,
+      1
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      0,
+      1
+     ],
+     "t": [
+      "u",
+      1,
+      2
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      1,
+      2
+     ],
+     "t": [
+      "u",
+      2,
+      1
+     ],
+     "curve": 14
+    }
+   ],
+   "auf": 0
+  },
+  {
+   "n": "Ub",
+   "d": "Malu 3-cikls (pretēji)",
+   "alg": "M2 U' M U2 M' U' M2",
+   "b": "bbb",
+   "f": "gog",
+   "l": "oro",
+   "r": "rgr",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      1,
+      2
+     ],
+     "t": [
+      "u",
+      0,
+      1
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      2,
+      1
+     ],
+     "t": [
+      "u",
+      1,
+      2
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      0,
+      1
+     ],
+     "t": [
+      "u",
+      2,
+      1
+     ],
+     "curve": 14
+    }
+   ],
+   "auf": 0
+  },
+  {
+   "n": "H",
+   "d": "Abas pretējās malas",
+   "alg": "M2 U' M2 U2 M2 U' M2",
+   "b": "bgb",
+   "f": "gbg",
+   "l": "oro",
+   "r": "ror",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      2,
+      1
+     ],
+     "t": [
+      "u",
+      0,
+      1
+     ],
+     "curve": 0,
+     "dbl": 1
+    },
+    {
+     "f": [
+      "u",
+      1,
+      2
+     ],
+     "t": [
+      "u",
+      1,
+      0
+     ],
+     "curve": 0,
+     "dbl": 1
+    }
+   ],
+   "auf": 0
+  },
+  {
+   "n": "Z",
+   "d": "Divi blakus malu pāri",
+   "alg": "M' U' M2 U' M2 U' M' U2 M2",
+   "b": "brb",
+   "f": "gog",
+   "l": "ogo",
+   "r": "rbr",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      1,
+      2
+     ],
+     "t": [
+      "u",
+      0,
+      1
+     ],
+     "curve": 0,
+     "dbl": 1
+    },
+    {
+     "f": [
+      "u",
+      2,
+      1
+     ],
+     "t": [
+      "u",
+      1,
+      0
+     ],
+     "curve": 0,
+     "dbl": 1
+    }
+   ],
+   "auf": 3
+  },
+  {
+   "n": "T",
+   "d": "Blakus stūri + malas",
+   "alg": "R U R' U' R' F R2 U' R' U' R U R' F'",
+   "b": "bbr",
+   "f": "ggr",
+   "l": "oro",
+   "r": "gob",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      2,
+      1
+     ],
+     "t": [
+      "u",
+      0,
+      1
+     ],
+     "curve": 0,
+     "dbl": 1
+    },
+    {
+     "f": [
+      "u",
+      2,
+      2
+     ],
+     "t": [
+      "u",
+      2,
+      0
+     ],
+     "curve": 0,
+     "dbl": 1
+    }
+   ],
+   "auf": 0
+  },
+  {
+   "n": "Ja",
+   "d": "Blakus stūri + malas",
+   "alg": "x R2 F R F' R U2 r' U r U2 x'",
+   "b": "brr",
+   "f": "ggr",
+   "l": "ooo",
+   "r": "gbb",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      2,
+      1
+     ],
+     "t": [
+      "u",
+      1,
+      0
+     ],
+     "curve": 0,
+     "dbl": 1
+    },
+    {
+     "f": [
+      "u",
+      2,
+      2
+     ],
+     "t": [
+      "u",
+      2,
+      0
+     ],
+     "curve": 0,
+     "dbl": 1
+    }
+   ],
+   "auf": 0
+  },
+  {
+   "n": "Jb",
+   "d": "Blakus stūri + malas (spog.)",
+   "alg": "R U R' F' R U R' U' R' F R2 U' R'",
+   "b": "bbb",
+   "f": "roo",
+   "l": "ogg",
+   "r": "rrg",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      1,
+      2
+     ],
+     "t": [
+      "u",
+      0,
+      1
+     ],
+     "curve": 0,
+     "dbl": 1
+    },
+    {
+     "f": [
+      "u",
+      2,
+      2
+     ],
+     "t": [
+      "u",
+      0,
+      2
+     ],
+     "curve": 0,
+     "dbl": 1
+    }
+   ],
+   "auf": 1
+  },
+  {
+   "n": "Ra",
+   "d": "R-tips",
+   "alg": "R U' R' U' R U R D R' U' R D' R' U2 R'",
+   "b": "brb",
+   "f": "rgo",
+   "l": "oog",
+   "r": "rbg",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      2,
+      2
+     ],
+     "t": [
+      "u",
+      0,
+      2
+     ],
+     "curve": 0,
+     "dbl": 1
+    },
+    {
+     "f": [
+      "u",
+      2,
+      1
+     ],
+     "t": [
+      "u",
+      1,
+      0
+     ],
+     "curve": 0,
+     "dbl": 1
+    }
+   ],
+   "auf": 1
+  },
+  {
+   "n": "Rb",
+   "d": "R-tips (spog.)",
+   "alg": "R' U2 R U2 R' F R U R' U' R' F' R2",
+   "b": "bbr",
+   "f": "gor",
+   "l": "ogo",
+   "r": "grb",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      1,
+      2
+     ],
+     "t": [
+      "u",
+      0,
+      1
+     ],
+     "curve": 0,
+     "dbl": 1
+    },
+    {
+     "f": [
+      "u",
+      2,
+      2
+     ],
+     "t": [
+      "u",
+      2,
+      0
+     ],
+     "curve": 0,
+     "dbl": 1
+    }
+   ],
+   "auf": 1
+  },
+  {
+   "n": "F",
+   "d": "Blakus stūri + pretējās malas",
+   "alg": "R' U' F' R U R' U' R' F R2 U' R' U' R U R' U R",
+   "b": "bgr",
+   "f": "gbr",
+   "l": "ooo",
+   "r": "grb",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      1,
+      2
+     ],
+     "t": [
+      "u",
+      1,
+      0
+     ],
+     "curve": 0,
+     "dbl": 1
+    },
+    {
+     "f": [
+      "u",
+      2,
+      2
+     ],
+     "t": [
+      "u",
+      2,
+      0
+     ],
+     "curve": 0,
+     "dbl": 1
+    }
+   ],
+   "auf": 0
+  },
+  {
+   "n": "V",
+   "d": "Diagonāle + malas",
+   "alg": "R' U R' U' R D' R' D R' U D' R2 U' R2 D R2",
+   "b": "grb",
+   "f": "ggb",
+   "l": "roo",
+   "r": "rbo",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      2,
+      2
+     ],
+     "t": [
+      "u",
+      0,
+      0
+     ],
+     "curve": 0,
+     "dbl": 1
+    },
+    {
+     "f": [
+      "u",
+      2,
+      1
+     ],
+     "t": [
+      "u",
+      1,
+      0
+     ],
+     "curve": 0,
+     "dbl": 1
+    }
+   ],
+   "auf": 0
+  },
+  {
+   "n": "Y",
+   "d": "Diagonāle + malas",
+   "alg": "F R U' R' U' R U R' F' R U R' U' R' F R F'",
+   "b": "gob",
+   "f": "ggb",
+   "l": "rbo",
+   "r": "rro",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      2,
+      2
+     ],
+     "t": [
+      "u",
+      0,
+      0
+     ],
+     "curve": 0,
+     "dbl": 1
+    },
+    {
+     "f": [
+      "u",
+      1,
+      0
+     ],
+     "t": [
+      "u",
+      0,
+      1
+     ],
+     "curve": 0,
+     "dbl": 1
+    }
+   ],
+   "auf": 0
+  },
+  {
+   "n": "Na",
+   "d": "N-perm",
+   "alg": "R U R' U R U R' F' R U R' U' R' F R2 U' R' U2 R U' R'",
+   "b": "bbg",
+   "f": "bgg",
+   "l": "orr",
+   "r": "oor",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      2,
+      1
+     ],
+     "t": [
+      "u",
+      0,
+      1
+     ],
+     "curve": 0,
+     "dbl": 1
+    },
+    {
+     "f": [
+      "u",
+      2,
+      0
+     ],
+     "t": [
+      "u",
+      0,
+      2
+     ],
+     "curve": 0,
+     "dbl": 1
+    }
+   ],
+   "auf": 0
+  },
+  {
+   "n": "Nb",
+   "d": "N-perm (spog.)",
+   "alg": "R' U R U' R' F' U' F R U R' F R' F' R U' R",
+   "b": "gbb",
+   "f": "ggb",
+   "l": "rro",
+   "r": "roo",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      2,
+      2
+     ],
+     "t": [
+      "u",
+      0,
+      0
+     ],
+     "curve": 0,
+     "dbl": 1
+    },
+    {
+     "f": [
+      "u",
+      2,
+      1
+     ],
+     "t": [
+      "u",
+      0,
+      1
+     ],
+     "curve": 0,
+     "dbl": 1
+    }
+   ],
+   "auf": 0
+  },
+  {
+   "n": "Ga",
+   "d": "Stūru + malu 3-cikls",
+   "alg": "R2 U R' U R' U' R U' R2 D U' R' U R D'",
+   "b": "bgr",
+   "f": "grr",
+   "l": "obo",
+   "r": "gob",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      2,
+      1
+     ],
+     "t": [
+      "u",
+      0,
+      1
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      0,
+      1
+     ],
+     "t": [
+      "u",
+      1,
+      0
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      1,
+      0
+     ],
+     "t": [
+      "u",
+      1,
+      2
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      2,
+      2
+     ],
+     "t": [
+      "u",
+      2,
+      0
+     ],
+     "curve": 0,
+     "dbl": 1
+    },
+    {
+     "f": [
+      "u",
+      1,
+      2
+     ],
+     "t": [
+      "u",
+      2,
+      1
+     ],
+     "curve": 14
+    }
+   ],
+   "auf": 0
+  },
+  {
+   "n": "Gb",
+   "d": "Stūru + malu 3-cikls",
+   "alg": "D R' U' R U D' R2 U R' U R U' R U' R2",
+   "b": "bor",
+   "f": "gbr",
+   "l": "oro",
+   "r": "ggb",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      1,
+      0
+     ],
+     "t": [
+      "u",
+      0,
+      1
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      1,
+      2
+     ],
+     "t": [
+      "u",
+      1,
+      0
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      2,
+      1
+     ],
+     "t": [
+      "u",
+      1,
+      2
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      2,
+      2
+     ],
+     "t": [
+      "u",
+      2,
+      0
+     ],
+     "curve": 0,
+     "dbl": 1
+    },
+    {
+     "f": [
+      "u",
+      0,
+      1
+     ],
+     "t": [
+      "u",
+      2,
+      1
+     ],
+     "curve": 14
+    }
+   ],
+   "auf": 0
+  },
+  {
+   "n": "Gc",
+   "d": "Stūru + malu 3-cikls",
+   "alg": "R2 U' R U' R U R' U R2 D' U R U' R' D",
+   "b": "brr",
+   "f": "gbr",
+   "l": "ogo",
+   "r": "gob",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      2,
+      1
+     ],
+     "t": [
+      "u",
+      0,
+      1
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      1,
+      2
+     ],
+     "t": [
+      "u",
+      1,
+      0
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      0,
+      1
+     ],
+     "t": [
+      "u",
+      1,
+      2
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      2,
+      2
+     ],
+     "t": [
+      "u",
+      2,
+      0
+     ],
+     "curve": 0,
+     "dbl": 1
+    },
+    {
+     "f": [
+      "u",
+      1,
+      0
+     ],
+     "t": [
+      "u",
+      2,
+      1
+     ],
+     "curve": 14
+    }
+   ],
+   "auf": 0
+  },
+  {
+   "n": "Gd",
+   "d": "Stūru + malu 3-cikls",
+   "alg": "R U R' U' D R2 U' R U' R' U R' U R2 D'",
+   "b": "bgr",
+   "f": "gor",
+   "l": "oro",
+   "r": "gbb",
+   "arrows": [
+    {
+     "f": [
+      "u",
+      1,
+      2
+     ],
+     "t": [
+      "u",
+      0,
+      1
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      2,
+      1
+     ],
+     "t": [
+      "u",
+      1,
+      0
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      1,
+      0
+     ],
+     "t": [
+      "u",
+      1,
+      2
+     ],
+     "curve": 14
+    },
+    {
+     "f": [
+      "u",
+      2,
+      2
+     ],
+     "t": [
+      "u",
+      2,
+      0
+     ],
+     "curve": 0,
+     "dbl": 1
+    },
+    {
+     "f": [
+      "u",
+      0,
+      1
+     ],
+     "t": [
+      "u",
+      2,
+      1
+     ],
+     "curve": 14
+    }
+   ],
+   "auf": 0
+  }
+ ],
+ "oll2": [
+  {
+   "n": "Sune",
+   "alg": "R U R' U R U2 R'",
+   "c": "xxyx",
+   "b": "yx",
+   "f": "xy",
+   "l": "xx",
+   "r": "yx"
+  },
+  {
+   "n": "Antisune",
+   "alg": "R U2 R' U' R U' R'",
+   "c": "xyxx",
+   "b": "xx",
+   "f": "yx",
+   "l": "yx",
+   "r": "xy"
+  },
+  {
+   "n": "Pi",
+   "alg": "F R U R' U' R U R' U' F'",
+   "c": "xxxx",
+   "b": "xy",
+   "f": "xy",
+   "l": "yy",
+   "r": "xx"
+  },
+  {
+   "n": "H",
+   "alg": "R2 U2 R U2 R2",
+   "c": "xxxx",
+   "b": "yy",
+   "f": "yy",
+   "l": "xx",
+   "r": "xx"
+  },
+  {
+   "n": "U",
+   "alg": "F R U R' U' F'",
+   "c": "xyxy",
+   "b": "xx",
+   "f": "xx",
+   "l": "yy",
+   "r": "xx"
+  },
+  {
+   "n": "T",
+   "alg": "R U R' U' R' F R F'",
+   "c": "xyxy",
+   "b": "yx",
+   "f": "yx",
+   "l": "xx",
+   "r": "xx"
+  },
+  {
+   "n": "L",
+   "alg": "F R U' R' U' R U R' F'",
+   "c": "yxxy",
+   "b": "xx",
+   "f": "yx",
+   "l": "xx",
+   "r": "yx"
+  }
+ ],
+ "pbl": [
+  {
+   "n": "adj-top",
+   "d": "Blakus maiņa augšā, apakša gatava",
+   "alg": "R U R' U' R' F R2 U' R' U' R U R' F'",
+   "b": "br",
+   "f": "gr",
+   "l": "oo",
+   "r": "gb",
+   "db": "bb",
+   "df": "gg",
+   "dl": "oo",
+   "dr": "rr"
+  },
+  {
+   "n": "diag-top",
+   "d": "Diagonāle augšā, apakša gatava",
+   "alg": "F R U' R' U' R U R' F' R U R' U' R' F R F'",
+   "b": "gb",
+   "f": "gb",
+   "l": "ro",
+   "r": "ro",
+   "db": "bb",
+   "df": "gg",
+   "dl": "oo",
+   "dr": "rr"
+  },
+  {
+   "n": "adj-adj",
+   "d": "Blakus + blakus",
+   "alg": "R2 U' R2 U2 F2 U' R2",
+   "b": "bb",
+   "f": "ro",
+   "l": "og",
+   "r": "rg",
+   "db": "bb",
+   "df": "ro",
+   "dl": "og",
+   "dr": "rg"
+  },
+  {
+   "n": "diag-diag",
+   "d": "Diagonāle + diagonāle",
+   "alg": "R2 F2 R2",
+   "b": "bg",
+   "f": "bg",
+   "l": "or",
+   "r": "or",
+   "db": "bg",
+   "df": "bg",
+   "dl": "or",
+   "dr": "or"
+  },
+  {
+   "n": "adj-diag",
+   "d": "Blakus augšā + diagonāle apakšā",
+   "alg": "R U' R F2 R' U R'",
+   "b": "ro",
+   "f": "gg",
+   "l": "bo",
+   "r": "br",
+   "db": "bg",
+   "df": "bg",
+   "dl": "or",
+   "dr": "or"
+  }
+ ],
+ "problems": []
+}
