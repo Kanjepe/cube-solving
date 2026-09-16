@@ -296,19 +296,21 @@
 <nav class="steps beg-nav" aria-label="Soļi — iesācējs">
   <div class="wrap">
     <a href="#nota" title="Notācija"><b>ABC</b> Notācija</a>
-    <a class="n1" href="#s1"><b>1</b> Pirmais slānis</a>
-    <a class="n2" href="#s2"><b>2</b> Augšas orientācija</a>
-    <a class="n3" href="#s3"><b>3</b> Stūru maiņa</a>
+    <a class="n1" href="#s1"><b>1</b> Baltais slānis</a>
+    <a class="n2" href="#s2"><b>2</b> Dzeltenā puse</a>
+    <a class="n3" href="#s3"><b>3</b> Stūri</a>
     <a href="#cheat" title="Kopsavilkums"><b>★</b> Kopsavilkums</a>
   </div>
 </nav>
 
 <nav class="steps pro-nav" aria-label="Soļi — pro">
   <div class="wrap">
-    <a href="#nota" title="Notācija"><b>ABC</b> Notācija</a>
-    <a class="pro" href="#ortega"><b>◆</b> Ortega</a>
-    <a class="pro" href="#cll"><b>◆</b> CLL</a>
-    <a href="#cheat" title="Kopsavilkums"><b>★</b> Kopsavilkums</a>
+    <a href="#ortega" title="Par Ortega"><b>i</b> Ortega</a>
+    <a class="pro" href="#side"><b>1</b> Viena puse</a>
+    <a class="pro" href="#oll2"><b>2</b> OLL</a>
+    <a class="pro" href="#pbl"><b>3</b> PBL</a>
+    <a class="pro" href="#cll"><b>4</b> CLL</a>
+    <a href="#cheat-pro" title="Visi algoritmi"><b>★</b> Algoritmi</a>
   </div>
 </nav>
 
@@ -391,114 +393,126 @@
 
   <section class="g2-page" data-g2-page="intro">
     <h2 tabindex="-1">Saliec savu 2×2 kubu</h2>
-    <p>Trīs soļi: baltais slānis → dzeltenā puse → sānu sakārtošana. Tie ir vienas salikšanas posmi; katrai krāsai visu metodi neatkārto.</p>
-    <div class="g2-result"><strong>Tev vajag:</strong> 2×2 kubu un laiku nesteidzīgi izpildīt gājienus. Iepriekšēja pieredze nav vajadzīga.</div>
+    <p>Trīs soļi: <strong>1.</strong> baltais slānis, <strong>2.</strong> dzeltenā puse, <strong>3.</strong> stūri vietās. Katrā solī redzēsi, kā turēt kubu un kā pārbaudīt rezultātu.</p>
+    <div class="g2-result"><strong>Tev vajag:</strong> 2×2 kubu. Iepriekšēja pieredze nav vajadzīga.</div>
     <h3>Katrs gabaliņš ir stūris</h3>
-    <figure class="dg" data-kind="face" data-c="xxxx" data-mark="3"><figcaption>Vienā pusē redzamas četras uzlīmes. Katrs stūris turpinās vēl divās pusēs, tāpēc tam ir trīs krāsas.</figcaption></figure>
-    <p>2×2 kubam ir astoņi stūri, <strong>nav centru un malu gabaliņu</strong>. Krāsas nosaka paši stūri. Standarta kubā balts ir pretī dzeltenam, sarkans pretī oranžam, zaļš pretī zilam.</p>
-    <div class="g2-warning"><strong>Viena puse nav tas pats, kas slānis.</strong> Pirmajā solī nepietiek ar četrām baltām uzlīmēm kopā: arī abu apakšējo uzlīmju krāsām katrā sānā jāsakrīt.</div>
+    <figure class="dg" data-kind="face" data-c="xxxx" data-mark="3"><figcaption>Vienā pusē redzamas četras uzlīmes. Katram stūrim ir trīs krāsas.</figcaption></figure>
+    <p>2×2 kubam ir astoņi stūri un <strong>nav centru</strong>. Standarta krāsas: balts pretī dzeltenam, sarkans pretī oranžam, zaļš pretī zilam.</p>
+    <div class="g2-warning"><strong>Mala</strong> šajā ceļvedī ir viena sāna divas uzlīmes blakus vienā rindā. Slānis ir gatavs, kad tā puse ir vienā krāsā un visas četras malas ap to arī.</div>
     <h3>Kā lasīt gājienus</h3>
-    <p><strong>R</strong> – labā kārta; <strong>U</strong> – augšējā; <strong>D</strong> – apakšējā; <strong>F</strong> – priekšējā. Apostrofs <strong>'</strong> maina virzienu; <strong>2</strong> nozīmē 180°.</p>
+    <p><strong>R</strong> – labā kārta, <strong>L</strong> – kreisā, <strong>U</strong> – augšējā, <strong>D</strong> – apakšējā, <strong>F</strong> – priekšējā. Burts bez zīmes nozīmē ceturtdaļapgriezienu pulksteņrādītāja virzienā, skatoties tieši uz griežamo pusi. <strong>'</strong> – pretējais virziens, <strong>2</strong> – pusapgrieziens.</p>
     <p class="alg" data-alg="R U R' U'"></p>
     <button type="button" data-g2-help="moves">Parādīt gājienu skaidrojumu</button>
-    <p>Pieskaries jebkuram algoritma burtam, lai redzētu tā nozīmi. Palīdzība atveras tepat, saglabājot lasīšanas vietu.</p>
-    <div class="g2-warning"><strong>Viena secība = viens algoritms.</strong> Izpildi visus gājienus no kreisās uz labo. Visa kuba priekšpuse algoritma laikā paliek pret Tevi.</div>
+    <p>Pieskaries jebkuram burtam, lai redzētu tā nozīmi.</p>
+    <div class="g2-warning"><strong>Viena secība = viens algoritms.</strong> Izpildi visus gājienus no kreisās uz labo. Priekšpuse algoritma laikā paliek pret Tevi.</div>
     <div class="g2-actions"><button type="button" class="g2-primary" data-g2-goto="1">Sākt ar balto slāni →</button><button type="button" data-g2-goto="scramble">Vispirms sajaukt kubu</button></div>
   </section>
 
   <section class="g2-page" data-g2-page="1" id="s1">
     <h2 tabindex="-1">Baltais slānis</h2>
-    <p class="g2-goal">Rezultāts: balta puse apakšā un katrā sānā abas apakšējās uzlīmes vienā krāsā.</p>
-    <h3>A. Izvēlies pirmo balto stūri</h3>
-    <p>Atrodi jebkuru stūri ar baltu uzlīmi. Pagriez <strong>visu kubu rokās</strong>, lai baltais skatītos uz leju un šis gabaliņš atrastos apakšā priekšā pa kreisi. Pagaidām kārtas nav jāgriež.</p>
-    <div class="g2-example"><strong>Tavs atskaites punkts:</strong> ja šī stūra zaļais skatās uz priekšu un sarkanais pa kreisi, priekšpuse būs zaļa, kreisā puse sarkana, labā oranža un aizmugure zila. Citu stūri izvēloties, krāsu izvietojums būs citāds; princips nemainās.</div>
-    <h3>B. Atrodi nākamā stūra vietu</h3>
+    <p class="g2-goal">Rezultāts: balta puse apakšā, un katrā sānā abas apakšējās uzlīmes vienā krāsā.</p>
+    <div class="g2-grip"><strong>Kā turēt</strong><br>Baltais apakšā. Stūris, kuru ievieto, – augšā priekšā pa labi.</div>
+    <h3>1. Pirmais stūris</h3>
+    <p>Atrodi jebkuru stūri ar baltu uzlīmi. Pagriez visu kubu rokās, lai baltais skatās uz leju. Šis stūris paliek apakšā un nosaka, kur pieder pārējie.</p>
+    <h3>2. Nākamais stūris</h3>
     <ol>
-      <li>Augšējā kārtā atrodi stūri ar balto. Apskati abas pārējās krāsas.</li>
-      <li>Nosaki, starp kurām sānu krāsām tam jāatrodas apakšā. Piemērā balti zaļi oranžais pieder priekšā pa labi; balti zili oranžais – aizmugurē pa labi.</li>
-      <li>Pagriez visu kubu ap vertikālo asi, lai izvēlētā vieta būtu <strong>apakšā priekšā pa labi</strong>. Baltais paliek apakšā.</li>
-      <li>Griez tikai U, līdz izvēlētais stūris ir <strong>tieši virs šīs vietas</strong>.</li>
+      <li>Augšā meklē stūri ar baltu uzlīmi un kādu no jau ievietotā baltā stūra <strong>sānu krāsām</strong>. Tas būs nākamais kaimiņš. Ja vajadzīgais stūris ir apakšā, izmanto palīdzību “Baltais stūris ir apakšā, bet nepareizā vietā” zemāk.</li>
+      <li>Atrodi šim stūrim vietu blakus jau ievietotajam baltajam stūrim: uz abu kopīgā sāna jābūt vienādai krāsai. Piemēram, blakus baltā–zaļā–sarkanā stūra zaļajai uzlīmei liec stūri ar baltu un zaļu uzlīmi. Griez U, līdz izvēlētais stūris ir virs savas vietas.</li>
+      <li>Pagriez visu kubu, lai šī vieta ir <strong>priekšā pa labi</strong>. Baltais paliek apakšā.</li>
     </ol>
-    <div class="g2-grip"><strong>Kā turēt</strong><br>Baltais apakšā. Ievietojamais stūris – augšā, priekšā pa labi. Tā baltā uzlīme drīkst skatīties uz jebkuru no trim pusēm.</div>
     <figure class="g2-grip-figure"><svg viewBox="0 0 200 225" role="img" aria-label="Atzīmēts augšējais priekšējais labais stūris"><polygon points="100,12 142,33 100,54 58,33" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="142,33 184,54 142,75 100,54" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="58,33 100,54 58,75 16,54" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="100,54 142,75 100,96 58,75" fill="#ffe574" stroke="#211e19" stroke-width="3"/><polygon points="16,54 58,75 58,117 16,96" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="58,75 100,96 100,138 58,117" fill="#ffe574" stroke="#211e19" stroke-width="3"/><polygon points="16,96 58,117 58,159 16,138" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="58,117 100,138 100,180 58,159" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="184,54 142,75 142,117 184,96" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="142,75 100,96 100,138 142,117" fill="#ffe574" stroke="#211e19" stroke-width="3"/><polygon points="184,96 142,117 142,159 184,138" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="142,117 100,138 100,180 142,159" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><text x="49" y="207" text-anchor="middle" font-size="12" fill="#211e19">Priekšpuse</text><text x="153" y="207" text-anchor="middle" font-size="12" fill="#211e19">Labā puse</text></svg><figcaption>Atzīmēts viens gabaliņš: augšā, priekšā pa labi.<br>Trīs dzeltenīgie laukumi rāda tā atrašanās vietu, nevis uzlīmju krāsas.</figcaption></figure>
-    <h3>C. Ievieto vienu stūri</h3>
+    <h3>3. Ievieto</h3>
     <p class="alg" data-alg="R U R' U'"></p>
-    <p>Izpildi visus četrus gājienus un pārbaudi <strong>apakšējo priekšējo labo stūri</strong>. Ja baltais vēl neskatās uz leju <strong>vai abas sānu krāsas neatbilst izvēlētajai vietai</strong>, atkārto visu secību ar to pašu priekšpusi. Starp atkārtojumiem papildu U negriez. Apstājies tikai tad, kad visas trīs krāsas ir pareizi.</p>
-    <div class="g2-check"><strong>Šis stūris gatavs:</strong> baltais ir lejā, un sānu krāsas atbilst izvēlētajai vietai. Tad atgriezies pie B daļas un izvēlies nākamo stūri.</div>
-    <details><summary>Baltais stūris jau apakšā, bet nepareizi</summary><p>Turi nepareizo stūri apakšā priekšā pa labi. Izpildi R U R' U' vienu reizi, lai izceltu to augšā. Tad pēc abām sānu krāsām no jauna nosaki pareizo vietu un turpini ar B daļu.</p></details>
-    <details><summary>Augšā vairs nav balto stūru, bet slānis nav gatavs</summary><p>Kāds baltais stūris ir nepareizi ievietots apakšā. Salīdzini sānu krāsas ar sākumā izvēlēto atskaites stūri. Nepareizo stūri izcel ar iepriekšējo paņēmienu. Pareizo atskaites stūri atstāj vietā.</p></details>
-    <details><summary>Pēc sešām secībām atkal esmu sākumā</summary><p>Pārbaudi, vai izvēlētais gabaliņš pirms algoritma bija augšā priekšā pa labi, vai nemainīji priekšpusi un vai pabeidzi U'. Ja baltais nonāk lejā, bet sāni nesakrīt, bija izvēlēta nepareizā vieta – stūris jāizceļ un jāievieto pareizi.</p></details>
-    <figure class="dg" data-kind="top" data-c="wwww" data-b="bb" data-r="oo" data-f="gg" data-l="rr"><figcaption>Gatavs slānis, skatoties uz balto pusi: balts vidū un vienādas krāsas pāris katrā sānā. Sānu krāsas ir piemērs.</figcaption></figure>
-    <div class="g2-check"><strong>Vai gatavs?</strong> Pārbaudi visus četrus sānus. Katrā sānā abas apakšējās uzlīmes sakrīt. Tikai tad pārej pie dzeltenās puses.</div>
-    <label class="g2-done"><input type="checkbox" data-g2-done="1"> Baltais un visu sānu apakšējās rindas gatavas</label>
+    <p>Atkārto šo secību, līdz baltais skatās uz leju un abas sānu krāsas sakrīt ar kaimiņiem. Parasti 1–5 reizes. Starp atkārtojumiem U negriez.</p>
+    <div class="g2-check"><strong>Stūris gatavs:</strong> baltais lejā, abas sānu krāsas sakrīt. Atkārto 2. un 3. punktu ar nākamo balto stūri.</div>
+    <figure class="dg" data-kind="top" data-c="wwww" data-b="bb" data-r="oo" data-f="gg" data-l="rr"><figcaption>Gatavs slānis, skats uz balto pusi: katrā sānā vienādu krāsu pāris. Krāsas ir piemērs.</figcaption></figure>
+    <div class="g2-check"><strong>Vai gatavs?</strong> Apakša balta, un visos četros sānos abas apakšējās uzlīmes vienā krāsā. Ja kāda mala nesakrīt, paliec šajā solī: izcel nepareizo stūri, kā aprakstīts zemāk, un ievieto pareizajā vietā.</div>
+    <details><summary>Baltais stūris ir apakšā, bet nepareizā vietā</summary><p>Turi to apakšā priekšā pa labi. Izpildi R U R' U' vienu reizi – stūris iznāk augšā. Tad sāc no 2. punkta.</p></details>
+    <details><summary>Pēc daudzām reizēm nesanāk</summary><p>Pārbaudi trīs lietas: stūris pirms secības bija augšā priekšā pa labi, priekšpuse nemainījās, U' pabeigts. Ja baltais nonāk lejā, bet sāni nesakrīt, vieta bija nepareiza – izcel stūri un atrodi vietu no jauna.</p></details>
+    <label class="g2-done"><input type="checkbox" data-g2-done="1"> Baltais slānis gatavs</label>
   </section>
 
   <section class="g2-page" data-g2-page="2" id="s2">
     <h2 tabindex="-1">Dzeltenā puse</h2>
-    <p class="g2-goal">Rezultāts: četras dzeltenās uzlīmes augšā; baltais slānis atkal gatavs apakšā. Augšējo sānu krāsas sakārtosim 3. solī.</p>
-    <div class="g2-warning"><strong>Pirms pirmā grieziena:</strong><ul>
-      <li>Izvēlies priekšpusi un <strong>nemaini to līdz šī soļa beigām</strong>. Arī tad, ja apakša izskatās sajaukta.</li>
-      <li>Vienmēr pabeidz <strong>visus 4 gājienus</strong>, arī pēdējo D. Apstājies pārbaudei tikai pēc pilnas secības.</li>
-      <li>Starp stūriem griez <strong>tikai U</strong>. Apakšu pa vidu nelabo un visu kubu rokās nepagriez.</li>
-    </ul></div>
-    <p>Ja augša jau visa dzeltena, šis solis gatavs. Citādi atrodi augšējā slāņa stūri, kam dzeltenais skatās uz sānu.</p>
-    <div class="g2-grip"><strong>Kā turēt</strong><br>Baltais slānis sākumā apakšā. Ar U novieto izvēlēto stūri <strong>augšā priekšā pa labi</strong>. Nav svarīgi, vai tā dzeltenais skatās uz priekšu vai pa labi.</div>
+    <p class="g2-goal">Rezultāts: visa augša dzeltena. Sānu krāsas vēl nav svarīgas.</p>
+    <div class="g2-grip"><strong>Kā turēt</strong><br>Baltais apakšā, dzeltenais augšā. Izvēlies priekšpusi un <strong>nemaini to līdz soļa beigām</strong>.</div>
+    <p>Ja augša jau dzeltena, ej uz 3. soli.</p>
+    <h3>1. Novieto stūri</h3>
+    <p>Griez U, lai stūris, kam dzeltenais skatās uz sānu, ir <strong>augšā priekšā pa labi</strong>.</p>
     <figure class="g2-grip-figure"><svg viewBox="0 0 200 225" role="img" aria-label="Atzīmēts augšējais priekšējais labais stūris"><polygon points="100,12 142,33 100,54 58,33" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="142,33 184,54 142,75 100,54" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="58,33 100,54 58,75 16,54" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="100,54 142,75 100,96 58,75" fill="#ffe574" stroke="#211e19" stroke-width="3"/><polygon points="16,54 58,75 58,117 16,96" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="58,75 100,96 100,138 58,117" fill="#ffe574" stroke="#211e19" stroke-width="3"/><polygon points="16,96 58,117 58,159 16,138" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="58,117 100,138 100,180 58,159" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="184,54 142,75 142,117 184,96" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="142,75 100,96 100,138 142,117" fill="#ffe574" stroke="#211e19" stroke-width="3"/><polygon points="184,96 142,117 142,159 184,138" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><polygon points="142,117 100,138 100,180 142,159" fill="#eee9df" stroke="#211e19" stroke-width="1.5"/><text x="49" y="207" text-anchor="middle" font-size="12" fill="#211e19">Priekšpuse</text><text x="153" y="207" text-anchor="middle" font-size="12" fill="#211e19">Labā puse</text></svg><figcaption>Atzīmēts viens gabaliņš: augšā, priekšā pa labi.<br>Trīs dzeltenīgie laukumi rāda tā atrašanās vietu, nevis uzlīmju krāsas.</figcaption></figure>
-    <h3>A. Pagriez vienu stūri</h3>
+    <h3>2. Pagriez stūri</h3>
+    <div class="g2-warning"><strong>Vienmēr pabeidz visus 4 gājienus.</strong> Apakša pa vidu izskatīsies sajaukta – tas ir normāli. Tā atjaunojas pati.</div>
     <p class="alg" data-alg="R' D' R D"></p>
-    <p>Pēc pilnas četru gājienu secības skaties <strong>tikai uz augšējo priekšējo labo stūri</strong>. Ja dzeltenais vēl nav augšā, atkārto visu secību. Parasti vajadzīgas divas vai četras pilnas reizes.</p>
-    <div class="g2-check"><strong>Šis stūris pagriezts:</strong> tā dzeltenā uzlīme skatās uz augšu. Citu gabaliņu krāsas šajā brīdī nevērtē.</div>
-    <h3>B. Pievērs nākamo stūri</h3>
-    <p>Ar <strong>U</strong> pievērs nākamo augšējo stūri, kam dzeltenais skatās sānis. Visa kuba priekšpuse paliek tā pati. Stūrus, kuri jau ir dzelteni augšā, izlaid. Tad atkārto A daļu.</p>
-    <h3>C. Pārbaudi abas puses</h3>
-    <p>Kad visi četri stūri ir dzelteni augšā, pabeidz šo soli. Apakšējam baltajam slānim tagad jābūt atjaunotam. Augšējās sānu krāsas vēl drīkst nesakrist ar apakšējām.</p>
-    <figure class="dg" data-kind="top" data-c="yyyy"><figcaption>Gatava dzeltenā puse. Sānu krāsas šajā attēlā apzināti nav norādītas.</figcaption></figure>
-    <details><summary>Apakša pa vidu izskatās sajaukta</summary><p>Tas šajā metodē ir paredzēts. Turpini pārbaudīt tikai izvēlētā augšējā stūra dzelteno uzlīmi. Apakša atjaunojas pēc visu vajadzīgo stūru pagriešanas, ja katra četru gājienu secība pabeigta un priekšpuse nav mainīta.</p></details>
-    <details><summary>Dzeltenā puse gatava, bet apakša nav atjaunojusies</summary><p>Vispirms pārbaudi, vai pēc pēdējā R izpildīji arī D. Ja precīzi atceries izlaisto gājienu, pabeidz to. Ja neatceries vai pagriezi visu kubu starp stūriem, neatkārto algoritmu uz jau dzeltena stūra – atgriezies 1. solī un pārbaudi balto slāni.</p></details>
-    <details data-g2-sune><summary>Piezīme: Tavs pazīstamais Sune</summary><p class="alg" data-alg="R U R' U R U2 R'"></p><p>Arī šo kombināciju var izmantot pretējās puses veidošanai, <strong>ja jau saproti, kad to lietot un kā turēt kubu</strong>. Tā nav obligāta šīs pamācības daļa. Sāc to tikai ar gatavu balto slāni; neizmanto to pa vidu nepabeigtajam R' D' R D procesam. Gadījumu attēli ir Pro sadaļā.</p></details>
-    <div class="g2-check"><strong>Vai gatavs?</strong> Augša visa dzeltena. Apakša visa balta, un katra sāna abas apakšējās uzlīmes vienā krāsā.</div>
-    <label class="g2-done"><input type="checkbox" data-g2-done="2"> Dzeltenā puse gatava, baltais slānis atjaunots</label>
+    <p>Atkārto, līdz šī stūra dzeltenais skatās uz augšu. Vajadzīgas 2 vai 4 reizes. Skaties tikai uz šo stūri.</p>
+    <h3>3. Nākamais stūris</h3>
+    <p>Griez <strong>tikai U</strong>, lai nākamais nedzeltenais stūris ir priekšā pa labi. Visu kubu rokās negriez. Atkārto 2. punktu.</p>
+    <figure class="dg" data-kind="top" data-c="yyyy"><figcaption>Gatava dzeltenā puse. Sāni vēl var nesakrist.</figcaption></figure>
+    <div class="g2-check"><strong>Vai gatavs?</strong> Augša visa dzeltena. Apakša atkal balta ar sakritušiem sāniem.</div>
+    <details><summary>Augša dzeltena, bet apakša nav atjaunojusies</summary><p>Kāda secība netika pabeigta vai pa vidu pagriezts viss kubs. Atgriezies 1. solī, saliec balto slāni un atkārto šo soli.</p></details>
+    <details data-g2-sune><summary>Alternatīva pieredzējušiem: Sune</summary><p class="alg" data-alg="R U R' U R U2 R'"></p><p>Nav obligāta. Der, ja jau zini, kad to lietot. Gadījumu attēli ir Pro sadaļā.</p></details>
+    <label class="g2-done"><input type="checkbox" data-g2-done="2"> Dzeltenā puse gatava</label>
   </section>
 
   <section class="g2-page" data-g2-page="3" id="s3">
-    <h2 tabindex="-1">Sānu sakārtošana</h2>
-    <p class="g2-goal">Rezultāts: visas sešas puses vienā krāsā. Tagad mainām stūru vietas, saglabājot balto un dzelteno pusi.</p>
-    <div class="g2-grip"><strong>Kā turēt</strong><br>Baltais apakšā, dzeltenais augšā. Apskati katra sāna <strong>divas augšējās uzlīmes</strong>. Pāris nozīmē vienādu krāsu blakus – tam vēl nav jāsakrīt ar apakšējo rindu.</div>
-    <h3>Izvēlies vienu gadījumu</h3>
-    <details><summary>Visos četros sānos augšā ir vienādas krāsas pāri</summary><p>Abi slāņi jau sakārtoti. Griez tikai U, līdz augšējo pāru krāsas sakrīt ar apakšējām rindām. Pārbaudi visus četrus sānus; ja sakrīt, kubs gatavs.</p></details>
-    <details><summary>Atrodu vienu pāri – blakus stūru maiņa</summary>
-      <p>Pagriez <strong>visu kubu ap vertikālo asi</strong>, lai vienādas krāsas augšējais pāris būtu <strong>pa kreisi</strong>. Baltais paliek apakšā. Algoritma laikā priekšpusi nemaini.</p>
-      <figure class="dg" data-kind="top" data-c="yyyy" data-b="bo" data-r="gb" data-f="go" data-l="rr" data-mark="1,3"><figcaption>Skats no augšas, priekšpuse attēla apakšā. Sarkanais pāris pa kreisi; apvilktie labās puses stūri mainīs vietas. Sānu krāsas ir piemērs.</figcaption></figure>
-      <p class="alg" data-alg="R U R' U' R' F R2 U' R' U' R U R' F'"></p>
-      <p>Izpildi visu secību vienreiz. Tad griez tikai U, līdz augšējās sānu krāsas sakrīt ar apakšējām. Pārbaudi visas sešas puses.</p>
-    </details>
-    <details><summary>Neatrodu nevienu pāri – pretējie stūri pa diagonāli</summary>
-      <p>Visos četros sānos augšējās divas krāsas atšķiras. Baltais paliek apakšā, dzeltenais augšā; priekšā drīkst būt jebkurš sāns.</p>
-      <figure class="dg" data-kind="top" data-c="yyyy" data-b="or" data-r="bg" data-f="or" data-l="bg" data-mark="0,3"><figcaption>Skats no augšas, priekšpuse attēla apakšā. Nevienā sānu strīpā nav vienādas krāsas pāra – diagonāles gadījums.</figcaption></figure>
+    <h2 tabindex="-1">Stūri vietās</h2>
+    <p class="g2-goal">Rezultāts: kubs salikts.</p>
+    <div class="g2-grip"><strong>Kā turēt</strong><br><strong>Dzeltenais augšā, baltais lejā.</strong> Skaties tikai uz augšējo rindu katrā sānā.</div>
+    <p>Vispirms pārbaudi: apakša ir balta un katrā sānā abas apakšējās uzlīmes sakrīt. Ja nesakrīt, atver palīdzību “Baltā puse ir gatava, bet tās malas nesakrīt” zemāk.</p>
+    <h3>Cik gatavu malu ir pie dzeltenā?</h3>
+    <p>Gatava mala = divas vienādas krāsas blakus <strong>augšējā rindā</strong>. Apskati visus četrus sānus.</p>
+    <p><strong>Četras gatavas malas:</strong> griez tikai U, līdz augšējās krāsas sakrīt ar apakšējām. Kubs gatavs, kombinācija nav vajadzīga.</p>
+    <div class="g2-example">
+      <h3>Viena gatava mala – stūri blakus</h3>
+      <ol>
+        <li>Pagriez tikai augšējo kārtu ar U, lai novietotu gatavo malu <strong>aizmugurē</strong>. Dzeltenais paliek augšā, baltais lejā.</li>
+      </ol>
+      <figure class="dg" data-kind="top" data-c="yyyy" data-b="oo" data-f="gb" data-l="br" data-r="gr"><figcaption>Skats no augšas; priekšpuse attēla apakšā. Piemērā oranžais pāris attēla augšā ir gatavā mala aizmugurē. Tavam pārim drīkst būt cita krāsa.</figcaption></figure>
+      <ol start="2">
+        <li>Izpildi <strong>vienu reizi</strong>:</li>
+      </ol>
+      <p class="alg" data-alg="L' U R' D2 R U' R' D2 R2"></p>
+      <ol start="3">
+        <li><strong>Pēc pēdējā gājiena</strong> pagriez visu kubu rokās, lai <strong>dzeltenais atkal būtu augšā</strong> un baltais lejā. Kombinācijas laikā priekšpusi nemaini.</li>
+        <li>Tikai tagad griez U, līdz katrs sāns ir vienā krāsā. Gatavs.</li>
+      </ol>
+    </div>
+    <div class="g2-example">
+      <h3>Nav gatavas malas – stūri pa diagonāli</h3>
+      <ol>
+        <li>Dzeltenais <strong>augšā</strong>, baltais lejā. Jebkurš sāns priekšā.</li>
+      </ol>
+      <figure class="dg" data-kind="top" data-c="yyyy" data-b="or" data-r="bg" data-f="or" data-l="bg" data-mark="0,3"><figcaption>Skats no augšas. Nevienā sānā augšējā rindā nav divu vienādu krāsu.</figcaption></figure>
+      <ol start="2">
+        <li>Izpildi <strong>vienu reizi</strong>:</li>
+      </ol>
       <p class="alg" data-alg="R U' R' U' F2 U' R U R' D R2"></p>
-      <p>Tā ir Tava pazīstamā kombinācija. Pabeidz arī pēdējo R2. Tad <strong>griez U, līdz augšējās krāsas sakrīt ar apakšējām</strong>. Apakšējā kārta var būt pagriezusies attiecībā pret sākumu, taču tās pāri saglabājas; izlīdzini augšu pret pašreizējo apakšu.</p>
+      <ol start="3">
+        <li>Griez U, līdz katrs sāns ir vienā krāsā. Gatavs.</li>
+      </ol>
+      <p class="g2-small">Apakšējā kārta pēc kombinācijas var būt pagriezusies. To atsevišķi labot nevajag: ar U pieskaņo tai augšējo kārtu.</p>
+    </div>
+    <div class="g2-check"><strong>Vai gatavs?</strong> Visas sešas puses vienā krāsā. Kubs salikts!</div>
+    <details data-g2-white-recovery><summary>Baltā puse ir gatava, bet tās malas nesakrīt</summary>
+      <p>Šī ir papildu palīdzība tikai tad, ja abas puses jau ir vienā krāsā: baltais lejā un dzeltenais augšā. Saskaiti gatavās malas <strong>apakšējā rindā</strong>.</p>
+      <p><strong>Četras:</strong> baltais slānis jau ir gatavs. Šeit neko negriez; izmanto augšā redzamās pēdējo stūru kartītes.</p>
+      <p><strong>Nevienas:</strong> atgriezies 1. solī un saliec balto slāni ar sakritušiem sāniem. Ja arī baltais vai dzeltenais nav vienā krāsā, vispirms pabeidz 1. un 2. soli.</p>
+      <p><strong>Tieši viena:</strong> pagriez visu kubu tā, lai dzeltenais būtu priekšā, baltais aizmugurē un gatavā mala pie baltā – lejā aizmugurē.</p>
+      <figure class="dg" data-kind="top" data-c="ooxx" data-b="ww" data-f="yy" data-l="xx" data-r="xx" data-mark="0,1"><figcaption>Skats no apakšas: baltais aizmugurē (attēla augšā), dzeltenais priekšā (attēla apakšā). Apvilkts gatavais pāris pie baltā; tā krāsa ir piemērs.</figcaption></figure>
+      <p>Izpildi vienu reizi, priekšpusi nemainot:</p>
+      <p class="alg" data-alg="R' U R' D2 R U' R' D2 R2"></p>
+      <p>Pēc kombinācijas pagriez visu kubu ar dzelteno augšā un balto lejā. Baltā slāņa četrām malām tagad jāsakrīt. Turpini ar pēdējo stūru kartītēm augstāk.</p>
     </details>
-    <details><summary>Nesaprotu, vai man ir pāris</summary><p>Skaties uz vienu sānu, tikai uz tā augšējo rindu. Ja abas uzlīmes ir, piemēram, zilas, tas ir pāris, pat ja apakšējās ir sarkanas. Pa diagonāli izvietotas vienādas krāsas nav šāds pāris. Ja apakšā nav gatava balta slāņa vai augša nav dzeltena, vispirms pabeidz iepriekšējos soļus.</p></details>
-    <details><summary>Par Tavām divām citām sānu kombinācijām</summary>
-      <p>Pieraksti saglabāti salīdzināšanai:</p>
-      <p><code>R' U R' D2 R U' R' D2 R2</code><br><code>L' U R' D2 R U' R' D2 R2</code></p>
-      <p>Tās šeit nelietojam kā blakus stūru maiņu: dotajā pierakstā un šī soļa turējumā tās nesaglabā vajadzīgo balto un dzelteno pusi. To lietojumam jānoskaidro precīzs sākuma stāvoklis un turējums. Šī soļa blakus gadījumam izmanto augstāk parādīto pārbaudīto secību.</p>
-    </details>
-    <details><summary>Par Tavu FINISH: R2 U2</summary>
-      <p class="alg" data-alg="R2 U2"></p>
-      <p>Šis ir konkrēta stāvokļa finišs, <strong>nevis obligāts pēdējais solis</strong>. Piemēram, tas atceļ no salikta kuba izpildītu U2 R2. Uz jau salikta kuba R2 U2 atkal sajauc krāsas. Šajā metodē pēc stūru maiņas pietiek ar U izlīdzināšanu; ja viss sakrīt, apstājies.</p>
-    </details>
-    <div class="g2-check"><strong>Vai gatavs?</strong> Katra no sešām pusēm pilnībā vienā krāsā. Kubs salikts!</div>
-    <label class="g2-done"><input type="checkbox" data-g2-done="3"> Visas sešas puses saliktas</label>
-    <button type="button" class="g2-primary" data-g2-goto="scramble">Nākamais izaicinājums – sajaukt kubu →</button>
+    <details><summary>Nesanāca</summary><ol><li>Pārbaudi: dzeltenais ir augšā un baltais lejā.</li><li>Ja augšā ir viena gatava mala, tai jābūt aizmugurē.</li><li>Ja augšā nav gatavas malas, izmanto diagonāles kombināciju.</li></ol></details>
+    <label class="g2-done"><input type="checkbox" data-g2-done="3"> Kubs salikts</label>
+    <button type="button" class="g2-primary" data-g2-goto="scramble">Sajaukt un salikt vēlreiz →</button>
   </section>
 
   <section class="g2-page" data-g2-page="scramble">
-    <h2 tabindex="-1">Sajaukšana un Tavs MIX</h2>
-    <p>Pirmais treniņš ir Tava MIX secība ar 10 gājieniem. Pārējās četras ir 25 gājienu treniņu secības. Numuri nenozīmē grūtības pakāpes, un tās nav oficiāli sacensību sajaukumi.</p>
-    <div class="g2-grip"><strong>Sākuma turējums</strong><br>Sāc ar saliktu kubu: baltais augšā, zaļais pret Tevi. Saglabā šo priekšpusi visā secībā. R un U apzīmē vietas, nevis konkrētas krāsas.</div>
-    <label class="g2-select-label">Sajaukšanas secība<select data-g2-select aria-label="Sajaukšanas secība"><option value="0">Tavs MIX – 10 gājieni</option><option value="1">2. sajaukums – 25 gājieni</option><option value="2">3. sajaukums – 25 gājieni</option><option value="3">4. sajaukums – 25 gājieni</option><option value="4">5. sajaukums – 25 gājieni</option></select></label>
-    <div data-g2-scramble="U R F2 U R F2 R U F' R"><p class="g2-small">Tavs MIX – 10 gājieni</p><p class="alg" data-alg="U R F2 U R F2 R U F' R"></p></div>
+    <h2 tabindex="-1">Sajaukšana</h2>
+    <p>Pieci treniņu sajaukumi. Pirmais ir īss ar 10 gājieniem, pārējie ar 25. Tie nav oficiāli sacensību sajaukumi.</p>
+    <div class="g2-grip"><strong>Kā turēt</strong><br>Salikts kubs: baltais augšā, zaļais pret Tevi. Priekšpusi visā secībā nemaini.</div>
+    <label class="g2-select-label">Sajaukšanas secība<select data-g2-select aria-label="Sajaukšanas secība"><option value="0">1. sajaukums – 10 gājieni</option><option value="1">2. sajaukums – 25 gājieni</option><option value="2">3. sajaukums – 25 gājieni</option><option value="3">4. sajaukums – 25 gājieni</option><option value="4">5. sajaukums – 25 gājieni</option></select></label>
+    <div data-g2-scramble="U R F2 U R F2 R U F' R"><p class="g2-small">1. sajaukums – 10 gājieni</p><p class="alg" data-alg="U R F2 U R F2 R U F' R"></p></div>
     <div data-g2-scramble="F R' F' U' B2 R' F' R2 B L2 B2 R F2 R2 B' D2 L2 F' D2 L2 U R F2 R U2"><p class="g2-small">2. sajaukums – 25 gājieni</p><p class="alg" data-alg="F R' F' U' B2 R' F' R2 B L2 B2 R F2 R2 B' D2 L2 F' D2 L2 U R F2 R U2"></p></div>
     <div data-g2-scramble="R' B' R' D2 L2 F D F U2 R' U' R' B' D2 B2 L B' L' B2 U' L' B' U' F' R"><p class="g2-small">3. sajaukums – 25 gājieni</p><p class="alg" data-alg="R' B' R' D2 L2 F D F U2 R' U' R' B' D2 B2 L B' L' B2 U' L' B' U' F' R"></p></div>
     <div data-g2-scramble="F2 L2 D' R2 B D' L D2 F' L' F R D F2 D B' L U L2 B R B2 D L F2"><p class="g2-small">4. sajaukums – 25 gājieni</p><p class="alg" data-alg="F2 L2 D' R2 B D' L D2 F' L' F R D F2 D B' L U L2 B R B2 D L F2"></p></div>
@@ -508,9 +522,9 @@
       <strong class="g2-current-move" data-g2-current></strong>
       <p data-g2-description></p>
       <div class="g2-actions"><button type="button" data-g2-move-back>← Iepriekšējais gājiens</button><button type="button" class="g2-primary" data-g2-move-next>Izpildīts →</button></div>
-      <p class="g2-small">Pogas pārvieto atzīmi ekrānā. Kubu griez Tu; “Iepriekšējais” neatceļ fiziski izdarītu griezienu.</p>
+      <p class="g2-small">Pogas pārvieto atzīmi ekrānā. Kubu griez Tu.</p>
     </div>
-    <details><summary>Kā izpildīt sajaukumu?</summary><p>Pieskaries jebkuram burtam, lai redzētu grieziena nozīmi. Pēc fiziski izpildīta gājiena spied “Izpildīts”. Ja pārslēdzies uz citu secību pa vidu, jaunam atkārtojamam izaicinājumam vispirms atkal saliec kubu.</p><p>Kad sajaukums pabeigts, 1. solī izvēlies vienu balto stūri par atskaites punktu.</p></details>
+    <details><summary>Kā izpildīt sajaukumu?</summary><p>Pieskaries burtam, lai redzētu grieziena nozīmi. Pēc katra gājiena spied “Izpildīts”. Ja pārslēdzies uz citu secību pa vidu, vispirms atkal saliec kubu.</p></details>
     <button type="button" data-g2-goto="1">Kubs sajaukts – sākt salikšanu →</button>
   </section>
 
@@ -619,7 +633,7 @@
 (function () {
   'use strict';
   var pages = ['intro', '1', '2', '3', 'scramble'];
-  var titles = ['Pirms sākuma', 'Baltais slānis', 'Dzeltenā puse', 'Sānu sakārtošana', 'Sajaukšana'];
+  var titles = ['Pirms sākuma', 'Baltais slānis', 'Dzeltenā puse', 'Stūri vietās', 'Sajaukšana'];
   function validPage(value) {
     return pages.indexOf(value) >= 0 ? value : 'intro';
   }
@@ -652,12 +666,14 @@
     var storageKey = 'cube2-beginner-v2';
     var stored = {};
     try { stored = JSON.parse(localStorage.getItem(storageKey)) || {}; } catch (error) {}
-    var current = validPage(stored.page);
+    var current = validPage(stored.page === '4' ? '3' : stored.page);
     var lengths = Array.from(root.querySelectorAll('[data-g2-scramble]')).map(function (node) {
       return node.getAttribute('data-g2-scramble').trim().split(/\s+/).length;
     });
     var practice = validPractice(stored.practice, lengths);
     var completed = stored.done && typeof stored.done === 'object' ? stored.done : {};
+    // The former third step only checked white sides, not a solved cube.
+    if (stored.version !== 3) completed['3'] = completed['4'] === true;
     var pageNodes = Array.from(root.querySelectorAll('[data-g2-page]'));
     var dialog = root.querySelector('[data-g2-dialog]');
     var dialogContent = root.querySelector('[data-g2-dialog-content]');
@@ -668,7 +684,7 @@
     var select = root.querySelector('[data-g2-select]');
 
     function save() {
-      try { localStorage.setItem(storageKey, JSON.stringify({ page: current, done: completed, practice: practice })); } catch (error) {}
+      try { localStorage.setItem(storageKey, JSON.stringify({ version: 3, page: current, done: completed, practice: practice })); } catch (error) {}
     }
     function navigate(value, focus) {
       current = validPage(value);
@@ -773,8 +789,8 @@
       if (!active && dialog.open) dialog.close();
     }
     function followHash() {
-      var match = location.hash.match(/^#(?:a2-)?s([1-3])$/);
-      if (match && document.body.classList.contains('g2-active')) navigate(match[1], true);
+      var match = location.hash.match(/^#(?:a2-)?s([1-4])$/);
+      if (match && document.body.classList.contains('g2-active')) navigate(match[1] === '4' ? '3' : match[1], true);
     }
     root.classList.add('g2-ready');
     navigate(current, false);
@@ -790,119 +806,509 @@
 </div><!-- /mode-beginner -->
 
 <div class="mode mode-pro">
+<!-- Generated by _build/pro_blocks.py from _build/pro_cases.py; edit those and rerun, do not edit this block by hand. -->
+<div class="guide2pro" data-g2p-cube="a2" data-g2p-key="cube2-pro-v1" data-g2p-steps="4" data-g2p-letters="R L U D F B y">
+<div class="g2p-heading"><p class="g2p-eyebrow">2×2 · Pro · Ortega un CLL</p><p class="g2p-location" data-g2p-location aria-live="polite">Pirms sākuma</p></div>
+<section class="g2p-page" data-g2p-page="intro" data-g2p-title="Ortega – ātrā 2×2 metode" id="ortega">
+<h2 tabindex="-1">Ortega – ātrā 2×2 metode</h2>
 
-<!-- ============ 2. METODE — PROFESIONĀĻA ============ -->
-<div class="part-head pro">
-  <div class="kick">2. metode</div>
-  <h2>Profesionāļa metode <span class="rule" style="background:var(--paper)"></span></h2>
-  <p>Kā kubu saliek ātrsalicēji (speedcuberi). Sāc ar <strong>Ortega</strong> (~12 algoritmi, viegli apgūt, ātrs), tad — ja gribi vēl ātrāk —
-  pāriej uz <strong>CLL</strong> (pēdējais slānis vienā piegājienā).</p>
-  <p><strong>Kad esi gatavs Pro līmenim?</strong> Kad iesācēju metodi izpildi bez lapas. Labā ziņa: lielākā daļa Ortega algoritmu
-  tev jau ir pazīstami no iesācēju soļiem — pa īstam jauni ir tikai daži.</p>
+<p>Trīs soļi un 12 algoritmi. Lielākā daļa Tev jau pazīstama no iesācēju soļiem; pa īstam jauni ir daži. Kad Ortega ir rokā, nākamais līmenis ir CLL ar 42 algoritmiem – arī tas ir šajā ceļvedī.</p>
+<div class="g2p-result"><strong>Tev vajag:</strong> iesācēju metodi bez lapas. Labs Ortega salicējs kubu saliek ātrāk nekā 5 sekundēs.</div>
+<div class="g2p-progress"><strong>Apgūtie algoritmi:</strong> <span data-g2p-total>0 no 0</span><div class="g2p-bar"><span data-g2p-total-bar></span></div></div>
+<h3>Ideja</h3>
+<ol>
+<li><strong>Viena puse</strong> vienā krāsā. Sāni drīkst nesakrist.</li>
+<li><strong>OLL</strong> – visa augša vienā krāsā ar vienu no 7 algoritmiem.</li>
+<li><strong>PBL</strong> – abu slāņu stūri vietās ar vienu no 5 algoritmiem.</li>
+</ol>
+<div class="g2p-warning"><strong>Atšķirība no iesācēju metodes:</strong> pirmais slānis nav jāsaliek pilnīgi. Sānu krāsas sakārto pašās beigās, abiem slāņiem reizē.</div>
+<h3>Vārdi, kas parādīsies tālāk</h3>
+<ul>
+<li><strong>OLL</strong> – augšas orientācija: visa augša vienā krāsā, vietas vēl nav svarīgas.</li>
+<li><strong>PBL</strong> – abu slāņu permutācija: stūri pārvietoti savās vietās augšā un apakšā reizē.</li>
+<li><strong>CLL</strong> – pēdējā slāņa stūri vienā algoritmā: orientācija un vietas reizē.</li>
+<li><strong>Lukturi</strong> – divi blakus stūri ar vienādu sānu krāsu vienā sānā.</li>
+<li><strong>Sānu strīpas attēlos</strong> – krāsainās joslas ap augšas kvadrātu ir augšējā slāņa sānu uzlīmes. Aizmugure attēlā ir augšā, priekšpuse pie Tevis.</li>
+</ul>
+<h3>Apzīmējumi</h3>
+<p>Tie paši burti, kas iesācējam, un y – visa kuba pagrieziens kā U. Pieskaries burtam, lai atvērtu skaidrojumu.</p>
+<p class="alg" data-alg="R U R' U' F2 D y"></p>
+<button type="button" data-g2p-help="moves">Parādīt visu apzīmējumu skaidrojumu</button>
+<div class="g2p-actions"><button type="button" class="g2p-primary" data-g2p-goto="1">Sākt ar vienu pusi →</button><button type="button" data-g2p-goto="drill">Uz algoritmu treniņu</button></div>
+
+</section>
+<section class="g2p-page" data-g2p-page="1" data-g2p-title="Viena puse" id="side">
+<h2 tabindex="-1">Viena puse</h2>
+
+<p class="g2p-goal">Rezultāts: viena puse vienā krāsā, parasti baltā. Sānu krāsas šoreiz nekontrolē.</p>
+<div class="g2p-grip"><strong>Kā turēt</strong><br>Sāc ar diviem baltiem stūriem, kas jau ir blakus. Turi tos apakšā un pievieno pārējos divus.</div>
+<figure class="dg" data-kind="face" data-c="wwww" data-small="1"><figcaption>Pietiek ar vienu pusi vienā krāsā.</figcaption></figure>
+<ol>
+<li>Atrodi divus baltos stūrus, kurus var savienot vienā griezienā. Novieto tos apakšā.</li>
+<li>Katru nākamo balto stūri ar U novieto virs tukšās vietas un ielaid ar 2–3 griezieniem. Vari lietot arī iesācēju R U R' U'.</li>
+<li>Neskaties uz sānu krāsām. Viss, kas svarīgs, ir balts apakšā.</li>
+</ol>
+<div class="g2p-check"><strong>Vai gatavs?</strong> Visa apakšpuse balta. Sāni drīkst būt jaukti.</div>
+<details><summary>Kāpēc nelikt pilnu slāni?</summary><p>Pilns slānis prasa vidēji par 3–4 griezieniem vairāk. PBL solis sakārto abus slāņus reizē, tāpēc šis darbs būtu lieks.</p></details>
+<label class="g2p-done"><input type="checkbox" data-g2p-done="1"> Apakšpuse vienā krāsā</label>
+</section>
+<section class="g2p-page" data-g2p-page="2" data-g2p-title="OLL – augša vienā krāsā" id="oll2">
+<h2 tabindex="-1">OLL – augša vienā krāsā</h2>
+
+<p class="g2p-goal">Rezultāts: visa augša dzeltena. Septiņi gadījumi, viens algoritms katram.</p>
+<div class="g2p-grip"><strong>Kā turēt</strong><br>Gatavā puse apakšā. Saskaiti dzeltenās uzlīmes augšā: 1 – Sune vai Antisune; 2 – U, T vai L; 0 – Pi vai H. Tad pagriez kubu ap vertikālo asi, līdz sakrīt arī sānu strīpas.</div>
+<div class="g2p-case" data-g2p-case="o2-sune" data-g2p-sets="oll2"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="xxyx" data-b="yx" data-f="xy" data-l="xx" data-r="yx" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">Sune</p><p class="alg" data-alg="R U R' U R U2 R'"></p><p class="g2p-small">Augšā 1 dzeltenas uzlīmes. Pagriez kubu ap vertikālo asi, līdz sānu strīpas sakrīt.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="o2-sune"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="o2-antisune" data-g2p-sets="oll2"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="xyxx" data-b="xx" data-f="yx" data-l="yx" data-r="xy" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">Antisune</p><p class="alg" data-alg="R U2 R' U' R U' R'"></p><p class="g2p-small">Augšā 1 dzeltenas uzlīmes. Pagriez kubu ap vertikālo asi, līdz sānu strīpas sakrīt.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="o2-antisune"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="o2-u" data-g2p-sets="oll2"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="xyxy" data-b="xx" data-f="xx" data-l="yy" data-r="xx" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">U</p><p class="alg" data-alg="F R U R' U' F'"></p><p class="g2p-small">Augšā 2 dzeltenas uzlīmes. Pagriez kubu ap vertikālo asi, līdz sānu strīpas sakrīt.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="o2-u"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="o2-t" data-g2p-sets="oll2"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="xyxy" data-b="yx" data-f="yx" data-l="xx" data-r="xx" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">T</p><p class="alg" data-alg="R U R' U' R' F R F'"></p><p class="g2p-small">Augšā 2 dzeltenas uzlīmes. Pagriez kubu ap vertikālo asi, līdz sānu strīpas sakrīt.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="o2-t"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="o2-l" data-g2p-sets="oll2"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="yxxy" data-b="xx" data-f="yx" data-l="xx" data-r="yx" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">L</p><p class="alg" data-alg="F R U' R' U' R U R' F'"></p><p class="g2p-small">Augšā 2 dzeltenas uzlīmes. Pagriez kubu ap vertikālo asi, līdz sānu strīpas sakrīt.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="o2-l"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="o2-pi" data-g2p-sets="oll2"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="xxxx" data-b="xy" data-f="xy" data-l="yy" data-r="xx" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">Pi</p><p class="alg" data-alg="F R U R' U' R U R' U' F'"></p><p class="g2p-small">Augšā 0 dzeltenas uzlīmes. Pagriez kubu ap vertikālo asi, līdz sānu strīpas sakrīt.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="o2-pi"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="o2-h" data-g2p-sets="oll2"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="xxxx" data-b="yy" data-f="yy" data-l="xx" data-r="xx" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">H</p><p class="alg" data-alg="R2 U2 R U2 R2"></p><p class="g2p-small">Augšā 0 dzeltenas uzlīmes. Pagriez kubu ap vertikālo asi, līdz sānu strīpas sakrīt.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="o2-h"> Apgūts</label></div></div>
+<div class="g2p-check"><strong>Vai gatavs?</strong> Augša vienā krāsā. Apakša joprojām vienā krāsā.</div>
+<details><summary>Var sākt tikai ar diviem</summary><p>Ar Sune un Antisune vien var atrisināt jebkuru gadījumu divos piegājienos. Pārējos piecus pievieno pa vienam.</p></details>
+<label class="g2p-done"><input type="checkbox" data-g2p-done="2"> Augša vienā krāsā</label>
+</section>
+<section class="g2p-page" data-g2p-page="3" data-g2p-title="PBL – abi slāņi vietās" id="pbl">
+<h2 tabindex="-1">PBL – abi slāņi vietās</h2>
+
+<p class="g2p-goal">Rezultāts: kubs salikts. Katram slānim ir trīs stāvokļi: gatavs, blakus maiņa vai diagonāle.</p>
+<div class="g2p-grip"><strong>Kā turēt</strong><br>Katram slānim atrodi <strong>lukturus</strong> – vienu sānu vienā krāsā. Ja tāds ir: blakus maiņa. Ja katrs sāns vienā krāsā: slānis gatavs. Ja neviena sāna vienā krāsā: diagonāle. Kubu drīkst apgriezt otrādi – abas puses jau ir vienā krāsā. Katrai kartītei ir divi attēli: augša un apakša.</div>
+<details><summary>Abi slāņi gatavi</summary><p>Algoritms nav vajadzīgs. Izlīdzini ar U un, ja vajag, D.</p></details>
+<div class="g2p-case" data-g2p-case="pbl-adj-top" data-g2p-sets="pbl"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="yyyy" data-b="br" data-f="gr" data-l="oo" data-r="gb" data-small="1"><figcaption>Augša</figcaption></figure><figure class="dg" data-kind="top" data-c="wwww" data-b="bb" data-f="gg" data-l="rr" data-r="oo" data-small="1"><figcaption>Apakša, kubs apgriezts otrādi ar to pašu priekšpusi</figcaption></figure></div><div class="g2p-case-body"><p class="g2p-case-name">Blakus maiņa augšā, apakša gatava</p><p class="alg" data-alg="R U R' U' R' F R2 U' R' U' R U R' F'"></p><p class="g2p-small"><strong>Kā turēt:</strong> Sakārtotais slānis apakšā. Augšā lukturi pa kreisi.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="pbl-adj-top"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="pbl-diag-top" data-g2p-sets="pbl"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="yyyy" data-b="gb" data-f="gb" data-l="ro" data-r="ro" data-small="1"><figcaption>Augša</figcaption></figure><figure class="dg" data-kind="top" data-c="wwww" data-b="bb" data-f="gg" data-l="rr" data-r="oo" data-small="1"><figcaption>Apakša, kubs apgriezts otrādi ar to pašu priekšpusi</figcaption></figure></div><div class="g2p-case-body"><p class="g2p-case-name">Diagonāle augšā, apakša gatava</p><p class="alg" data-alg="F R U' R' U' R U R' F' R U R' U' R' F R F'"></p><p class="g2p-small"><strong>Kā turēt:</strong> Sakārtotais slānis apakšā. Augšā neviens sāns nav vienā krāsā; leņķis vienalga.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="pbl-diag-top"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="pbl-adj-adj" data-g2p-sets="pbl"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="yyyy" data-b="bb" data-f="ro" data-l="og" data-r="rg" data-small="1"><figcaption>Augša</figcaption></figure><figure class="dg" data-kind="top" data-c="wwww" data-b="bb" data-f="or" data-l="rg" data-r="og" data-small="1"><figcaption>Apakša, kubs apgriezts otrādi ar to pašu priekšpusi</figcaption></figure></div><div class="g2p-case-body"><p class="g2p-case-name">Blakus + blakus</p><p class="alg" data-alg="R2 U' R2 U2 F2 U' R2"></p><p class="g2p-small"><strong>Kā turēt:</strong> Abu slāņu vienādās krāsas pāri aizmugurē.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="pbl-adj-adj"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="pbl-diag-diag" data-g2p-sets="pbl"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="yyyy" data-b="bg" data-f="bg" data-l="or" data-r="or" data-small="1"><figcaption>Augša</figcaption></figure><figure class="dg" data-kind="top" data-c="wwww" data-b="gb" data-f="gb" data-l="or" data-r="or" data-small="1"><figcaption>Apakša, kubs apgriezts otrādi ar to pašu priekšpusi</figcaption></figure></div><div class="g2p-case-body"><p class="g2p-case-name">Diagonāle + diagonāle</p><p class="alg" data-alg="R2 F2 R2"></p><p class="g2p-small"><strong>Kā turēt:</strong> Jebkurš leņķis. Trīs griezieni.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="pbl-diag-diag"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="pbl-adj-diag" data-g2p-sets="pbl"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="yyyy" data-b="ro" data-f="gg" data-l="bo" data-r="br" data-small="1"><figcaption>Augša</figcaption></figure><figure class="dg" data-kind="top" data-c="wwww" data-b="gb" data-f="gb" data-l="or" data-r="or" data-small="1"><figcaption>Apakša, kubs apgriezts otrādi ar to pašu priekšpusi</figcaption></figure></div><div class="g2p-case-body"><p class="g2p-case-name">Blakus augšā + diagonāle apakšā</p><p class="alg" data-alg="R U' R F2 R' U R'"></p><p class="g2p-small"><strong>Kā turēt:</strong> Slānis ar pāri augšā, tā pāris priekšā.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="pbl-adj-diag"> Apgūts</label></div></div>
+<div class="g2p-warning"><strong>Pēc algoritma</strong> izlīdzini abus slāņus ar U un D. Ja slānis, kam jābūt augšā, ir apakšā, apgriez kubu pirms algoritma.</div>
+<div class="g2p-check"><strong>Vai gatavs?</strong> Visas sešas puses vienā krāsā.</div>
+<label class="g2p-done"><input type="checkbox" data-g2p-done="3"> Kubs salikts ar PBL</label>
+</section>
+<section class="g2p-page" data-g2p-page="4" data-g2p-title="CLL – pēdējais slānis vienā algoritmā" id="cll">
+<h2 tabindex="-1">CLL – pēdējais slānis vienā algoritmā</h2>
+
+<p class="g2p-goal">Rezultāts: pēc pilna pirmā slāņa visa augša gatava ar vienu algoritmu. Nav atsevišķa OLL un PBL.</p>
+<div class="g2p-result"><strong>Kad pāriet:</strong> kad Ortega iet zem 5 sekundēm un gribi zem 3. Līdz tam Ortega ir pilnvērtīga pro metode.</div>
+<div class="g2p-grip"><strong>Kā turēt</strong><br>Pirmais slānis <strong>pilnībā</strong> salikts apakšā, arī sānu krāsas. Vispirms atpazīsti augšas figūru kā Ortega OLL (Sune, Antisune, U, T, L, Pi, H), tad grupā atrodi kartīti, kurai sakrīt arī pārējās sānu krāsas. Attēlos krāsas ir piemērs ar zaļo priekšā; svarīgs ir raksts, kuras uzlīmes ir vienādas.</div>
+<h3>Kā mācīties</h3>
+<ol>
+<li>Sāc ar grupu, kuras Ortega OLL Tev jau labi padodas. Sešas kartītes vienā grupā ir viena nedēļa.</li>
+<li>Katru jauno kartīti trenē treniņa lapā ar kopu “CLL”.</li>
+<li>Kamēr grupa nav apgūta, tās gadījumus turpini likt ar Ortega OLL + PBL. Abas metodes var jaukt.</li>
+</ol>
+<h3>Visi 42 gadījumi</h3>
+<details class="g2p-group"><summary>Sune – 1 dzeltena augšā · 6 <span class="g2p-badge" data-g2p-group-count="cll:Sune"></span></summary><div class="g2p-case" data-g2p-case="cll-sune-1" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="ogyb" data-b="yo" data-f="ry" data-l="bg" data-r="yr" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL Sune 1</p><p class="alg" data-alg="L' U2 L U2 L F' L' F"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-sune-1"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-sune-2" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="bryo" data-b="yg" data-f="gy" data-l="ro" data-r="yb" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL Sune 2</p><p class="alg" data-alg="R U R' U' R' F R F' R U R' U R U2 R'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-sune-2"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-sune-3" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="bgyo" data-b="yo" data-f="ry" data-l="rg" data-r="yb" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL Sune 3</p><p class="alg" data-alg="R U' R' F R' F' R"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-sune-3"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-sune-4" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="gbyo" data-b="yr" data-f="ry" data-l="og" data-r="yb" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL Sune 4</p><p class="alg" data-alg="F R' F' R U2 R U2 R'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-sune-4"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-sune-5" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="boyg" data-b="yb" data-f="ry" data-l="rg" data-r="yo" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL Sune 5</p><p class="alg" data-alg="y2 R U R' U R' F R F' R U2 R'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-sune-5"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-sune-6" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="rgyo" data-b="yo" data-f="by" data-l="gr" data-r="yb" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL Sune 6</p><p class="alg" data-alg="R U R' U R U2 R'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-sune-6"> Apgūts</label></div></div></details><details class="g2p-group"><summary>Antisune – 1 dzeltena augšā · 6 <span class="g2p-badge" data-g2p-group-count="cll:Antisune"></span></summary><div class="g2p-case" data-g2p-case="cll-antisune-1" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="yorb" data-b="gy" data-f="yo" data-l="rb" data-r="gy" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL Antisune 1</p><p class="alg" data-alg="y R U2 R' U' R U' R'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-antisune-1"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-antisune-2" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="ybgo" data-b="ry" data-f="yg" data-l="br" data-r="oy" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL Antisune 2</p><p class="alg" data-alg="R U2 R' F R' F' R U' R U' R'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-antisune-2"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-antisune-3" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="yobg" data-b="ry" data-f="yr" data-l="bo" data-r="gy" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL Antisune 3</p><p class="alg" data-alg="y2 F' L F L' U2 L' U2 L"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-antisune-3"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-antisune-4" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="yogb" data-b="ry" data-f="yo" data-l="br" data-r="gy" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL Antisune 4</p><p class="alg" data-alg="y2 R' F R F' R U R'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-antisune-4"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-antisune-5" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="ygob" data-b="ry" data-f="yo" data-l="bg" data-r="ry" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL Antisune 5</p><p class="alg" data-alg="y2 R U2 R' U2 R' F R F'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-antisune-5"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-antisune-6" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="ygrb" data-b="oy" data-f="yo" data-l="gb" data-r="ry" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL Antisune 6</p><p class="alg" data-alg="y' R U2 R' U' R U' R' F R' F' R U R U' R' U'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-antisune-6"> Apgūts</label></div></div></details><details class="g2p-group"><summary>U – 2 dzeltenas blakus · 6 <span class="g2p-badge" data-g2p-group-count="cll:U"></span></summary><div class="g2p-case" data-g2p-case="cll-u-1" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="ggyy" data-b="yy" data-f="or" data-l="ob" data-r="rb" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL U 1</p><p class="alg" data-alg="y' F R U R' U' F'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-u-1"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-u-2" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="oryy" data-b="yy" data-f="gg" data-l="bo" data-r="br" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL U 2</p><p class="alg" data-alg="R' U' R2 U R' U2 R U2 R' U R'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-u-2"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-u-3" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="ggyy" data-b="yy" data-f="bb" data-l="or" data-r="ro" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL U 3</p><p class="alg" data-alg="y2 F R U R' U2 F' R U' R' F"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-u-3"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-u-4" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="royy" data-b="yy" data-f="or" data-l="gb" data-r="gb" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL U 4</p><p class="alg" data-alg="y' F R' F' R U' R U' R' U2 R U' R'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-u-4"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-u-5" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="rbyy" data-b="yy" data-f="gr" data-l="go" data-r="ob" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL U 5</p><p class="alg" data-alg="R U' R2 F R F' R U R' U' R U R'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-u-5"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-u-6" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="gryy" data-b="yy" data-f="rb" data-l="og" data-r="bo" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL U 6</p><p class="alg" data-alg="R' U R' F R F' R U2 R' U R"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-u-6"> Apgūts</label></div></div></details><details class="g2p-group"><summary>T – 2 dzeltenas blakus · 6 <span class="g2p-badge" data-g2p-group-count="cll:T"></span></summary><div class="g2p-case" data-g2p-case="cll-t-1" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="goyy" data-b="rb" data-f="gr" data-l="yo" data-r="yb" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL T 1</p><p class="alg" data-alg="y' R U R' U' R' F R F'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-t-1"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-t-2" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="rgyy" data-b="bo" data-f="og" data-l="yb" data-r="yr" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL T 2</p><p class="alg" data-alg="y L' U' L U L F' L' F"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-t-2"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-t-3" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="royy" data-b="bb" data-f="ro" data-l="yg" data-r="yg" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL T 3</p><p class="alg" data-alg="F U' R U2 R' U' F2 R U R'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-t-3"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-t-4" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="ooyy" data-b="gb" data-f="rr" data-l="yg" data-r="yb" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL T 4</p><p class="alg" data-alg="R' U R U2 R2 F' R U' R' F2 R2"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-t-4"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-t-5" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="ggyy" data-b="ro" data-f="or" data-l="yb" data-r="yb" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL T 5</p><p class="alg" data-alg="y2 F R U R' U' R U' R' U' R U R' F'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-t-5"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-t-6" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="oryy" data-b="gg" data-f="bb" data-l="yr" data-r="yo" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL T 6</p><p class="alg" data-alg="R' U R U2 R2 F R F' R"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-t-6"> Apgūts</label></div></div></details><details class="g2p-group"><summary>L – 2 dzeltenas pa diagonāli · 6 <span class="g2p-badge" data-g2p-group-count="cll:L"></span></summary><div class="g2p-case" data-g2p-case="cll-l-1" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="ryyr" data-b="yo" data-f="gb" data-l="go" data-r="by" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL L 1</p><p class="alg" data-alg="y R U2 R' F' R U2 R' U R' F2 R"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-l-1"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-l-2" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="byyb" data-b="yr" data-f="go" data-l="ro" data-r="gy" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL L 2</p><p class="alg" data-alg="y2 R U2 R2 F2 R U R' F2 R F'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-l-2"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-l-3" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="gyyr" data-b="yo" data-f="rb" data-l="og" data-r="by" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL L 3</p><p class="alg" data-alg="y2 R' U R' U2 R U' R' U R U' R2"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-l-3"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-l-4" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="byyo" data-b="yo" data-f="rg" data-l="rg" data-r="by" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL L 4</p><p class="alg" data-alg="y R U2 R2 F R F' R U2 R'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-l-4"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-l-5" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="ryyo" data-b="yb" data-f="og" data-l="gb" data-r="ry" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL L 5</p><p class="alg" data-alg="y F R' F' R U R U' R'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-l-5"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-l-6" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="gyyb" data-b="yb" data-f="ro" data-l="og" data-r="ry" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL L 6</p><p class="alg" data-alg="y2 F' R U R' U' R' F R"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-l-6"> Apgūts</label></div></div></details><details class="g2p-group"><summary>Pi – 0 dzeltenu augšā · 6 <span class="g2p-badge" data-g2p-group-count="cll:Pi"></span></summary><div class="g2p-case" data-g2p-case="cll-pi-1" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="grog" data-b="ry" data-f="by" data-l="yy" data-r="bo" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL Pi 1</p><p class="alg" data-alg="y F R' F' R U2 R U' R' U R U2 R'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-pi-1"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-pi-2" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="obbr" data-b="gy" data-f="ry" data-l="yy" data-r="og" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL Pi 2</p><p class="alg" data-alg="R U2 R' U' R U R' U2 R' F R F'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-pi-2"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-pi-3" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="gbbg" data-b="ry" data-f="ry" data-l="yy" data-r="oo" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL Pi 3</p><p class="alg" data-alg="y F R2 U' R2 U R2 U R2 F'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-pi-3"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-pi-4" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="oror" data-b="gy" data-f="by" data-l="yy" data-r="bg" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL Pi 4</p><p class="alg" data-alg="y2 R' F R F' R U' R' U' R U' R'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-pi-4"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-pi-5" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="rbrg" data-b="by" data-f="gy" data-l="yy" data-r="oo" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL Pi 5</p><p class="alg" data-alg="y' R' U' R' F R F' R U' R' U2 R"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-pi-5"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-pi-6" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="brgr" data-b="oy" data-f="oy" data-l="yy" data-r="bg" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL Pi 6</p><p class="alg" data-alg="F R U R' U' R U R' U' F'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-pi-6"> Apgūts</label></div></div></details><details class="g2p-group"><summary>H – 0 dzeltenu augšā · 4 <span class="g2p-badge" data-g2p-group-count="cll:H"></span></summary><div class="g2p-case" data-g2p-case="cll-h-1" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="orbb" data-b="gg" data-f="ro" data-l="yy" data-r="yy" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL H 1</p><p class="alg" data-alg="F R2 U' R2 U' R2 U R2 F'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-h-1"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-h-2" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="brgr" data-b="og" data-f="ob" data-l="yy" data-r="yy" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL H 2</p><p class="alg" data-alg="R U R' U R U R' F R' F' R"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-h-2"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-h-3" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="oror" data-b="gg" data-f="bb" data-l="yy" data-r="yy" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL H 3</p><p class="alg" data-alg="y F R U R' U' R U R' U' R U R' U' F'"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-h-3"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="cll-h-4" data-g2p-sets="cll"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="rroo" data-b="bg" data-f="bg" data-l="yy" data-r="yy" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">CLL H 4</p><p class="alg" data-alg="y R2 U2 R' U2 R2"></p><p class="g2p-small">Salīdzini dzeltenās uzlīmes augšā un sānos, tad arī pārējo sānu krāsu rakstu. y burts algoritma sākumā nozīmē pagriezt visu kubu.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="cll-h-4"> Apgūts</label></div></div></details><details class="g2p-group"><summary>Augša jau dzeltena · 2 <span class="g2p-badge" data-g2p-group-count="cll:O"></span></summary><div class="g2p-case" data-g2p-case="pbl-adj-top" data-g2p-sets="cll pbl"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="yyyy" data-b="br" data-f="gr" data-l="oo" data-r="gb" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">Augša gatava – blakus maiņa (T perm)</p><p class="alg" data-alg="R U R' U' R' F R2 U' R' U' R U R' F'"></p><p class="g2p-small">Tas pats algoritms, ko PBL.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="pbl-adj-top"> Apgūts</label></div></div><div class="g2p-case" data-g2p-case="pbl-diag-top" data-g2p-sets="cll pbl"><div class="g2p-case-figs"><figure class="dg" data-kind="top" data-c="yyyy" data-b="gb" data-f="gb" data-l="ro" data-r="ro" data-small="1"></figure></div><div class="g2p-case-body"><p class="g2p-case-name">Augša gatava – diagonāle (Y perm)</p><p class="alg" data-alg="F R U' R' U' R U R' F' R U R' U' R' F R F'"></p><p class="g2p-small">Tas pats algoritms, ko PBL.</p><label class="g2p-learned"><input type="checkbox" data-g2p-learned="pbl-diag-top"> Apgūts</label></div></div></details>
+<div class="g2p-check"><strong>Vai gatavs?</strong> Kubs salikts uzreiz pēc algoritma, atliek tikai izlīdzināt U.</div>
+<div class="g2p-table-wrap"><table class="g2p-table"><tr><th>Metode</th><th>Algoritmi</th><th>Kad</th></tr>
+<tr><td>Iesācēju</td><td>4</td><td>Sākums – vienmēr strādā</td></tr>
+<tr><td>Ortega</td><td>12</td><td>Zem 5 s, maz jāmācās</td></tr>
+<tr><td>CLL</td><td>42</td><td>Pēdējais slānis vienā skatienā</td></tr>
+</table></div>
+<label class="g2p-done"><input type="checkbox" data-g2p-done="4"> CLL grupas apgūtas</label>
+</section>
+<section class="g2p-page" data-g2p-page="drill" data-g2p-title="Algoritmu treniņš" id="drill">
+<h2 tabindex="-1">Algoritmu treniņš</h2>
+
+<p>Sagatavo gadījumu uz salikta kuba, atpazīsti to un izpildi algoritmu no galvas.</p>
+<div class="g2p-grip"><strong>Sākuma stāvoklis</strong><br>Salikts kubs, <strong>dzeltenais augšā, zaļais pret Tevi</strong>. Sagatavošanas secību izpildi ar šo pašu priekšpusi.</div><label class="g2p-select-label">Algoritmu kopa<select data-g2p-drill-set aria-label="Algoritmu kopa"><option value="oll2">Ortega OLL – 7</option><option value="pbl">PBL – 5</option><option value="cll">CLL – 42</option><option value="all">Viss kopā</option></select></label><p class="g2p-small" data-g2p-drill-progress></p><div class="g2p-practice" data-g2p-drill><p><strong>1. Sagatavo gadījumu</strong> – izpildi šo secību uz salikta kuba:</p><div data-g2p-drill-setup class="alg"></div><p><strong>2. Atpazīsti gadījumu</strong> un izpildi tā algoritmu no galvas. <strong>3. Pārbaudi</strong> – kubam jābūt saliktam.</p><div class="g2p-actions"><button type="button" data-g2p-drill-reveal>Parādīt atbildi</button><button type="button" class="g2p-primary" data-g2p-drill-next>Nākamais gadījums →</button></div><div data-g2p-drill-answer hidden class="g2p-answer"><div data-g2p-drill-figure></div><p class="g2p-case-name" data-g2p-drill-name></p><div data-g2p-drill-alg class="alg"></div><label class="g2p-learned"><input type="checkbox" data-g2p-drill-learned> Zināju no galvas – atzīmēt kā apgūtu</label></div></div><details><summary>Kā treniņš darbojas?</summary><p>Sagatavošanas secība ir gadījuma algoritma apgrieztā versija. Uz salikta kuba tā uzliek tieši šo gadījumu, tāpēc pēc pareizi izpildīta algoritma kubs atkal ir salikts. Vispirms tiek piedāvāti vēl neapgūtie gadījumi.</p></details>
+</section>
+<section class="g2p-page" data-g2p-page="algs" data-g2p-title="Visi algoritmi un avoti" id="cheat-pro">
+<h2 tabindex="-1">Visi algoritmi un avoti</h2>
+
+<p>Ātrā uzziņa bez skaidrojumiem: tie paši algoritmi, kas soļu lapās.</p>
+<h3>Ortega OLL</h3><div class="g2p-cheat"><div class="g2p-cheat-row"><span class="g2p-cheat-name">Sune</span><p class="alg" data-alg="R U R' U R U2 R'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">Antisune</span><p class="alg" data-alg="R U2 R' U' R U' R'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">Pi</span><p class="alg" data-alg="F R U R' U' R U R' U' F'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">H</span><p class="alg" data-alg="R2 U2 R U2 R2"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">U</span><p class="alg" data-alg="F R U R' U' F'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">T</span><p class="alg" data-alg="R U R' U' R' F R F'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">L</span><p class="alg" data-alg="F R U' R' U' R U R' F'"></p></div></div><h3>PBL</h3><div class="g2p-cheat"><div class="g2p-cheat-row"><span class="g2p-cheat-name">Blakus maiņa augšā, apakša gatava</span><p class="alg" data-alg="R U R' U' R' F R2 U' R' U' R U R' F'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">Diagonāle augšā, apakša gatava</span><p class="alg" data-alg="F R U' R' U' R U R' F' R U R' U' R' F R F'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">Blakus + blakus</span><p class="alg" data-alg="R2 U' R2 U2 F2 U' R2"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">Diagonāle + diagonāle</span><p class="alg" data-alg="R2 F2 R2"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">Blakus augšā + diagonāle apakšā</span><p class="alg" data-alg="R U' R F2 R' U R'"></p></div></div><h3>Sune – 1 dzeltena augšā</h3><div class="g2p-cheat"><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL Sune 1</span><p class="alg" data-alg="L' U2 L U2 L F' L' F"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL Sune 2</span><p class="alg" data-alg="R U R' U' R' F R F' R U R' U R U2 R'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL Sune 3</span><p class="alg" data-alg="R U' R' F R' F' R"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL Sune 4</span><p class="alg" data-alg="F R' F' R U2 R U2 R'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL Sune 5</span><p class="alg" data-alg="y2 R U R' U R' F R F' R U2 R'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL Sune 6</span><p class="alg" data-alg="R U R' U R U2 R'"></p></div></div><h3>Antisune – 1 dzeltena augšā</h3><div class="g2p-cheat"><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL Antisune 1</span><p class="alg" data-alg="y R U2 R' U' R U' R'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL Antisune 2</span><p class="alg" data-alg="R U2 R' F R' F' R U' R U' R'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL Antisune 3</span><p class="alg" data-alg="y2 F' L F L' U2 L' U2 L"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL Antisune 4</span><p class="alg" data-alg="y2 R' F R F' R U R'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL Antisune 5</span><p class="alg" data-alg="y2 R U2 R' U2 R' F R F'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL Antisune 6</span><p class="alg" data-alg="y' R U2 R' U' R U' R' F R' F' R U R U' R' U'"></p></div></div><h3>U – 2 dzeltenas blakus</h3><div class="g2p-cheat"><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL U 1</span><p class="alg" data-alg="y' F R U R' U' F'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL U 2</span><p class="alg" data-alg="R' U' R2 U R' U2 R U2 R' U R'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL U 3</span><p class="alg" data-alg="y2 F R U R' U2 F' R U' R' F"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL U 4</span><p class="alg" data-alg="y' F R' F' R U' R U' R' U2 R U' R'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL U 5</span><p class="alg" data-alg="R U' R2 F R F' R U R' U' R U R'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL U 6</span><p class="alg" data-alg="R' U R' F R F' R U2 R' U R"></p></div></div><h3>T – 2 dzeltenas blakus</h3><div class="g2p-cheat"><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL T 1</span><p class="alg" data-alg="y' R U R' U' R' F R F'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL T 2</span><p class="alg" data-alg="y L' U' L U L F' L' F"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL T 3</span><p class="alg" data-alg="F U' R U2 R' U' F2 R U R'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL T 4</span><p class="alg" data-alg="R' U R U2 R2 F' R U' R' F2 R2"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL T 5</span><p class="alg" data-alg="y2 F R U R' U' R U' R' U' R U R' F'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL T 6</span><p class="alg" data-alg="R' U R U2 R2 F R F' R"></p></div></div><h3>L – 2 dzeltenas pa diagonāli</h3><div class="g2p-cheat"><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL L 1</span><p class="alg" data-alg="y R U2 R' F' R U2 R' U R' F2 R"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL L 2</span><p class="alg" data-alg="y2 R U2 R2 F2 R U R' F2 R F'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL L 3</span><p class="alg" data-alg="y2 R' U R' U2 R U' R' U R U' R2"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL L 4</span><p class="alg" data-alg="y R U2 R2 F R F' R U2 R'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL L 5</span><p class="alg" data-alg="y F R' F' R U R U' R'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL L 6</span><p class="alg" data-alg="y2 F' R U R' U' R' F R"></p></div></div><h3>Pi – 0 dzeltenu augšā</h3><div class="g2p-cheat"><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL Pi 1</span><p class="alg" data-alg="y F R' F' R U2 R U' R' U R U2 R'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL Pi 2</span><p class="alg" data-alg="R U2 R' U' R U R' U2 R' F R F'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL Pi 3</span><p class="alg" data-alg="y F R2 U' R2 U R2 U R2 F'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL Pi 4</span><p class="alg" data-alg="y2 R' F R F' R U' R' U' R U' R'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL Pi 5</span><p class="alg" data-alg="y' R' U' R' F R F' R U' R' U2 R"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL Pi 6</span><p class="alg" data-alg="F R U R' U' R U R' U' F'"></p></div></div><h3>H – 0 dzeltenu augšā</h3><div class="g2p-cheat"><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL H 1</span><p class="alg" data-alg="F R2 U' R2 U' R2 U R2 F'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL H 2</span><p class="alg" data-alg="R U R' U R U R' F R' F' R"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL H 3</span><p class="alg" data-alg="y F R U R' U' R U R' U' R U R' U' F'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">CLL H 4</span><p class="alg" data-alg="y R2 U2 R' U2 R2"></p></div></div><h3>Augša jau dzeltena</h3><div class="g2p-cheat"><div class="g2p-cheat-row"><span class="g2p-cheat-name">Augša gatava – blakus maiņa (T perm)</span><p class="alg" data-alg="R U R' U' R' F R2 U' R' U' R U R' F'"></p></div><div class="g2p-cheat-row"><span class="g2p-cheat-name">Augša gatava – diagonāle (Y perm)</span><p class="alg" data-alg="F R U' R' U' R U R' F' R U R' U' R' F R F'"></p></div></div><div class="g2p-progress"><strong>Tavs progress:</strong> <span data-g2p-total>0 no 0</span><div class="g2p-bar"><span data-g2p-total-bar></span></div></div><h3>Avoti</h3><p>Visi algoritmi ir šajā lapā un pārbaudīti simulatorā. Saites ir papildu lasīšanai, video un pirkstu trikiem.</p><ul class="g2p-sources"><li><a href="https://cubingcheatsheet.com/algs2x.html" rel="noopener">cubingcheatsheet.com – 2×2</a> – Ortega OLL un PBL vienā lapā</li><li><a href="https://speedcubedb.com/a/2x2/CLL" rel="noopener">speedcubedb.com – CLL</a> – visi 42 CLL ar alternatīvām; no šejienes ņemts šis saraksts</li><li><a href="https://jperm.net/algs/2x2/cll" rel="noopener">jperm.net – CLL</a> – CLL ar video</li><li><a href="https://www.speedsolving.com/wiki/index.php/Ortega_Method" rel="noopener">speedsolving.com wiki – Ortega</a> – metodes apraksts</li></ul>
+</section>
+<nav class="g2p-bottom" aria-label="2×2 Pro navigācija"><button type="button" data-g2p-prev>← Atpakaļ</button><button type="button" data-g2p-menu>Soļi ☰</button><button type="button" class="g2p-primary" data-g2p-next>Tālāk →</button></nav>
+<dialog class="g2p-dialog" data-g2p-dialog aria-label="2×2 Pro palīdzība un soļi"><div class="g2p-dialog-top"><strong data-g2p-dialog-title></strong><button type="button" data-g2p-close aria-label="Aizvērt">Aizvērt ×</button></div><div data-g2p-dialog-content></div></dialog>
+<style data-guide2pro-styles>
+  body.g2p-active { font-family: 'Segoe UI', Arial, sans-serif; }
+  body.g2p-active nav.steps, body.g2p-active .panel-hero,
+  body.g2p-active header.hero, body.g2p-active .hero,
+  body.g2p-active #uzbuve, body.g2p-active #nota,
+  body.g2p-active #a2-uzbuve, body.g2p-active #a2-nota,
+  body.g2p-active #a3-uzbuve, body.g2p-active #a3-nota,
+  body.g2p-active #py-uzbuve, body.g2p-active #py-nota,
+  body.g2p-active footer, body.g2p-active .mb-hint { display: none; }
+  body.g2p-active nav.steps { display: none !important; }
+  .guide2pro { max-width: 680px; margin: 0 auto; padding-bottom: 110px; --pro: #7A3FB5; --pro-soft: #F1E9F8; --pro-line: #C9B3E3; }
+  .guide2pro [hidden] { display: none !important; }
+  .guide2pro .g2p-heading { padding: 24px 0 12px; border-bottom: 1px solid var(--line); margin-bottom: 22px; }
+  .guide2pro .g2p-eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--pro); }
+  .guide2pro .g2p-location { font-weight: 700; margin-top: 3px; }
+  .guide2pro .g2p-page { margin-bottom: 0; }
+  .guide2pro h2 { font-family: 'Segoe UI', Arial, sans-serif; font-size: clamp(25px, 5vw, 34px); line-height: 1.2; text-transform: none; letter-spacing: -.025em; margin: 0 0 14px; display: block; }
+  .guide2pro h2:focus { outline: none; }
+  .guide2pro h3 { font-family: inherit; font-size: 21px; margin: 26px 0 10px; text-transform: none; letter-spacing: normal; }
+  .guide2pro p { margin: 12px 0; }
+  .guide2pro li { margin: 10px 0; padding-left: 3px; }
+  .guide2pro ol, .guide2pro ul { padding-left: 24px; margin: 12px 0; }
+  .guide2pro .g2p-goal { color: var(--ink-soft); font-size: 18px; }
+  .guide2pro .g2p-grip, .guide2pro .g2p-result, .guide2pro .g2p-example, .guide2pro .g2p-progress,
+  .guide2pro .g2p-check, .guide2pro .g2p-warning { padding: 15px 17px; border-radius: 12px; margin: 18px 0; background: var(--card); border: 1px solid var(--line); }
+  .guide2pro .g2p-grip { border-left: 4px solid var(--pro); }
+  .guide2pro .g2p-result { border-left: 4px solid var(--pro); background: var(--pro-soft); }
+  .guide2pro .g2p-check { border-left: 4px solid #167449; background: #edf6ec; }
+  .guide2pro .g2p-warning { border-left: 4px solid #ac6400; background: #fff0c4; }
+  .guide2pro .g2p-progress { display: block; }
+  .guide2pro .g2p-bar { height: 8px; border-radius: 6px; background: var(--gray); margin-top: 10px; overflow: hidden; }
+  .guide2pro .g2p-bar span { display: block; height: 100%; width: 0; background: var(--pro); transition: width .25s ease; }
+  .guide2pro .dg { margin: 18px auto; max-width: 100%; text-align: center; }
+  .guide2pro .dg svg { max-width: 100%; }
+  .guide2pro .dg figcaption { font: inherit; font-size: 15px; line-height: 1.45; max-width: 360px; margin: 8px auto 0; text-transform: none; letter-spacing: normal; color: var(--ink); }
+  .guide2pro .g2p-grip-figure { margin: 16px auto; text-align: center; }
+  .guide2pro .g2p-grip-figure svg { width: 300px; max-width: 100%; height: auto; }
+  .guide2pro .g2p-grip-figure figcaption { font-size: 14px; color: var(--ink-soft); }
+  .guide2pro details { border: 1px solid var(--line); border-radius: 12px; padding: 0 15px; margin: 12px 0; background: var(--card); }
+  .guide2pro summary { cursor: pointer; font-weight: 650; min-height: 52px; padding: 14px 0; line-height: 1.45; }
+  .guide2pro details[open] { border-color: #8b8370; }
+  .guide2pro details[open] summary { border-bottom: 1px solid var(--line); margin-bottom: 12px; }
+  .guide2pro details.g2p-group summary { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .guide2pro .g2p-badge { font-size: 13px; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: var(--pro-soft); color: var(--pro); border: 1px solid var(--pro-line); white-space: nowrap; }
+  .guide2pro .g2p-badge.is-complete { background: #edf6ec; color: #167449; border-color: #9fcaa9; }
+  .guide2pro button, .guide2pro select { font: inherit; font-size: 16px; min-height: 46px; padding: 10px 14px; border: 1px solid #8b8370; border-radius: 10px; background: var(--card); color: var(--ink); cursor: pointer; line-height: 1.4; }
+  .guide2pro button:focus-visible, .guide2pro select:focus-visible, .guide2pro summary:focus-visible, .guide2pro input:focus-visible { outline: 3px solid var(--pro); outline-offset: 3px; }
+  .guide2pro button:hover { background: #ebe5d7; }
+  .guide2pro button:disabled { opacity: .45; cursor: default; }
+  .guide2pro button.g2p-primary { background: var(--pro); color: #fff; border-color: var(--pro); }
+  .guide2pro button.g2p-primary:hover { background: #64318f; }
+  .guide2pro .g2p-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
+  .guide2pro .g2p-actions > button { flex: 1 1 180px; }
+  .guide2pro .alg { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); max-width: 100%; white-space: normal; margin: 12px 0; font-size: inherit; font-weight: normal; }
+  .guide2pro .alg .mv { font-family: Consolas, monospace; font-size: 22px; min-width: 46px; min-height: 46px; padding: 5px 9px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; background: #ffe574; color: #211e19; box-shadow: none; border: 0; }
+  .guide2pro .alg .mv.prime { background: #dfebff; color: #174789; }
+  .guide2pro .alg .mv.dbl { background: #ffe3c3; color: #854600; }
+  .guide2pro .alg .mv.wide { background: #e7f3e8; color: #135c33; }
+  .guide2pro .alg .mv.rot { background: #eee6f7; color: #4c2a73; }
+  .guide2pro .alg .mv.tip { background: #e7f3e8; color: #135c33; }
+  .guide2pro .g2p-case { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 6px 14px; align-items: start; padding: 14px 0; border-top: 1px solid var(--line); }
+  .guide2pro .g2p-case.g2p-case-text { grid-template-columns: minmax(0, 1fr); }
+  .guide2pro .g2p-case:first-of-type { border-top: 0; }
+  .guide2pro .g2p-case-figs { display: grid; gap: 6px; }
+  .guide2pro .g2p-case-figs .dg { margin: 0; }
+  .guide2pro .g2p-case-figs .dg svg { width: 102px; }
+  .guide2pro .g2p-case-figs .dg[data-kind="f2l"] svg { width: 112px; }
+  .guide2pro .g2p-case-figs .dg figcaption { font-size: 12px; color: var(--ink-soft); margin: 2px 0 0; max-width: 112px; }
+  .guide2pro .g2p-cheat { display: grid; gap: 4px; margin: 6px 0 18px; }
+  .guide2pro .g2p-cheat-row { display: grid; grid-template-columns: minmax(96px, 30%) minmax(0, 1fr); gap: 8px; align-items: center; border-top: 1px solid var(--line); padding: 6px 0; }
+  .guide2pro .g2p-cheat-row .g2p-cheat-name { font-weight: 650; font-size: 15px; }
+  .guide2pro .g2p-cheat-row .alg { margin: 0; padding: 6px; gap: 4px; border: 0; background: transparent; }
+  .guide2pro .g2p-cheat-row .alg .mv { font-size: 15px; min-width: 30px; min-height: 34px; padding: 2px 5px; }
+  .guide2pro .g2p-sources li { margin: 8px 0; }
+  .guide2pro .g2p-sources a { color: var(--pro); font-weight: 650; }
+  .guide2pro .g2p-case-body { min-width: 0; }
+  .guide2pro .g2p-case-name { font-weight: 700; margin: 0 0 6px; }
+  .guide2pro .g2p-case .alg { padding: 8px; gap: 6px; margin: 6px 0; }
+  .guide2pro .g2p-case .alg .mv { font-size: 17px; min-width: 36px; min-height: 40px; padding: 3px 6px; }
+  .guide2pro .g2p-case .g2p-small { margin: 6px 0; }
+  .guide2pro .g2p-learned { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 650; padding: 8px 0; cursor: pointer; }
+  .guide2pro .g2p-learned input { width: 22px; height: 22px; accent-color: var(--pro); }
+  .guide2pro .g2p-case.is-learned .g2p-case-name::after { content: " ✓"; color: #167449; }
+  .guide2pro .g2p-done { display: flex; align-items: flex-start; gap: 12px; padding: 16px 0; cursor: pointer; }
+  .guide2pro .g2p-done input { flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px; accent-color: #167449; }
+  .guide2pro .g2p-bottom { display: none; }
+  body.g2p-active .guide2pro.g2p-ready .g2p-bottom { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; position: fixed; bottom: 0; left: 0; right: 0; z-index: 80; background: var(--card); border-top: 1px solid var(--line); padding: 12px max(14px, calc((100% - 680px) / 2)) calc(12px + env(safe-area-inset-bottom)); }
+  .guide2pro .g2p-bottom button { white-space: nowrap; padding-left: 6px; padding-right: 6px; }
+  .guide2pro .g2p-dialog { position: fixed; margin: auto; inset: 0; width: min(620px, calc(100vw - 24px)); max-height: calc(100dvh - 32px); padding: 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); color: var(--ink); overflow-y: auto; overscroll-behavior: contain; }
+  .guide2pro .g2p-dialog::backdrop { background: rgba(24, 22, 18, .58); }
+  .guide2pro .g2p-dialog-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+  .guide2pro .g2p-menu-list { display: grid; gap: 9px; }
+  .guide2pro .g2p-menu-list button { text-align: left; }
+  .guide2pro [aria-current="step"] { border: 2px solid var(--pro); background: var(--pro-soft); }
+  .guide2pro .g2p-select-label { display: grid; gap: 8px; font-weight: 650; margin: 20px 0; }
+  .guide2pro select { width: 100%; }
+  .guide2pro .g2p-practice { border: 1px solid var(--line); padding: 16px; border-radius: 12px; background: var(--card); }
+  .guide2pro .g2p-answer { border-top: 1px dashed var(--line); margin-top: 14px; padding-top: 10px; }
+  .guide2pro .g2p-answer .dg { margin: 6px 0; text-align: left; }
+  .guide2pro .g2p-small { color: var(--ink-soft); font-size: 14px; }
+  .guide2pro .g2p-table-wrap { overflow-x: auto; margin: 14px 0; }
+  .guide2pro .g2p-table { border-collapse: collapse; width: 100%; background: var(--card); font-size: 15px; }
+  .guide2pro .g2p-table th, .guide2pro .g2p-table td { border: 1px solid var(--line); padding: 9px 11px; text-align: left; vertical-align: top; font-weight: normal; }
+  .guide2pro .g2p-table th { font-weight: 700; background: var(--pro-soft); font-family: inherit; text-transform: none; letter-spacing: normal; color: var(--ink); font-size: 15px; }
+  @media (max-width: 560px) {
+    body.g2p-active { font-size: 17px; line-height: 1.6; }
+    body.g2p-active .topbar .tabbtn { min-height: 44px; font-size: 13px; padding: 6px 8px; }
+    body.g2p-active .topbar .tb-row { justify-content: center; gap: 6px; }
+    body.g2p-active .topbar .tb-group { gap: 5px; }
+    body.g2p-active .topbar .tb-sep { display: none; }
+    .guide2pro .g2p-heading { padding-top: 18px; margin-bottom: 18px; }
+    .guide2pro .g2p-bottom button { font-size: 15px; }
+    .guide2pro .g2p-dialog { padding: 16px; }
+    .guide2pro .g2p-case { grid-template-columns: 96px minmax(0, 1fr); gap: 4px 10px; }
+    .guide2pro .g2p-case.g2p-case-text { grid-template-columns: minmax(0, 1fr); }
+    .guide2pro .g2p-case-figs .dg svg { width: 90px; }
+    .guide2pro .g2p-case-figs .dg[data-kind="f2l"] svg { width: 96px; }
+    .guide2pro .g2p-cheat-row { grid-template-columns: 1fr; gap: 2px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .guide2pro .g2p-bar span { transition: none; } body.g2p-active { scroll-behavior: auto; } }
+  @media print {
+    .guide2pro { padding-bottom: 0; }
+    .guide2pro [data-g2p-page][hidden] { display: block !important; }
+    .guide2pro .g2p-page { break-before: page; }
+    body.g2p-active .guide2pro.g2p-ready .g2p-bottom, .guide2pro .g2p-dialog, .guide2pro .g2p-practice, .guide2pro .g2p-done { display: none; }
+  }
+</style>
+<script data-guide2pro-runtime>
+(function () {
+  'use strict';
+  function invert(alg) {
+    return alg.trim().split(/\s+/).reverse().map(function (m) {
+      if (m.slice(-1) === '2') return m;
+      return m.slice(-1) === "'" ? m.slice(0, -1) : m + "'";
+    }).join(' ');
+  }
+  function describeCube(move) {
+    if (!/^[RLUDFBrludfbMSExyz](2|')?$/.test(move)) return '';
+    var base = move[0], suffix = move.slice(1);
+    var faces = { R: 'Labā kārta', L: 'Kreisā kārta', U: 'Augšējā kārta', D: 'Apakšējā kārta', F: 'Priekšējā kārta', B: 'Aizmugurējā kārta' };
+    var wide = { r: 'Labās divas kārtas kopā (R un vidējā)', l: 'Kreisās divas kārtas kopā (L un vidējā)', u: 'Augšējās divas kārtas kopā', d: 'Apakšējās divas kārtas kopā', f: 'Priekšējās divas kārtas kopā', b: 'Aizmugurējās divas kārtas kopā' };
+    var slice = { M: 'Vidējā kārta starp L un R; griežas tāpat kā L', S: 'Vidējā kārta starp F un B; griežas tāpat kā F', E: 'Vidējā kārta starp U un D; griežas tāpat kā D' };
+    var rot = { x: 'Viss kubs rokās, tāpat kā R', y: 'Viss kubs rokās, tāpat kā U', z: 'Viss kubs rokās, tāpat kā F' };
+    var name = faces[base] || wide[base] || slice[base] || rot[base];
+    var ref = wide[base] ? ' Virziens kā lielajam burtam ' + base.toUpperCase() + '.' : '';
+    if (suffix === '2') return name + ': 180° jeb pusapgrieziens. Virziens nav svarīgs.' + ref;
+    var prime = suffix === "'";
+    return name + ': 90° ' + (prime ? 'pretēji pulksteņrādītāja virzienam' : 'pulksteņrādītāja virzienā') + (rot[base] ? '.' : ', skatoties tieši uz šo pusi.') + ref;
+  }
+  function describePyra(move) {
+    if (!/^[ULRBulrb]'?$/.test(move)) return '';
+    var names = { U: 'Augšējā virsotne', L: 'Kreisā virsotne', R: 'Labā virsotne', B: 'Aizmugurējā virsotne' };
+    var tip = move[0] === move[0].toLowerCase();
+    var prime = move[1] === "'";
+    return names[move[0].toUpperCase()] + ': 120° ' + (prime ? 'pretēji pulksteņrādītāja virzienam' : 'pulksteņrādītāja virzienā') +
+      ', skatoties no šīs virsotnes ārpuses uz piramīdas vidu. ' +
+      (tip ? 'Griez tikai mazo galu (G); gabals zem tā paliek nekustīgs.' : 'Griez divus slānīšus kopā: galu (G), stūri (S) un trīs blakus malas (M).') +
+      ' Visa piramīda rokās negriežas.';
+  }
+  function chipClass(move, pyra) {
+    if (move.indexOf("'") >= 0) return 'mv prime';
+    if (!pyra && move.indexOf('2') >= 0) return 'mv dbl';
+    if (pyra && /^[ulrb]/.test(move)) return 'mv tip';
+    if (!pyra && /^[xyz]/.test(move)) return 'mv rot';
+    if (!pyra && /^[rludfbMSE]/.test(move)) return 'mv wide';
+    return 'mv';
+  }
+  if (typeof module !== 'undefined' && module.exports) module.exports = { invert: invert, describeCube: describeCube, describePyra: describePyra, chipClass: chipClass };
+  if (typeof document === 'undefined') return;
+
+  // F2L case picture: U face above F face, R face to the right; only the pair and the centres are coloured.
+  function renderF2L(host) {
+    var NS = 'http://www.w3.org/2000/svg';
+    var COL = { y: '#FFD500', w: '#FFFFFF', r: '#D6382E', o: '#FF7A00', g: '#0AA24C', b: '#1558C9', x: '#E6E1D2' };
+    var cs = 22, gap = 6, off = 3;
+    var w = off * 2 + cs * 6 + gap, h = off * 2 + cs * 6 + gap;
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    svg.setAttribute('width', 112);
+    svg.setAttribute('role', 'img');
+    svg.style.height = 'auto';
+    function grid(str, ox, oy, faded) {
+      for (var i = 0; i < 9; i++) {
+        var r = document.createElementNS(NS, 'rect');
+        r.setAttribute('x', ox + (i % 3) * cs); r.setAttribute('y', oy + Math.floor(i / 3) * cs);
+        r.setAttribute('width', cs); r.setAttribute('height', cs); r.setAttribute('rx', 3);
+        r.setAttribute('fill', COL[str[i]] || COL.x); r.setAttribute('stroke', '#211E19'); r.setAttribute('stroke-width', 1.6);
+        if (faded) r.setAttribute('opacity', '.9');
+        svg.appendChild(r);
+      }
+    }
+    grid(host.getAttribute('data-u') || '', off, off);
+    grid(host.getAttribute('data-f') || '', off, off + cs * 3 + gap);
+    grid(host.getAttribute('data-r') || '', off + cs * 3 + gap, off + cs * 3 + gap, true);
+    function label(t, x, y) { var e = document.createElementNS(NS, 'text'); e.setAttribute('x', x); e.setAttribute('y', y); e.setAttribute('font-size', 11); e.setAttribute('font-weight', 700); e.setAttribute('fill', '#57503F'); e.setAttribute('font-family', 'Segoe UI, Arial, sans-serif'); e.textContent = t; svg.appendChild(e); }
+    label('U', off + cs * 3 + gap + 4, off + 12);
+    label('F', off + cs * 3 - 12, h - 6);
+    label('R', w - 12, h - 6);
+    host.insertBefore(svg, host.firstChild);
+  }
+
+  function init(root) {
+    var cube = root.getAttribute('data-g2p-cube');
+    var pyra = cube === 'py';
+    var describe = pyra ? describePyra : describeCube;
+    var letters = (root.getAttribute('data-g2p-letters') || '').split(/\s+/).filter(Boolean);
+    var storageKey = root.getAttribute('data-g2p-key');
+    var steps = Number(root.getAttribute('data-g2p-steps')) || 0;
+    var pageNodes = Array.from(root.querySelectorAll('[data-g2p-page]'));
+    var pages = pageNodes.map(function (p) { return p.getAttribute('data-g2p-page'); });
+    var titles = pageNodes.map(function (p) { return p.getAttribute('data-g2p-title'); });
+    var stored = {};
+    try { stored = JSON.parse(localStorage.getItem(storageKey)) || {}; } catch (e) {}
+    var current = pages.indexOf(stored.page) >= 0 ? stored.page : 'intro';
+    var completed = stored.done && typeof stored.done === 'object' ? stored.done : {};
+    var learned = stored.learned && typeof stored.learned === 'object' ? stored.learned : {};
+    var drillState = stored.drill && typeof stored.drill === 'object' ? stored.drill : {};
+    var dialog = root.querySelector('[data-g2p-dialog]');
+    var dialogContent = root.querySelector('[data-g2p-dialog-content]');
+    var dialogTitle = root.querySelector('[data-g2p-dialog-title]');
+    var previous = root.querySelector('[data-g2p-prev]');
+    var next = root.querySelector('[data-g2p-next]');
+
+    root.querySelectorAll('.dg[data-kind="f2l"]').forEach(function (host) {
+      try { renderF2L(host); } catch (e) { /* decorative */ }
+    });
+
+    function save() {
+      try { localStorage.setItem(storageKey, JSON.stringify({ page: current, done: completed, learned: learned, drill: drillState })); } catch (e) {}
+    }
+    function chips(container, algText, asButtons) {
+      container.replaceChildren();
+      algText.trim().split(/\s+/).forEach(function (move) {
+        var chip = document.createElement(asButtons ? 'button' : 'span');
+        if (asButtons) { chip.type = 'button'; chip.setAttribute('aria-label', move + ': atvērt skaidrojumu'); chip.addEventListener('click', function () { help(move); }); }
+        chip.className = chipClass(move, pyra);
+        chip.textContent = move;
+        container.appendChild(chip);
+      });
+    }
+    function navigate(value, focus) {
+      current = pages.indexOf(value) >= 0 ? value : 'intro';
+      pageNodes.forEach(function (p) { p.hidden = p.getAttribute('data-g2p-page') !== current; });
+      var index = pages.indexOf(current);
+      root.querySelector('[data-g2p-location]').textContent = current === 'intro' ? 'Pirms sākuma' : /^\d+$/.test(current) ? current + '. no ' + steps + ' · ' + titles[index] : titles[index];
+      previous.disabled = index === 0;
+      next.disabled = index === pages.length - 1;
+      save();
+      if (focus) {
+        if (dialog.open) dialog.close();
+        pageNodes[index].querySelector('h2').focus({ preventScroll: true });
+        var offset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--tbh')) || 60;
+        window.scrollTo({ top: Math.max(0, root.getBoundingClientRect().top + window.scrollY - offset - 12), behavior: 'instant' });
+      }
+    }
+    function openDialog(title) { dialogTitle.textContent = title; dialogContent.replaceChildren(); if (!dialog.open) dialog.showModal(); }
+    function paragraph(text) { var p = document.createElement('p'); p.textContent = text; dialogContent.appendChild(p); }
+    function help(move) {
+      openDialog(move ? 'Gājiens ' + move : 'Apzīmējumu skaidrojums');
+      if (move) paragraph(describe(move));
+      else {
+        letters.forEach(function (m) { paragraph(m + ' – ' + describe(m)); });
+        if (pyra) paragraph("Apostrofs ' nozīmē pretēju virzienu. Mazie burti griež tikai galu.");
+        else paragraph("Apostrofs ' nozīmē pretēju virzienu. 2 nozīmē 180° jeb divus ceturtdaļapgriezienus.");
+      }
+      paragraph('Algoritmu lasi no kreisās uz labo. Pabeidz visu secību ar to pašu priekšpusi, tad pārbaudi rezultātu.');
+    }
+    function menu() {
+      openDialog('Kur vēlies turpināt?');
+      var list = document.createElement('div');
+      list.className = 'g2p-menu-list';
+      pages.forEach(function (p, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = (/^\d+$/.test(p) ? p + '. ' : '') + titles[i] + (completed[p] === true ? ' ✓' : '');
+        if (p === current) b.setAttribute('aria-current', 'step');
+        b.addEventListener('click', function () { navigate(p, true); });
+        list.appendChild(b);
+      });
+      dialogContent.appendChild(list);
+    }
+
+    // Case cards and their shared learned state (the same id may appear on several pages).
+    var cases = [];
+    var byId = {};
+    root.querySelectorAll('.g2p-case').forEach(function (node) {
+      var id = node.getAttribute('data-g2p-case');
+      var sets = node.getAttribute('data-g2p-sets').split(/\s+/);
+      if (!byId[id]) {
+        byId[id] = { id: id, sets: sets, name: node.querySelector('.g2p-case-name').textContent, alg: node.querySelector('[data-alg]').getAttribute('data-alg'), figure: node.querySelector('figure.dg') };
+        cases.push(byId[id]);
+      } else {
+        sets.forEach(function (s) { if (byId[id].sets.indexOf(s) < 0) byId[id].sets.push(s); });
+      }
+    });
+    function refreshLearned() {
+      root.querySelectorAll('[data-g2p-learned]').forEach(function (box) {
+        var id = box.getAttribute('data-g2p-learned');
+        box.checked = learned[id] === true;
+        box.closest('.g2p-case').classList.toggle('is-learned', box.checked);
+      });
+      var total = cases.length, n = cases.filter(function (c) { return learned[c.id] === true; }).length;
+      root.querySelectorAll('[data-g2p-total]').forEach(function (el) { el.textContent = n + ' no ' + total; });
+      root.querySelectorAll('[data-g2p-total-bar]').forEach(function (el) { el.style.width = (total ? Math.round(100 * n / total) : 0) + '%'; });
+      root.querySelectorAll('[data-g2p-group-count]').forEach(function (el) {
+        var ids = [];
+        el.closest('details').querySelectorAll('.g2p-case').forEach(function (c) { if (ids.indexOf(c.getAttribute('data-g2p-case')) < 0) ids.push(c.getAttribute('data-g2p-case')); });
+        var k = ids.filter(function (id) { return learned[id] === true; }).length;
+        el.textContent = k + ' / ' + ids.length;
+        el.classList.toggle('is-complete', k === ids.length && ids.length > 0);
+      });
+      renderDrillProgress();
+    }
+    root.querySelectorAll('[data-g2p-learned]').forEach(function (box) {
+      box.addEventListener('change', function () { learned[box.getAttribute('data-g2p-learned')] = box.checked; save(); refreshLearned(); });
+    });
+
+    // Drill: setup = inverse of the case algorithm; unlearned cases first.
+    var drillSelect = root.querySelector('[data-g2p-drill-set]');
+    var drillCase = null;
+    function drillPool() {
+      var set = drillSelect ? drillSelect.value : 'all';
+      return cases.filter(function (c) { return set === 'all' || c.sets.indexOf(set) >= 0; });
+    }
+    function renderDrillProgress() {
+      var el = root.querySelector('[data-g2p-drill-progress]');
+      if (!el) return;
+      var pool = drillPool();
+      var k = pool.filter(function (c) { return learned[c.id] === true; }).length;
+      el.textContent = 'Šajā kopā apgūti ' + k + ' no ' + pool.length + '.';
+    }
+    function newDrillCase() {
+      var pool = drillPool();
+      if (!pool.length) return;
+      var open = pool.filter(function (c) { return learned[c.id] !== true && (!drillCase || c.id !== drillCase.id); });
+      var from = open.length ? open : pool;
+      showDrill(from[Math.floor(Math.random() * from.length)], false);
+    }
+    function showDrill(c, revealed) {
+      drillCase = c;
+      drillState = { set: drillSelect.value, id: c.id, revealed: !!revealed };
+      chips(root.querySelector('[data-g2p-drill-setup]'), invert(c.alg), true);
+      root.querySelector('[data-g2p-drill-answer]').hidden = !revealed;
+      root.querySelector('[data-g2p-drill-reveal]').disabled = !!revealed;
+      var figHost = root.querySelector('[data-g2p-drill-figure]');
+      figHost.replaceChildren();
+      if (c.figure) { var clone = c.figure.cloneNode(true); var cap = clone.querySelector('figcaption'); if (cap) cap.remove(); figHost.appendChild(clone); }
+      root.querySelector('[data-g2p-drill-name]').textContent = c.name;
+      chips(root.querySelector('[data-g2p-drill-alg]'), c.alg, true);
+      root.querySelector('[data-g2p-drill-learned]').checked = learned[c.id] === true;
+      save();
+    }
+    if (drillSelect) {
+      if (drillState.set && Array.from(drillSelect.options).some(function (o) { return o.value === drillState.set; })) drillSelect.value = drillState.set;
+      drillSelect.addEventListener('change', function () { drillCase = null; newDrillCase(); renderDrillProgress(); });
+      root.querySelector('[data-g2p-drill-next]').addEventListener('click', newDrillCase);
+      root.querySelector('[data-g2p-drill-reveal]').addEventListener('click', function () { if (drillCase) showDrill(drillCase, true); });
+      root.querySelector('[data-g2p-drill-learned]').addEventListener('change', function (ev) { if (drillCase) { learned[drillCase.id] = ev.target.checked; save(); refreshLearned(); } });
+      var restored = byId[drillState.id];
+      if (restored) showDrill(restored, drillState.revealed); else newDrillCase();
+    }
+
+    root.querySelectorAll('[data-alg]').forEach(function (a) { if (!a.closest('[data-g2p-drill]')) chips(a, a.getAttribute('data-alg'), true); });
+    root.querySelectorAll('[data-g2p-done]').forEach(function (box) {
+      var step = box.getAttribute('data-g2p-done');
+      box.checked = completed[step] === true;
+      box.addEventListener('change', function () { completed[step] = box.checked; save(); });
+    });
+    root.querySelectorAll('[data-g2p-goto]').forEach(function (b) { b.addEventListener('click', function () { navigate(b.getAttribute('data-g2p-goto'), true); }); });
+    root.querySelectorAll('[data-g2p-help]').forEach(function (b) { b.addEventListener('click', function () { help(); }); });
+    previous.addEventListener('click', function () { navigate(pages[Math.max(0, pages.indexOf(current) - 1)], true); });
+    next.addEventListener('click', function () { navigate(pages[Math.min(pages.length - 1, pages.indexOf(current) + 1)], true); });
+    root.querySelector('[data-g2p-menu]').addEventListener('click', menu);
+    root.querySelector('[data-g2p-close]').addEventListener('click', function () { dialog.close(); });
+
+    function syncActive() {
+      var body = document.body;
+      var unified = root.closest('.cubepanel');
+      var active = unified ? body.getAttribute('data-cube') === cube && body.getAttribute('data-level') === 'pro' : body.classList.contains('pro');
+      if (body.classList.contains('g2p-active') !== active) body.classList.toggle('g2p-active', active);
+      if (!active && dialog.open) dialog.close();
+    }
+    function followHash() {
+      var id = location.hash.slice(1);
+      if (!id || !document.body.classList.contains('g2p-active')) return;
+      var target = pageNodes.filter(function (p) { return p.id === id; })[0];
+      if (target) navigate(target.getAttribute('data-g2p-page'), true);
+    }
+    root.classList.add('g2p-ready');
+    navigate(current, false);
+    refreshLearned();
+    syncActive();
+    new MutationObserver(syncActive).observe(document.body, { attributes: true, attributeFilter: ['class', 'data-cube', 'data-level'] });
+    window.addEventListener('hashchange', followHash);
+    followHash();
+  }
+  document.addEventListener('DOMContentLoaded', function () { document.querySelectorAll('.guide2pro').forEach(init); });
+})();
+</script>
 </div>
-
-<!-- ---- ORTEGA ---- -->
-<section id="ortega">
-  <div class="card step pro">
-    <h3>Ortega metode — 3 soļi</h3>
-    <p class="goal">Ideja: neveido pilnu pirmo slāni. Uztaisi tikai vienu pusi (krāsā), tad ar 2 algoritmiem pabeidz visu pārējo.</p>
-
-    <h3 style="font-size:18px">1. Uztaisi vienu pusi</h3>
-    <p>Saliec <strong>jebkuru</strong> vienu pusi vienā krāsā (parasti balto). Nav svarīgi, vai apakšējā slāņa sāni sakrīt —
-    svarīgi tikai, ka visa apakšpuse ir vienā krāsā. Dari to <strong>ar aci, bez algoritma</strong> (2–4 griezieni):
-    sāc ar diviem baltiem stūriem, kas jau ir kopā, un pievieno pārējos divus — tāpat kā iesācēju 1. solī,
-    tikai sānu krāsas šoreiz nav jākontrolē.</p>
-    <div class="dgrow">
-      <figure class="dg" data-kind="face" data-c="wwww" data-small="1"
-        ><figcaption>Viena puse vienā krāsā — ar to pietiek (sāni var nesakrist)</figcaption></figure>
-    </div>
-
-    <h3 style="font-size:18px">2. OLL — orientē augšu (7 gadījumi)</h3>
-    <p>Turi gatavo pusi <strong>apakšā</strong> un panāc, lai visa augša ir vienā krāsā. Atpazīsti figūru pēc dzeltenajām
-    uzlīmēm augšā <em>un</em> sānos, tad izpildi attiecīgo algoritmu:</p>
-    <div class="cheat-wrap">
-      <table class="cheat pro">
-        <tr><th>Gadījums</th><th>Algoritms</th></tr>
-        <tr><td>Sune</td><td><span class="alg small" data-alg="R U R' U R U2 R'"></span></td></tr>
-        <tr><td>Antisune</td><td><span class="alg small" data-alg="R U2 R' U' R U' R'"></span></td></tr>
-        <tr><td>Pi</td><td><span class="alg small" data-alg="F R U R' U' R U R' U' F'"></span></td></tr>
-        <tr><td>H</td><td><span class="alg small" data-alg="R2 U2 R U2 R2"></span></td></tr>
-        <tr><td>U</td><td><span class="alg small" data-alg="F R U R' U' F'"></span></td></tr>
-        <tr><td>T</td><td><span class="alg small" data-alg="R U R' U' R' F R F'"></span></td></tr>
-        <tr><td>L</td><td><span class="alg small" data-alg="F R U' R' U' R U R' F'"></span></td></tr>
-      </table>
-    </div>
-    <p>Katra gadījuma izskats (dzeltenās uzlīmes augšā un sānu strīpās). Pagriez kubu ap vertikālo asi,
-    līdz tavs kubs izskatās <strong>tieši</strong> kā diagrammā, tad izpildi algoritmu:</p>
-    <div class="dgrow">
-      <figure class="dg" data-kind="top" data-small="1" data-c="xxyx" data-b="yx" data-f="xy" data-l="xx" data-r="yx"
-        ><figcaption>Sune</figcaption></figure>
-      <figure class="dg" data-kind="top" data-small="1" data-c="xyxx" data-b="xx" data-f="yx" data-l="yx" data-r="xy"
-        ><figcaption>Antisune</figcaption></figure>
-      <figure class="dg" data-kind="top" data-small="1" data-c="xxxx" data-b="xy" data-f="xy" data-l="yy" data-r="xx"
-        ><figcaption>Pi</figcaption></figure>
-      <figure class="dg" data-kind="top" data-small="1" data-c="xxxx" data-b="yy" data-f="yy" data-l="xx" data-r="xx"
-        ><figcaption>H</figcaption></figure>
-      <figure class="dg" data-kind="top" data-small="1" data-c="xyxy" data-b="xx" data-f="xx" data-l="yy" data-r="xx"
-        ><figcaption>U</figcaption></figure>
-      <figure class="dg" data-kind="top" data-small="1" data-c="xyxy" data-b="yx" data-f="yx" data-l="xx" data-r="xx"
-        ><figcaption>T</figcaption></figure>
-      <figure class="dg" data-kind="top" data-small="1" data-c="yxxy" data-b="xx" data-f="yx" data-l="xx" data-r="yx"
-        ><figcaption>L</figcaption></figure>
-    </div>
-    <div class="tip"><b>Atpazīšana īsi:</b> saskaiti dzeltenās uzlīmes augšā: <b>1</b> → Sune vai Antisune;
-    <b>2</b> → U, T vai L; <b>0</b> → Pi vai H. Tad atrodi diagrammu, kurā sakrīt arī sānu dzeltenās uzlīmes.</div>
-
-    <h3 style="font-size:18px">3. PBL — permutē abus slāņus (samaini stūrus)</h3>
-    <p>Tagad augša ir vienā krāsā, bet stūri (gan augšā, gan apakšā) var būt nepareizās vietās. Katram slānim ir 3 iespējas:
-    <strong>gatavs</strong>, <strong>blakus maiņa</strong> — viens sāns vienā krāsā (t.s. <strong>«lukturi»</strong>: divi
-    vienādas krāsas stūri vienā sānā, kā auto priekšējie lukturi), vai <strong>diagonāle</strong> (neviens sāns nav vienā krāsā).</p>
-    <div class="cheat-wrap">
-      <table class="cheat pro">
-        <tr><th>Gadījums</th><th>Kā turēt</th><th>Algoritms</th></tr>
-        <tr><td>Abi slāņi gatavi</td><td>—</td><td><em>tikai izlīdzini ar U</em></td></tr>
-        <tr><td>Blakus maiņa + otrs gatavs</td><td>nesakārtotais slānis augšā, «lukturi» pa kreisi</td><td><span class="alg tiny" data-alg="R U R' U' R' F R2 U' R' U' R U R' F'"></span></td></tr>
-        <tr><td>Diagonāle + otrs gatavs</td><td>nesakārtotais slānis augšā, leņķis vienalga</td><td><span class="alg tiny" data-alg="F R U' R' U' R U R' F' R U R' U' R' F R F'"></span></td></tr>
-        <tr><td>Blakus + blakus</td><td>abi pareizie pāri aizmugurē</td><td><span class="alg small" data-alg="R2 U' R2 U2 F2 U' R2"></span></td></tr>
-        <tr><td>Diagonāle + diagonāle</td><td>jebkurš leņķis</td><td><span class="alg small" data-alg="R2 F2 R2"></span></td></tr>
-        <tr><td>Blakus + diagonāle</td><td>blakus-slānis augšā, tā pareizais pāris priekšā</td><td><span class="alg small" data-alg="R U' R F2 R' U R'"></span></td></tr>
-      </table>
-    </div>
-    <div class="tip"><b>Svarīgi:</b> ja slānis, kam pēc tabulas jābūt augšā, ir apakšā — vienkārši <strong>apgriez kubu otrādi
-    pirms algoritma</strong> (šajā solī tas ir atļauts: augša jau ir vienā krāsā, apakša arī). Pēc katra PBL algoritma
-    beigās izlīdzini slāņus ar U (un, ja vajag, D).</div>
-    <div class="tip"><b>Ātrums:</b> ar Ortega labs risinātājs kubu saliek ātrāk nekā 5 sekundēs. Vari sākt tikai ar 4 algoritmiem
-    (Sune, Antisune + «diag+diag», «blakus+blakus») un pārējos pievienot vēlāk.</div>
-  </div>
-</section>
-
-<!-- ---- CLL ---- -->
-<section id="cll">
-  <div class="card step pro">
-    <h3>CLL metode — pēdējais slānis vienā piegājienā</h3>
-    <p class="goal">Ideja: saliec pilnu pirmo slāni (kā iesācēju metodē), tad visu augšu — orientāciju UN permutāciju — atrisini ar VIENU algoritmu.</p>
-    <ol>
-      <li><strong>1. slānis pilnībā.</strong> Atšķirībā no Ortega, šeit apakšējais slānis jāsaliek <strong>pilnīgi pareizi</strong>
-        (arī sānu krāsas). Dari to intuitīvi vai ar <span class="alg tiny" style="display:inline-flex;vertical-align:middle" data-alg="R U R' U'"></span>.</li>
-      <li><strong>Pēdējais slānis — 1 algoritms.</strong> Atpazīsti gadījumu un izpildi vienu no <strong>42 CLL algoritmiem</strong>.
-        Kubs salikts uzreiz — nav atsevišķa orientācijas un permutācijas soļa.</li>
-    </ol>
-    <p>42 gadījumi ir sagrupēti pēc <strong>7 augšas figūrām</strong> (tās pašas, ko zini no Ortega OLL):
-    <strong>Sune, Antisune, Pi, H, U, T, L</strong>. Katrai figūrai ir vairāki apakšgadījumi atkarībā no tā, kā stūri jāpārvieto.</p>
-    <div class="tip"><b>Ar ko sākt:</b> ja pēc pirmā slāņa augša jau <em>gadās</em> pilnībā orientēta, CLL sakrīt ar diviem
-    permutācijas gadījumiem — izmanto Ortega PBL «blakus» un «diagonāle» algoritmus. Pārējos 40 apgūsti pa figūru grupām.</div>
-    <div class="warn"><b>Godīgi:</b> visus 42 CLL algoritmus nav prātīgi mācīties no galvas no šīs lapas — tos apgūst pa grupām
-    no pilna algoritmu saraksta. Uzticami pilnie saraksti: <strong>jperm.net/algs/2x2/cll</strong> un <strong>KewbzUK CLL PDF</strong>.
-    Ortega (augstāk) ir pilnībā pietiekama «pro» metode, līdz esi gatavs CLL.</div>
-    <table class="cheat pro" style="margin-top:6px">
-      <tr><th>Metode</th><th>Algoritmu sk.</th><th>Kad izvēlēties</th></tr>
-      <tr><td>Iesācēju</td><td>4</td><td>Sākums — vienmēr strādā, viegli atcerēties</td></tr>
-      <tr><td>Ortega</td><td>~12</td><td>Ātri (&lt;5 s), maz jāmācās — ieteicamais «pro» starts</td></tr>
-      <tr><td>CLL</td><td>42</td><td>Nākamais līmenis — pēdējais slānis 1 skatienā</td></tr>
-    </table>
-  </div>
-</section>
-
 </div><!-- /mode-pro -->
 
 <!-- ============ KOPSAVILKUMS (kopīgs abiem režīmiem) ============ -->

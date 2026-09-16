@@ -20,6 +20,7 @@ test('2x2 navigation follows three steps and restores only valid pages', () => {
   assert.equal(guide.adjacentPage('intro', -1), 'intro');
   assert.equal(guide.adjacentPage('intro', 1), '1');
   assert.equal(guide.adjacentPage('3', 1), 'scramble');
+  assert.equal(guide.validPage('4'), 'intro');
   assert.equal(guide.adjacentPage('scramble', -1), '3');
   assert.equal(guide.adjacentPage('scramble', 1), 'scramble');
 });

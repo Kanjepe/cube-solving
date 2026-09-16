@@ -94,10 +94,13 @@ class TestBuildPipeline(unittest.TestCase):
 
 
 class TestKnownBadContentStaysGone(unittest.TestCase):
-    def test_broken_2x2_algorithms_absent(self):
+    def test_2x2_algorithms_are_taught_only_with_verified_holds(self):
+        # R' U R' D2 R U' R' D2 R2 was once listed here: it breaks both faces when
+        # held yellow-up, but held yellow-in-front it is the taught step-3 A perm
+        # (proved in test_guide2_solves). The L' variant is the adjacent-corners
+        # case with yellow up and the finished pair at the back.
         algs = algs_in(read(G2))
-        self.assertNotIn("L' U R' D2 R U' R' D2 R2", algs)
-        self.assertNotIn("R' U R' D2 R U' R' D2 R2", algs)
+        self.assertIn("L' U R' D2 R U' R' D2 R2", algs)
 
     def test_typos_and_bad_notation_absent(self):
         for path in (G2, G3, GP, UNIFIED):
@@ -107,16 +110,17 @@ class TestKnownBadContentStaysGone(unittest.TestCase):
 
     def test_no_lukturi_at_back_instruction_for_tperm(self):
         s = read(G3)
-        self.assertIn('turi tos <strong>pa kreisi</strong>', s)
+        self.assertRegex(s, r'turi tos (<strong>)?pa kreisi(</strong>)? un izpildi T perm')
 
 
 class TestAlgorithmStringsParse(unittest.TestCase):
     def test_2x2_algs_parse_and_use_only_outer_face_moves(self):
+        # A 2x2 has no slices or wide moves; whole-cube y rotations (CLL) are fine.
         for alg in algs_in(read(G2)):
             c = fresh()
             c.apply(alg)   # raises on typo
             for mv in alg.split():
-                self.assertIn(mv[0], 'RLUDFB',
+                self.assertIn(mv[0], 'RLUDFBy',
                               '2x2 alg uses non-face move: %s in %r' % (mv, alg))
 
     def test_3x3_algs_parse(self):
@@ -145,29 +149,34 @@ class TestDiagramsMatchAlgorithms(unittest.TestCase):
                 'U': "R2 D' R U2 R' D R U2 R", 'T': "r U R' U' r' F R F'",
                 'L': "F R' F' r U R U' r'"}
 
-    def collect(self, path, expected_names):
+    # Pro case card ids carrying these pictures (2x2 Ortega OLL / 3x3 OCLL).
+    IDS_2X2 = {n: 'o2-' + n.lower() for n in OLL_2X2}
+    IDS_3X3 = {'H': 'oll-21', 'Pi': 'oll-22', 'U': 'oll-23', 'T': 'oll-24', 'L': 'oll-25', 'Antisune': 'oll-26', 'Sune': 'oll-27'}
+
+    def collect(self, path, ids):
         found = {}
-        for attrs, caption in FIG_RE.findall(read(path)):
-            if fig_attr(attrs, 'data-kind') != 'top' or not fig_attr(attrs, 'data-small'):
+        html = read(path)
+        for name, cid in ids.items():
+            m = re.search(r'data-g[23]p-case="%s"[^>]*>\s*<div class="g[23]p-case-figs"><figure class="dg"([^>]*)>' % re.escape(cid), html)
+            if not m:
                 continue
+            attrs = m.group(1)
             vals = tuple(fig_attr(attrs, a) for a in
                          ('data-c', 'data-b', 'data-f', 'data-l', 'data-r'))
             if any(v is None or set(v) - set('xy') for v in vals):
                 continue
-            name = caption.split()[0].strip()
-            if name in expected_names:
-                found[name] = vals
+            found[name] = vals
         return found
 
     def test_2x2_oll_case_diagrams(self):
-        found = self.collect(G2, self.OLL_2X2)
+        found = self.collect(G2, self.IDS_2X2)
         self.assertEqual(sorted(found), sorted(self.OLL_2X2), 'missing OLL figures')
         for name, alg in self.OLL_2X2.items():
             self.assertEqual(found[name], case_diagram_2x2(alg),
                              '2x2 OLL diagram wrong for %s' % name)
 
     def test_3x3_ocll_case_diagrams(self):
-        found = self.collect(G3, self.OCLL_3X3)
+        found = self.collect(G3, self.IDS_3X3)
         self.assertEqual(sorted(found), sorted(self.OCLL_3X3), 'missing OCLL figures')
         for name, alg in self.OCLL_3X3.items():
             self.assertEqual(found[name], case_diagram_3x3(alg),
@@ -184,7 +193,7 @@ class TestDiagramsMatchAlgorithms(unittest.TestCase):
 
 class TestPyraDiagramAttributes(unittest.TestCase):
     def test_pyra_marks_and_labels_are_valid(self):
-        for path in (GP, UNIFIED, os.path.join(ROOT, '_build', 'py-beginner.html')):
+        for path in (GP, UNIFIED):
             s = read(path)
             for m in re.finditer(r'data-kind="pyra"[^>]*', s):
                 frag = m.group(0)

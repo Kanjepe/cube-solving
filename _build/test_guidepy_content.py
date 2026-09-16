@@ -26,18 +26,10 @@ class TestGuidePyContent(unittest.TestCase):
         built = unified.split(marker)[1].split('</div><!-- /mode-beginner -->')[0]
         built = re.sub(r'id="py-([^"]+)"', r'id="\1"', built)
         self.assertEqual(source, built)
-        old = (ROOT / 'archive/2026-09-10-rubiks-pyraminx-guide.html').read_text(encoding='utf-8')
-        marker = '<div class="mode mode-pro">'
-        end = '</div><!-- /mode-pro -->'
-        self.assertEqual(html.split(marker)[1].split(end)[0], old.split(marker)[1].split(end)[0])
-        self.assertEqual(html.split('<script>')[-1], old.split('<script>')[-1])
-
-    def test_other_puzzles_are_unchanged(self):
-        old = (ROOT / 'archive/2026-09-10-before-pyraminx-cube-solving.html').read_text(encoding='utf-8')
-        new = (ROOT / 'cube-solving.html').read_text(encoding='utf-8')
-        start = '<div class="cubepanel" id="panel-a2"'
-        end = '<div class="cubepanel" id="panel-py"'
-        self.assertEqual(new.split(start)[1].split(end)[0], old.split(start)[1].split(end)[0])
+        # The Pro block is generated (test_guidepro_content); the shared renderer
+        # script and the beginner block stay as archived.
+        before_pro = (ROOT / 'archive/2026-09-16-before-pro-rubiks-pyraminx-guide.html').read_text(encoding='utf-8')
+        self.assertEqual(html.split('<script>')[-1], before_pro.split('<script>')[-1])
 
     def test_shared_layout_matches_three_by_three(self):
         reference = (ROOT / '3x3/rubiks-3x3-guide.html').read_text(encoding='utf-8')

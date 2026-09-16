@@ -1,5 +1,4 @@
 import re
-import subprocess
 import unittest
 from pathlib import Path
 
@@ -10,25 +9,6 @@ SOURCE = ROOT / '3x3' / 'rubiks-3x3-guide.html'
 
 
 class TestBeginnerMobileContent(unittest.TestCase):
-    def test_other_unified_panels_match_the_committed_version(self):
-        previous = subprocess.check_output(
-            ['git', 'show', 'HEAD:cube-solving.html'], cwd=ROOT).decode('utf-8')
-        current = (ROOT / 'cube-solving.html').read_text(encoding='utf-8')
-        def panel(html, name, following):
-            start = html.index('<div class="cubepanel" id="panel-' + name + '"')
-            end = html.index('<div class="cubepanel" id="panel-' + following + '"') if following else html.index('</main>')
-            return html[start:end].strip()
-        for name, following in [('a2', 'a3'), ('py', None)]:
-            current_panel = panel(current, name, following)
-            previous_panel = panel(previous, name, following)
-            if name in ('a2', 'py'):
-                # Both beginner redesigns are intentional; preserve their Pro blocks.
-                marker = '<div class="mode mode-pro">'
-                end = '</div><!-- /mode-pro -->'
-                current_panel = current_panel.split(marker)[1].split(end)[0]
-                previous_panel = previous_panel.split(marker)[1].split(end)[0]
-            self.assertEqual(current_panel, previous_panel)
-
     def test_unified_beginner_matches_the_standalone_source(self):
         def beginner(html):
             return html.split('<div class="guide3">', 1)[1].split('</div><!-- /mode-beginner -->', 1)[0]
@@ -52,11 +32,12 @@ class TestBeginnerMobileContent(unittest.TestCase):
             self.assertIn('Sānu centru krāsas ir tikai piemērs.', figure)
             self.assertNotIn('?', figure)
 
-    def test_pro_content_is_identical_to_the_archived_source(self):
+    def test_shared_tail_is_identical_to_the_archived_source(self):
         html = SOURCE.read_text(encoding='utf-8')
-        old = (ROOT / 'archive/2026-09-09-rubiks-3x3-guide.html').read_text(encoding='utf-8')
-        marker = '<div class="mode mode-pro">'
-        self.assertEqual(html[html.index(marker):], old[old.index(marker):])
+        # footer and shared renderer script: unchanged since before the Pro redesign
+        before_pro = (ROOT / 'archive/2026-09-16-before-pro-rubiks-3x3-guide.html').read_text(encoding='utf-8')
+        end = '</div><!-- /mode-pro -->'
+        self.assertEqual(html[html.index(end):], before_pro[before_pro.index(end):])
 
     def test_all_learning_pages_and_local_help_exist(self):
         html = SOURCE.read_text(encoding='utf-8')

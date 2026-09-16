@@ -96,7 +96,7 @@ for (const file of files) {
     try {
       for (const width of [320, 360, 390, 430, 1440]) {
         await page.setViewportSize({ width, height: 844 });
-        for (const name of ['Pirms sākuma', '1. Baltais slānis', '2. Dzeltenā puse', '3. Sānu sakārtošana', 'Sajaukšana']) {
+        for (const name of ['Pirms sākuma', '1. Baltais slānis', '2. Dzeltenā puse', '3. Stūri vietās', 'Sajaukšana']) {
           await go(page, name);
           await page.locator('[data-g2-page]:visible details:not([data-g2-sune])').evaluateAll(nodes => nodes.forEach(node => { node.open = true; }));
           const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
@@ -106,7 +106,7 @@ for (const file of files) {
           for (const button of await page.locator('.g2-bottom button').all()) {
             assert.ok((await button.boundingBox()).height >= 44);
           }
-          if (process.env.CUBE_SCREENSHOTS && ['Pirms sākuma', '2. Dzeltenā puse', '3. Sānu sakārtošana'].includes(name)) {
+          if (process.env.CUBE_SCREENSHOTS && ['Pirms sākuma', '2. Dzeltenā puse', '3. Stūri vietās'].includes(name)) {
             mkdirSync(process.env.CUBE_SCREENSHOTS, { recursive: true });
             const pageId = await page.locator('[data-g2-page]:visible').getAttribute('data-g2-page');
             await page.screenshot({ path: join(process.env.CUBE_SCREENSHOTS, (file === 'cube-solving.html' ? 'unified' : 'standalone') + '-' + width + '-' + pageId + '.png'), fullPage: true });
@@ -117,6 +117,36 @@ for (const file of files) {
     } finally { await context.close(); }
   });
 }
+
+test('old four-step progress and links open the final step without a false solved checkmark', async () => {
+  const { context, page, errors } = await open(files[0]);
+  try {
+    await page.evaluate(() => localStorage.setItem('cube2-beginner-v2', JSON.stringify({
+      page: '4', done: { 1: true, 2: true, 3: true, 4: false }, practice: { sequence: 1, move: 7 }
+    })));
+    await page.reload();
+    await page.waitForSelector('.guide2.g2-ready');
+    assert.equal(await page.locator('[data-g2-page="3"]').isVisible(), true);
+    assert.equal(await page.locator('[data-g2-done="3"]').isChecked(), false);
+    assert.equal(await page.locator('[data-g2-done="2"]').isChecked(), true);
+    assert.equal(await page.locator('[data-g2-location]').innerText(), '3. no 3 · Stūri vietās');
+    assert.equal(await page.locator('[data-g2-next]').innerText(), 'Sajaukt →');
+    assert.equal(await page.locator('[data-g2-white-recovery]').evaluate(node => node.open), false);
+    assert.equal(await page.locator('[data-g2-page="3"] .g2-example:visible').count(), 2);
+    await page.locator('[data-g2-done="3"]').check();
+    await page.reload();
+    await page.waitForSelector('.guide2.g2-ready');
+    assert.equal(await page.locator('[data-g2-done="3"]').isChecked(), true);
+    await go(page, 'Sajaukšana');
+    assert.equal(await page.locator('[data-g2-counter]').innerText(), 'Gājiens 8 no 25');
+    await page.locator('[data-g2-menu]').click();
+    assert.equal(await page.locator('.g2-menu-list button').last().innerText(), 'Sajaukšana');
+    await page.locator('[data-g2-close]').click();
+    await page.goto(pathToFileURL(join(rootPath, files[0])).href + '#s4');
+    await page.waitForSelector('[data-g2-page="3"]');
+    assert.deepEqual(errors, []);
+  } finally { await context.close(); }
+});
 
 test('2x2 and 3x3 keep independent state, dialogs and matching visual styles', async () => {
   const { context, page, errors } = await open('cube-solving.html');

@@ -1,22 +1,19 @@
-
-<!-- PREVIEW: one shared Pro runtime for all three puzzles. In the real
-     implementation each standalone guide carries its own namespaced copy
-     (.guide2pro / .guide3pro / .guidepypro), like the beginner guides do. -->
 <style data-guidepro-styles>
-  body[class*="gp-active-"] { font-family: 'Segoe UI', Arial, sans-serif; }
-  body[class*="gp-active-"] nav.steps, body[class*="gp-active-"] .panel-hero,
-  body[class*="gp-active-"] header.hero, body[class*="gp-active-"] .hero,
-  body[class*="gp-active-"] #uzbuve, body[class*="gp-active-"] #nota,
-  body[class*="gp-active-"] #a2-uzbuve, body[class*="gp-active-"] #a2-nota,
-  body[class*="gp-active-"] #a3-uzbuve, body[class*="gp-active-"] #a3-nota,
-  body[class*="gp-active-"] #py-uzbuve, body[class*="gp-active-"] #py-nota,
-  body[class*="gp-active-"] footer, body[class*="gp-active-"] .mb-hint { display: none; }
-  body[class*="gp-active-"] nav.steps { display: none !important; }
+  body.gp-active { font-family: 'Segoe UI', Arial, sans-serif; }
+  body.gp-active nav.steps, body.gp-active .panel-hero,
+  body.gp-active header.hero, body.gp-active .hero,
+  body.gp-active #uzbuve, body.gp-active #nota,
+  body.gp-active #a2-uzbuve, body.gp-active #a2-nota,
+  body.gp-active #a3-uzbuve, body.gp-active #a3-nota,
+  body.gp-active #py-uzbuve, body.gp-active #py-nota,
+  body.gp-active footer, body.gp-active .mb-hint { display: none; }
+  body.gp-active nav.steps { display: none !important; }
   .guidepro { max-width: 680px; margin: 0 auto; padding-bottom: 110px; --pro: #7A3FB5; --pro-soft: #F1E9F8; --pro-line: #C9B3E3; }
   .guidepro [hidden] { display: none !important; }
   .guidepro .gp-heading { padding: 24px 0 12px; border-bottom: 1px solid var(--line); margin-bottom: 22px; }
   .guidepro .gp-eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--pro); }
   .guidepro .gp-location { font-weight: 700; margin-top: 3px; }
+  .guidepro .gp-page { margin-bottom: 0; }
   .guidepro h2 { font-family: 'Segoe UI', Arial, sans-serif; font-size: clamp(25px, 5vw, 34px); line-height: 1.2; text-transform: none; letter-spacing: -.025em; margin: 0 0 14px; display: block; }
   .guidepro h2:focus { outline: none; }
   .guidepro h3 { font-family: inherit; font-size: 21px; margin: 26px 0 10px; text-transform: none; letter-spacing: normal; }
@@ -62,6 +59,7 @@
   .guidepro .alg .mv.rot { background: #eee6f7; color: #4c2a73; }
   .guidepro .alg .mv.tip { background: #e7f3e8; color: #135c33; }
   .guidepro .gp-case { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 6px 14px; align-items: start; padding: 14px 0; border-top: 1px solid var(--line); }
+  .guidepro .gp-case.gp-case-text { grid-template-columns: minmax(0, 1fr); }
   .guidepro .gp-case:first-of-type { border-top: 0; }
   .guidepro .gp-case-figs { display: grid; gap: 6px; }
   .guidepro .gp-case-figs .dg { margin: 0; }
@@ -86,7 +84,7 @@
   .guidepro .gp-done { display: flex; align-items: flex-start; gap: 12px; padding: 16px 0; cursor: pointer; }
   .guidepro .gp-done input { flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px; accent-color: #167449; }
   .guidepro .gp-bottom { display: none; }
-  body[class*="gp-active-"] .guidepro.gp-ready .gp-bottom { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; position: fixed; bottom: 0; left: 0; right: 0; z-index: 80; background: var(--card); border-top: 1px solid var(--line); padding: 12px max(14px, calc((100% - 680px) / 2)) calc(12px + env(safe-area-inset-bottom)); }
+  body.gp-active .guidepro.gp-ready .gp-bottom { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; position: fixed; bottom: 0; left: 0; right: 0; z-index: 80; background: var(--card); border-top: 1px solid var(--line); padding: 12px max(14px, calc((100% - 680px) / 2)) calc(12px + env(safe-area-inset-bottom)); }
   .guidepro .gp-bottom button { white-space: nowrap; padding-left: 6px; padding-right: 6px; }
   .guidepro .gp-dialog { position: fixed; margin: auto; inset: 0; width: min(620px, calc(100vw - 24px)); max-height: calc(100dvh - 32px); padding: 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); color: var(--ink); overflow-y: auto; overscroll-behavior: contain; }
   .guidepro .gp-dialog::backdrop { background: rgba(24, 22, 18, .58); }
@@ -105,25 +103,26 @@
   .guidepro .gp-table th, .guidepro .gp-table td { border: 1px solid var(--line); padding: 9px 11px; text-align: left; vertical-align: top; font-weight: normal; }
   .guidepro .gp-table th { font-weight: 700; background: var(--pro-soft); font-family: inherit; text-transform: none; letter-spacing: normal; color: var(--ink); font-size: 15px; }
   @media (max-width: 560px) {
-    body[class*="gp-active-"] { font-size: 17px; line-height: 1.6; }
-    body[class*="gp-active-"] .topbar .tabbtn { min-height: 44px; font-size: 13px; padding: 6px 8px; }
-    body[class*="gp-active-"] .topbar .tb-row { justify-content: center; gap: 6px; }
-    body[class*="gp-active-"] .topbar .tb-group { gap: 5px; }
-    body[class*="gp-active-"] .topbar .tb-sep { display: none; }
+    body.gp-active { font-size: 17px; line-height: 1.6; }
+    body.gp-active .topbar .tabbtn { min-height: 44px; font-size: 13px; padding: 6px 8px; }
+    body.gp-active .topbar .tb-row { justify-content: center; gap: 6px; }
+    body.gp-active .topbar .tb-group { gap: 5px; }
+    body.gp-active .topbar .tb-sep { display: none; }
     .guidepro .gp-heading { padding-top: 18px; margin-bottom: 18px; }
     .guidepro .gp-bottom button { font-size: 15px; }
     .guidepro .gp-dialog { padding: 16px; }
     .guidepro .gp-case { grid-template-columns: 96px minmax(0, 1fr); gap: 4px 10px; }
+    .guidepro .gp-case.gp-case-text { grid-template-columns: minmax(0, 1fr); }
     .guidepro .gp-case-figs .dg svg { width: 90px; }
     .guidepro .gp-case-figs .dg[data-kind="f2l"] svg { width: 96px; }
     .guidepro .gp-cheat-row { grid-template-columns: 1fr; gap: 2px; }
   }
-  @media (prefers-reduced-motion: reduce) { .guidepro .gp-bar span { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .guidepro .gp-bar span { transition: none; } body.gp-active { scroll-behavior: auto; } }
   @media print {
     .guidepro { padding-bottom: 0; }
     .guidepro [data-gp-page][hidden] { display: block !important; }
     .guidepro .gp-page { break-before: page; }
-    body[class*="gp-active-"] .guidepro.gp-ready .gp-bottom, .guidepro .gp-dialog, .guidepro .gp-practice, .guidepro .gp-done { display: none; }
+    body.gp-active .guidepro.gp-ready .gp-bottom, .guidepro .gp-dialog, .guidepro .gp-practice, .guidepro .gp-done { display: none; }
   }
 </style>
 <script data-guidepro-runtime>
@@ -166,10 +165,10 @@
     if (!pyra && /^[rludfbMSE]/.test(move)) return 'mv wide';
     return 'mv';
   }
-  if (typeof module !== 'undefined' && module.exports) module.exports = { invert: invert, describeCube: describeCube, describePyra: describePyra };
+  if (typeof module !== 'undefined' && module.exports) module.exports = { invert: invert, describeCube: describeCube, describePyra: describePyra, chipClass: chipClass };
   if (typeof document === 'undefined') return;
 
-  // Case picture for F2L: U face above F face, R face to the right (flat net of the three visible faces).
+  // F2L case picture: U face above F face, R face to the right; only the pair and the centres are coloured.
   function renderF2L(host) {
     var NS = 'http://www.w3.org/2000/svg';
     var COL = { y: '#FFD500', w: '#FFFFFF', r: '#D6382E', o: '#FF7A00', g: '#0AA24C', b: '#1558C9', x: '#E6E1D2' };
@@ -199,12 +198,12 @@
     label('R', w - 12, h - 6);
     host.insertBefore(svg, host.firstChild);
   }
-  document.addEventListener('DOMContentLoaded', function () { document.querySelectorAll('.guidepro .dg[data-kind="f2l"]').forEach(renderF2L); });
 
   function init(root) {
     var cube = root.getAttribute('data-gp-cube');
     var pyra = cube === 'py';
     var describe = pyra ? describePyra : describeCube;
+    var letters = (root.getAttribute('data-gp-letters') || '').split(/\s+/).filter(Boolean);
     var storageKey = root.getAttribute('data-gp-key');
     var steps = Number(root.getAttribute('data-gp-steps')) || 0;
     var pageNodes = Array.from(root.querySelectorAll('[data-gp-page]'));
@@ -221,6 +220,10 @@
     var dialogTitle = root.querySelector('[data-gp-dialog-title]');
     var previous = root.querySelector('[data-gp-prev]');
     var next = root.querySelector('[data-gp-next]');
+
+    root.querySelectorAll('.dg[data-kind="f2l"]').forEach(function (host) {
+      try { renderF2L(host); } catch (e) { /* decorative */ }
+    });
 
     function save() {
       try { localStorage.setItem(storageKey, JSON.stringify({ page: current, done: completed, learned: learned, drill: drillState })); } catch (e) {}
@@ -239,7 +242,7 @@
       current = pages.indexOf(value) >= 0 ? value : 'intro';
       pageNodes.forEach(function (p) { p.hidden = p.getAttribute('data-gp-page') !== current; });
       var index = pages.indexOf(current);
-      root.querySelector('[data-gp-location]').textContent = /^\d+$/.test(current) ? current + '. no ' + steps + ' · ' + titles[index] : titles[index];
+      root.querySelector('[data-gp-location]').textContent = current === 'intro' ? 'Pirms sākuma' : /^\d+$/.test(current) ? current + '. no ' + steps + ' · ' + titles[index] : titles[index];
       previous.disabled = index === 0;
       next.disabled = index === pages.length - 1;
       save();
@@ -255,12 +258,10 @@
     function help(move) {
       openDialog(move ? 'Gājiens ' + move : 'Apzīmējumu skaidrojums');
       if (move) paragraph(describe(move));
-      else if (pyra) {
-        ['U', 'L', 'R', 'B', 'u'].forEach(function (m) { paragraph(m + ' – ' + describe(m)); });
-        paragraph("Apostrofs ' nozīmē pretēju virzienu. Mazie burti griež tikai galu.");
-      } else {
-        ['R', 'L', 'U', 'D', 'F', 'B', 'r', 'M', 'S', 'E', 'x', 'y', 'z'].forEach(function (m) { paragraph(m + ' – ' + describe(m)); });
-        paragraph("Apostrofs ' nozīmē pretēju virzienu. 2 nozīmē 180° jeb divus ceturtdaļapgriezienus.");
+      else {
+        letters.forEach(function (m) { paragraph(m + ' – ' + describe(m)); });
+        if (pyra) paragraph("Apostrofs ' nozīmē pretēju virzienu. Mazie burti griež tikai galu.");
+        else paragraph("Apostrofs ' nozīmē pretēju virzienu. 2 nozīmē 180° jeb divus ceturtdaļapgriezienus.");
       }
       paragraph('Algoritmu lasi no kreisās uz labo. Pabeidz visu secību ar to pašu priekšpusi, tad pārbaudi rezultātu.');
     }
@@ -279,19 +280,17 @@
       dialogContent.appendChild(list);
     }
 
-    // cases + learned state
-    var caseNodes = Array.from(root.querySelectorAll('.gp-case'));
+    // Case cards and their shared learned state (the same id may appear on several pages).
     var cases = [];
-    var seen = {};
-    caseNodes.forEach(function (node) {
+    var byId = {};
+    root.querySelectorAll('.gp-case').forEach(function (node) {
       var id = node.getAttribute('data-gp-case');
-      var algNode = node.querySelector('[data-alg]');
-      if (!seen[id]) {
-        seen[id] = true;
-        cases.push({ id: id, sets: node.getAttribute('data-gp-sets').split(/\s+/), name: node.querySelector('.gp-case-name').textContent, alg: algNode.getAttribute('data-alg'), figure: node.querySelector('figure.dg') });
+      var sets = node.getAttribute('data-gp-sets').split(/\s+/);
+      if (!byId[id]) {
+        byId[id] = { id: id, sets: sets, name: node.querySelector('.gp-case-name').textContent, alg: node.querySelector('[data-alg]').getAttribute('data-alg'), figure: node.querySelector('figure.dg') };
+        cases.push(byId[id]);
       } else {
-        var known = cases.filter(function (c) { return c.id === id; })[0];
-        known.sets = known.sets.concat(node.getAttribute('data-gp-sets').split(/\s+/));
+        sets.forEach(function (s) { if (byId[id].sets.indexOf(s) < 0) byId[id].sets.push(s); });
       }
     });
     function refreshLearned() {
@@ -304,9 +303,8 @@
       root.querySelectorAll('[data-gp-total]').forEach(function (el) { el.textContent = n + ' no ' + total; });
       root.querySelectorAll('[data-gp-total-bar]').forEach(function (el) { el.style.width = (total ? Math.round(100 * n / total) : 0) + '%'; });
       root.querySelectorAll('[data-gp-group-count]').forEach(function (el) {
-        var det = el.closest('details');
         var ids = [];
-        det.querySelectorAll('.gp-case').forEach(function (c) { if (ids.indexOf(c.getAttribute('data-gp-case')) < 0) ids.push(c.getAttribute('data-gp-case')); });
+        el.closest('details').querySelectorAll('.gp-case').forEach(function (c) { if (ids.indexOf(c.getAttribute('data-gp-case')) < 0) ids.push(c.getAttribute('data-gp-case')); });
         var k = ids.filter(function (id) { return learned[id] === true; }).length;
         el.textContent = k + ' / ' + ids.length;
         el.classList.toggle('is-complete', k === ids.length && ids.length > 0);
@@ -317,7 +315,7 @@
       box.addEventListener('change', function () { learned[box.getAttribute('data-gp-learned')] = box.checked; save(); refreshLearned(); });
     });
 
-    // drill
+    // Drill: setup = inverse of the case algorithm; unlearned cases first.
     var drillSelect = root.querySelector('[data-gp-drill-set]');
     var drillCase = null;
     function drillPool() {
@@ -334,16 +332,15 @@
     function newDrillCase() {
       var pool = drillPool();
       if (!pool.length) return;
-      var fresh = pool.filter(function (c) { return learned[c.id] !== true && (!drillCase || c.id !== drillCase.id); });
-      var pick = (fresh.length ? fresh : pool)[Math.floor(Math.random() * (fresh.length ? fresh : pool).length)];
-      showDrill(pick, false);
+      var open = pool.filter(function (c) { return learned[c.id] !== true && (!drillCase || c.id !== drillCase.id); });
+      var from = open.length ? open : pool;
+      showDrill(from[Math.floor(Math.random() * from.length)], false);
     }
     function showDrill(c, revealed) {
       drillCase = c;
       drillState = { set: drillSelect.value, id: c.id, revealed: !!revealed };
       chips(root.querySelector('[data-gp-drill-setup]'), invert(c.alg), true);
-      var answer = root.querySelector('[data-gp-drill-answer]');
-      answer.hidden = !revealed;
+      root.querySelector('[data-gp-drill-answer]').hidden = !revealed;
       root.querySelector('[data-gp-drill-reveal]').disabled = !!revealed;
       var figHost = root.querySelector('[data-gp-drill-figure]');
       figHost.replaceChildren();
@@ -359,7 +356,7 @@
       root.querySelector('[data-gp-drill-next]').addEventListener('click', newDrillCase);
       root.querySelector('[data-gp-drill-reveal]').addEventListener('click', function () { if (drillCase) showDrill(drillCase, true); });
       root.querySelector('[data-gp-drill-learned]').addEventListener('change', function (ev) { if (drillCase) { learned[drillCase.id] = ev.target.checked; save(); refreshLearned(); } });
-      var restored = cases.filter(function (c) { return c.id === drillState.id; })[0];
+      var restored = byId[drillState.id];
       if (restored) showDrill(restored, drillState.revealed); else newDrillCase();
     }
 
@@ -380,12 +377,12 @@
       var body = document.body;
       var unified = root.closest('.cubepanel');
       var active = unified ? body.getAttribute('data-cube') === cube && body.getAttribute('data-level') === 'pro' : body.classList.contains('pro');
-      if (body.classList.contains('gp-active-' + cube) !== active) body.classList.toggle('gp-active-' + cube, active);
+      if (body.classList.contains('gp-active') !== active) body.classList.toggle('gp-active', active);
       if (!active && dialog.open) dialog.close();
     }
     function followHash() {
       var id = location.hash.slice(1);
-      if (!id || !document.body.classList.contains('gp-active-' + cube)) return;
+      if (!id || !document.body.classList.contains('gp-active')) return;
       var target = pageNodes.filter(function (p) { return p.id === id; })[0];
       if (target) navigate(target.getAttribute('data-gp-page'), true);
     }

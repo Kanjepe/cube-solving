@@ -1,6 +1,6 @@
 # Pyraminx beginner guide with the existing 3x3 layout
 
-Status: planned; Pyraminx HTML and build behavior have not been changed in this planning pass.
+Status: implemented 2026-09-11 (Pyraminx beginner block, simulator and tests; see the commit "Add mobile-first beginner guides for 2x2, 3x3, Pyraminx with simulator tests").
 
 ## Objective and scope
 

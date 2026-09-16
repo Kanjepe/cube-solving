@@ -134,7 +134,9 @@ test('other puzzles and 3x3 Pro are isolated from the new beginner UI', async ()
     await page.locator('.cubebtn[data-cube="a3"]').click();
     await page.locator('.lvlbtn[data-level="pro"]').click();
     assert.equal(await page.locator('#a3-cfop').isVisible(), true);
-    assert.equal(await page.locator('#a3-nota').isVisible(), true);
+    // The Pro block is a step guide too: it hides the shared notation section and shows its own bottom nav.
+    assert.equal(await page.locator('#a3-nota').isVisible(), false);
+    assert.equal(await page.locator('.g3p-bottom').isVisible(), true);
     assert.equal(await page.locator('.g3-bottom').isVisible(), false);
     await page.locator('.lvlbtn[data-level="beginner"]').click();
     assert.equal(await page.locator('.g3-bottom').isVisible(), true);

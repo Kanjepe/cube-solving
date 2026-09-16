@@ -59,7 +59,6 @@ main_py = extract_main(src_py, 'py')
 # in the original guide file.
 
 # The standalone Pyraminx owns its beginner content, styles and runtime.
-# Keep py-beginner.html as an inactive historical reference, not a build input.
 pat = re.compile(r'<div class="mode mode-beginner">.*?</div><!-- /mode-beginner -->', re.S)
 if not pat.search(main_py):
     raise SystemExit('pyraminx mode-beginner block not found')

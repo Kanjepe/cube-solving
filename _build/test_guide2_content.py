@@ -5,24 +5,24 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '2x2/rubiks-2x2-guide.html'
-ARCHIVE = ROOT / 'archive/2026-09-10-rubiks-2x2-guide.html'
 
 
 class TestGuide2Content(unittest.TestCase):
-    def test_five_pages_with_progress_and_local_help(self):
+    def test_three_steps_with_progress_and_local_help(self):
         html = SOURCE.read_text(encoding='utf-8')
         self.assertEqual(re.findall(r'data-g2-page="([^"]+)"', html), ['intro', '1', '2', '3', 'scramble'])
         self.assertEqual(re.findall(r'<input[^>]*data-g2-done="([^"]+)"', html), ['1', '2', '3'])
+        for step, title in (('1', 'Baltais slānis'), ('2', 'Dzeltenā puse'), ('3', 'Stūri vietās')):
+            self.assertRegex(html, r'data-g2-page="%s"[^>]*>\s*<h2 tabindex="-1">%s</h2>' % (step, title))
+        self.assertIn("'Pirms sākuma', 'Baltais slānis', 'Dzeltenā puse', 'Stūri vietās', 'Sajaukšana'", html)
         self.assertIn('data-g2-help', html)
         self.assertIn('data-g2-menu', html)
 
-    def test_pro_block_and_existing_renderer_are_preserved(self):
-        marker = '<div class="mode mode-pro">'
+    def test_existing_renderer_script_is_preserved(self):
+        # The Pro block is generated (see test_guidepro_content) and the beginner
+        # block is authored; the shared renderer script must stay as archived.
         source = SOURCE.read_text(encoding='utf-8')
-        old = ARCHIVE.read_text(encoding='utf-8')
-        # The shared beginner summary outside Pro may be updated separately.
-        end = '</div><!-- /mode-pro -->'
-        self.assertEqual(source.split(marker)[1].split(end)[0], old.split(marker)[1].split(end)[0])
+        old = (ROOT / 'archive/2026-09-16-before-pro-rubiks-2x2-guide.html').read_text(encoding='utf-8')
         self.assertEqual(source.split('<script>')[-1], old.split('<script>')[-1])
 
     def test_unified_beginner_matches_standalone(self):
@@ -34,16 +34,10 @@ class TestGuide2Content(unittest.TestCase):
         unified = re.sub(r'id="a2-([^"]+)"', r'id="\1"', unified)
         self.assertEqual(source, unified)
 
-    def test_three_by_three_and_pyraminx_pro_are_unchanged(self):
-        old = (ROOT / 'archive/2026-09-10-before-2x2-cube-solving.html').read_text(encoding='utf-8')
+    def test_unified_page_has_exactly_three_beginner_blocks(self):
         current = (ROOT / 'cube-solving.html').read_text(encoding='utf-8')
-        marker = '<div class="cubepanel" id="panel-a3"'
-        end = '<div class="cubepanel" id="panel-py"'
-        self.assertEqual(current.split(marker)[1].split(end)[0], old.split(marker)[1].split(end)[0])
-        pro = '<div class="mode mode-pro">'
-        pro_end = '</div><!-- /mode-pro -->'
-        self.assertEqual(current.split(end)[1].split(pro)[1].split(pro_end)[0],
-                         old.split(end)[1].split(pro)[1].split(pro_end)[0])
+        self.assertEqual(current.count('<div class="mode mode-beginner">'), 3)
+        self.assertEqual(current.count('</div><!-- /mode-beginner -->'), 3)
 
     def test_two_by_two_uses_same_scoped_styles_as_three_by_three(self):
         source = SOURCE.read_text(encoding='utf-8')
